@@ -57,7 +57,7 @@ export default function ReportTable() {
   const Header = ({
     title,
     subtitle,
-    titleColor = "black",
+    titleColor = "gray",
     subtitleColor = "gray",
   }) => {
     return (
@@ -66,8 +66,12 @@ export default function ReportTable() {
           style={{
             fontFamily: "Source Sans Pro, sans-serif",
             fontSize: "32px",
-            color: "black",
+            color: titleColor,
             fontWeight: "700",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", // Shadow effect
+            border: "1px solid rgba(255, 255, 255, 0.5)", // Light white border
+            padding: "4px", // Optional: padding to make the border more visible
+            borderRadius: "4px" // Optional: rounded corners for the border
           }}
         >
           {title}
@@ -264,7 +268,7 @@ export default function ReportTable() {
 
   return (
     <Box m="20px">
-      <Header title="REPORT" subtitle="Xử Lí Báo Cáo Hệ Thống" />
+      <Header title="REPORT" subtitle="Track reports on the system" />
 
       <Box sx={StyledBox} height="100%">
         <DataGrid

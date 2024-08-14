@@ -98,7 +98,7 @@ const ShopTableStaff = () => {
   const Header = ({
     title,
     subtitle,
-    titleColor = "black",
+    titleColor = "gray",
     subtitleColor = "gray",
   }) => {
     return (
@@ -107,8 +107,12 @@ const ShopTableStaff = () => {
           style={{
             fontFamily: "Source Sans Pro, sans-serif",
             fontSize: "32px",
-            color: "black",
+            color: titleColor,
             fontWeight: "700",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", // Shadow effect
+            border: "1px solid rgba(255, 255, 255, 0.5)", // Light white border
+            padding: "4px", // Optional: padding to make the border more visible
+            borderRadius: "4px" // Optional: rounded corners for the border
           }}
         >
           {title}
@@ -186,14 +190,14 @@ const ShopTableStaff = () => {
                   style={{ backgroundColor: "#55ab95", minWidth: "50px", textTransform: "capitalize" }}
                   onClick={() => handleAccept(id)}
                 >
-                  Chặn
+                  Ban
                 </Button>
                 <Button
                   variant="contained"
                   style={{ backgroundColor: colors.redAccent[600], minWidth: "50px", textTransform: "capitalize" }}
                   onClick={() => handleDeny(id)}
                 >
-                  Hủy chặn
+                  Unban
                 </Button>
               </Box>
             );
@@ -286,7 +290,7 @@ const ShopTableStaff = () => {
   return (
     <Box m="20px">
       {/* <CategoryList/> */}
-      <Header title="POSTS" subtitle="Quản Lý Bài Đăng Hệ Thống" />
+      <Header title="POSTS MANAGEMENT" subtitle="System Post Management" />
 
       <Box sx={StyledBox} height="100%">
         <DataGrid

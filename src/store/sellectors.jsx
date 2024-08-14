@@ -79,7 +79,7 @@ export const packagesSelector = (state) => state.packages.entities; //GetAllSubs
 
 
 export const allCancelAmountSelector = (state) => state.cancelAmount.entities; //getCancelledAmount
-
+export const allPriceAmountSelector = (state) => state.priceAmount.entities; //getPriceAmount
 
 
 export const packageDetailSelector = (state) => state.packageDetail.entities;

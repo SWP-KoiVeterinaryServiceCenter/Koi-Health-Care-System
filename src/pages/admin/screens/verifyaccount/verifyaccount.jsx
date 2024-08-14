@@ -482,7 +482,7 @@ export default function VerifyAccount() {
   const Header = ({
     title,
     subtitle,
-    titleColor = "black",
+    titleColor = "gray",
     subtitleColor = "gray",
   }) => {
     return (
@@ -493,6 +493,10 @@ export default function VerifyAccount() {
             fontSize: "32px",
             color: titleColor,
             fontWeight: "700",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", // Shadow effect
+            border: "1px solid rgba(255, 255, 255, 0.5)", // Light white border
+            padding: "4px", // Optional: padding to make the border more visible
+            borderRadius: "4px" // Optional: rounded corners for the border
           }}
         >
           {title}
@@ -542,19 +546,19 @@ export default function VerifyAccount() {
     },
     {
       field: "userName",
-      headerName: "Tên tài khoản",
+      headerName: "User Name",
       flex: 1,
       renderCell: ({ row: { userName } }) => <div>{userName}</div>,
     },
     {
       field: "roleName",
-      headerName: "Vai Trò",
+      headerName: "Role",
       flex: 1,
       renderCell: ({ row: { roleName } }) => <div>{roleName}</div>,
     },
     {
       field: "profileImage",
-      headerName: "Hình ảnh",
+      headerName: "Image",
       headerAlign: "center",
       flex: 2,
       renderCell: ({ row: { profileImage } }) => (
@@ -563,7 +567,7 @@ export default function VerifyAccount() {
     },
     {
       field: "verifyStatus",
-      headerName: "Tình trạng",
+      headerName: "Status",
       flex: 1,
       renderCell: ({ row: { verifyStatus } }) => (
         <div
@@ -581,7 +585,7 @@ export default function VerifyAccount() {
     },
     {
       field: "action",
-      headerName: "Hành động",
+      headerName: "Action",
       flex: 1,
       renderCell: ({ row: { id, verifyStatus } }) => {
         if (verifyStatus === "Pending") {
@@ -596,7 +600,7 @@ export default function VerifyAccount() {
                 }}
                 onClick={() => handleAccept(id)}
               >
-                Đồng ý
+                Accept
               </Button>
               <Button
                 variant="contained"
@@ -607,7 +611,7 @@ export default function VerifyAccount() {
                 }}
                 onClick={() => handleDeny(id)}
               >
-                Từ chối
+                Reject
               </Button>
             </Box>
           );
@@ -703,8 +707,8 @@ export default function VerifyAccount() {
   return (
     <Box m="20px">
       <Header
-        title="XÁC MINH TÀI KHOẢN"
-        subtitle="Xác minh Tài Khoản Hệ Thống"
+        title="VERIFY ACCOUNT"
+        subtitle="Verify System Account"
       />
 
       <Box sx={StyledBox} height="100%">

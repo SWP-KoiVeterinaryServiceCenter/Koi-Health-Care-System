@@ -122,7 +122,7 @@ export default function WalletTable() {
   const Header = ({
     title,
     subtitle,
-    titleColor = "black",
+    titleColor = "gray",
     subtitleColor = "gray",
   }) => {
     return (
@@ -131,8 +131,12 @@ export default function WalletTable() {
           style={{
             fontFamily: "Source Sans Pro, sans-serif",
             fontSize: "32px",
-            color: "black",
+            color: titleColor,
             fontWeight: "700",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", // Shadow effect
+            border: "1px solid rgba(255, 255, 255, 0.5)", // Light white border
+            padding: "4px", // Optional: padding to make the border more visible
+            borderRadius: "4px" // Optional: rounded corners for the border
           }}
         >
           {title}
@@ -161,7 +165,7 @@ export default function WalletTable() {
     },
     {
       field: "id",
-      headerName: "ID Giao dịch",
+      headerName: "Transaction ID",
       flex: 1,
       renderCell: ({ row: { id } }) => <div>{id}</div>,
     },
@@ -360,7 +364,7 @@ export default function WalletTable() {
 
   return (
     <Box m="20px">
-      <Header title="GIAO DỊCH" subtitle="Quản Lý Giao Dịch Hệ Thống" />
+      <Header title="WALLER TRANSACTION" subtitle="System Transaction Management" />
       {/* <div
         style={{
           color: "#3045FF",

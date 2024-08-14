@@ -34,7 +34,7 @@ import OrderTable from "./pages/manager/screens/order/orderTable";
 import ManagerDashboard from "./pages/manager/screens/dashboard/dashboardPage/dashboard";
 import DashboardDetail from "./pages/manager/screens/dashboard/dashboardDetail/dashboardDetail";
 import CancelAmount from "./pages/platformStaff/screens/policy/cancelledAmount/cancelledAmount";
-
+import AdjustMoney from "./pages/platformStaff/screens/policy/postPrice/postPrice";
 //Staff
 import StaffHome from "./pages/platformStaff/screens/home/staffHome";
 import ShopTableStaff from "./pages/platformStaff/screens/shop/shopTable";
@@ -168,6 +168,10 @@ const router = createBrowserRouter([
             {
                 path: "cancelAmount",
                 element: <CancelAmount />,
+            },
+            {
+                path: "adjustMoney",
+                element: <AdjustMoney />,
             },
         ],
     },

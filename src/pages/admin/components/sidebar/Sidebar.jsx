@@ -25,12 +25,14 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import PersonalVideoIcon from "@mui/icons-material/PersonalVideo";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
-import InventoryIcon from '@mui/icons-material/Inventory';
-import CategoryIcon from '@mui/icons-material/Category';
-import ClassIcon from '@mui/icons-material/Class';
-import PaidIcon from '@mui/icons-material/Paid';
-import ManageHistoryIcon from '@mui/icons-material/ManageHistory';
-import EventRepeatIcon from '@mui/icons-material/EventRepeat';
+import InventoryIcon from "@mui/icons-material/Inventory";
+import CategoryIcon from "@mui/icons-material/Category";
+import ClassIcon from "@mui/icons-material/Class";
+import PaidIcon from "@mui/icons-material/Paid";
+import ManageHistoryIcon from "@mui/icons-material/ManageHistory";
+import EventRepeatIcon from "@mui/icons-material/EventRepeat";
+import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
+import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -59,7 +61,7 @@ const Sidebar = (props) => {
   const [open, setOpen] = useState(true);
   const [openCPM, setOpenCPM] = useState(true);
   const [openTran, setOpenTran] = useState(true);
-
+  const [openPol, setOpenPol] = useState(true);
   const handleClick = () => {
     setOpen(!open);
   };
@@ -69,6 +71,9 @@ const Sidebar = (props) => {
   };
   const handleClickTransaction = () => {
     setOpenTran(!openTran);
+  };
+  const handleClickPolicy = () => {
+    setOpenPol(!openPol);
   };
 
   const url = new URL(window.location.href);
@@ -212,15 +217,14 @@ const Sidebar = (props) => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                      <Item
+                  <Item
                     title="Subscription"
                     to="package"
                     icon={<SubscriptionsIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
-        
-               
+
                   {/* ///////////////////////////////////////////////////////////////////// */}
                   <List>
                     <ListItemButton onClick={handleClickProductManagement}>
@@ -281,8 +285,8 @@ const Sidebar = (props) => {
                       />
                     </Collapse>
                   </List>
-                    {/* ////////////////////////////////////////////////////////////////// */}
-                    <List>
+                  {/* ////////////////////////////////////////////////////////////////// */}
+                  <List>
                     <ListItemButton onClick={handleClickTransaction}>
                       {!isCollapsed && (
                         <PaidIcon
@@ -341,23 +345,76 @@ const Sidebar = (props) => {
                       />
                     </Collapse>
                   </List>
-                  {/* ///////////////////////////////////////////////////////////////////// */}
-              
-                
-                  <Item
+                  {/* //////////////////////////////////handleClickPolicy/////////////////////////////////// */}
+                  <List>
+                    <ListItemButton onClick={handleClickPolicy}>
+                      {!isCollapsed && (
+                        <LocalPoliceIcon
+                          style={{
+                            marginLeft: "10px",
+                            marginRight: "19px",
+                            color: "white",
+                          }}
+                        />
+                      )}
+                      {!isCollapsed && (
+                        <ListItemText
+                          primary="Policy"
+                          style={{
+                            color: "white",
+                          }}
+                        />
+                      )}
+                      {openPol ? (
+                        <ExpandLess
+                          style={{
+                            marginLeft: "10px",
+                            color: "white",
+                          }}
+                        />
+                      ) : (
+                        <ExpandMore
+                          style={{
+                            marginLeft: "10px",
+                            color: "white",
+                          }}
+                        />
+                      )}
+                    </ListItemButton>
+                    <Collapse
+                      in={openPol}
+                      timeout="auto"
+                      unmountOnExit
+                      style={{
+                        paddingLeft: !isCollapsed ? "20px" : 0,
+                      }}
+                    >
+                       <Item
                     title="Daily cancellation limit"
                     to="cancelAmount"
                     icon={<EventRepeatIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
-                    <Item
+                  <Item
+                    title="Adjust Money"
+                    to="adjustMoney"
+                    icon={<CurrencyExchangeIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  <Item
                     title="Report"
                     to="report"
                     icon={<ReportGmailerrorredIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
+                    </Collapse>
+                  </List>
+                  {/* ///////////////////////////////////////////////////////////////////// */}
+
+                 
                 </Collapse>
               </List>
             </Box>

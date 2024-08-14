@@ -69,7 +69,7 @@ const OrdertrackTable = () => {
   const Header = ({
     title,
     subtitle,
-    titleColor = "black",
+    titleColor = "gray",
     subtitleColor = "gray",
   }) => {
     return (
@@ -80,6 +80,10 @@ const OrdertrackTable = () => {
             fontSize: "32px",
             color: titleColor,
             fontWeight: "700",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", // Shadow effect
+            border: "1px solid rgba(255, 255, 255, 0.5)", // Light white border
+            padding: "4px", // Optional: padding to make the border more visible
+            borderRadius: "4px" // Optional: rounded corners for the border
           }}
         >
           {title}
@@ -295,7 +299,7 @@ const OrdertrackTable = () => {
 
   return (
     <Box m="20px">
-      <Header title="Order Tracking" subtitle="Theo Dõi Đơn Hàng Từ Hệ Thống" />
+      <Header title="ORDER TRACKING" subtitle="Track Orders From The System" />
 
       <Box sx={StyledBox} height="100%">
         <DataGrid
