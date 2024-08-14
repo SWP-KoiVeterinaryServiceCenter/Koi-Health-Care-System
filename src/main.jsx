@@ -22,6 +22,7 @@ import VerifyAccount from "./pages/admin/screens/verifyaccount/verifyaccount";
 import WalletTableAdmin from "./pages/admin/screens/wallet/walletTable";
 import AdminDashboard from "./pages/admin/screens/dashboard/dashboardPage/dashboard";
 import AdminDashboardDetail from "./pages/admin/screens/dashboard/dashboardDetail/dashboardDetail";
+
 //Manager
 import CreateShopManager from "./pages/manager/screens/shop/createShop/createShop";
 import ManagerHome from "./pages/manager/screens/home/managerHome";
@@ -32,29 +33,8 @@ import WalletTable from "./pages/manager/screens/wallet/walletTable";
 import OrderTable from "./pages/manager/screens/order/orderTable";
 import ManagerDashboard from "./pages/manager/screens/dashboard/dashboardPage/dashboard";
 import DashboardDetail from "./pages/manager/screens/dashboard/dashboardDetail/dashboardDetail";
-//Shop
-import ShopHome from "./pages/shop/screens/home/shopHome";
-import ShopProfile from "./pages/shop/screens/profile/profile";
-import PackagePage from "./pages/shop/screens/package/packagePage";
-import StaffTable from "./pages/shop/screens/staff/staffTable/staffTable";
-import EventTable from "./pages/shop/screens/event/eventTable/eventTable";
-import CreateStaff from "./pages/shop/screens/staff/createStaff/createStaff";
-import CreateEvent from "./pages/shop/screens/event/createEvent/createEvent";
-import CreateEventField from "./pages/shop/screens/event/createEventField/createEventField";
-import UpdateEvent from "./pages/shop/screens/event/updateEvent/updateEvent";
-import EventDetail from "./pages/shop/screens/event/eventDetail/eventDetail";
-import TransactionTable from "./pages/shop/screens/transaction/transactionTable";
-import OrderTableShop from "./pages/shop/screens/order/orderTable";
-import ShopDashboardDetail from "./pages/shop/screens/dashboard/dashboardDetail/dashboardDetail";
-import ShopDashboard from "./pages/shop/screens/dashboard/dashboardPage/dashboard";
-import ProductTable from "./pages/shop/screens/product/productTable/productTable";
-import CreateProduct from "./pages/shop/screens/product/createProduct/createProduct";
-import UpdateProduct from "./pages/shop/screens/product/updateProduct/updateProduct";
-import PromotionTable from "./pages/shop/screens/promotion/promotionTable/promotionTable";
-import CreatePromotion from "./pages/shop/screens/promotion/createPromotion/createPromotion";
-import UpdatePromotion from "./pages/shop/screens/promotion/updatePromotion/updatePromotion";
-import ShopReportTable from "./pages/shop/screens/report/reportTable";
-import ChangePasswordStaff from "./pages/shop/screens/staff/changePasswordStaff/changePasswordStaff";
+import CancelAmount from "./pages/platformStaff/screens/policy/cancelledAmount/cancelledAmount";
+
 //Staff
 import StaffHome from "./pages/platformStaff/screens/home/staffHome";
 import ShopTableStaff from "./pages/platformStaff/screens/shop/shopTable";
@@ -185,6 +165,10 @@ const router = createBrowserRouter([
                 path: "ordertable",
                 element: <OrdertrackTable />,
             },
+            {
+                path: "cancelAmount",
+                element: <CancelAmount />,
+            },
         ],
     },
     //Staff
@@ -295,98 +279,7 @@ const router = createBrowserRouter([
             },
         ],
     },
-    //Shop
-    {
-        path: "/shop",
-        element: <ShopHome />,
-        errorElement: <Error404 />,
-        children: [
-            {
-                path: "",
-                element: <ShopDashboard />,
-            },
-            {
-                path: "dashboardDetail",
-                element: <ShopDashboardDetail />,
-            },
-            {
-                path: "staff",
-                element: <StaffTable />,
-            },
-            {
-                path: "event",
-                element: <EventTable />,
-            },
-            {
-                path: "profile",
-                element: <ShopProfile />,
-            },
-            {
-                path: "transaction",
-                element: <TransactionTable />,
-            },
-            {
-                path: "order",
-                element: <OrderTableShop />,
-            },
-            {
-                path: "package",
-                element: <PackagePage />,
-            },
-            {
-                path: "createStaff",
-                element: <CreateStaff />,
-            },
-            {
-                path: "changePasswordStaff",
-                element: <ChangePasswordStaff />,
-            },
-            {
-                path: "createEvent",
-                element: <CreateEvent />,
-            },
-            {
-                path: "createEventField",
-                element: <CreateEventField />,
-            },
-            {
-                path: "updateEvent",
-                element: <UpdateEvent />,
-            },
-            {
-                path: "eventDetail",
-                element: <EventDetail />,
-            },
-            {
-                path: "product",
-                element: <ProductTable />,
-            },
-            {
-                path: "createProduct",
-                element: <CreateProduct />,
-            },
-            {
-                path: "updateProduct",
-                element: <UpdateProduct />,
-            },
-            {
-                path: "promotion",
-                element: <PromotionTable />,
-            },
-            {
-                path: "createPromotion",
-                element: <CreatePromotion />,
-            },
-            {
-                path: "updatePromotion",
-                element: <UpdatePromotion />,
-            },
-            {
-                path: "report",
-                element: <ShopReportTable />,
-            },
-        ],
-    },
+    
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

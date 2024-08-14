@@ -52,7 +52,7 @@ import { shopOutcomeSlice } from "./features/wallet.slice/shopOutcome.slice";
 import { shopIncomeSlice } from "./features/wallet.slice/shopIncome.slice";
 import { platformIncomeSlice } from "./features/wallet.slice/platformIncome.slice";
 import { platformMonthIncomeSlice } from "./features/wallet.slice/platformMonthIncome.slice";
-
+import { cancelSlice } from "./features/policy.slice/cancelAmount.slice";
 import { packagesSlice } from "./features/package.slice/packages.slice";
 import { packageDetailSlice } from "./features/package.slice/packageDetail.slice";
 
@@ -132,6 +132,7 @@ export const store = configureStore({
     platformMonthIncome: platformMonthIncomeSlice.reducer,
 
     packages: packagesSlice.reducer,
+    cancelAmount: cancelSlice.reducer,
     packageDetail: packageDetailSlice.reducer,
 
     allReports: allReportsSlice.reducer,

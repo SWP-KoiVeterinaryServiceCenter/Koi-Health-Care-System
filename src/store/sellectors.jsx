@@ -76,6 +76,12 @@ export const platformMonthIncomeSelector = (state) =>
   state.platformMonthIncome.entities;
 
 export const packagesSelector = (state) => state.packages.entities; //GetAllSubscription
+
+
+export const allCancelAmountSelector = (state) => state.cancelAmount.entities; //getCancelledAmount
+
+
+
 export const packageDetailSelector = (state) => state.packageDetail.entities;
 
 export const allReportsSelector = (state) => state.allReports.entities;

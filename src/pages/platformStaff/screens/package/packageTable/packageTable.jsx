@@ -46,7 +46,7 @@ export default function PackageTable(props) {
   const navigate = useNavigate();
   const packages = useSelector(packagesSelector);
   const [showLoadingModal, setShowLoadingModal] = useState(false);
-  const [pageSize, setPageSize] = useState(20);
+  const [pageSize, setPageSize] = useState(30);
   const [pageNumber, setPageNumber] = useState(1);
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedPackage, setSelectedPackage] = useState(null);
