@@ -18,18 +18,34 @@ export default function CreatePackage() {
     const dispatch = useDispatch();
     const [showLoadingModal, setShowLoadingModal] = useState(false);
 
-    const Header = ({ title, subtitle, titleColor = "black", subtitleColor = "gray" }) => {
+    const Header = ({
+        title,
+        subtitle,
+        titleColor = "gray",
+        subtitleColor = "gray",
+      }) => {
         return (
-            <Box mb={2}>
-                <Typography style={{ fontFamily: 'Source Sans Pro, sans-serif', fontSize: '32px', color: titleColor, fontWeight: '700' }}>
-                    {title}
-                </Typography>
-                <Typography variant="subtitle1" style={{ color: subtitleColor }}>
-                    {subtitle}
-                </Typography>
-            </Box>
+          <Box mb={2}>
+            <Typography
+              style={{
+                fontFamily: "Source Sans Pro, sans-serif",
+                fontSize: "32px",
+                color: titleColor,
+                fontWeight: "700",
+                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", // Shadow effect
+                // border: "1px solid rgba(255, 255, 255, 0.5)", // Light white border
+                padding: "4px", // Optional: padding to make the border more visible
+                borderRadius: "4px" // Optional: rounded corners for the border
+              }}
+            >
+              {title}
+            </Typography>
+            <Typography variant="subtitle1" style={{ color: subtitleColor }}>
+              {subtitle}
+            </Typography>
+          </Box>
         );
-    };
+      };
 
     const formik = useFormik({
         initialValues: {
@@ -40,9 +56,9 @@ export default function CreatePackage() {
         },
         validationSchema: Yup.object({
             // description: Yup.string().required("Mô tả không thể trống"),
-            expiryDay: Yup.number().required("Ngày không thể trống"),
-            price: Yup.number().required("Giá không thể trống"),
-            subcriptionType: Yup.string().required("Mô tả không thể trống"),
+            expiryDay: Yup.number().required("Date cannot be empty"),
+            price: Yup.number().required("Price cannot be empty"),
+            subcriptionType: Yup.string().required("Description cannot be empty"),
         }),
         onSubmit: async (values) => {
             setShowLoadingModal(true);
@@ -90,8 +106,8 @@ export default function CreatePackage() {
     return (
         <div className="createPackage">
             <Header
-                title="Tạo Gói Đăng Ký"
-                subtitle="Cung cấp thông tin gói đăng ký"
+                title="Create Subscription "
+                subtitle="CProvide subscription package information"
             />
             <form onSubmit={formik.handleSubmit}>
                 {/* subcriptionType */}
@@ -100,7 +116,7 @@ export default function CreatePackage() {
                         id="subcriptionType"
                         label={
                             <span>
-                                Loại Gói <span style={{ color: "red" }}>*</span>
+                                Subscription Name <span style={{ color: "red" }}>*</span>
                             </span>
                         }
                         variant="outlined"
@@ -168,7 +184,7 @@ export default function CreatePackage() {
                         id="expiryDay"
                         label={
                             <span>
-                                Thời Hạn (ngày) <span style={{ color: "red" }}>*</span>
+                                Expiry Date (Date) <span style={{ color: "red" }}>*</span>
                             </span>
                         }
                         variant="outlined"
@@ -200,7 +216,7 @@ export default function CreatePackage() {
                 <>
                     <TextField
                         id="price"
-                        label={"Gía tiền"}
+                        label={"Price"}
                         variant="outlined"
                         value={formik.values.price}
                         onChange={formik.handleChange}
@@ -247,7 +263,7 @@ export default function CreatePackage() {
                             variant="contained"
                             type="submit"
                         >
-                            Tạo
+                            Create
                         </Button>
                     </div>
                 ) : (

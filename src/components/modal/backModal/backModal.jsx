@@ -41,7 +41,7 @@ export function BackButton(props) {
                 variant="contained"
                 onClick={handleBack}
             >
-                Quay Lại
+                Back
             </Button>
         </div>
     );

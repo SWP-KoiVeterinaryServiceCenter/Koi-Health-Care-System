@@ -174,7 +174,7 @@ export default function PackageTable(props) {
     },
     {
       field: "subcriptionType",
-      headerName: "Subscription Type",
+      headerName: "Subscription Name",
       flex: 1,
       cellClassName: "name-column--cell",
     },

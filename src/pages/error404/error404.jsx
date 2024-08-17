@@ -28,7 +28,7 @@ export default function Error404() {
                     variant="contained"
                     onClick={() => navigate(-1)}
                 >
-                    Quay Lại
+                    Back
                 </Button>
             </div>
         </div>

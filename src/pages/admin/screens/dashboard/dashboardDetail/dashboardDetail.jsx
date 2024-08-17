@@ -246,7 +246,7 @@ export default function AdminDashboardDetail() {
                     variant="contained"
                     onClick={() => navigate(-1)}
                 >
-                    Quay lại
+                    Back
                 </Button>
             </Box>
         </div>

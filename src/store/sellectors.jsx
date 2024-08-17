@@ -1,4 +1,4 @@
-export const userDetailSelector = (state) => state.userDetail.entities;
+export const userDetailSelector = (state) => state.userDetail.entities; //lấy ở verify user Detail
 export const userDataSelector = (state) => state.userData.entities;
 export const staffsSelector = (state) => state.staffs.entities;
 
