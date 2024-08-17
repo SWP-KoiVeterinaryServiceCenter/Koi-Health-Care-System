@@ -179,10 +179,10 @@ export default function PackageTable(props) {
       cellClassName: "name-column--cell",
     },
     {
-      field: "expiryMonth",
+      field: "expiryDay",
       flex: 1,
       headerName: "Expiry Date",
-      renderCell: ({ row: { expiryMonth } }) => <div>{expiryMonth} Ngày</div>,
+      renderCell: ({ row: { expiryDay } }) => <div>{expiryDay} Date</div>,
     },
     {
       field: "price",
@@ -210,7 +210,7 @@ export default function PackageTable(props) {
     // },
     {
       field: "action",
-      headerName: "Action",
+      headerName: "Type",
       headerAlign: "center",
       flex: 1,
       renderCell: ({ row: { id, description } }) => (

@@ -34,13 +34,13 @@ export default function CreatePackage() {
     const formik = useFormik({
         initialValues: {
             // description: "",
-            expiryMonth: "",
+            expiryDay: "",
             price: "",
             subcriptionType: "",
         },
         validationSchema: Yup.object({
             // description: Yup.string().required("Mô tả không thể trống"),
-            expiryMonth: Yup.number().required("Tháng không thể trống"),
+            expiryDay: Yup.number().required("Ngày không thể trống"),
             price: Yup.number().required("Giá không thể trống"),
             subcriptionType: Yup.string().required("Mô tả không thể trống"),
         }),
@@ -49,7 +49,7 @@ export default function CreatePackage() {
             dispatch(
                 createPackageThunk({
                     // description: values.description,
-                    expiryMonth: values.expiryMonth,
+                    expiryDay: values.expiryDay,
                     price: values.price,
                     subcriptionType: values.subcriptionType,
                 })
@@ -162,20 +162,20 @@ export default function CreatePackage() {
                             </div>
                         )}
                 </> */}
-                {/* expiryMonth */}
+                {/* expiryDay */}
                 <>
                     <TextField
-                        id="expiryMonth"
+                        id="expiryDay"
                         label={
                             <span>
                                 Thời Hạn (ngày) <span style={{ color: "red" }}>*</span>
                             </span>
                         }
                         variant="outlined"
-                        value={formik.values.expiryMonth}
+                        value={formik.values.expiryDay}
                         onChange={formik.handleChange}
                         fullWidth
-                        autoComplete="expiryMonth"
+                        autoComplete="expiryDay"
                         margin="dense"
                         type="number"
                         color="secondary"
@@ -190,9 +190,9 @@ export default function CreatePackage() {
                             }
                         }}
                     />
-                    {formik.touched.expiryMonth && formik.errors.expiryMonth && (
+                    {formik.touched.expiryDay && formik.errors.expiryDay && (
                         <div className="login__validation__error">
-                            <p>{formik.errors.expiryMonth}</p>
+                            <p>{formik.errors.expiryDay}</p>
                         </div>
                     )}
                 </>
