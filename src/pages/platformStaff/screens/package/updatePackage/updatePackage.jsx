@@ -42,14 +42,14 @@
 //     enableReinitialize: true,
 //     initialValues: {
 //       description: packageDetail.description,
-//       expiryMonth: packageDetail.expiryMonth,
+//       expiryDay: packageDetail.expiryDay,
 //       price: packageDetail.price,
 //       subcriptionType: packageDetail.subcriptionType,
      
 //     },
 //     validationSchema: Yup.object({
 //       description: Yup.string().required("Mô tả không thể trống"),
-//       expiryMonth: Yup.number().required("Tháng không thể trống"),
+//       expiryDay: Yup.number().required("Tháng không thể trống"),
 //     }),
 //     onSubmit: async (values) => {
 //       setShowLoadingModal(true);
@@ -57,7 +57,7 @@
 //         updatePackageThunk({
 //           id: packageId,
 //           description: values.description,
-//           expiryMonth: values.expiryMonth,
+//           expiryDay: values.expiryDay,
 //           price: values.price,
 //           subcriptionType: values.subcriptionType,
 //         })
@@ -144,20 +144,20 @@
 //                 </div>
 //               )}
 //           </>
-//           {/* expiryMonth */}
+//           {/* expiryDay */}
 //           <>
 //             <TextField
-//               id="expiryMonth"
+//               id="expiryDay"
 //               label={
 //                 <span>
 //                   Thời Hạn (tháng) <span style={{ color: "red" }}>*</span>
 //                 </span>
 //               }
 //               variant="outlined"
-//               value={formik.values.expiryMonth}
+//               value={formik.values.expiryDay}
 //               onChange={formik.handleChange}
 //               fullWidth
-//               autoComplete="expiryMonth"
+//               autoComplete="expiryDay"
 //               margin="dense"
 //               type="number"
 //               color="secondary"
@@ -172,9 +172,9 @@
 //                 },
 //               }}
 //             />
-//             {formik.touched.expiryMonth && formik.errors.expiryMonth && (
+//             {formik.touched.expiryDay && formik.errors.expiryDay && (
 //               <div className="login__validation__error">
-//                 <p>{formik.errors.expiryMonth}</p>
+//                 <p>{formik.errors.expiryDay}</p>
 //               </div>
 //             )}
 //           </>
@@ -315,12 +315,12 @@ export default function UpdatePackage() {
     enableReinitialize: true,
     initialValues: {
       // description: packageDetail.description || '',
-      expiryMonth: packageDetail.expiryMonth || '',
+      expiryDay: packageDetail.expiryDay || '',
       price: packageDetail.price || '',
       subcriptionType: packageDetail.subcriptionType || '',
     },
     validationSchema: Yup.object({
-      expiryMonth: Yup.number().required("Tháng không thể trống"),
+      expiryDay: Yup.number().required("Tháng không thể trống"),
       price: Yup.number().required("Giá không thể trống"),
       subcriptionType: Yup.string().required("Mô tả không thể trống"),
     }),
@@ -330,7 +330,7 @@ export default function UpdatePackage() {
         updatePackageThunk({
           id: packageId,
           // description: values.description,
-          expiryMonth: values.expiryMonth,
+          expiryDay: values.expiryDay,
           price: values.price,
           subcriptionType: values.subcriptionType,
         })
@@ -407,19 +407,19 @@ export default function UpdatePackage() {
               <p>{formik.errors.subcriptionType}</p>
             </div>
           )}
-          {/* expiryMonth */}
+          {/* expiryDay */}
           <TextField
-            id="expiryMonth"
+            id="expiryDay"
             label={
               <span>
                 Thời Hạn (Date) <span style={{ color: "red" }}>*</span>
               </span>
             }
             variant="outlined"
-            value={formik.values.expiryMonth}
+            value={formik.values.expiryDay}
             onChange={formik.handleChange}
             fullWidth
-            autoComplete="expiryMonth"
+            autoComplete="expiryDay"
             margin="dense"
             type="number"
             color="secondary"
@@ -434,9 +434,9 @@ export default function UpdatePackage() {
               },
             }}
           />
-          {formik.touched.expiryMonth && formik.errors.expiryMonth && (
+          {formik.touched.expiryDay && formik.errors.expiryDay && (
             <div className="login__validation__error">
-              <p>{formik.errors.expiryMonth}</p>
+              <p>{formik.errors.expiryDay}</p>
             </div>
           )}
           {/* description */}
