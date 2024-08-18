@@ -59,9 +59,9 @@ const Sidebar = (props) => {
   let setIsCollapsed = props.setIsCollapsed;
   const [selected, setSelected] = useState("Thu Nhập");
   const [open, setOpen] = useState(true);
-  const [openCPM, setOpenCPM] = useState(true);
-  const [openTran, setOpenTran] = useState(true);
-  const [openPol, setOpenPol] = useState(true);
+  const [openCPM, setOpenCPM] = useState(false);
+  const [openTran, setOpenTran] = useState(false);
+  const [openPol, setOpenPol] = useState(false);
   const handleClick = () => {
     setOpen(!open);
   };
