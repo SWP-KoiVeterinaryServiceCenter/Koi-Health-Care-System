@@ -34,7 +34,7 @@ export const createPost = async data => {
 };
 
 export const getPostDetail = async id => {
-    const response = await api.get(`/api/v1/posts/${id}`);
+    const response = await api.get(`/api/v1/Post/PostDetail/${id}`);
     return response.data;
 };
 

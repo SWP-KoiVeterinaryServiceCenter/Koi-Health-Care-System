@@ -163,12 +163,12 @@ export default function WalletTable() {
         </Box>
       ),
     },
-    {
-      field: "id",
-      headerName: "Transaction ID",
-      flex: 1,
-      renderCell: ({ row: { id } }) => <div>{id}</div>,
-    },
+    // {
+    //   field: "id",
+    //   headerName: "Transaction ID",
+    //   flex: 1,
+    //   renderCell: ({ row: { id } }) => <div>{id}</div>,
+    // },
     {
       field: "email",
       headerName: "Email",

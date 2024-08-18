@@ -38,7 +38,7 @@ export default function createCategory() {
             
         },
         validationSchema: Yup.object({
-            categoryName: Yup.string().required("Mô tả không thể trống"),
+            categoryName: Yup.string().required("Description cannot be empty"),
            
         }),
         onSubmit: async (values) => {
@@ -85,8 +85,8 @@ export default function createCategory() {
     return (
         <div className="createPackage">
             <Header
-                title="Tạo Category"
-                subtitle="Cung cấp category"
+                title="Create Category"
+                subtitle="Provide category"
             />
             <form onSubmit={formik.handleSubmit}>
                 {/* categoryName */}
@@ -95,7 +95,7 @@ export default function createCategory() {
                         id="categoryName"
                         label={
                             <span>
-                                Tên Category <span style={{ color: "red" }}>*</span>
+                                Category Name <span style={{ color: "red" }}>*</span>
                             </span>
                         }
                         variant="outlined"
@@ -144,7 +144,7 @@ export default function createCategory() {
                             variant="contained"
                             type="submit"
                         >
-                            Tạo
+                            Create
                         </Button>
                     </div>
                 ) : (

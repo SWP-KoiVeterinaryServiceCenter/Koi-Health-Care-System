@@ -14,31 +14,40 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { tokens } from "../../../../theme";
 import Header from "../../components/header/Header";
-import { allOrdersSelector } from "../../../../store/sellectors";
+import { allOrdersSelector,orderDetailSelector } from "../../../../store/sellectors";
 import {
   getAllOrdersThunk,
   cancelOrderThunk,
+  getOrderDetailThunk
 } from "../../../../store/apiThunk/orderThunk";
 import {
   StyledBox,
   CustomNoRowsOverlay,
   GridLoadingOverlay,
 } from "../../../../components/styledTable/styledTable";
+import OrderBackdrop from "../../../../components/backdrop/orderBackdrop/orderBackdrop";
+
 import "./ordertrack.css";
 
 const OrdertrackTable = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const orders = useSelector(allOrdersSelector);
+  const orderDetail = useSelector(orderDetailSelector);
   const dispatch = useDispatch();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [pageSize, setPageSize] = useState(5);
   const [pageNumber, setPageNumber] = useState(0);
+  const [open, setOpen] = useState(false);
+  console.log(orderDetail);
 
   useEffect(() => {
     dispatch(getAllOrdersThunk());
   }, [dispatch]);
 
+  const handleClose = () => {
+    setOpen(false);
+  };
   const handleCancel = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -111,26 +120,26 @@ const OrdertrackTable = () => {
         </Box>
       ),
     },
-    {
-      field: "id",
-      headerName: "Order Id",
-      flex: 2,
-      cellClassName: "name-column--cell",
-      renderCell: ({ row: { id } }) => {
-        const handleOpen = () => {
-          setShowLoadingModal(true);
-          dispatch(getAllOrdersThunk(id)).then(() => {
-            setShowLoadingModal(false);
-            setOpen(true);
-          });
-        };
-        return (
-          <div onClick={handleOpen} style={{ cursor: "pointer" }}>
-            {id}
-          </div>
-        );
-      },
-    },
+    // {
+    //   field: "id",
+    //   headerName: "Order Id",
+    //   flex: 2,
+    //   cellClassName: "name-column--cell",
+    //   renderCell: ({ row: { id } }) => {
+    //     const handleOpen = () => {
+    //       setShowLoadingModal(true);
+    //       dispatch(getOrderDetailThunk(id)).then(() => {
+    //         setShowLoadingModal(false);
+    //         setOpen(true);
+    //       });
+    //     };
+    //     return (
+    //       <div onClick={handleOpen} style={{ cursor: "pointer" }}>
+    //         {id}
+    //       </div>
+    //     );
+    //   },
+    // },
     {
       field: "senderUsername",
       headerName: "Sender Name",
@@ -139,7 +148,7 @@ const OrdertrackTable = () => {
       renderCell: ({ row: { id, senderUsername } }) => {
         const handleOpen = () => {
           setShowLoadingModal(true);
-          dispatch(getAllOrdersThunk(id)).then(() => {
+          dispatch(getOrderDetailThunk(id)).then(() => {
             setShowLoadingModal(false);
             setOpen(true);
           });
@@ -318,6 +327,11 @@ const OrdertrackTable = () => {
             Pagination: CustomFooter,
           }}
         />
+            <OrderBackdrop
+                    open={open}
+                    handleClose={handleClose}
+                    orderDetail={orderDetail}
+                />
       </Box>
     </Box>
   );

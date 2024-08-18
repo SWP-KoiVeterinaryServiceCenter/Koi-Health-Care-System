@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import {
   Box,
@@ -16,7 +15,12 @@ import Swal from "sweetalert2";
 import { tokens } from "../../../../theme";
 import Header from "../../components/header/Header";
 import { allAccountsSelector } from "../../../../store/sellectors";
-import { getPostThunk, banPostThunk, unbanPostThunk } from "../../../../store/apiThunk/postThunk";
+import {
+  getPostThunk,
+  banPostThunk,
+  unbanPostThunk,
+  getPostDetailThunk,
+} from "../../../../store/apiThunk/postThunk";
 import {
   getAllUsersThunk,
   banUserThunk,
@@ -27,7 +31,8 @@ import {
   CustomNoRowsOverlay,
   GridLoadingOverlay,
 } from "../../../../components/styledTable/styledTable";
-import { postSelector,postDetailSelector} from "../../../../store/sellectors";
+import { postSelector, postDetailSelector } from "../../../../store/sellectors";
+import { ShopBackdrop } from "../../../../components/backdrop/shopBackdrop/shopBackdrop";
 // import { CategoryList } from "../../../platformStaff/screens/categoryList/categorydetail/categorydetail";
 
 // import "./accountTable.css";
@@ -36,16 +41,21 @@ const ShopTableStaff = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const accounts = useSelector(postSelector);
-  // const shopDetail = useSelector(postDetailSelector);
+  const shopDetail = useSelector(postDetailSelector);
   const dispatch = useDispatch();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [pageSize, setPageSize] = useState(5); // State for number of rows per page
   const [pageNumber, setPageNumber] = useState(0); // Current page index
+  const [open, setOpen] = useState(false);
+console.log(shopDetail);
 
   useEffect(() => {
     dispatch(getPostThunk());
   }, [dispatch]);
 
+  const handleClose = () => {
+    setOpen(false);
+  };
   const handleAccept = (id) => {
     setShowLoadingModal(true);
     dispatch(banPostThunk(id))
@@ -112,7 +122,7 @@ const ShopTableStaff = () => {
             textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", // Shadow effect
             // border: "1px solid rgba(255, 255, 255, 0.5)", // Light white border
             padding: "4px", // Optional: padding to make the border more visible
-            borderRadius: "4px" // Optional: rounded corners for the border
+            borderRadius: "4px", // Optional: rounded corners for the border
           }}
         >
           {title}
@@ -124,86 +134,98 @@ const ShopTableStaff = () => {
     );
   };
   const columns = [
-        {
-          field: "order",
-          headerName: "STT",
-          headerAlign: "center",
-          renderCell: ({ row: { order } }) => (
-            <Box display="flex" justifyContent="center" alignItems="center" width="100%">
-              {order}
-            </Box>
-          ),
-        },
-        {
-          field: "postTitle",
-          headerName: "Post Title",
-          flex: 1,
-          cellClassName: "name-column--cell",
-          renderCell: ({ row: { id, postTitle } }) => {
-            const handleOpen = () => {
-              setShowLoadingModal(true);
-              dispatch(getPostThunk({ id })).then(() => {
-                setShowLoadingModal(false);
-                setOpen(true);
-              });
-            };
-            return (
-              <div onClick={handleOpen} style={{ cursor: "pointer" }}>
-                {postTitle}
-              </div>
-            );
-          },
-        },
-        {
-          field: "postContent",
-          headerName: "Post Content",
-          flex: 1,
-        },
-        {
-          field: "creationDate",
-          headerName: "Creation Date",
-          flex: 1,
-          renderCell: ({ row: { creationDate } }) => (
-            <div>{creationDate}</div>
-          ),
-        },
-        {
-          field: "status",
-          headerName: "Status",
-          flex: 1,
-          renderCell: ({ row: { status } }) => (
-            <div className={status === "Unban" ? "status-not-ban" : "status-ban"}>
-              {status}
-            </div>
-          ),
-        },
-        {
-          field: "action",
-          headerName: "Action",
-          headerAlign: "center",
-          flex: 1,
-          renderCell: ({ row: { id } }) => {
-            return (
-              <Box width="100%" display="flex" justifyContent="center" gap="4px">
-                <Button
-                  variant="contained"
-                  style={{ backgroundColor: "#55ab95", minWidth: "50px", textTransform: "capitalize" }}
-                  onClick={() => handleAccept(id)}
-                >
-                  Ban
-                </Button>
-                <Button
-                  variant="contained"
-                  style={{ backgroundColor: colors.redAccent[600], minWidth: "50px", textTransform: "capitalize" }}
-                  onClick={() => handleDeny(id)}
-                >
-                  Unban
-                </Button>
-              </Box>
-            );
-          },
-        },
-      ];
+    {
+      field: "order",
+      headerName: "STT",
+      headerAlign: "center",
+      renderCell: ({ row: { order } }) => (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          width="100%"
+        >
+          {order}
+        </Box>
+      ),
+    },
+    {
+      field: "postTitle",
+      headerName: "Post Title",
+      flex: 1,
+      cellClassName: "name-column--cell",
+      renderCell: ({ row: { id, postTitle } }) => {
+       const handleOpen = () => {
+  setShowLoadingModal(true);
+  dispatch(getPostDetailThunk(id))  // Truyền id trực tiếp thay vì đối tượng { id }
+    .then(() => {
+      setShowLoadingModal(false);
+      setOpen(true);
+    });
+};
+        return (
+          <div onClick={handleOpen} style={{ cursor: "pointer" }}>
+            {postTitle}
+          </div>
+        );
+      },
+    },
+    {
+      field: "postContent",
+      headerName: "Post Content",
+      flex: 1,
+    },
+    {
+      field: "creationDate",
+      headerName: "Creation Date",
+      flex: 1,
+      renderCell: ({ row: { creationDate } }) => <div>{creationDate}</div>,
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      flex: 1,
+      renderCell: ({ row: { status } }) => (
+        <div className={status === "Unban" ? "status-not-ban" : "status-ban"}>
+          {status}
+        </div>
+      ),
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      headerAlign: "center",
+      flex: 1,
+      renderCell: ({ row: { id } }) => {
+        return (
+          <Box width="100%" display="flex" justifyContent="center" gap="4px">
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: "#55ab95",
+                minWidth: "50px",
+                textTransform: "capitalize",
+              }}
+              onClick={() => handleAccept(id)}
+            >
+              Ban
+            </Button>
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: colors.redAccent[600],
+                minWidth: "50px",
+                textTransform: "capitalize",
+              }}
+              onClick={() => handleDeny(id)}
+            >
+              Unban
+            </Button>
+          </Box>
+        );
+      },
+    },
+  ];
 
   const rows =
     accounts?.map((account, index) => ({
@@ -309,11 +331,11 @@ const ShopTableStaff = () => {
             Pagination: CustomFooter, // Custom footer component
           }}
         />
-          {/* <ShopBackdrop
-                    open={open}
-                    handleClose={handleClose}
-                    shopDetail={shopDetail}
-                /> */}
+        <ShopBackdrop
+          open={open}
+          handleClose={handleClose}
+          shopDetail={shopDetail}
+        />
       </Box>
     </Box>
   );
