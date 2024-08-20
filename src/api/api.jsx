@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://capstonewebapi-acasdhg2acepabdb.japanwest-01.azurewebsites.net/";
+const url = "https://capstonebackendwebapi-dvdbgtc4def9h3c2.japanwest-01.azurewebsites.net/";
 
 const api = axios.create({
     baseURL: url,
