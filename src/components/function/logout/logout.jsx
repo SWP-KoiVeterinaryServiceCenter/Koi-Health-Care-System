@@ -21,7 +21,7 @@ export function LogoutButton() {
         <div className="logoutButton">
             <div className="logout flex-center" onClick={handleSignOut}>
                 <LogoutIcon fontSize="medium" />
-                Đăng xuất
+                Log Out
             </div>
         </div>
     );

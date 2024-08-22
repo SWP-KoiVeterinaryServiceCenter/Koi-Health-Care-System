@@ -1,6 +1,3 @@
-
-
-
 import {
   Box,
   Button,
@@ -11,6 +8,7 @@ import {
   InputLabel,
   Typography,
   FormControl,
+  TextField,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../../../theme";
@@ -28,7 +26,6 @@ import {
 } from "../../../../store/apiThunk/userThunk";
 import { useEffect, useState } from "react";
 import Pagination from "../../../../components/pagination/pagination";
-import { AccRole } from "../../../../components/mapping/mapping";
 import {
   StyledBox,
   CustomNoRowsOverlay,
@@ -50,14 +47,39 @@ export default function VerifyAccount() {
   const [pageSize, setPageSize] = useState(5);
   const [pageNumber, setPageNumber] = useState(0);
   const [open, setOpen] = useState(false);
-  console.log(userDetail);
-  
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredRows, setFilteredRows] = useState([]);
+
   useEffect(() => {
     dispatch(getAllVerifyUsersThunk());
   }, [dispatch]);
 
-  const handleClose = () => {
-    setOpen(false);
+  useEffect(() => {
+    setFilteredRows(
+      accounts.map((account, index) => ({
+        ...account,
+        order: index + 1,
+      }))
+    );
+  }, [accounts]);
+
+  const handleSearch = () => {
+    const lowercasedQuery = searchQuery.toLowerCase();
+    
+    // Filter dữ liệu với kiểm tra giá trị null hoặc undefined
+    const filteredData = accounts.filter((account) =>
+      Object.values(account).some((value) =>
+        value != null && value.toString().toLowerCase().includes(lowercasedQuery)
+      )
+    );
+
+    setFilteredRows(
+      filteredData.map((account, index) => ({
+        ...account,
+        order: index + 1,
+      }))
+    );
+    setPageNumber(0); // Reset page number after search
   };
 
   const handleAccept = (id) => {
@@ -124,10 +146,9 @@ export default function VerifyAccount() {
             fontSize: "32px",
             color: titleColor,
             fontWeight: "700",
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", // Shadow effect
-            // border: "1px solid rgba(255, 255, 255, 0.5)", // Light white border
-            padding: "4px", // Optional: padding to make the border more visible
-            borderRadius: "4px" // Optional: rounded corners for the border
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+            padding: "4px",
+            borderRadius: "4px"
           }}
         >
           {title}
@@ -170,7 +191,7 @@ export default function VerifyAccount() {
         };
         return (
           <div onClick={handleOpen} style={{ cursor: "pointer" }}>
-            {email}
+            {email || "N/A"}
           </div>
         );
       },
@@ -179,13 +200,13 @@ export default function VerifyAccount() {
       field: "userName",
       headerName: "User Name",
       flex: 1,
-      renderCell: ({ row: { userName } }) => <div>{userName}</div>,
+      renderCell: ({ row: { userName } }) => <div>{userName || "N/A"}</div>,
     },
     {
       field: "roleName",
       headerName: "Role",
       flex: 1,
-      renderCell: ({ row: { roleName } }) => <div>{roleName}</div>,
+      renderCell: ({ row: { roleName } }) => <div>{roleName || "N/A"}</div>,
     },
     {
       field: "profileImage",
@@ -193,7 +214,7 @@ export default function VerifyAccount() {
       headerAlign: "center",
       flex: 2,
       renderCell: ({ row: { profileImage } }) => (
-        <img style={{ height: "160px", padding: 20 }} src={profileImage} />
+        <img style={{ height: "160px", padding: 20 }} src={profileImage || ""} alt="Profile" />
       ),
     },
     {
@@ -253,12 +274,6 @@ export default function VerifyAccount() {
     },
   ];
 
-  const rows =
-    accounts?.map((account, index) => ({
-      ...account,
-      order: index + 1,
-    })) || [];
-
   const handlePageChange = (newPage) => {
     setPageNumber(newPage);
   };
@@ -268,7 +283,7 @@ export default function VerifyAccount() {
     setPageNumber(0); // Reset to the first page when page size changes
   };
 
-  const paginatedRows = rows.slice(
+  const paginatedRows = filteredRows.slice(
     pageNumber * pageSize,
     (pageNumber + 1) * pageSize
   );
@@ -294,7 +309,7 @@ export default function VerifyAccount() {
         </Box>
         <Button
           onClick={() => handlePageChange(pageNumber + 1)}
-          disabled={(pageNumber + 1) * pageSize >= rows.length}
+          disabled={(pageNumber + 1) * pageSize >= filteredRows.length}
           sx={{ color: "black", backgroundColor: "#7CB9E8" }}
         >
           Next
@@ -343,6 +358,38 @@ export default function VerifyAccount() {
       />
 
       <Box sx={StyledBox} height="100%">
+        <Box display="flex"  alignItems="center">
+          <TextField
+            label="Search"
+            variant="outlined"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
+            placeholder="Search Information"
+            InputProps={{
+              style: { color: 'black' }, // Text color
+            }}
+            sx={{
+              mb: 2,
+              width: "200px",
+              "& .MuiInputBase-input": { color: "black" },
+              "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
+              "& .MuiInputLabel-root": { color: "black" } // Label color
+            }}
+          />
+          <Button
+            variant="contained"
+            onClick={handleSearch}
+            sx={{ mb: 2, ml: 1, height: "50px" }}
+          >
+            Search
+          </Button>
+        </Box>
+        
         <DataGrid
           disableRowSelectionOnClick
           loading={showLoadingModal}
@@ -353,7 +400,7 @@ export default function VerifyAccount() {
           pageSize={pageSize}
           page={pageNumber}
           onPageChange={handlePageChange}
-          rowCount={rows.length} // Total number of rows
+          rowCount={filteredRows.length} // Total number of filtered rows
           rowsPerPageOptions={[]} // Hides the rows per page selector
           components={{
             Pagination: CustomFooter, // Custom footer component
@@ -361,7 +408,7 @@ export default function VerifyAccount() {
         />
         <AccountBackdrop
           open={open}
-          handleClose={handleClose}
+          handleClose={() => setOpen(false)}
           userDetail={userDetail}
         />
       </Box>

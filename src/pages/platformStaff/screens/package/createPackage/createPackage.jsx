@@ -32,10 +32,9 @@ export default function CreatePackage() {
                 fontSize: "32px",
                 color: titleColor,
                 fontWeight: "700",
-                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", // Shadow effect
-                // border: "1px solid rgba(255, 255, 255, 0.5)", // Light white border
-                padding: "4px", // Optional: padding to make the border more visible
-                borderRadius: "4px" // Optional: rounded corners for the border
+                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+                padding: "4px",
+                borderRadius: "4px"
               }}
             >
               {title}
@@ -49,22 +48,23 @@ export default function CreatePackage() {
 
     const formik = useFormik({
         initialValues: {
-            // description: "",
             expiryDay: "",
             price: "",
             subcriptionType: "",
         },
         validationSchema: Yup.object({
-            // description: Yup.string().required("Mô tả không thể trống"),
             expiryDay: Yup.number().required("Date cannot be empty"),
-            price: Yup.number().required("Price cannot be empty"),
+            price: Yup.number()
+                .required("Price cannot be empty")
+                .min(0, "Price cannot be negative")
+                .integer("Price must be an integer")
+                .max(9999999, "Price cannot exceed 7 digits"),
             subcriptionType: Yup.string().required("Description cannot be empty"),
         }),
         onSubmit: async (values) => {
             setShowLoadingModal(true);
             dispatch(
                 createPackageThunk({
-                    // description: values.description,
                     expiryDay: values.expiryDay,
                     price: values.price,
                     subcriptionType: values.subcriptionType,
@@ -106,143 +106,106 @@ export default function CreatePackage() {
     return (
         <div className="createPackage">
             <Header
-                title="Create Subscription "
-                subtitle="CProvide subscription package information"
+                title="Create Subscription"
+                subtitle="Provide subscription package information"
             />
             <form onSubmit={formik.handleSubmit}>
                 {/* subcriptionType */}
-                <>
-                    <TextField
-                        id="subcriptionType"
-                        label={
-                            <span>
-                                Subscription Name <span style={{ color: "red" }}>*</span>
-                            </span>
+                <TextField
+                    id="subcriptionType"
+                    label={
+                        <span>
+                            Subscription Name <span style={{ color: "red" }}>*</span>
+                        </span>
+                    }
+                    variant="outlined"
+                    value={formik.values.subcriptionType}
+                    onChange={formik.handleChange}
+                    fullWidth
+                    autoComplete="subcriptionType"
+                    margin="dense"
+                    color="secondary"
+                    InputLabelProps={{
+                        style: { color: 'black' }
+                    }}
+                    InputProps={{
+                        style: {
+                            backgroundColor: '#f5f5f5',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                            color: 'black'
                         }
-                        variant="outlined"
-                        value={formik.values.subcriptionType}
-                        onChange={formik.handleChange}
-                        fullWidth
-                        autoComplete="subcriptionType"
-                        margin="dense"
-                        color="secondary"
-                        InputLabelProps={{
-                            style: { color: 'black' } // Đặt màu sắc của nhãn thành màu đen
-                        }}
-                        InputProps={{
-                            style: {
-                                backgroundColor: '#f5f5f5', // Nền của input màu xám nhạt
-                                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Hiệu ứng bóng nhẹ
-                                color: 'black' // Màu chữ bên trong ô input
-                            }
-                        }}
-                    />
-                    {formik.touched.subcriptionType &&
-                        formik.errors.subcriptionType && (
-                            <div className="login__validation__error">
-                                <p>{formik.errors.subcriptionType}</p>
-                            </div>
-                        )}
-                </>
-                {/* description */}
-                {/* <>
-                    <TextField
-                        id="description"
-                        label={
-                            <span>
-                                Mô tả <span style={{ color: "red" }}>*</span>
-                            </span>
-                        }
-                        variant="outlined"
-                        value={formik.values.description}
-                        onChange={formik.handleChange}
-                        fullWidth
-                        autoComplete="description"
-                        margin="dense"
-                        color="secondary"
-                        InputLabelProps={{
-                            style: { color: 'black' } // Đặt màu sắc của nhãn thành màu đen
-                        }}
-                        InputProps={{
-                            style: {
-                                backgroundColor: '#f5f5f5', // Nền của input màu xám nhạt
-                                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Hiệu ứng bóng nhẹ
-                                color: 'black' // Màu chữ bên trong ô input
-                            }
-                        }}
-                    />
-                    {formik.touched.description &&
-                        formik.errors.description && (
-                            <div className="login__validation__error">
-                                <p>{formik.errors.description}</p>
-                            </div>
-                        )}
-                </> */}
-                {/* expiryDay */}
-                <>
-                    <TextField
-                        id="expiryDay"
-                        label={
-                            <span>
-                                Expiry Date (Date) <span style={{ color: "red" }}>*</span>
-                            </span>
-                        }
-                        variant="outlined"
-                        value={formik.values.expiryDay}
-                        onChange={formik.handleChange}
-                        fullWidth
-                        autoComplete="expiryDay"
-                        margin="dense"
-                        type="number"
-                        color="secondary"
-                        InputLabelProps={{
-                            style: { color: 'black' } // Đặt màu sắc của nhãn thành màu đen
-                        }}
-                        InputProps={{
-                            style: {
-                                backgroundColor: '#f5f5f5', // Nền của input màu xám nhạt
-                                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Hiệu ứng bóng nhẹ
-                                color: 'black' // Màu chữ bên trong ô input
-                            }
-                        }}
-                    />
-                    {formik.touched.expiryDay && formik.errors.expiryDay && (
+                    }}
+                />
+                {formik.touched.subcriptionType &&
+                    formik.errors.subcriptionType && (
                         <div className="login__validation__error">
-                            <p>{formik.errors.expiryDay}</p>
+                            <p>{formik.errors.subcriptionType}</p>
                         </div>
                     )}
-                </>
+
+                {/* expiryDay */}
+                <TextField
+                    id="expiryDay"
+                    label={
+                        <span>
+                            Expiry Date (Date) <span style={{ color: "red" }}>*</span>
+                        </span>
+                    }
+                    variant="outlined"
+                    value={formik.values.expiryDay}
+                    onChange={formik.handleChange}
+                    fullWidth
+                    autoComplete="expiryDay"
+                    margin="dense"
+                    type="number"
+                    color="secondary"
+                    InputLabelProps={{
+                        style: { color: 'black' }
+                    }}
+                    InputProps={{
+                        style: {
+                            backgroundColor: '#f5f5f5',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                            color: 'black'
+                        }
+                    }}
+                />
+                {formik.touched.expiryDay && formik.errors.expiryDay && (
+                    <div className="login__validation__error">
+                        <p>{formik.errors.expiryDay}</p>
+                    </div>
+                )}
+
                 {/* price */}
-                <>
-                    <TextField
-                        id="price"
-                        label={"Price"}
-                        variant="outlined"
-                        value={formik.values.price}
-                        onChange={formik.handleChange}
-                        fullWidth
-                        autoComplete="price"
-                        margin="dense"
-                        type="number"
-                        color="secondary"
-                        InputLabelProps={{
-                            style: { color: 'black' } // Đặt màu sắc của nhãn thành màu đen
-                        }}
-                        InputProps={{
-                            style: {
-                                backgroundColor: '#f5f5f5', // Nền của input màu xám nhạt
-                                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Hiệu ứng bóng nhẹ
-                                color: 'black' // Màu chữ bên trong ô input
-                            }
-                        }}
-                    />
-                    {formik.touched.price &&
-                        formik.errors.price && (
-                            <div className="login__validation__error">
-                                <p>{formik.errors.price}</p>
-                            </div>
-                        )}
-                </>
+                <TextField
+                    id="price"
+                    label={"Price"}
+                    variant="outlined"
+                    value={formik.values.price}
+                    onChange={formik.handleChange}
+                    fullWidth
+                    autoComplete="price"
+                    margin="dense"
+                    type="number"
+                    color="secondary"
+                    InputLabelProps={{
+                        style: { color: 'black' }
+                    }}
+                    InputProps={{
+                        style: {
+                            backgroundColor: '#f5f5f5',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                            color: 'black'
+                        }
+                    }}
+                />
+                {formik.touched.price &&
+                    formik.errors.price && (
+                        <div className="login__validation__error">
+                            <p>{formik.errors.price}</p>
+                        </div>
+                    )}
+
                 {!showLoadingModal ? (
                     <div
                         style={{
@@ -253,12 +216,12 @@ export default function CreatePackage() {
                             marginTop: "30px",
                         }}
                     >
-                        <BackButton style={{ fontSize: '14px' }} /> {/* Thay đổi kích cỡ chữ ở đây */}
+                        <BackButton style={{ fontSize: '14px' }} />
                         <Button
                             className="login__btn"
                             style={{
                                 backgroundColor: "#70d8bd",
-                                fontSize: '14px', // Thay đổi kích cỡ chữ của nút Tạo
+                                fontSize: '14px',
                             }}
                             variant="contained"
                             type="submit"

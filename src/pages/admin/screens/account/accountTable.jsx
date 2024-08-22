@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import {
   Box,
@@ -10,6 +8,7 @@ import {
   Select,
   MenuItem,
   Typography,
+  TextField 
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,7 +27,6 @@ import {
   CustomNoRowsOverlay,
   GridLoadingOverlay,
 } from "../../../../components/styledTable/styledTable";
-// import SwapHorizontalCircleIcon from '@mui/icons-material/SwapHorizontalCircle';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import "./accountTable.css";
 
@@ -40,10 +38,38 @@ const AccountTable = () => {
   const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [pageSize, setPageSize] = useState(5); // State for number of rows per page
   const [pageNumber, setPageNumber] = useState(0); // Current page index
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredRows, setFilteredRows] = useState([]);
 
   useEffect(() => {
     dispatch(getAllUsersThunk());
   }, [dispatch]);
+
+  useEffect(() => {
+    setFilteredRows(
+      accounts?.map((account, index) => ({
+        ...account,
+        order: index + 1,
+      })) || []
+    );
+  }, [accounts]);
+
+  const handleSearch = () => {
+    const lowercasedQuery = searchQuery.toLowerCase();
+    const filteredData = accounts.filter((account) =>
+      Object.values(account).some((value) =>
+        value.toString().toLowerCase().includes(lowercasedQuery)
+      )
+    );
+
+    setFilteredRows(
+      filteredData.map((account, index) => ({
+        ...account,
+        order: index + 1,
+      }))
+    );
+    setPageNumber(0); // Reset page number after search
+  };
 
   const handleAccept = (id) => {
     setShowLoadingModal(true);
@@ -132,10 +158,9 @@ const AccountTable = () => {
             fontSize: "32px",
             color: titleColor,
             fontWeight: "700",
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", // Shadow effect
-            // border: "1px solid rgba(255, 255, 255, 0.5)", // Light white border
-            padding: "4px", // Optional: padding to make the border more visible
-            borderRadius: "4px" // Optional: rounded corners for the border
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+            padding: "4px",
+            borderRadius: "4px"
           }}
         >
           {title}
@@ -210,31 +235,32 @@ const AccountTable = () => {
       headerAlign: "center",
       flex: 1,
       renderCell: ({ row: { id, role } }) => {
-        // Check if the current role is "Moderator" and hide the button if so
         if (role === "Moderator") return null;
 
         return (
           <Box width="100%" display="flex" justifyContent="center" alignItems="center">
-            <Button><SwapHorizIcon
-              color="primary"
-              style={{ cursor: "pointer", fontSize: 30 }}
-              onClick={() => {
-                Swal.fire({
-                  title: "Confirm Role Change",
-                  text: "Tài khoản này sẽ được cấp role Moderator vĩnh viễn!",
-                  icon: "warning",
-                  showCancelButton: true,
-                  confirmButtonColor: "#3085d6",
-                  cancelButtonColor: "#d33",
-                  confirmButtonText: "Yes, change role!",
-                  cancelButtonText: "No, cancel!",
-                }).then((result) => {
-                  if (result.isConfirmed) {
-                    handleChangeRole(id);
-                  }
-                });
-              }}
-            /></Button>
+            <Button>
+              <SwapHorizIcon
+                color="primary"
+                style={{ cursor: "pointer", fontSize: 30 }}
+                onClick={() => {
+                  Swal.fire({
+                    title: "Confirm Role Change",
+                    text: "This account will be given the Moderator role, you cannot change the role from here!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, change role!",
+                    cancelButtonText: "No, cancel!",
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      handleChangeRole(id);
+                    }
+                  });
+                }}
+              />
+            </Button>
           </Box>
         );
       },
@@ -292,14 +318,10 @@ const AccountTable = () => {
   };
 
   const handlePageSizeChange = (event) => {
-    setPageSize(event.target.value);
-    setPageNumber(0); // Reset to the first page when page size changes
+    setPageSize(Number(event.target.value));
   };
 
-  const paginatedRows = rows.slice(
-    pageNumber * pageSize,
-    (pageNumber + 1) * pageSize
-  );
+  const paginatedRows = filteredRows.slice(pageNumber * pageSize, pageNumber * pageSize + pageSize);
 
   const CustomFooter = () => (
     <Box
@@ -322,7 +344,7 @@ const AccountTable = () => {
         </Box>
         <Button
           onClick={() => handlePageChange(pageNumber + 1)}
-          disabled={(pageNumber + 1) * pageSize >= rows.length}
+          disabled={(pageNumber + 1) * pageSize >= filteredRows.length}
           sx={{ color: "black", backgroundColor: "#7CB9E8" }}
         >
           Next
@@ -365,8 +387,40 @@ const AccountTable = () => {
 
   return (
     <Box m="20px">
-      <Header title="ACCOUNT" subtitle="System Account Management" />
-
+      <Header
+        title="ACCOUNT"
+        subtitle="System Account Management"
+      />
+      <Box display="flex" alignItems="center">
+        <TextField
+          label="Search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
+          placeholder="Search Information"
+          InputProps={{
+            style: { color: 'black' }, // Text color
+          }}
+          sx={{
+            mb: 2,
+            width: "200px",
+            "& .MuiInputBase-input": { color: "black" },
+            "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
+            "& .MuiInputLabel-root": { color: "black" } // Label color
+          }}
+        />
+        <Button
+          variant="contained"
+          onClick={handleSearch}
+          sx={{ mb: 2, ml: 1, height: "50px" }}
+        >
+          Search
+        </Button>
+      </Box>
       <Box sx={StyledBox} height="100%">
         <DataGrid
           disableRowSelectionOnClick
@@ -378,10 +432,10 @@ const AccountTable = () => {
           pageSize={pageSize}
           page={pageNumber}
           onPageChange={handlePageChange}
-          rowCount={rows.length} // Total number of rows
-          rowsPerPageOptions={[]} // Hides the rows per page selector
+          rowCount={filteredRows.length}
+          rowsPerPageOptions={[]}
           components={{
-            Pagination: CustomFooter, // Custom footer component
+            Pagination: CustomFooter,
           }}
         />
       </Box>

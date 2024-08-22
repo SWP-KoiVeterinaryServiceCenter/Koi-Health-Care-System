@@ -157,7 +157,7 @@ const Topbar = () => {
         <div className="manager_topbar">
             <Box display="flex" justifyContent="flex-end" p={2} width="auto">
                 <Box display="flex">
-                    <ClickAwayListener onClickAway={handleClickAwayNoti}>
+                    {/* <ClickAwayListener onClickAway={handleClickAwayNoti}>
                         <div>
                             <div
                                 className="count_box"
@@ -261,7 +261,7 @@ const Topbar = () => {
                                 </div>
                             ) : null}
                         </div>
-                    </ClickAwayListener>
+                    </ClickAwayListener> */}
                     <ClickAwayListener onClickAway={handleClickAway}>
                         <div>
                             <IconButton onClick={handleClick}>
