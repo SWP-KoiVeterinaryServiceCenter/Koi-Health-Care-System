@@ -348,8 +348,12 @@ export default function UpdatePackage() {
       subcriptionType: packageDetail.subcriptionType || '',
     },
     validationSchema: Yup.object({
-      expiryDay: Yup.number().required("Date cannot be empty"),
-      price: Yup.number().required("Price cannot be empty"),
+      expiryDay: Yup.number().required("Date cannot be empty").max(31, "Day cannot exceed 31 Days"),
+      price: Yup.number()
+          .required("Price cannot be empty")
+          .min(0, "Price cannot be negative")
+          .integer("Price must be an integer")
+          .max(1000000, "Price cannot exceed 1.000.000"),
       subcriptionType: Yup.string().required("Description cannot be empty"),
     }),
     onSubmit: async (values) => {

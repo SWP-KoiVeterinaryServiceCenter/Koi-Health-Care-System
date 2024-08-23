@@ -8,34 +8,27 @@ import {
   Select,
   MenuItem,
   Typography,
+  TextField,
+ 
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { tokens } from "../../../../theme";
 import Header from "../../components/header/Header";
-import { allAccountsSelector } from "../../../../store/sellectors";
+import { postSelector, postDetailSelector } from "../../../../store/sellectors";
+import {
+  StyledBox,
+  CustomNoRowsOverlay,
+  GridLoadingOverlay,
+} from "../../../../components/styledTable/styledTable";
 import {
   getPostThunk,
   banPostThunk,
   unbanPostThunk,
   getPostDetailThunk,
 } from "../../../../store/apiThunk/postThunk";
-import {
-  getAllUsersThunk,
-  banUserThunk,
-  unbanUserThunk,
-} from "../../../../store/apiThunk/userThunk";
-import {
-  StyledBox,
-  CustomNoRowsOverlay,
-  GridLoadingOverlay,
-} from "../../../../components/styledTable/styledTable";
-import { postSelector, postDetailSelector } from "../../../../store/sellectors";
 import { ShopBackdrop } from "../../../../components/backdrop/shopBackdrop/shopBackdrop";
-// import { CategoryList } from "../../../platformStaff/screens/categoryList/categorydetail/categorydetail";
-
-// import "./accountTable.css";
 
 const ShopTableStaff = () => {
   const theme = useTheme();
@@ -44,18 +37,46 @@ const ShopTableStaff = () => {
   const shopDetail = useSelector(postDetailSelector);
   const dispatch = useDispatch();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
-  const [pageSize, setPageSize] = useState(5); // State for number of rows per page
-  const [pageNumber, setPageNumber] = useState(0); // Current page index
+  const [pageSize, setPageSize] = useState(5);
+  const [pageNumber, setPageNumber] = useState(0);
   const [open, setOpen] = useState(false);
-console.log(shopDetail);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredRows, setFilteredRows] = useState([]);
 
   useEffect(() => {
     dispatch(getPostThunk());
   }, [dispatch]);
 
+  useEffect(() => {
+    setFilteredRows(
+      accounts.map((account, index) => ({
+        ...account,
+        order: index + 1,
+      })) || []
+    );
+  }, [accounts]);
+
+  const handleSearch = () => {
+    const lowercasedQuery = searchQuery.toLowerCase();
+    const filteredData = accounts.filter((account) =>
+      Object.values(account).some((value) =>
+        value.toString().toLowerCase().includes(lowercasedQuery)
+      )
+    );
+
+    setFilteredRows(
+      filteredData.map((account, index) => ({
+        ...account,
+        order: index + 1,
+      }))
+    );
+    setPageNumber(0);
+  };
+
   const handleClose = () => {
     setOpen(false);
   };
+
   const handleAccept = (id) => {
     setShowLoadingModal(true);
     dispatch(banPostThunk(id))
@@ -105,6 +126,7 @@ console.log(shopDetail);
       }
     });
   };
+
   const Header = ({
     title,
     subtitle,
@@ -119,10 +141,9 @@ console.log(shopDetail);
             fontSize: "32px",
             color: titleColor,
             fontWeight: "700",
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", // Shadow effect
-            // border: "1px solid rgba(255, 255, 255, 0.5)", // Light white border
-            padding: "4px", // Optional: padding to make the border more visible
-            borderRadius: "4px", // Optional: rounded corners for the border
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+            padding: "4px",
+            borderRadius: "4px",
           }}
         >
           {title}
@@ -133,6 +154,7 @@ console.log(shopDetail);
       </Box>
     );
   };
+
   const columns = [
     {
       field: "order",
@@ -155,14 +177,14 @@ console.log(shopDetail);
       flex: 1,
       cellClassName: "name-column--cell",
       renderCell: ({ row: { id, postTitle } }) => {
-       const handleOpen = () => {
-  setShowLoadingModal(true);
-  dispatch(getPostDetailThunk(id))  // Truyền id trực tiếp thay vì đối tượng { id }
-    .then(() => {
-      setShowLoadingModal(false);
-      setOpen(true);
-    });
-};
+        const handleOpen = () => {
+          setShowLoadingModal(true);
+          dispatch(getPostDetailThunk(id))
+            .then(() => {
+              setShowLoadingModal(false);
+              setOpen(true);
+            });
+        };
         return (
           <div onClick={handleOpen} style={{ cursor: "pointer" }}>
             {postTitle}
@@ -196,42 +218,39 @@ console.log(shopDetail);
       headerName: "Action",
       headerAlign: "center",
       flex: 1,
-      renderCell: ({ row: { id } }) => {
-        return (
-          <Box width="100%" display="flex" justifyContent="center" gap="4px">
-            <Button
-              variant="contained"
-              style={{
-                backgroundColor: "#55ab95",
-                minWidth: "50px",
-                textTransform: "capitalize",
-              }}
-              onClick={() => handleAccept(id)}
-            >
-              Ban
-            </Button>
-            <Button
-              variant="contained"
-              style={{
-                backgroundColor: colors.redAccent[600],
-                minWidth: "50px",
-                textTransform: "capitalize",
-              }}
-              onClick={() => handleDeny(id)}
-            >
-              Unban
-            </Button>
-          </Box>
-        );
-      },
+      renderCell: ({ row: { id } }) => (
+        <Box width="100%" display="flex" justifyContent="center" gap="4px">
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: "#55ab95",
+              minWidth: "50px",
+              textTransform: "capitalize",
+            }}
+            onClick={() => handleAccept(id)}
+          >
+            Ban
+          </Button>
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: colors.redAccent[600],
+              minWidth: "50px",
+              textTransform: "capitalize",
+            }}
+            onClick={() => handleDeny(id)}
+          >
+            Unban
+          </Button>
+        </Box>
+      ),
     },
   ];
 
-  const rows =
-    accounts?.map((account, index) => ({
-      ...account,
-      order: index + 1,
-    })) || [];
+  const rows = filteredRows.slice(
+    pageNumber * pageSize,
+    (pageNumber + 1) * pageSize
+  );
 
   const handlePageChange = (newPage) => {
     setPageNumber(newPage);
@@ -239,13 +258,8 @@ console.log(shopDetail);
 
   const handlePageSizeChange = (event) => {
     setPageSize(event.target.value);
-    setPageNumber(0); // Reset to the first page when page size changes
+    setPageNumber(0);
   };
-
-  const paginatedRows = rows.slice(
-    pageNumber * pageSize,
-    (pageNumber + 1) * pageSize
-  );
 
   const CustomFooter = () => (
     <Box
@@ -268,7 +282,7 @@ console.log(shopDetail);
         </Box>
         <Button
           onClick={() => handlePageChange(pageNumber + 1)}
-          disabled={(pageNumber + 1) * pageSize >= rows.length}
+          disabled={(pageNumber + 1) * pageSize >= filteredRows.length}
           sx={{ color: "black", backgroundColor: "#7CB9E8" }}
         >
           Next
@@ -311,24 +325,53 @@ console.log(shopDetail);
 
   return (
     <Box m="20px">
-      {/* <CategoryList/> */}
       <Header title="POSTS MANAGEMENT" subtitle="System Post Management" />
-
+      <Box display="flex" alignItems="center">
+        <TextField
+          label="Search"
+          variant="outlined"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
+          placeholder="Search Information"
+          InputProps={{
+            style: { color: 'black' },
+          }}
+          sx={{
+            mb: 2,
+            width: "200px",
+            "& .MuiInputBase-input": { color: "black" },
+            "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
+            "& .MuiInputLabel-root": { color: "black" }
+          }}
+        />
+        <Button
+          variant="contained"
+          onClick={handleSearch}
+          sx={{ mb: 2, ml: 1, height: "50px" }}
+        >
+          Search
+        </Button>
+      </Box>
       <Box sx={StyledBox} height="100%">
         <DataGrid
           disableRowSelectionOnClick
           loading={showLoadingModal}
-          rows={paginatedRows}
+          rows={rows}
           columns={columns}
           pagination
           paginationMode="client"
           pageSize={pageSize}
           page={pageNumber}
           onPageChange={handlePageChange}
-          rowCount={rows.length} // Total number of rows
-          rowsPerPageOptions={[]} // Hides the rows per page selector
+          rowCount={filteredRows.length}
+          rowsPerPageOptions={[]} 
           components={{
-            Pagination: CustomFooter, // Custom footer component
+            Pagination: CustomFooter,
           }}
         />
         <ShopBackdrop
