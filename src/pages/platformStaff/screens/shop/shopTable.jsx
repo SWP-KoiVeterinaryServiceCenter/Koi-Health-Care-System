@@ -352,7 +352,7 @@ const ShopTableStaff = () => {
         <Button
           variant="contained"
           onClick={handleSearch}
-          sx={{ mb: 2, ml: 1, height: "50px" }}
+          sx={{ mb: 2, ml: 1, height: "50px",backgroundColor: "#7CB9E8" }}
         >
           Search
         </Button>
