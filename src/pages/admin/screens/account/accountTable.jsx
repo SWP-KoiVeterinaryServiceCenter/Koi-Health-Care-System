@@ -120,7 +120,7 @@ const AccountTable = () => {
   const handleDeny = (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "You will update the status of this account!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -271,36 +271,74 @@ const AccountTable = () => {
       flex: 1,
       renderCell: ({ row: { role } }) => <div>{role}</div>,
     },
+    // {
+    //   field: "action",
+    //   headerName: "Action",
+    //   headerAlign: "center",
+    //   flex: 1,
+    //   renderCell: ({ row: { id } }) => {
+    //     return (
+    //       <Box width="100%" display="flex" justifyContent="center" gap="4px">
+    //         <Button
+    //           variant="contained"
+    //           style={{
+    //             backgroundColor: "#55ab95",
+    //             minWidth: "50px",
+    //             textTransform: "capitalize",
+    //           }}
+    //           onClick={() => handleAccept(id)}
+    //         >
+    //           Ban
+    //         </Button>
+    //         <Button
+    //           variant="contained"
+    //           style={{
+    //             backgroundColor: colors.redAccent[600],
+    //             minWidth: "50px",
+    //             textTransform: "capitalize",
+    //           }}
+    //           onClick={() => handleDeny(id)}
+    //         >
+    //           Unban
+    //         </Button>
+    //       </Box>
+    //     );
+    //   },
+    // },
     {
       field: "action",
       headerName: "Action",
       headerAlign: "center",
       flex: 1,
-      renderCell: ({ row: { id } }) => {
+      renderCell: ({ row: { id, status } }) => {
         return (
           <Box width="100%" display="flex" justifyContent="center" gap="4px">
-            <Button
-              variant="contained"
-              style={{
-                backgroundColor: "#55ab95",
-                minWidth: "50px",
-                textTransform: "capitalize",
-              }}
-              onClick={() => handleAccept(id)}
-            >
-              Ban
-            </Button>
-            <Button
-              variant="contained"
-              style={{
-                backgroundColor: colors.redAccent[600],
-                minWidth: "50px",
-                textTransform: "capitalize",
-              }}
-              onClick={() => handleDeny(id)}
-            >
-              Unban
-            </Button>
+            {status === "Not ban" && (
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: "#55ab95",
+                  minWidth: "50px",
+                  textTransform: "capitalize",
+                }}
+                onClick={() => handleAccept(id)}
+              >
+                Ban
+              </Button>
+            )}
+            {status === "Ban" && (
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: colors.redAccent[600],
+                  minWidth: "50px",
+                  textTransform: "capitalize",
+                }}
+                onClick={() => handleDeny(id)}
+              >
+                Unban
+              </Button>
+            )}
           </Box>
         );
       },

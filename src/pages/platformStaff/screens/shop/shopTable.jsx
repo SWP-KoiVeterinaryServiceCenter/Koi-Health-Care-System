@@ -42,6 +42,7 @@ const ShopTableStaff = () => {
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredRows, setFilteredRows] = useState([]);
+console.log(shopDetail);
 
   useEffect(() => {
     dispatch(getPostThunk());

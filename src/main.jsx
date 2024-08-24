@@ -38,7 +38,8 @@ import AdjustMoney from "./pages/platformStaff/screens/policy/postPrice/postPric
 //Staff
 import StaffHome from "./pages/platformStaff/screens/home/staffHome";
 import ShopTableStaff from "./pages/platformStaff/screens/shop/shopTable";
-import ReportTable from "./pages/platformStaff/screens/report/reportTable";
+import ReportTable from "./pages/platformStaff/screens/reportPostTable/reportTable";
+import ReportPostTable from "./pages/platformStaff/screens/reportPostTable/reportPostTable";
 import ItemTable from "./pages/platformStaff/screens/item/itemTable/itemTable";
 import CreateItem from "./pages/platformStaff/screens/item/createItem/createItem";
 import UpdateItem from "./pages/platformStaff/screens/item/updateItem/updateItem";
@@ -130,6 +131,10 @@ const router = createBrowserRouter([
                 element: <ReportTable />,
             },
             {
+                path: "reportPost",
+                element: <ReportPostTable />,
+            },
+            {
                 path: "package",
                 element: <PackageTable direction="admin" />,
             },
@@ -200,6 +205,10 @@ const router = createBrowserRouter([
             {
                 path: "report",
                 element: <ReportTable />,
+            },
+            {
+                path: "reportPost",
+                element: <ReportPostTable />,
             },
             {
                 path: "package",

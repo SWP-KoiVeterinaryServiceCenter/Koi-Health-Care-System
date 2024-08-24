@@ -184,13 +184,13 @@ const Sidebar = (props) => {
                     setSelected={setSelected}
                   /> */}
                 
-                  {/* <Item
+                  <Item
                     title="Report"
                     to="report"
                     icon={<ReportGmailerrorredIcon />}
                     selected={selected}
                     setSelected={setSelected}
-                  /> */}
+                  />
                 </Collapse>
               </List>
               <Divider />

@@ -51,8 +51,8 @@ export const commentSelector = (state) => state.comment.entities;
 export const commentDetailSelector = (state) => state.commentDetail.entities;
 
 export const postCategorySelector = (state) => state.postCategory.entities;
-export const postCategoryDetailSelector = (state) => state.postCategoryDetail?.entities || [];
-
+export const postCategoryDetailSelector = (state) =>
+  state.postCategoryDetail?.entities || [];
 
 export const allItemsSelector = (state) => state.allItems.entities;
 export const itemDetailSelector = (state) => state.itemDetail.entities;
@@ -77,14 +77,20 @@ export const platformMonthIncomeSelector = (state) =>
 
 export const packagesSelector = (state) => state.packages.entities; //GetAllSubscription
 
-
 export const allCancelAmountSelector = (state) => state.cancelAmount.entities; //getCancelledAmount
 export const allPriceAmountSelector = (state) => state.priceAmount.entities; //getPriceAmount
-
 
 export const packageDetailSelector = (state) => state.packageDetail.entities;
 
 export const allReportsSelector = (state) => state.allReports.entities;
+export const allPostReportsSelector = (state) => state.allPostReports.entities;
+
+
+
+
+export const userReportsSelector = (state) => state.userReports.entities;
+export const postReportsSelector = (state) => state.postReports.entities;
+
 export const shopReportsSelector = (state) => state.shopReports.entities;
 
 export const transactionDetailSelector = (state) =>

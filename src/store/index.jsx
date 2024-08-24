@@ -62,6 +62,13 @@ import { packagesSlice } from "./features/package.slice/packages.slice";
 import { packageDetailSlice } from "./features/package.slice/packageDetail.slice";
 
 import { allReportsSlice } from "./features/report.slice/allReports.slice";
+import { allPostReportsSlice } from "./features/report.slice/allPostReports.slice";
+
+import { userReportsSlice } from "./features/report.slice/reportUser.slice";
+import { postReportsSlice } from "./features/report.slice/reportPost.slice";
+
+
+
 import { shopReportsSlice } from "./features/report.slice/shopReports.slice";
 
 import { transactionDetailSlice } from "./features/transaction.slice/transactionDetail.slice";
@@ -146,6 +153,14 @@ export const store = configureStore({
     packageDetail: packageDetailSlice.reducer,
 
     allReports: allReportsSlice.reducer,
+    allPostReports: allPostReportsSlice.reducer,
+
+
+
+
+    userReports: userReportsSlice.reducer,
+    postReports: postReportsSlice.reducer,
+    
     shopReports: shopReportsSlice.reducer,
 
     transactionDetail: transactionDetailSlice.reducer,

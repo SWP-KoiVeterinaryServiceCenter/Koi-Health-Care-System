@@ -12,25 +12,21 @@ import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../../../theme";
 import Header from "../../components/header/Header";
 import { useDispatch, useSelector } from "react-redux";
-import Coin from "../../../../assets/coinvnd.png";
-
-import {
-  allPetCoffeeShopsSelector,
-  walletSelector,
-  petCoffeeShopDetailSelector,
-  postSelector,
-} from "../../../../store/sellectors";
+import ReportPostTable from "../../../platformStaff/screens/reportPostTable/reportPostTable";
 import {
   allReportsSelector,
+  userReportsSelector,
 } from "../../../../store/sellectors";
 import {
   getAllReportsThunk,
+  getReportsUserDetailThunk,
 } from "../../../../store/apiThunk/reportThunk";
 
 import { getWalletThunk } from "../../../../store/apiThunk/walletThunk";
 import { useEffect, useState } from "react";
 import Pagination from "../../../../components/pagination/pagination";
 import { AccRole } from "../../../../components/mapping/mapping";
+import Star from "../../../../../src/assets/ratingstar.png";
 import {
   StyledBox,
   CustomNoRowsOverlay,
@@ -38,19 +34,20 @@ import {
 } from "../../../../components/styledTable/styledTable";
 import { FilterComponent } from "../../../../components/filter/filterComponent";
 import { FormatPhoneNumber } from "../../../../components/format/formatText/formatText";
-import { AccountBackdrop } from "../../../../components/backdrop/accountBackdrop/accountBackdrop";
+import { ReportUserBackdrop } from "../../../../components/backdrop/reportBackdrop/reportBackdrop";
 import Swal from "sweetalert2";
 
 export default function ReportTable() {
   const theme = useTheme();
-  const shopDetail = useSelector(petCoffeeShopDetailSelector);
+  const reportUserDetail = useSelector(userReportsSelector);
   const colors = tokens(theme.palette.mode);
   const accounts = useSelector(allReportsSelector);
   const dispatch = useDispatch();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [pageSize, setPageSize] = useState(10);
   const [pageNumber, setPageNumber] = useState(0);
-  console.log(accounts);
+  const [open, setOpen] = useState(false);
+  console.log(reportUserDetail);
   useEffect(() => {
     dispatch(getAllReportsThunk());
   }, []);
@@ -71,7 +68,7 @@ export default function ReportTable() {
             textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", // Shadow effect
             // border: "1px solid rgba(255, 255, 255, 0.5)", // Light white border
             padding: "4px", // Optional: padding to make the border more visible
-            borderRadius: "4px" // Optional: rounded corners for the border
+            borderRadius: "4px", // Optional: rounded corners for the border
           }}
         >
           {title}
@@ -99,30 +96,30 @@ export default function ReportTable() {
       ),
     },
 
-    {
-      field: "id",
-      headerName: "ID",
-      flex: 1,
-      cellClassName: "name-column--cell",
-      renderCell: ({ row: { id } }) => {
-        const handleOpen = () => {
-          setShowLoadingModal(true);
-          dispatch(
-            getAllReportsThunk({
-              id,
-            })
-          ).then(() => {
-            setShowLoadingModal(false);
-            setOpen(true);
-          });
-        };
-        return (
-          <div onClick={handleOpen} style={{ cursor: "pointer" }}>
-            {id}
-          </div>
-        );
-      },
-    },
+    // {
+    //   field: "id",
+    //   headerName: "ID",
+    //   flex: 1,
+    //   cellClassName: "name-column--cell",
+    //   renderCell: ({ row: { id } }) => {
+    //     const handleOpen = () => {
+    //       setShowLoadingModal(true);
+    //       dispatch(
+    //         getAllReportsThunk({
+    //           id,
+    //         })
+    //       ).then(() => {
+    //         setShowLoadingModal(false);
+    //         setOpen(true);
+    //       });
+    //     };
+    //     return (
+    //       <div onClick={handleOpen} style={{ cursor: "pointer" }}>
+    //         {id}
+    //       </div>
+    //     );
+    //   },
+    // },
     {
       field: "reportContent",
       headerName: "Report Content",
@@ -131,14 +128,11 @@ export default function ReportTable() {
       renderCell: ({ row: { id, reportContent } }) => {
         const handleOpen = () => {
           setShowLoadingModal(true);
-          dispatch(
-            getAllReportsThunk({
-              id,
-            })
-          ).then(() => {
-            setShowLoadingModal(false);
-            setOpen(true);
-          });
+          dispatch(getReportsUserDetailThunk(id))
+            .then(() => {
+              setShowLoadingModal(false);
+              setOpen(true);
+            });
         };
         return (
           <div onClick={handleOpen} style={{ cursor: "pointer" }}>
@@ -147,17 +141,41 @@ export default function ReportTable() {
         );
       },
     },
+    // {
+    //   field: "reportUserId",
+    //   headerName: "Report User ID",
+    //   flex: 1,
+    //   renderCell: ({ row: { reportUserId } }) => <div>{reportUserId}</div>,
+    // },
     {
-      field: "reportUserId",
-      headerName: "Report User ID",
+      field: "fulName",
+      headerName: "User Name",
       flex: 1,
-      renderCell: ({ row: { reportUserId } }) => <div>{reportUserId}</div>,
+      renderCell: ({ row: { fulName } }) => <div>{fulName}</div>,
     },
     {
-      field: "reportPostId",
-      headerName: "Report POST ID",
+      field: "email",
+      headerName: "Gmail",
       flex: 1,
-      renderCell: ({ row: { reportPostId } }) => <div>{reportPostId}</div>,
+      renderCell: ({ row: { email } }) => <div>{email}</div>,
+    },
+    {
+      field: "rating",
+      flex: 1,
+      // headerAlign: "center",
+      headerName: "Rating",
+      renderCell: ({ row: { rating } }) => (
+        <Box
+          display="flex"
+          alignItems="center"
+          // justifyContent="center"
+          width="100%"
+          gap="6px"
+        >
+          <img src={Star} alt="" style={{ width: "35px" }} />
+          {rating}
+        </Box>
+      ),
     },
     // {
     //   field: "amount",
@@ -183,6 +201,9 @@ export default function ReportTable() {
     accounts?.map((account, index) => ({
       ...account,
       order: index + 1,
+      fulName: account.user.fulName,
+      email: account.user.email,
+      rating: account.user.rating,
     })) || [];
   const handleClose = () => {
     setOpen(false);
@@ -253,7 +274,8 @@ export default function ReportTable() {
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
               borderColor: "black",
             },
-            "& .MuiSvgIcon-root": { // Thêm phần này để thay đổi màu của icon
+            "& .MuiSvgIcon-root": {
+              // Thêm phần này để thay đổi màu của icon
               color: "black",
             },
           }}
@@ -267,8 +289,9 @@ export default function ReportTable() {
   );
 
   return (
+    <Box>
     <Box m="20px">
-      <Header title="REPORT" subtitle="Track reports on the system" />
+      <Header title="REPORT" subtitle="Track reports Users on the system" />
 
       <Box sx={StyledBox} height="100%">
         <DataGrid
@@ -287,12 +310,15 @@ export default function ReportTable() {
             Pagination: CustomFooter, // Custom footer component
           }}
         />
-        {/* <AccountBackdrop
-                        open={open}
-                        handleClose={handleClose}
-                        shopDetail={shopDetail}
-                    /> */}
+        <ReportUserBackdrop
+          open={open}
+          handleClose={handleClose}
+          reportUserDetail={reportUserDetail}
+        />
       </Box>
+      
+    </Box>
+    <ReportPostTable/>
     </Box>
   );
 }

@@ -403,13 +403,13 @@ const Sidebar = (props) => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                  {/* <Item
+                  <Item
                     title="Report"
                     to="report"
                     icon={<ReportGmailerrorredIcon />}
                     selected={selected}
                     setSelected={setSelected}
-                  /> */}
+                  />
                     </Collapse>
                   </List>
                   {/* ///////////////////////////////////////////////////////////////////// */}

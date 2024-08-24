@@ -7,7 +7,7 @@ import NoBackground from "../../../assets/noBackground.png";
 import NoAvatar from "../../../assets/noAvatar.png";
 
 
-export function ReportUserBackdrop({ open, handleClose, reportUserDetail }) {
+export function ReportPostBackdrop({ open, handleClose, reportPostDetail }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);  
 
@@ -21,12 +21,12 @@ export function ReportUserBackdrop({ open, handleClose, reportUserDetail }) {
         <div className="shopBackdrop">
           <div className="flex-column">
             <div className="text" style={{ color: colors.greenAccent[500] }}>
-              ID:{reportUserDetail.id}
+              ID:{reportPostDetail.id}
             </div>
           </div>
           <div style={{ position: "relative" }}>
             <img
-              src={reportUserDetail.user?.authorImage || NoBackground}
+              src={reportPostDetail.postDetail?.productImageUrl || NoBackground}
               alt=""
               className="background"
             />
@@ -37,26 +37,26 @@ export function ReportUserBackdrop({ open, handleClose, reportUserDetail }) {
           <div className="flex-row">
             <div className="flex-column">
               <div className="text" style={{ color: colors.greenAccent[500] }}>
-                Full Name:{" "}
+                Report Content:{" "}
                 <h style={{ color: colors.greenAccent[100] }}>
-                  {reportUserDetail.user?.fulName}
+                  {reportPostDetail.reportContent}
                 </h>
               </div>
             </div>
 
             <div className="flex-column">
               <div className="text" style={{ color: colors.greenAccent[500] }}>
-                Email:{" "}
+                Name Post:{" "}
                 <h style={{ color: colors.greenAccent[100] }}>
-                {reportUserDetail.user?.email}
+                {reportPostDetail.postDetail?.postTitle}
                 </h>
               </div>
             </div>
             <div className="flex-column">
               <div className="text" style={{ color: colors.greenAccent[500] }}>
-                PhoneNumber:{" "}
+                Type:{" "}
                 <h style={{ color: colors.greenAccent[100] }}>
-                {reportUserDetail.user?.phoneNumber}
+                {reportPostDetail.postDetail?.conditionTypeName}
                 </h>
               </div>
             </div>
@@ -64,9 +64,25 @@ export function ReportUserBackdrop({ open, handleClose, reportUserDetail }) {
             <Divider color={colors.greenAccent[500]} />
             <div className="flex-column">
               <div className="text" style={{ color: colors.greenAccent[500] }}>
-                Author ID:{" "}
+                Author Name:{" "}
                 <h style={{ color: colors.greenAccent[100] }}>
-                  {reportUserDetail.user?.authorId}
+                  {reportPostDetail.postDetail?.postAuthor?.fulName}
+                </h>
+              </div>
+            </div>
+            <div className="flex-column">
+              <div className="text" style={{ color: colors.greenAccent[500] }}>
+                Email:{" "}
+                <h style={{ color: colors.greenAccent[100] }}>
+                  {reportPostDetail.postDetail?.postAuthor?.email}
+                </h>
+              </div>
+            </div>
+            <div className="flex-column">
+              <div className="text" style={{ color: colors.greenAccent[500] }}>
+                Phone Number:{" "}
+                <h style={{ color: colors.greenAccent[100] }}>
+                  {reportPostDetail.postDetail?.postAuthor?.phoneNumber}
                 </h>
               </div>
             </div>
@@ -74,18 +90,11 @@ export function ReportUserBackdrop({ open, handleClose, reportUserDetail }) {
               <div className="text" style={{ color: colors.greenAccent[500] }}>
                 Create Day:{" "}
                 <h style={{ color: colors.greenAccent[100] }}>
-                  {reportUserDetail.user?.createdDate}
+                  {reportPostDetail.postDetail?.postAuthor?.createdDate}
                 </h>
               </div>
             </div>
-            <div className="flex-column">
-              <div className="text" style={{ color: colors.greenAccent[500] }}>
-                Rating:{" "}
-                <h style={{ color: colors.greenAccent[100] }}>
-                  {reportUserDetail.user?.rating}      
-                </h>
-              </div>
-            </div>
+        
           </div>
         </div>
       </Box>
