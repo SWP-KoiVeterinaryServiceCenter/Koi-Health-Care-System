@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import heroImage from "../../../../../assets/imglanding.jpg";
-
+import heroImage2 from "../../../../../assets/Marketing_Sale.png";
 import { useNavigate } from "react-router-dom";
 import { alpha } from "@mui/material/styles"; // Add this line
 import "slick-carousel/slick/slick.css";
@@ -132,7 +132,7 @@ export default function Hero() {
             // height: { xs: 200, sm: 600 },
             height: 380,
             width: "100%",
-            borderRadius: "10px",
+            // borderRadius: "10px",
             outline: "1px solid",
             outlineColor:
               theme.palette.mode === "light"
@@ -154,7 +154,7 @@ export default function Hero() {
             </div>
             <div>
               <img
-                src={heroImage}
+                src={heroImage2}
                 alt="Hero Image 2"
                 style={{ width: "100%", height: "100%", borderRadius: "10px" }}
               />

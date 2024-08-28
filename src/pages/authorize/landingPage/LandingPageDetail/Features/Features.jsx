@@ -13,7 +13,7 @@ import DevicesRoundedIcon from '@mui/icons-material/DevicesRounded';
 import EdgesensorHighRoundedIcon from '@mui/icons-material/EdgesensorHighRounded';
 import ViewQuiltRoundedIcon from '@mui/icons-material/ViewQuiltRounded';
 import mobileIntegrationImage from '../../../../../assets/bodyFeature2.png'; // Replace with actual path
-import dashboardImage from '../../../../../assets/bodyFeature1.jpg'; // Replace with actual path
+import dashboardImage from '../../../../../assets/Adminbody.png'; // Replace with actual path
 import platformsImage from '../../../../../assets/bodyFeature3.png'; // Replace with actual path
 const items = [
   {

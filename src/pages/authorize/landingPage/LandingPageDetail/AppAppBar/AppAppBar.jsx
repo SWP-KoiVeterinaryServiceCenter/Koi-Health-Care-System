@@ -161,7 +161,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 variant="contained"
                 size="small"
                 component="a"
-                href="https://expo.dev/accounts/dieuanh14/projects/goods-exchange/builds/486e820b-d147-4386-bd88-0bdf6d23fee5?fbclid=IwY2xjawEZ67lleHRuA2FlbQIxMAABHY22SLNGOEE1T3adoLiXQF8xERUXKhQ6b_vxXlQYZd2C-FaQ6ja3NNFKwg_aem_Vf37TouB4Kc4Z9jw6pRU8A" // Replace with actual link
+                href="https://expo.dev/artifacts/eas/9yJyRqE4484PY7wkdhKG2F.apk" // Replace with actual link
                 target="_blank"
               >
                 Free Download
@@ -227,7 +227,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                       color="primary"
                       variant="outlined"
                       component="a"
-                      href="https://expo.dev/accounts/dieuanh14/projects/goods-exchange/builds/486e820b-d147-4386-bd88-0bdf6d23fee5?fbclid=IwY2xjawEZ67lleHRuA2FlbQIxMAABHY22SLNGOEE1T3adoLiXQF8xERUXKhQ6b_vxXlQYZd2C-FaQ6ja3NNFKwg_aem_Vf37TouB4Kc4Z9jw6pRU8A" // Replace with actual link
+                      href="https://expo.dev/artifacts/eas/9yJyRqE4484PY7wkdhKG2F.apk" // Replace with actual link
                       target="_blank"
                       sx={{ width: '100%' }}
                     >

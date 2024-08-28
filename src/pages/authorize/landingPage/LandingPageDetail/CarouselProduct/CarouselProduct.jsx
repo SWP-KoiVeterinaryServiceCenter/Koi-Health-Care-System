@@ -55,7 +55,7 @@ export default function CircularDemo() {
         </div>
         <div className="product-details">
           <h4 className="product-name">{product.name}</h4>
-          <h6 className="product-price">${product.price}</h6>
+          <h6 className="product-price">{product.price} Vnđ</h6>
           {/* Uncomment if needed */}
           {/* <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
           <div className="product-actions">

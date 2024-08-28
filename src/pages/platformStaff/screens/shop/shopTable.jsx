@@ -214,38 +214,75 @@ console.log(shopDetail);
         </div>
       ),
     },
+    // {
+    //   field: "action",
+    //   headerName: "Action",
+    //   headerAlign: "center",
+    //   flex: 1,
+    //   renderCell: ({ row: { id } }) => (
+    //     <Box width="100%" display="flex" justifyContent="center" gap="4px">
+    //       <Button
+    //         variant="contained"
+    //         style={{
+    //           backgroundColor: "#55ab95",
+    //           minWidth: "50px",
+    //           textTransform: "capitalize",
+    //         }}
+    //         onClick={() => handleAccept(id)}
+    //       >
+    //         Ban
+    //       </Button>
+    //       <Button
+    //         variant="contained"
+    //         style={{
+    //           backgroundColor: colors.redAccent[600],
+    //           minWidth: "50px",
+    //           textTransform: "capitalize",
+    //         }}
+    //         onClick={() => handleDeny(id)}
+    //       >
+    //         Unban
+    //       </Button>
+    //     </Box>
+    //   ),
+    // },
     {
       field: "action",
       headerName: "Action",
       headerAlign: "center",
       flex: 1,
-      renderCell: ({ row: { id } }) => (
+      renderCell: ({ row: { id, status } }) => (
         <Box width="100%" display="flex" justifyContent="center" gap="4px">
-          <Button
-            variant="contained"
-            style={{
-              backgroundColor: "#55ab95",
-              minWidth: "50px",
-              textTransform: "capitalize",
-            }}
-            onClick={() => handleAccept(id)}
-          >
-            Ban
-          </Button>
-          <Button
-            variant="contained"
-            style={{
-              backgroundColor: colors.redAccent[600],
-              minWidth: "50px",
-              textTransform: "capitalize",
-            }}
-            onClick={() => handleDeny(id)}
-          >
-            Unban
-          </Button>
+          {status === "Unban" && (
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: "#55ab95",
+                minWidth: "50px",
+                textTransform: "capitalize",
+              }}
+              onClick={() => handleAccept(id)}
+            >
+              Ban
+            </Button>
+          )}
+          {status === "Ban" && (
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: colors.redAccent[600],
+                minWidth: "50px",
+                textTransform: "capitalize",
+              }}
+              onClick={() => handleDeny(id)}
+            >
+              Unban
+            </Button>
+          )}
         </Box>
       ),
     },
+    
   ];
 
   const rows = filteredRows.slice(

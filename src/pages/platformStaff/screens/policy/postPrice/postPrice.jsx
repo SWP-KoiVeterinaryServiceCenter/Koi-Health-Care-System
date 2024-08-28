@@ -71,10 +71,74 @@ import {
         });
     };
   
+    // const columns = [
+    //   {
+    //     field: "postPrice",
+    //     headerName: "Post Price (VNĐ)",
+    //     headerAlign: "center",
+    //     flex: 1,
+    //     renderCell: ({ row: { id, postPrice } }) => (
+    //       <Box
+    //         display="flex"
+    //         justifyContent="center"
+    //         alignItems="center"
+    //         width="100%"
+    //       >
+    //         {editingId === id ? (
+    //           <input
+    //             type="number"
+    //             value={newCancelledAmount}
+    //             onChange={(e) => setNewCancelledAmount(e.target.value)}
+    //             autoFocus
+    //           />
+    //         ) : (
+    //           <span style={{ fontSize: "40px", fontWeight: "bold" }}>{postPrice} <span  style={{ fontSize: "20px", fontWeight: "bold" }}>vnđ</span></span>
+    //         )}
+    //       </Box>
+    //     ),
+    //   },
+    //   {
+    //     field: "activity",
+    //     headerName: "Action",
+    //     flex: 1,
+    //     headerAlign: "center",
+    //     sortable: false,
+    //     disableColumnMenu: true,
+    //     renderCell: ({ row: { id, postPrice } }) => (
+    //       <Box
+    //         display="flex"
+    //         justifyContent="center"
+    //         alignItems="center"
+    //         width="100%"
+    //         gap="10px"
+    //       >
+    //         {editingId === id ? (
+    //           <Button
+    //             variant="contained"
+    //             color="success"
+    //             style={{ color: "white", textTransform: "capitalize" }}
+    //             onClick={() => handleUpdateCancelledAmount(id)}
+    //           >
+    //             Ok
+    //           </Button>
+    //         ) : (
+    //           <Button
+    //             variant="contained"
+    //             color="warning"
+    //             style={{ color: "white", textTransform: "capitalize" }}
+    //             onClick={() => handleEditClick(id, postPrice)}
+    //           >
+    //             Edit
+    //           </Button>
+    //         )}
+    //       </Box>
+    //     ),
+    //   },
+    // ];
     const columns = [
       {
         field: "postPrice",
-        headerName: "Post Price",
+        headerName: "Post Price (VNĐ)",
         headerAlign: "center",
         flex: 1,
         renderCell: ({ row: { id, postPrice } }) => (
@@ -88,11 +152,35 @@ import {
               <input
                 type="number"
                 value={newCancelledAmount}
-                onChange={(e) => setNewCancelledAmount(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+    
+                  // Check if the input is a positive integer
+                  if (/^\d+$/.test(value)) {
+                    const numValue = Number(value);
+    
+                    // Validate the range (1-50,000)
+                    if (numValue >= 1 && numValue <= 50000) {
+                      setNewCancelledAmount(value);
+                    } else {
+                      alert("Giá tiền tối thiểu nằm trong khoảng 1-50000."); // Display error alert
+                    }
+                  } else if (value === "") {
+                    // Allow clearing the input
+                    setNewCancelledAmount("");
+                  }
+                }}
                 autoFocus
+                min="1"
+                max="50000"
+                step="1"
+                style={{ fontSize: "20px", fontWeight: "bold", textAlign: "center" }}
               />
             ) : (
-              <span>{postPrice}</span>
+              <span style={{ fontSize: "40px", fontWeight: "bold" }}>
+                {postPrice}
+                <span style={{ fontSize: "20px", fontWeight: "bold" }}> vnđ</span>
+              </span>
             )}
           </Box>
         ),
@@ -135,7 +223,7 @@ import {
         ),
       },
     ];
-  
+    
     const rows =
       accounts?.map((account, index) => ({
         ...account,

@@ -69,6 +69,31 @@ export default function WalletTable() {
   };
 
   const columns = [
+    // {
+    //   field: "orderCancelledAmount",
+    //   headerName: "Cancelled Amount",
+    //   headerAlign: "center",
+    //   flex: 1,
+    //   renderCell: ({ row: { id, orderCancelledAmount } }) => (
+    //     <Box
+    //       display="flex"
+    //       justifyContent="center"
+    //       alignItems="center"
+    //       width="100%"
+    //     >
+    //       {editingId === id ? (
+    //         <input
+    //           type="number"
+    //           value={newCancelledAmount}
+    //           onChange={(e) => setNewCancelledAmount(e.target.value)}
+    //           autoFocus
+    //         />
+    //       ) : (
+    //         <span style={{ fontSize: "40px", fontWeight: "bold" }}>{orderCancelledAmount} <span style={{ fontSize: "10px", fontWeight: "bold" }} >/per day</span> </span>
+    //       )}
+    //     </Box>
+    //   ),
+    // },
     {
       field: "orderCancelledAmount",
       headerName: "Cancelled Amount",
@@ -82,18 +107,45 @@ export default function WalletTable() {
           width="100%"
         >
           {editingId === id ? (
-            <input
-              type="number"
-              value={newCancelledAmount}
-              onChange={(e) => setNewCancelledAmount(e.target.value)}
-              autoFocus
-            />
+            <>
+              <input
+                type="number"
+                value={newCancelledAmount}
+                onChange={(e) => {
+                  const value = e.target.value;
+    
+                  // Check if the input is a positive integer
+                  if (/^\d+$/.test(value)) {
+                    const numValue = Number(value);
+    
+                    // Validate the range (1-5)
+                    if (numValue >= 1 && numValue <= 5) {
+                      setNewCancelledAmount(value);
+                    } else {
+                      alert("Valid values ​​are from 1 to 5!"); // Display error alert
+                    }
+                  } else if (value === "") {
+                    // Allow clearing the input
+                    setNewCancelledAmount("");
+                  }
+                }}
+                autoFocus
+                min="1"
+                max="5"
+                step="1"
+                style={{ fontSize: "20px", fontWeight: "bold", textAlign: "center" }}
+              />
+            </>
           ) : (
-            <span>{orderCancelledAmount}</span>
+            <span style={{ fontSize: "40px", fontWeight: "bold" }}>
+              {orderCancelledAmount}
+              <span style={{ fontSize: "10px", fontWeight: "bold" }}>/per day</span>
+            </span>
           )}
         </Box>
       ),
     },
+    
     {
       field: "activity",
       headerName: "Action",
