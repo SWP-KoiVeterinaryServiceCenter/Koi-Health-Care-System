@@ -8,7 +8,10 @@ import {
     getPackageDetail,
     getAllSubscription,
     setPriorityPackage,
-    setStandardPackage
+    setStandardPackage,
+    getTotalBuyStandardSubs,
+    getTotalBuyPrioritySubs,
+    getTotalBuy
 } from "../../api/package";
 
 export const getPackageDetailThunk = createAsyncThunk(
@@ -104,6 +107,39 @@ export const getAllSubscriptionThunk = createAsyncThunk(
     async (thunkAPI) => {
         try {
             const response = await getAllSubscription();
+            return response;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+export const getTotalBuyThunk  = createAsyncThunk(
+    "package/getTotalBuy",
+    async (thunkAPI) => {
+        try {
+            const response = await getTotalBuy();
+            return response;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+export const getTotalBuyStandardSubsThunk  = createAsyncThunk(
+    "package/getTotalBuyStandardSubs",
+    async (thunkAPI) => {
+        try {
+            const response = await getTotalBuyStandardSubs();
+            return response;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+export const getTotalBuyPrioritySubsThunk  = createAsyncThunk(
+    "package/getTotalBuyPrioritySubs",
+    async (thunkAPI) => {
+        try {
+            const response = await getTotalBuyPrioritySubs();
             return response;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data);

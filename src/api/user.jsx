@@ -140,6 +140,11 @@ export const getAllUsers = async () => {
   return response.data;
 };
 
+export const getTotalUsers = async () => {
+  const response = await api.get(`/api/v1/User/GetTotalUser`); //La get API All users
+  return response.data;
+};
+
 export const getAllAccounts = async (role, pageNumber, pageSize) => {
   const response = await api.get(
     `/api/v1/auths/accounts?Roles=${role}&PageNumber=${pageNumber}&PageSize=${pageSize}`

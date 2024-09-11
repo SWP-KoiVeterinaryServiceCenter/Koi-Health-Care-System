@@ -1,4 +1,4 @@
-import Coin from "../../assets/coin.png";
+import Coin from "../../assets/coinvnd.png";
 import { TransactionType } from "../mapping/mapping";
 
 export const GeneratePastSixMonths = () => {

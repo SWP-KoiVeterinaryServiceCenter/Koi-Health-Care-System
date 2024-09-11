@@ -23,6 +23,7 @@ import {
 import {
   allPetCoffeeShopsSelector,
   walletSelector,
+  walletDetailSelector,
   petCoffeeShopDetailSelector,
   postSelector,
 } from "../../../../store/sellectors";
@@ -37,7 +38,7 @@ import {
   banUserThunk,
   unbanUserThunk,
 } from "../../../../store/apiThunk/userThunk";
-import { getWalletThunk } from "../../../../store/apiThunk/walletThunk";
+import { getWalletThunk,getWalletDetailThunk } from "../../../../store/apiThunk/walletThunk";
 import { useEffect, useState } from "react";
 import Pagination from "../../../../components/pagination/pagination";
 import { AccRole } from "../../../../components/mapping/mapping";
@@ -48,20 +49,23 @@ import {
 } from "../../../../components/styledTable/styledTable";
 import { FilterComponent } from "../../../../components/filter/filterComponent";
 import { FormatPhoneNumber } from "../../../../components/format/formatText/formatText";
-import { AccountBackdrop } from "../../../../components/backdrop/accountBackdrop/accountBackdrop";
+import { WalletBackdrop } from "../../../../components/backdrop/walletBackdrop/walletBackdrop";
 import Swal from "sweetalert2";
 
 export default function WalletTable() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const accounts = useSelector(walletSelector);
+  const walletDetail = useSelector(walletDetailSelector);
   const dispatch = useDispatch();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [pageSize, setPageSize] = useState(10);
   const [pageNumber, setPageNumber] = useState(0);
   console.log(accounts);
+  console.log(walletDetail);
   useEffect(() => {
     dispatch(getWalletThunk());
+    dispatch(getWalletDetailThunk());
   }, []);
 
   // const handleAccept = (id) => {
@@ -70,6 +74,9 @@ export default function WalletTable() {
   //     dispatch(getAllVerifyUsersThunk()).then(setShowLoadingModal(false));
   //   });
   // };
+  const handleClose = () => {
+    setOpen(false);
+  };
   const handleAccept = (id) => {
     setShowLoadingModal(true);
     dispatch(banUserThunk(id))
@@ -219,6 +226,24 @@ export default function WalletTable() {
       ),
     },
     {
+      field: "creationDate",
+      flex: 1,
+      // headerAlign: "center",
+      headerName: "Creation Date",
+      renderCell: ({ row: { creationDate } }) => (
+        <Box
+          display="flex"
+          alignItems="center"
+          // justifyContent="center"
+          width="100%"
+          gap="6px"
+        >
+        
+          {creationDate}
+        </Box>
+      ),
+    },  
+    {
       field: "amount",
       flex: 1,
       // headerAlign: "center",
@@ -236,6 +261,24 @@ export default function WalletTable() {
         </Box>
       ),
     },
+    {
+      field: "creationTime",
+      flex: 1,
+      // headerAlign: "center",
+      headerName: "Creation Time",
+      renderCell: ({ row: { creationTime } }) => (
+        <Box
+          display="flex"
+          alignItems="center"
+          // justifyContent="center"
+          width="100%"
+          gap="6px"
+        >
+        
+          {creationTime}
+        </Box>
+      ),
+    },  
 
     // {
     //   field: "profileImage",
@@ -287,6 +330,7 @@ export default function WalletTable() {
     accounts?.map((account, index) => ({
       ...account,
       order: index + 1,
+      id: account.id
     })) || [];
   const handlePageChange = (newPage) => {
     setPageNumber(newPage);
@@ -409,10 +453,12 @@ export default function WalletTable() {
             Pagination: CustomFooter, // Custom footer component
           }}
         />
-        {/* <AccountBackdrop
+
+        
+        {/* <WalletBackdrop
                     open={open}
                     handleClose={handleClose}
-                    userDetail={userDetail}
+                    walletDetail={walletDetail}
                 /> */}
         {/* {accounts.email} */}
       </Box>

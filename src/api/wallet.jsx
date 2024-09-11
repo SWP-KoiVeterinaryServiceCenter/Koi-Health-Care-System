@@ -4,6 +4,19 @@ export const getWallet = async () => {
     const response = await api.get(`/api/v1/WalletTransaction/TransactionList`);
     return response.data;
 };
+export const getWalletDetail = async (id) => {
+    const response = await api.get(`/api/v1/WalletTransaction/Detail/${id}`);
+    return response.data;
+};
+
+export const getTotalAmounts = async () => {
+    const response = await api.get(`/api/v1/WalletTransaction/GetTotalAmountForEachMonth`);
+    return response.data;
+};
+export const getAmounts = async () => {
+    const response = await api.get(`/api/v1/WalletTransaction/GetTotalCount`);
+    return response.data;
+};
 
 export const getManagerIncome = async () => {
     const response = await api.get(`/api/v1/account/wallet/income?Months=6`);

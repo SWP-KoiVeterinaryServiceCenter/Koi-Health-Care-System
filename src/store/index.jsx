@@ -4,6 +4,8 @@ import { userDetailSlice } from "./features/user.slice/userDetail.slice";
 import { userDataSlice } from "./features/user.slice/userData.slice";
 import { staffsSlice } from "./features/user.slice/staffs.slice";
 import { allAccountsSlice } from "./features/user.slice/allAccounts.slice";
+import { totalUsersSlice } from "./features/user.slice/totalUsers.slice";
+
 import { allVerifyUsersSlice } from "./features/user.slice/allVerifyUsers.slice"; //allVerifyUsers
 
 import { petDetailSlice } from "./features/pet.slice/petDetail.slice";
@@ -34,6 +36,9 @@ import { randomPetCoffeeShopsSlice } from "./features/petCoffeeShop.slice/random
 
 import { postDetailSlice } from "./features/post.slice/postDetail.slice";
 import { postSlice } from "./features/post.slice/post.slice";
+import { totalPostSlice } from "./features/post.slice/totalPost.slice";
+import { totalAmountsSlice } from "./features/wallet.slice/totalAmounts.slice";
+import { AmountsSlice } from "./features/wallet.slice/amounts.slice";
 
 import { allFollowShopsSlice } from "./features/followPetCoffeeShop.slice/allFollowShops.slice";
 
@@ -42,6 +47,7 @@ import { itemDetailSlice } from "./features/item.slice/itemDetail.slice";
 import { itemsFromUserSlice } from "./features/item.slice/itemsFromUser.slice";
 
 import { walletSlice } from "./features/wallet.slice/wallet.slice";
+import { walletDetailSlice } from "./features/wallet.slice/walletDetail.slice";
 import { managerIncomeSlice } from "./features/wallet.slice/managerIncome.slice";
 import { managerOutcomeSlice } from "./features/wallet.slice/managerOutcome.slice";
 import { managerMonthIncomeSlice } from "./features/wallet.slice/managerMonthIncome.slice";
@@ -60,6 +66,9 @@ import { priceSlice } from "./features/policy.slice/priceAmount.slice";
 
 import { packagesSlice } from "./features/package.slice/packages.slice";
 import { packageDetailSlice } from "./features/package.slice/packageDetail.slice";
+import { totalBuySlice } from "./features/package.slice/totalBuy.slice";
+import { totalBuyStandardSubsSlice } from "./features/package.slice/totalBuyStandardSubs.slice";
+import { totalBuyPrioritySubsSlice } from "./features/package.slice/totalBuyPrioritySubs.slice";
 
 import { allReportsSlice } from "./features/report.slice/allReports.slice";
 import { allPostReportsSlice } from "./features/report.slice/allPostReports.slice";
@@ -93,6 +102,7 @@ export const store = configureStore({
     userData: userDataSlice.reducer,
     staffs: staffsSlice.reducer,
     allAccounts: allAccountsSlice.reducer,
+    totalUsers: totalUsersSlice.reducer,
     allVerifyUsers: allVerifyUsersSlice.reducer,
 
     petDetail: petDetailSlice.reducer,
@@ -126,12 +136,16 @@ export const store = configureStore({
 
     postDetail: postDetailSlice.reducer,
     post: postSlice.reducer,
+    totalPost: totalPostSlice.reducer,
+    totalAmounts: totalAmountsSlice.reducer,
+    Amounts: AmountsSlice.reducer,
 
     allItems: allItemsSlice.reducer,
     itemDetail: itemDetailSlice.reducer,
     itemsFromUser: itemsFromUserSlice.reducer,
 
     wallet: walletSlice.reducer,
+    walletDetail: walletDetailSlice.reducer,
     shopMonthIncome: shopMonthIncomeSlice.reducer,
     managerMonthIncome: managerMonthIncomeSlice.reducer,
     managerMonthOutcome: managerMonthOutcomeSlice.reducer,
@@ -151,6 +165,9 @@ export const store = configureStore({
 
 
     packageDetail: packageDetailSlice.reducer,
+    totalBuy: totalBuySlice.reducer,
+    totalBuyPrioritySubs: totalBuyPrioritySubsSlice.reducer,
+    totalBuyStandardSubs: totalBuyStandardSubsSlice.reducer,
 
     allReports: allReportsSlice.reducer,
     allPostReports: allPostReportsSlice.reducer,
