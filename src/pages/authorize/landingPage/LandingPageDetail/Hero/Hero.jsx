@@ -61,7 +61,7 @@ export default function Hero() {
               fontSize: "clamp(3.5rem, 10vw, 4rem)",
             }}
           >
-            FPTU&nbsp;
+            KOI&nbsp;
             <Typography
               component="span"
               variant="h1"
