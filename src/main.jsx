@@ -51,8 +51,11 @@ import CreateCategoryList from "./pages/platformStaff/screens/categoryList/creat
 import UpdateCategoryList from "./pages/platformStaff/screens/categoryList/updateCategory/updateCategory";
 import OrdertrackTable from "./pages/admin/screens/order/ordertrack";
 
+//Customer
+import CreateKoifish from "./pages/createKoifish/createfish";
+
 const router = createBrowserRouter([
-    {
+    {   
         path: "",
         element: <LandingPage />,
     },
@@ -245,6 +248,50 @@ const router = createBrowserRouter([
             {
                 path: "ordertable",
                 element: <OrdertrackTable />,
+            },
+        ],
+    },
+      //Customer
+      {
+        path: "/customer",
+        element: <CreateKoifish />,
+        errorElement: <Error404 />,
+        children: [
+            {
+                path: "",
+                element: <CreateKoifish />,
+            },
+            {
+                path: "shop",
+                element: <ShopTable />,
+            },
+            {
+                path: "dashboardDetail",
+                element: <DashboardDetail />,
+            },
+            {
+                path: "profile",
+                element: <ManagerProfile />,
+            },
+            {
+                path: "wallet",
+                element: <WalletTable />,
+            },
+            {
+                path: "order",
+                element: <OrderTable />,
+            },
+            {
+                path: "updateShop",
+                element: <UpdateShop />,
+            },
+            {
+                path: "createShopManager",
+                element: <CreateShopManager />,
+            },
+            {
+                path: "changePassword",
+                element: <ChangePassword />,
             },
         ],
     },

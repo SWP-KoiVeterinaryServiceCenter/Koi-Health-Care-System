@@ -1,6 +1,5 @@
 import "./login.css";
 import { useState } from "react";
-
 import {
   Button,
   TextField,
@@ -22,7 +21,9 @@ import Swal from "sweetalert2";
 import { auth } from "../../../../firebaseConfig";
 import Google from "../../../assets/google.png";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
+import Pet from "../../../assets/koi_bg.webp";
+import backgroundVideo from "../../../assets/video/bg3.mp4";
+import backgroundGif from "../../../assets/video/giphy.webp";
 import { getPackagesThunk } from "../../../store/apiThunk/packageThunk";
 import {
   getManagerIncomeThunk,
@@ -42,7 +43,7 @@ import {
   NOTALLOW,
   SUCCESSTEXT,
 } from "../../../components/text/notiText/notiText";
-import GoodExLogo from "../../../assets/logo.png";
+
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -63,7 +64,7 @@ export default function Login() {
         .email("Email sai định dạng"),
       password: Yup.string()
         .required("Mật khẩu không thể trống")
-        .min(5, "Mật khẩu phải có ít nhất 5 chữ số"),
+        .min(8, "Mật khẩu phải có ít nhất 8 chữ số"),
     }),
     onSubmit: async (values) => {
       setShowLoadingModal(true);
@@ -83,111 +84,98 @@ export default function Login() {
             .unwrap()
             .then((res) => {
               switch (res.role) {
-                // case "Customer":
-                //   setShowLoadingModal(false);
-                //   Swal.fire({
-                //     title: SUCCESSTEXT,
-                //     text: LOGINSUCCESS,
-                //     icon: "success",
-                //     showCancelButton: false,
-                //     showConfirmButton: false,
-                //     background: "white",
-                //     timer: 1500,
-                //     timerProgressBar: true,
-                //     scrollbarPadding: false,
-                //   }).then(() => {
-                //     if (res.status !== "Verifying") {
-                //       navigate("/becomeManager", {
-                //         state: { email: res.email },
-                //       });
-                //     } else {
-                //       navigate(`/verifyAccount`, {
-                //         state: {
-                //           email: res.email,
-                //           direction: "signup",
-                //         },
-                //       });
-                //     }
-                //   });
-                //   break;
-                // case "Manager":
-                //   dispatch(getPackagesThunk());
-                //   dispatch(getManagerOutcomeThunk());
-                //   dispatch(getAllNotificationsThunk());
-                //   dispatch(getUnreadNotificationsThunk());
-                //   dispatch(getManagerIncomeThunk()).then(() => {
-                //     setShowLoadingModal(false);
-                //     Swal.fire({
-                //       title: SUCCESSTEXT,
-                //       text: LOGINSUCCESS,
-                //       icon: "success",
-                //       showCancelButton: false,
-                //       showConfirmButton: false,
-                //       background: "white",
-                //       timer: 1500,
-                //       timerProgressBar: true,
-                //       scrollbarPadding: false,
-                //     }).then(() => {
-                //       navigate("/manager");
-                //     });
-                //   });
-                //   break;
-                
-                  case "Admin":
+                case "Customer":
                   // dispatch(getAllNotificationsThunk());
-                  // dispatch(getUnreadNotificationsThunk());
-                  // dispatch(getPlatformIncomeThunk()).then(() => {
-                    setShowLoadingModal(false);
-                    Swal.fire({
-                      title: SUCCESSTEXT,
-                      text: LOGINSUCCESS,
-                      icon: "success",
-                      showCancelButton: false,
-                      showConfirmButton: false,
-                      background: "white",
-                      timer: 1500,
-                      timerProgressBar: true,
-                      scrollbarPadding: false,
-                    }).then(() => {
-                      navigate("/admin");
-                    });
+                  // dispatch(getUnreadNotificationsThunk()).then(() => {
+                  setShowLoadingModal(false);
+                  Swal.fire({
+                    title: SUCCESSTEXT,
+                    text: LOGINSUCCESS,
+                    icon: "success",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    background: "white",
+                    timer: 1500,
+                    timerProgressBar: true,
+                    scrollbarPadding: false,
+                    heightAuto: false, // Thêm thuộc tính này
+                    
+                  }).then(() => {
+                    navigate("/customer");
+                  });
                   // });
                   break;
-                case "Moderator":
-                  dispatch(getAllNotificationsThunk());
-                  dispatch(getUnreadNotificationsThunk()).then(() => {
-                    setShowLoadingModal(false);
-                    Swal.fire({
-                      title: SUCCESSTEXT,
-                      text: LOGINSUCCESS,
-                      icon: "success",
-                      showCancelButton: false,
-                      showConfirmButton: false,
-                      background: "white",
-                      timer: 1500,
-                      timerProgressBar: true,
-                      scrollbarPadding: false,
-                    }).then(() => {
-                      navigate("/staff");
-                    });
+                case "Manager":
+                  setShowLoadingModal(false);
+                  Swal.fire({
+                    title: SUCCESSTEXT,
+                    text: LOGINSUCCESS,
+                    icon: "success",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    background: "white",
+                    timer: 1500,
+                    timerProgressBar: true,
+                    scrollbarPadding: false,
+                  }).then(() => {
+                    navigate("/manager");
+                  });
+
+                  break;
+                case "Admin":
+                  //   dispatch(getAllNotificationsThunk());
+                  //   dispatch(getUnreadNotificationsThunk());
+                  //   dispatch(getPlatformIncomeThunk()).then(() => {
+                  setShowLoadingModal(false);
+                  Swal.fire({
+                    title: SUCCESSTEXT,
+                    text: LOGINSUCCESS,
+                    icon: "success",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    background: "white",
+                    timer: 1500,
+                    timerProgressBar: true,
+                    scrollbarPadding: false,
+                  }).then(() => {
+                    navigate("/admin");
+                  });
+                  //   });
+                  break;
+                case "PlatformStaff":
+                  //   dispatch(getAllNotificationsThunk());
+                  //   dispatch(getUnreadNotificationsThunk()).then(() => {
+                  setShowLoadingModal(false);
+                  Swal.fire({
+                    title: SUCCESSTEXT,
+                    text: LOGINSUCCESS,
+                    icon: "success",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    background: "white",
+                    timer: 1500,
+                    timerProgressBar: true,
+                    scrollbarPadding: false,
+                  }).then(() => {
+                    navigate("/staff");
+                  });
+                  //   });
+                  break;
+                case "Staff":
+                  localStorage.clear();
+                  setShowLoadingModal(false);
+                  Swal.fire({
+                    title: ERRORTEXT,
+                    text: NOTALLOW,
+                    icon: "error",
+                    showConfirmButton: false,
+                    background: "white",
+                    timer: 1500,
+                    timerProgressBar: true,
+                    scrollbarPadding: false,
                   });
                   break;
-                // case "Staff":
-                //   localStorage.clear();
-                //   setShowLoadingModal(false);
-                //   Swal.fire({
-                //     title: ERRORTEXT,
-                //     text: NOTALLOW,
-                //     icon: "error",
-                //     showConfirmButton: false,
-                //     background: "white",
-                //     timer: 1500,
-                //     timerProgressBar: true,
-                //     scrollbarPadding: false,
-                //   });
-                //   break;
-                
-                  default:
+                default:
                   break;
               }
             });
@@ -207,7 +195,7 @@ export default function Login() {
         });
     },
   });
-console.log(getUserDataThunk);
+  //////////////////////////////////////////////////////////////////////////
   const SignInUsingGoogle = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -222,7 +210,12 @@ console.log(getUserDataThunk);
             .unwrap()
             .then((res) => {
               switch (res.role) {
-                case "Customer":
+                case "Manager":
+                  //   dispatch(getPackagesThunk());
+                  //   dispatch(getManagerOutcomeThunk());
+                  //   dispatch(getAllNotificationsThunk());
+                  //   dispatch(getUnreadNotificationsThunk());
+                  //   dispatch(getManagerIncomeThunk()).then(() => {
                   setShowLoadingGGModal(false);
                   Swal.fire({
                     title: SUCCESSTEXT,
@@ -235,63 +228,63 @@ console.log(getUserDataThunk);
                     timerProgressBar: true,
                     scrollbarPadding: false,
                   }).then(() => {
-                    if (res.status !== "Verifying") {
-                      navigate("/becomeManager", {
-                        state: { email: res.email },
-                      });
-                    } else {
-                      navigate(`/verifyAccount`, {
-                        state: {
-                          email: res.email,
-                          direction: "signup",
-                        },
-                      });
-                    }
+                    navigate("/manager");
                   });
-                  break;
-                case "Manager":
-                  dispatch(getPackagesThunk());
-                  dispatch(getManagerOutcomeThunk());
-                  dispatch(getAllNotificationsThunk());
-                  dispatch(getUnreadNotificationsThunk());
-                  dispatch(getManagerIncomeThunk()).then(() => {
-                    setShowLoadingGGModal(false);
-                    Swal.fire({
-                      title: SUCCESSTEXT,
-                      text: LOGINSUCCESS,
-                      icon: "success",
-                      showCancelButton: false,
-                      showConfirmButton: false,
-                      background: "white",
-                      timer: 1500,
-                      timerProgressBar: true,
-                      scrollbarPadding: false,
-                    }).then(() => {
-                      navigate("/manager");
-                    });
-                  });
+                  //   });
                   break;
                 case "Admin":
-                  dispatch(getAllNotificationsThunk());
-                  dispatch(getUnreadNotificationsThunk());
-                  dispatch(getPlatformIncomeThunk()).then(() => {
-                    setShowLoadingGGModal(false);
-                    Swal.fire({
-                      title: SUCCESSTEXT,
-                      text: LOGINSUCCESS,
-                      icon: "success",
-                      showCancelButton: false,
-                      showConfirmButton: false,
-                      background: "white",
-                      timer: 1500,
-                      timerProgressBar: true,
-                      scrollbarPadding: false,
-                    }).then(() => {
-                      navigate("/admin");
-                    });
+                  //   dispatch(getAllNotificationsThunk());
+                  //   dispatch(getUnreadNotificationsThunk());
+                  //   dispatch(getPlatformIncomeThunk()).then(() => {
+                  setShowLoadingGGModal(false);
+                  Swal.fire({
+                    title: SUCCESSTEXT,
+                    text: LOGINSUCCESS,
+                    icon: "success",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    background: "white",
+                    timer: 1500,
+                    timerProgressBar: true,
+                    scrollbarPadding: false,
+                  }).then(() => {
+                    navigate("/admin");
+                  });
+                  //   });
+                  break;
+                case "PlatformStaff":
+                  //   dispatch(getAllNotificationsThunk());
+                  //   dispatch(getUnreadNotificationsThunk()).then(() => {
+                  setShowLoadingGGModal(false);
+                  Swal.fire({
+                    title: SUCCESSTEXT,
+                    text: LOGINSUCCESS,
+                    icon: "success",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    background: "white",
+                    timer: 1500,
+                    timerProgressBar: true,
+                    scrollbarPadding: false,
+                  }).then(() => {
+                    navigate("/staff");
+                  });
+                  //   });
+                  break;
+                case "Staff":
+                  localStorage.clear();
+                  setShowLoadingGGModal(false);
+                  Swal.fire({
+                    title: ERRORTEXT,
+                    text: NOTALLOW,
+                    icon: "error",
+                    showConfirmButton: false,
+                    background: "white",
+                    timer: 1500,
+                    timerProgressBar: true,
+                    scrollbarPadding: false,
                   });
                   break;
-               
                 default:
                   break;
               }
@@ -328,23 +321,26 @@ console.log(getUserDataThunk);
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="login">
-          <Grid container spacing={1}>
-            {/* <Grid item xs={1}></Grid> */}
-            {/* <Grid item xs={5} className="flex-center">
-              <img src={GoodExLogo} className="body_login_img" alt="" />
-            </Grid> */}
-            <Grid item xs={12} className="flex-center">
-          
+          {/* Thêm video background */}
+          <video autoPlay loop muted className="login__video_background">
+            <source src={backgroundVideo} type="video/mp4" />
+          </video>
+          {/* <img
+          src={backgroundGif}
+          alt="background gif"
+          className="login__video_background"
+        /> */}
+          <Grid container spacing={2}>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={2} className="flex-center"></Grid>
+            <Grid item xs={4} className="flex-center">
               <div className="login__form">
-              <Grid item xs={5} className="flex-center">
-              <img src={GoodExLogo} className="body_login_img" alt="" />
-            </Grid>
-                <h3 className="login__title">Login</h3>
+                <h3 className="login__title">Đăng nhập</h3>
                 <form onSubmit={formik.handleSubmit}>
                   <TextField
                     id="email"
                     label={
-                      <span>
+                      <span style={{ color: "black" }}>
                         Email <span style={{ color: "red" }}>*</span>
                       </span>
                     }
@@ -357,6 +353,28 @@ console.log(getUserDataThunk);
                     fullWidth
                     color="secondary"
                     margin="dense"
+                    InputLabelProps={{
+                      style: { color: "black" }, // Màu đen cho label
+                    }}
+                    InputProps={{
+                      style: { color: "black" }, // Màu đen cho chữ trong input
+                    }}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": {
+                          borderColor: " #419781", // Viền đen cho TextField
+                          borderWidth :"2px"
+                        },
+                        "&:hover fieldset": {
+                          borderColor: " #419781", // Viền đen cho TextField
+                          borderWidth :"2px"
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: " #419781", // Viền đen cho TextField
+                          borderWidth :"2px"
+                        },
+                      },
+                    }}
                   />
                   {formik.touched.email && formik.errors.email ? (
                     <div className="login__validation__error">
@@ -366,8 +384,8 @@ console.log(getUserDataThunk);
                   <TextField
                     id="password"
                     label={
-                      <span>
-                        Password<span style={{ color: "red" }}>*</span>
+                      <span style={{ color: "black" }}>
+                        Mật Khẩu <span style={{ color: "red" }}>*</span>
                       </span>
                     }
                     variant="outlined"
@@ -379,6 +397,10 @@ console.log(getUserDataThunk);
                     fullWidth
                     margin="dense"
                     color="secondary"
+                    InputLabelProps={{
+                      style: { color: "black" }, // Màu đen cho label
+                    }}
+              
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -393,6 +415,23 @@ console.log(getUserDataThunk);
                           </IconButton>
                         </InputAdornment>
                       ),
+                      style: { color: "black" }, // Màu đen cho chữ trong input
+                    }}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": {
+                          borderColor: " #419781", // Viền đen cho TextField
+                          borderWidth :"2px"
+                        },
+                        "&:hover fieldset": {
+                          borderColor: " #419781", // Viền đen cho TextField
+                          borderWidth :"2px"
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: " #419781", // Viền đen cho TextField
+                          borderWidth :"2px"
+                        },
+                      },
                     }}
                   />
                   {formik.touched.password && formik.errors.password ? (
@@ -401,13 +440,13 @@ console.log(getUserDataThunk);
                     </div>
                   ) : null}
                   <p style={{ textAlign: "right" }}>
-                    {/* <Link
-                      to="/forgotPassword"
+                    <Link
+                      to="/"
                       variant="body2"
                       className="login__forgot"
                     >
                       Quên mật khẩu?
-                    </Link> */}
+                    </Link>
                   </p>
                   {!showLoadingModal ? (
                     <Button
@@ -416,13 +455,13 @@ console.log(getUserDataThunk);
                       type="submit"
                       fullWidth
                     >
-                      Login
+                      Đăng nhập
                     </Button>
                   ) : (
                     <LoadingModal />
                   )}
 
-                  {/* <p className="login__link">
+                  <p className="login__link">
                     Không có tài khoản?
                     <Link
                       to="/signup"
@@ -438,9 +477,9 @@ console.log(getUserDataThunk);
                         Đăng ký ngay!
                       </span>
                     </Link>
-                  </p> */}
+                  </p>
                 </form>
-                {/* <div className="login__google">
+                <div className="login__google">
                   <div className="login__flex">
                     <div className="login__divide"></div>
                     <span style={{ color: "#8b8b8b" }}>hoặc đăng nhập với</span>
@@ -457,10 +496,10 @@ console.log(getUserDataThunk);
                   ) : (
                     <LoadingModal />
                   )}
-                </div> */}
+                </div>
               </div>
             </Grid>
-            {/* <Grid item xs={1}></Grid> */}
+            <Grid item xs={2}></Grid>
           </Grid>
         </div>
       </ThemeProvider>
