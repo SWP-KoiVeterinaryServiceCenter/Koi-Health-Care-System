@@ -73,7 +73,7 @@ export default function Hero() {
                     : "primary.light",
               }}
             >
-              Goods Exchange
+              Fish
             </Typography>
           </Typography>
           <Typography
