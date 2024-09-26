@@ -3,8 +3,8 @@ import "./service.css";
 import Ultrasound from "../../assets/Ultrasound.png";
 import fishveterinarians from "../../assets/fishveterinarians.png";
 import medicine from "../../assets/medicine.png";
-import AppAppBar from "../authorize/landingPage/LandingPageDetail/AppAppBar/AppAppBar";
-import Footer from "../authorize/landingPage/LandingPageDetail/Footer/Footer";
+import AppAppBar from "../../authorize/landingPage/LandingPageDetail/AppAppBar/AppAppBar";
+import Footer from "../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 import { Divider } from "@mui/material";
 
 const Service = () => {
