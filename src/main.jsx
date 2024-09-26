@@ -53,297 +53,301 @@ import OrdertrackTable from "./pages/admin/screens/order/ordertrack";
 
 //Customer
 import CreateKoifish from "./pages/createKoifish/createfish";
+import Service from "./pages/service/service";
 
 const router = createBrowserRouter([
-    {   
-        path: "",
-        element: <LandingPage />,
-    },
-    {
-        path: "/login",
-        element: <Login />,
-    },
-    {
-        path: "/newPassword",
-        element: <NewPassword />,
-    },
-    {
-        path: "/forgotPassword",
-        element: <ForgotPassword />,
-    },
-    {
-        path: "/becomeManager",
-        element: <BecomeManager />,
-    },
-    {
-        path: "/signup",
-        element: <Signup />,
-    },
-    // {
-    //     path: "/verifyAccount",
-    //     element: <VerifyAccount />,
-    // },
-    {
-        path: "/error404",
-        element: <Error404 />,
-    },
-    {
-        path: "/createShop",
-        element: <CreateShop />,
-    },
-    {
-        path: "/transferStatus",
-        element: <TransferStatus />,
-    },
-    //Admin
-    {
-        path: "/admin",
-        element: <AdminHome />,
-        errorElement: <Error404 />,
-        children: [
-            {
-                path: "",
-                element: <AdminDashboard />,
-            },
-            {
-                path: "dashboardDetail",
-                element: <AdminDashboardDetail />,
-            },
-            {
-                path: "account",
-                element: <AccountTable />,
-            },
-            {
-                path: "verifyAccount",
-                element: <VerifyAccount />,
-            },
-            {
-                path: "wallet",
-                element: <WalletTableAdmin />,
-            },
-            {
-                path: "shop",
-                element: <ShopTableStaff />,
-            },
-            // {
-            //     path: "item",
-            //     element: <ItemTable direction="admin" />,
-            // },
-            {
-                path: "report",
-                element: <ReportTable />,
-            },
-            {
-                path: "reportPost",
-                element: <ReportPostTable />,
-            },
-            {
-                path: "package",
-                element: <PackageTable direction="admin" />,
-            },
-            {
-                path: "createItem",
-                element: <CreateItem />,
-            },
-            {
-                path: "updateItem",
-                element: <UpdateItem />,
-            },
-            {
-                path: "updatePackage",
-                element: <UpdatePackage />,
-            },
-            {
-                path: "createPackage",
-                element: <CreatePackage />,
-            },
-            {
-                path: "category",
-                element: <CategoryList direction="admin" />,
-            },
-            {
-                path: "createCategory",
-                element: <CreateCategoryList />,
-            },
-            {
-                path: "updateCategory",
-                element: <UpdateCategoryList />,
-            },
-            {
-                path: "ordertable",
-                element: <OrdertrackTable />,
-            },
-            {
-                path: "cancelAmount",
-                element: <CancelAmount />,
-            },
-            {
-                path: "adjustMoney",
-                element: <AdjustMoney />,
-            },
-        ],
-    },
-    //Staff
-    {
-        path: "/staff",
-        element: <StaffHome />,
-        errorElement: <Error404 />,
-        children: [
-            {
-                path: "",
-                element: <ShopTableStaff />,
-            },
-            {
-                path: "account",
-                element: <AccountTable />,
-            },
-            {
-                path: "wallet",
-                element: <WalletTableAdmin />,
-            },
-            {
-                path: "item",
-                element: <ItemTable direction="staff" />,
-            },
-            {
-                path: "report",
-                element: <ReportTable />,
-            },
-            {
-                path: "reportPost",
-                element: <ReportPostTable />,
-            },
-            {
-                path: "package",
-                element: <PackageTable direction="staff" />,
-            },
-            {
-                path: "createItem",
-                element: <CreateItem />,
-            },
-            {
-                path: "updateItem",
-                element: <UpdateItem />,
-            },
-            {
-                path: "updatePackage",
-                element: <UpdatePackage />,
-            },
-            {
-                path: "createPackage",
-                element: <CreatePackage />,
-            },
-            {
-                path: "category",
-                element: <CategoryList direction="staff"/>,
-            },
-            {
-                path: "createCategory",
-                element: <CreateCategoryList />,
-            },
-            {
-                path: "updateCategory",
-                element: <UpdateCategoryList />,
-            },
-            {
-                path: "ordertable",
-                element: <OrdertrackTable />,
-            },
-        ],
-    },
-      //Customer
+  {
+    path: "",
+    element: <LandingPage />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/newPassword",
+    element: <NewPassword />,
+  },
+  {
+    path: "/forgotPassword",
+    element: <ForgotPassword />,
+  },
+  {
+    path: "/becomeManager",
+    element: <BecomeManager />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
+  // {
+  //     path: "/verifyAccount",
+  //     element: <VerifyAccount />,
+  // },
+  {
+    path: "/error404",
+    element: <Error404 />,
+  },
+  {
+    path: "/createShop",
+    element: <CreateShop />,
+  },
+  {
+    path: "/transferStatus",
+    element: <TransferStatus />,
+  },
+  {
+    path: "/service",
+    element: <Service />,
+  },
+  //Admin
+  {
+    path: "/admin",
+    element: <AdminHome />,
+    errorElement: <Error404 />,
+    children: [
       {
-        path: "/customer",
+        path: "",
+        element: <AdminDashboard />,
+      },
+      {
+        path: "dashboardDetail",
+        element: <AdminDashboardDetail />,
+      },
+      {
+        path: "account",
+        element: <AccountTable />,
+      },
+      {
+        path: "verifyAccount",
+        element: <VerifyAccount />,
+      },
+      {
+        path: "wallet",
+        element: <WalletTableAdmin />,
+      },
+      {
+        path: "shop",
+        element: <ShopTableStaff />,
+      },
+      // {
+      //     path: "item",
+      //     element: <ItemTable direction="admin" />,
+      // },
+      {
+        path: "report",
+        element: <ReportTable />,
+      },
+      {
+        path: "reportPost",
+        element: <ReportPostTable />,
+      },
+      {
+        path: "package",
+        element: <PackageTable direction="admin" />,
+      },
+      {
+        path: "createItem",
+        element: <CreateItem />,
+      },
+      {
+        path: "updateItem",
+        element: <UpdateItem />,
+      },
+      {
+        path: "updatePackage",
+        element: <UpdatePackage />,
+      },
+      {
+        path: "createPackage",
+        element: <CreatePackage />,
+      },
+      {
+        path: "category",
+        element: <CategoryList direction="admin" />,
+      },
+      {
+        path: "createCategory",
+        element: <CreateCategoryList />,
+      },
+      {
+        path: "updateCategory",
+        element: <UpdateCategoryList />,
+      },
+      {
+        path: "ordertable",
+        element: <OrdertrackTable />,
+      },
+      {
+        path: "cancelAmount",
+        element: <CancelAmount />,
+      },
+      {
+        path: "adjustMoney",
+        element: <AdjustMoney />,
+      },
+    ],
+  },
+  //Staff
+  {
+    path: "/staff",
+    element: <StaffHome />,
+    errorElement: <Error404 />,
+    children: [
+      {
+        path: "",
+        element: <ShopTableStaff />,
+      },
+      {
+        path: "account",
+        element: <AccountTable />,
+      },
+      {
+        path: "wallet",
+        element: <WalletTableAdmin />,
+      },
+      {
+        path: "item",
+        element: <ItemTable direction="staff" />,
+      },
+      {
+        path: "report",
+        element: <ReportTable />,
+      },
+      {
+        path: "reportPost",
+        element: <ReportPostTable />,
+      },
+      {
+        path: "package",
+        element: <PackageTable direction="staff" />,
+      },
+      {
+        path: "createItem",
+        element: <CreateItem />,
+      },
+      {
+        path: "updateItem",
+        element: <UpdateItem />,
+      },
+      {
+        path: "updatePackage",
+        element: <UpdatePackage />,
+      },
+      {
+        path: "createPackage",
+        element: <CreatePackage />,
+      },
+      {
+        path: "category",
+        element: <CategoryList direction="staff" />,
+      },
+      {
+        path: "createCategory",
+        element: <CreateCategoryList />,
+      },
+      {
+        path: "updateCategory",
+        element: <UpdateCategoryList />,
+      },
+      {
+        path: "ordertable",
+        element: <OrdertrackTable />,
+      },
+    ],
+  },
+  //Customer
+  {
+    path: "/customer",
+    element: <CreateKoifish />,
+    errorElement: <Error404 />,
+    children: [
+      {
+        path: "",
         element: <CreateKoifish />,
-        errorElement: <Error404 />,
-        children: [
-            {
-                path: "",
-                element: <CreateKoifish />,
-            },
-            {
-                path: "shop",
-                element: <ShopTable />,
-            },
-            {
-                path: "dashboardDetail",
-                element: <DashboardDetail />,
-            },
-            {
-                path: "profile",
-                element: <ManagerProfile />,
-            },
-            {
-                path: "wallet",
-                element: <WalletTable />,
-            },
-            {
-                path: "order",
-                element: <OrderTable />,
-            },
-            {
-                path: "updateShop",
-                element: <UpdateShop />,
-            },
-            {
-                path: "createShopManager",
-                element: <CreateShopManager />,
-            },
-            {
-                path: "changePassword",
-                element: <ChangePassword />,
-            },
-        ],
-    },
-    //Manager
-    {
-        path: "/manager",
-        element: <ManagerHome />,
-        errorElement: <Error404 />,
-        children: [
-            {
-                path: "",
-                element: <ManagerDashboard />,
-            },
-            {
-                path: "shop",
-                element: <ShopTable />,
-            },
-            {
-                path: "dashboardDetail",
-                element: <DashboardDetail />,
-            },
-            {
-                path: "profile",
-                element: <ManagerProfile />,
-            },
-            {
-                path: "wallet",
-                element: <WalletTable />,
-            },
-            {
-                path: "order",
-                element: <OrderTable />,
-            },
-            {
-                path: "updateShop",
-                element: <UpdateShop />,
-            },
-            {
-                path: "createShopManager",
-                element: <CreateShopManager />,
-            },
-            {
-                path: "changePassword",
-                element: <ChangePassword />,
-            },
-        ],
-    },
-    
+      },
+      {
+        path: "shop",
+        element: <ShopTable />,
+      },
+      {
+        path: "dashboardDetail",
+        element: <DashboardDetail />,
+      },
+      {
+        path: "profile",
+        element: <ManagerProfile />,
+      },
+      {
+        path: "wallet",
+        element: <WalletTable />,
+      },
+      {
+        path: "order",
+        element: <OrderTable />,
+      },
+      {
+        path: "updateShop",
+        element: <UpdateShop />,
+      },
+      {
+        path: "createShopManager",
+        element: <CreateShopManager />,
+      },
+      {
+        path: "changePassword",
+        element: <ChangePassword />,
+      },
+    ],
+  },
+  //Manager
+  {
+    path: "/manager",
+    element: <ManagerHome />,
+    errorElement: <Error404 />,
+    children: [
+      {
+        path: "",
+        element: <ManagerDashboard />,
+      },
+      {
+        path: "shop",
+        element: <ShopTable />,
+      },
+      {
+        path: "dashboardDetail",
+        element: <DashboardDetail />,
+      },
+      {
+        path: "profile",
+        element: <ManagerProfile />,
+      },
+      {
+        path: "wallet",
+        element: <WalletTable />,
+      },
+      {
+        path: "order",
+        element: <OrderTable />,
+      },
+      {
+        path: "updateShop",
+        element: <UpdateShop />,
+      },
+      {
+        path: "createShopManager",
+        element: <CreateShopManager />,
+      },
+      {
+        path: "changePassword",
+        element: <ChangePassword />,
+      },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <Provider store={store}>
-        <RouterProvider router={router} />
-    </Provider>
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );

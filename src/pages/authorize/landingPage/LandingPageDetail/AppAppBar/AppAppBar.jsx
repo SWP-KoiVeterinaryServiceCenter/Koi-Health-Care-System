@@ -34,6 +34,13 @@ function AppAppBar({ mode, toggleColorMode }) {
   const handleSignUPClick = () => {
     navigate("/signup");
   };
+  const handleServiceClick = () => {
+    navigate("/service");
+  };
+  const handleLandingPageClick = () => {
+    navigate("/");
+  };
+
   const scrollToSection = (sectionId) => {
     const sectionElement = document.getElementById(sectionId);
     const offset = 128;
@@ -102,16 +109,24 @@ function AppAppBar({ mode, toggleColorMode }) {
                   onClick={() => scrollToSection("features")}
                   sx={{ py: "6px", px: "12px" }}
                 >
-                  <Typography variant="body2" color="text.primary">
-                    HOME
+                  <Typography
+                    variant="body2"
+                    color="text.primary"
+                    onClick={handleLandingPageClick}
+                  >
+                    Nhà
                   </Typography>
                 </MenuItem>
                 <MenuItem
                   onClick={() => scrollToSection("testimonials")}
                   sx={{ py: "6px", px: "12px" }}
                 >
-                  <Typography variant="body2" color="text.primary">
-                    CONTACT
+                  <Typography
+                    variant="body2"
+                    color="text.primary"
+                    onClick={handleServiceClick}
+                  >
+                    Dịch Vụ
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -119,7 +134,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   sx={{ py: "6px", px: "12px" }}
                 >
                   <Typography variant="body2" color="text.primary">
-                    ABOUT
+                    Lịch Đặt
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -127,7 +142,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   sx={{ py: "6px", px: "12px" }}
                 >
                   <Typography variant="body2" color="text.primary">
-                    SUBSCRIPTION
+                    Phản Hồi
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -135,16 +150,14 @@ function AppAppBar({ mode, toggleColorMode }) {
                   sx={{ py: "6px", px: "12px" }}
                 >
                   <Typography variant="body2" color="text.primary">
-                    FAQ
+                    Về Chúng Tôi
                   </Typography>
                 </MenuItem>
                 <MenuItem
                   onClick={() => scrollToSection("faq")}
                   sx={{ py: "6px", px: "12px" }}
                 >
-                  <Typography variant="body2" color="text.primary">
-                  
-                  </Typography>
+                  <Typography variant="body2" color="text.primary"></Typography>
                 </MenuItem>
               </Box>
             </Box>
@@ -174,7 +187,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 onClick={handleLoginClick}
                 target="_blank"
               >
-                Login
+                Đăng Nhập
               </Button>
             </Box>
             <Box sx={{ display: { sm: "", md: "none" } }}>
