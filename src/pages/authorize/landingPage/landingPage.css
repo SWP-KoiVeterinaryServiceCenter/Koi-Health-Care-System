@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Pacifico");
 @import url("https://fonts.googleapis.com/css?family=Lobster");
 
-.landingPage {
+/* .landingPage {
   background-color: #DBE9F4;
-  /* background-color: #0F0002; */
 }
+
 .landingPage .header {
   padding-block: 2em;
   padding-inline: 10%;
@@ -35,14 +35,12 @@
   margin-bottom: 30px;
 }
 .landingPage .body_top_text {
-  /* font-family: "Lobster"; */
   font-family: "Pacifico";
   font-size: 100px;
   font-weight: bold;
   line-height: 1.3em;
   margin-bottom: 21px;
   margin-top: 80px;
-  /* color: #70d8bd; */
   color: #00CAFF;
 }
 
@@ -121,4 +119,190 @@
 }
 .body_top_img{
   width: 50%;
+} */
+
+.koi-img-1 {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  margin-top: 120px;
+}
+
+.koi-img-1 img {
+  width: 100%;
+  height: 100%; /* Ensure the image fills the container */
+  object-fit: cover;
+}
+
+.koi-img-1 .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+  z-index: 1; /* Place overlay below text */
+}
+
+.koi-img-1 .title,
+.koi-img-1 .subtitle,
+.koi-img-1 .request {
+  position: absolute;
+  left: 20px; /* Align the text to the left with some padding */
+  color: white;
+  text-align: left; /* Align the text to the left */
+  font-weight: bold;
+  z-index: 2; /* Place text above the overlay */
+}
+
+.koi-img-1 .title {
+  font-size: 65px;
+  padding-left: 30px;
+}
+
+.koi-img-1 .subtitle {
+  top: 40%; /* Adjust to move the text vertically */
+  font-size: 20px;
+  padding-left: 30px;
+}
+
+.koi-img-1 .request {
+  top: 60%; /* Adjust to move the text vertically */
+  font-size: 20px;
+  padding-left: 30px;
+}
+
+.request {
+  background: linear-gradient(140.14deg, #ec540e 15.05%, #d6361f 114.99%)
+      padding-box,
+    linear-gradient(142.51deg, #ff9465 8.65%, #af1905 88.82%) border-box;
+  border-radius: 7px;
+  border: 2px solid transparent;
+
+  text-shadow: 1px 1px 1px #00000040;
+  box-shadow: 8px 8px 20px 0px #45090059;
+  margin-left: 20px;
+  padding: 10px 40px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.request:hover {
+  box-shadow: none;
+  opacity: 80%;
+}
+
+.tittle-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Horizontally center content */
+  justify-content: center; /* Vertically center content */
+  text-align: center; /* Center text within its container */
+  padding: 20px; /* Optional: Adds padding around the content */
+  max-width: 800px; /* Optional: Restricts width of the content */
+  margin: 0 auto; /* Centers the element horizontally if width is restricted */
+}
+
+.tittle-center .title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 15px; /* Space between title and subtitle */
+}
+
+.tittle-center .subtitle {
+  font-size: 18px;
+  line-height: 1.6; /* Improves readability of the text */
+}
+
+.container-1 {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 30px;
+}
+
+.container-1 img {
+  padding: 30px 30px;
+  border-radius: 100px;
+  height: 400px;
+  width: 400px;
+}
+
+.container-1 .title {
+  font-size: 35px;
+  font-weight: bold;
+  margin-bottom: 15px; /* Space between title and subtitle */
+}
+
+.container-1 .subtitle {
+  font-size: 15px;
+  line-height: 1.6; /* Improves readability of the text */
+}
+
+.box {
+  display: block;
+  width: 400px;
+}
+
+.container-2 {
+  display: flex;
+  justify-content: space-evenly;
+  background: #81ecec;
+  margin-bottom: 30px;
+  border-radius: 100px 0px 100px 0px;
+}
+
+.container-2 img {
+  padding: 30px 30px;
+  border-radius: 100px;
+  height: 470px;
+  width: 380px;
+}
+
+.container-2 .title {
+  font-size: 38px;
+  font-weight: bold;
+  margin: 60px 0px 40px 0px; /* Space between title and subtitle */
+}
+
+.container-2 .subtitle {
+  font-size: 15px;
+  line-height: 1.6; /* Improves readability of the text */
+}
+
+.container-2 .box {
+  display: block;
+  width: 500px;
+}
+
+.container-3 {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 30px;
+}
+
+.container-3 img {
+  padding: 30px 30px;
+  border-radius: 100px;
+  height: 360px;
+  width: 500px;
+}
+
+.container-3 .title {
+  font-size: 35px;
+  font-weight: bold;
+  margin-bottom: 15px; /* Space between title and subtitle */
+}
+
+.container-3 .subtitle {
+  font-size: 15px;
+  line-height: 1.6; /* Improves readability of the text */
+}
+
+.container-3 .box {
+  display: block;
+  width: 500px;
 }
