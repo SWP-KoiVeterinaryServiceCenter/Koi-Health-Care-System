@@ -55,6 +55,7 @@ import OrdertrackTable from "./pages/admin/screens/order/ordertrack";
 import CreateKoifish from "./pages/createKoifish/createfish";
 import Service from "./pages/customer/service/service";
 import ServiceInformation from "./pages/customer/serviceInformation/ServiceInformation";
+import PersonalInformation from "./pages/customer/personalInformation/PersonalInformation";
 
 const router = createBrowserRouter([
   {
@@ -104,6 +105,10 @@ const router = createBrowserRouter([
   {
     path: "/serviceInformation",
     element: <ServiceInformation />,
+  },
+  {
+    path: "/personalInformation",
+    element: <PersonalInformation />,
   },
 
   //Admin

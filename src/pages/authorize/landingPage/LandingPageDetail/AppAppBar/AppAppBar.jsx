@@ -17,9 +17,9 @@ import MedicalServicesOutlinedIcon from "@mui/icons-material/MedicalServicesOutl
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 
 import { Link, useNavigate } from "react-router-dom";
-import "./AppAppBar.css";
 import { colors } from "@mui/material";
 
 const logoStyle = {
@@ -46,6 +46,9 @@ function AppAppBar({ mode, toggleColorMode }) {
   };
   const handleLandingPageClick = () => {
     navigate("/");
+  };
+  const handlePersonalInformationPageClick = () => {
+    navigate("/personalInformation");
   };
 
   const scrollToSection = (sectionId) => {
@@ -194,7 +197,12 @@ function AppAppBar({ mode, toggleColorMode }) {
                   onClick={() => scrollToSection("faq")}
                   sx={{ py: "6px", px: "12px" }}
                 >
-                  <Typography variant="body2" color="text.primary"></Typography>
+                  <Typography variant="body2" color="text.primary">
+                    <PersonOutlineOutlinedIcon
+                      sx={{ color: "black", fontSize: "20px" }}
+                      onClick={handlePersonalInformationPageClick}
+                    />
+                  </Typography>
                 </MenuItem>
               </Box>
             </Box>
