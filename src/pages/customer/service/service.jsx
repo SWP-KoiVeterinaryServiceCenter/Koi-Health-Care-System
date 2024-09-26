@@ -1,13 +1,20 @@
 import React from "react";
 import "./service.css";
-import Ultrasound from "../../assets/Ultrasound.png";
-import fishveterinarians from "../../assets/fishveterinarians.png";
-import medicine from "../../assets/medicine.png";
+import Ultrasound from "../../../assets/Ultrasound.png";
+import fishveterinarians from "../../../assets/fishveterinarians.png";
+import medicine from "../../../assets/medicine.png";
 import AppAppBar from "../../authorize/landingPage/LandingPageDetail/AppAppBar/AppAppBar";
 import Footer from "../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 import { Divider } from "@mui/material";
 
+import { useNavigate } from "react-router-dom";
+
 const Service = () => {
+  const navigate = useNavigate();
+  const handleServiceInformationClick = () => {
+    navigate("/serviceInformation");
+  };
+
   return (
     <div>
       <AppAppBar />
@@ -15,7 +22,7 @@ const Service = () => {
         <p>Avaliable Sevice In Our System</p>
       </div>
       <div className="container">
-        <div class="card">
+        <div class="card" onClick={handleServiceInformationClick}>
           <img src={fishveterinarians} />
           <div class="card-details">
             <p class="text-title">Service</p>

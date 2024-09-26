@@ -88,7 +88,7 @@ export default function LandingPage() {
       <div className="card-1">
         <div className="koi-img-1">
           <div className="overlay"></div>
-          <p className="title">Có cá bệnh không?</p>
+          <p className="title">Cá Bạn Bị Bệnh?</p>
           <p className="subtitle">
             Cơ Sở Thú Y Của Chúng Tôi Sẵn Sàng Giúp Đỡ Tại Thành Phố Hồ Chí
             Minh.

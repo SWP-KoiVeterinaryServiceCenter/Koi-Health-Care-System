@@ -12,8 +12,15 @@ import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import ToggleColorMode from "../ToggleColorMode/ToggleColorMode";
 import logo from "../../../../../assets/koi_loho.png";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import MedicalServicesOutlinedIcon from "@mui/icons-material/MedicalServicesOutlined";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 import { Link, useNavigate } from "react-router-dom";
+import "./AppAppBar.css";
+import { colors } from "@mui/material";
 
 const logoStyle = {
   width: "140px",
@@ -56,7 +63,7 @@ function AppAppBar({ mode, toggleColorMode }) {
   };
 
   return (
-    <div>
+    <div className="">
       <AppBar
         position="fixed"
         sx={{
@@ -107,11 +114,14 @@ function AppAppBar({ mode, toggleColorMode }) {
               >
                 <MenuItem
                   onClick={() => scrollToSection("features")}
-                  sx={{ py: "6px", px: "12px" }}
+                  // sx={{ py: "6px", px: "12px" }}
                 >
+                  <HomeOutlinedIcon sx={{ color: "black", fontSize: "20px" }} />
                   <Typography
-                    variant="body2"
-                    color="text.primary"
+                    // variant="body2"
+                    // color="text.primary"
+                    color="black"
+                    fontSize="15px"
                     onClick={handleLandingPageClick}
                   >
                     Nhà
@@ -119,11 +129,16 @@ function AppAppBar({ mode, toggleColorMode }) {
                 </MenuItem>
                 <MenuItem
                   onClick={() => scrollToSection("testimonials")}
-                  sx={{ py: "6px", px: "12px" }}
+                  // sx={{ py: "6px", px: "12px" }}
                 >
+                  <MedicalServicesOutlinedIcon
+                    sx={{ color: "black", fontSize: "20px" }}
+                  />
                   <Typography
-                    variant="body2"
-                    color="text.primary"
+                    // variant="body2"
+                    // color="text.primary"
+                    color="black"
+                    fontSize="15px"
                     onClick={handleServiceClick}
                   >
                     Dịch Vụ
@@ -131,25 +146,47 @@ function AppAppBar({ mode, toggleColorMode }) {
                 </MenuItem>
                 <MenuItem
                   onClick={() => scrollToSection("highlights")}
-                  sx={{ py: "6px", px: "12px" }}
+                  // sx={{ py: "6px", px: "12px" }}
                 >
-                  <Typography variant="body2" color="text.primary">
+                  <CalendarMonthOutlinedIcon
+                    sx={{ color: "black", fontSize: "20px" }}
+                  />
+                  <Typography
+                    // variant="body2"
+                    // color="text.primary"
+                    color="black"
+                    fontSize="15px"
+                  >
                     Lịch Đặt
                   </Typography>
                 </MenuItem>
                 <MenuItem
                   onClick={() => scrollToSection("pricing")}
-                  sx={{ py: "6px", px: "12px" }}
+                  // sx={{ py: "6px", px: "12px" }}
                 >
-                  <Typography variant="body2" color="text.primary">
+                  <FeedbackOutlinedIcon
+                    sx={{ color: "black", fontSize: "20px" }}
+                  />
+                  <Typography
+                    // variant="body2"
+                    // color="text.primary"
+                    color="black"
+                    fontSize="15px"
+                  >
                     Phản Hồi
                   </Typography>
                 </MenuItem>
                 <MenuItem
                   onClick={() => scrollToSection("faq")}
-                  sx={{ py: "6px", px: "12px" }}
+                  // sx={{ py: "6px", px: "12px" }}
                 >
-                  <Typography variant="body2" color="text.primary">
+                  <InfoOutlinedIcon sx={{ color: "black", fontSize: "20px" }} />
+                  <Typography
+                    // variant="body2"
+                    // color="text.primary"
+                    color="black"
+                    fontSize="15px"
+                  >
                     Về Chúng Tôi
                   </Typography>
                 </MenuItem>
