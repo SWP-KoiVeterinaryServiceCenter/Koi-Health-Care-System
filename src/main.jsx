@@ -57,6 +57,8 @@ import Service from "./pages/customer/service/service";
 import ServiceInformation from "./pages/customer/serviceInformation/ServiceInformation";
 import PersonalInformation from "./pages/customer/personalInformation/PersonalInformation";
 import AddMoreFish from "./pages/customer/addMoreFish/AddMoreFish";
+import Booking from "./pages/customer/booking/booking";
+
 
 const router = createBrowserRouter([
   {
@@ -114,6 +116,10 @@ const router = createBrowserRouter([
   {
     path: "/addMoreFish",
     element: <AddMoreFish />,
+  },
+  {
+    path: "/booking",
+    element: <Booking />,
   },
 
 

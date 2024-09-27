@@ -50,6 +50,9 @@ function AppAppBar({ mode, toggleColorMode }) {
   const handlePersonalInformationPageClick = () => {
     navigate("/personalInformation");
   };
+  const handleBookingPageClick = () => {
+    navigate("/booking");
+  };
 
   const scrollToSection = (sectionId) => {
     const sectionElement = document.getElementById(sectionId);
@@ -159,6 +162,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     // color="text.primary"
                     color="black"
                     fontSize="15px"
+                    onClick={handleBookingPageClick}
                   >
                     Lịch Đặt
                   </Typography>
