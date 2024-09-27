@@ -56,6 +56,7 @@ import CreateKoifish from "./pages/createKoifish/createfish";
 import Service from "./pages/customer/service/service";
 import ServiceInformation from "./pages/customer/serviceInformation/ServiceInformation";
 import PersonalInformation from "./pages/customer/personalInformation/PersonalInformation";
+import AddMoreFish from "./pages/customer/addMoreFish/AddMoreFish";
 
 const router = createBrowserRouter([
   {
@@ -110,6 +111,11 @@ const router = createBrowserRouter([
     path: "/personalInformation",
     element: <PersonalInformation />,
   },
+  {
+    path: "/addMoreFish",
+    element: <AddMoreFish />,
+  },
+
 
   //Admin
   {

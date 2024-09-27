@@ -108,3 +108,18 @@
   font-size: x-large;
   font-weight: 500;
 }
+
+
+.pi-add-button:hover {
+  background-color: #cce7ff; /* Changes the background color */
+  transform: scale(1.05); /* Slightly scales up the button */
+}
+
+/* Optional: Adding hover effect for text and image color changes */
+.pi-add-button:hover p {
+  color: #007bff; /* Changes text color on hover */
+}
+
+.pi-add-button:hover img {
+  filter: brightness(1.2); /* Makes the image brighter on hover */
+}

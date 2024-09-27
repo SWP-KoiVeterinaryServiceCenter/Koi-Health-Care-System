@@ -1,7 +1,6 @@
 import React from "react";
 import "./PersonalInformation.css";
 
-
 import koi from "../../../assets/koi-fish-1.jpg";
 import pen from "../../../assets/pen.png";
 import add from "../../../assets/add.png";
@@ -9,8 +8,16 @@ import trash from "../../../assets/bin.png";
 import AppAppBar from "../../authorize/landingPage/LandingPageDetail/AppAppBar/AppAppBar";
 import Footer from "../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 import { Divider } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const PersonalInformation = () => {
+  const navigate = useNavigate();
+
+  const handleAddMoreFishPageClick = () => {
+    navigate("/addMoreFish");
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div>
       <AppAppBar />
@@ -64,12 +71,12 @@ const PersonalInformation = () => {
           </div>
         </div>
 
-        <div className="pi-add-button">
+        <div className="pi-add-button" onClick={handleAddMoreFishPageClick}>
           <p>Add More Fish</p>
           <img src={add} />
         </div>
       </div>
-      <Divider/>
+      <Divider />
       <Footer />
     </div>
   );
