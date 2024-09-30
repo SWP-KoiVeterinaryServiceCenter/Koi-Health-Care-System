@@ -61,13 +61,13 @@ function AppAppBar({ mode, toggleColorMode }) {
     navigate("/signup");
   };
   const handleServiceClick = () => {
-    navigate("/service");
+    navigate("service");
   };
   const handleLandingPageClick = () => {
-    navigate("/");
+    navigate("");
   };
   const handlePersonalInformationPageClick = () => {
-    navigate("/personalInformation");
+    navigate("personalInformation");
   };
   const handleBookingPageClick = () => {
     navigate("/booking");
@@ -234,8 +234,12 @@ function AppAppBar({ mode, toggleColorMode }) {
                     {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
                   </Box>
                   <MenuItem onClick={() => scrollToSection("features")}>
-                    Features
+                  Profile
                   </MenuItem>
+                  <MenuItem onClick={() => scrollToSection("features")}>
+                  Fish information
+                  </MenuItem>
+               
                  
                   <Divider />
                   <MenuItem>

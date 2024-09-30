@@ -4,7 +4,7 @@ import "./PersonalInformation.css";
 import koi from "../../../../assets/koi-fish-1.jpg";
 import pen from "../../../../assets/pen.png";
 import add from "../../../../assets/add.png";
-// import trash from "../../../assets/bin.png";
+import trash from "../../../../assets/bin.png";
 // import AppAppBar from "../../authorize/landingPage/LandingPageDetail/AppAppBar/AppAppBar";
 // import Footer from "../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 import { Divider } from "@mui/material";

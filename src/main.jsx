@@ -101,13 +101,14 @@ const router = createBrowserRouter([
     path: "/transferStatus",
     element: <TransferStatus />,
   },
-  {
-    path: "/service",
-    element: <Service />,
-  },
+ 
   {
     path: "/serviceInformation",
     element: <ServiceInformation />,
+  },
+  {
+    path: "/service",
+    element: <Service />,
   },
   {
     path: "/personalInformation",
@@ -288,6 +289,18 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <HomePage />,
+      },
+      {
+        path: "service",
+        element: <Service direction="customer"/>,
+      },
+      {
+        path: "personalInformation",
+        element: <PersonalInformation />,
+      },
+      {
+        path: "serviceInformation",
+        element: <ServiceInformation />,
       },
     
     ],
