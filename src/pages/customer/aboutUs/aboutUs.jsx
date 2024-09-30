@@ -2,8 +2,6 @@ import React from "react";
 import "./aboutUs.css";
 import AppAppBar from "../../authorize/landingPage/LandingPageDetail/AppAppBar/AppAppBar";
 import Footer from "../../authorize/landingPage/LandingPageDetail/Footer/Footer";
-// import koiImage from "../../assets/koi.jpg"; // Assume you have koi fish images in the assets folder
-// import teamImage from "../../assets/team.jpg"; // Assume you have a team/character image here
 
 import Ultrasound from "../../../assets/Ultrasound.png";
 import fishveterinarians from "../../../assets/fishveterinarians.png";

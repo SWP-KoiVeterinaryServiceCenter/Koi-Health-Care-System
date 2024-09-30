@@ -37,6 +37,18 @@
     flex: 1;
     padding: 20px;
   }
+
+  .aboutus__text h2{
+    flex: 1;
+    font-size:80px;
+  }
+
+  .aboutus__text p{
+    flex: 1;
+    padding: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+  }
   
   .aboutus__image {
     flex: 1;
