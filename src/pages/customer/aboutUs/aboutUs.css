@@ -1,0 +1,72 @@
+.aboutus__container {
+    padding: 50px;
+    font-family: Arial, sans-serif;
+    margin-top: 50px;
+  }
+  
+  .aboutus__intro {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .aboutus__intro h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .aboutus__intro p {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .aboutus__koi-mission,
+  .aboutus__team {
+    margin-bottom: 50px;
+  }
+  
+  .aboutus__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .aboutus__text {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .aboutus__image {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .aboutus__image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .aboutus__values {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .aboutus__values h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .aboutus__values ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .aboutus__values ul li {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  

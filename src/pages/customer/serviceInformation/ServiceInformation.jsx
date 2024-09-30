@@ -15,6 +15,8 @@ import AppAppBar from "../../authorize/landingPage/LandingPageDetail/AppAppBar/A
 import Footer from "../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 import { Divider } from "@mui/material";
 
+import { useNavigate } from "react-router-dom";
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -39,55 +41,113 @@ function createData(Name, Description, Price, Duration, Action) {
   return { Name, Description, Price, Duration, Action };
 }
 
-const rows = [
-  createData(
-    "Frozen yoghurt",
-    159,
-    6.0,
-    24,
-    <Button variant="contained" color="primary">
-      Thêm Vào Cuộc Hẹn
-    </Button>
-  ),
-  createData(
-    "Ice cream sandwich",
-    237,
-    9.0,
-    37,
-    <Button variant="contained" color="primary">
-      Thêm Vào Cuộc Hẹn
-    </Button>
-  ),
-  createData(
-    "Eclair",
-    262,
-    16.0,
-    24,
-    <Button variant="contained" color="primary">
-      Thêm Vào Cuộc Hẹn
-    </Button>
-  ),
-  createData(
-    "Cupcake",
-    305,
-    3.7,
-    67,
-    <Button variant="contained" color="primary">
-      Thêm Vào Cuộc Hẹn
-    </Button>
-  ),
-  createData(
-    "Gingerbread",
-    356,
-    16.0,
-    49,
-    <Button variant="contained" color="primary">
-      Thêm Vào Cuộc Hẹn
-    </Button>
-  ),
-];
-
 const ServiceInformation = () => {
+  const navigate = useNavigate();
+  const handleCreateKoiFishAppointmentClick = () => {
+    navigate("/createKoiFishAppointment");
+    window.scrollTo(0, 0);
+  };
+
+
+  //   createData(
+  //     "Frozen yoghurt",
+  //     159,
+  //     6.0,
+  //     24,
+  //     <Button variant="contained" color="primary" onClick={handleCreateKoiFishAppointmentClick}>
+  //       Thêm Vào Cuộc Hẹn
+  //     </Button>
+  //   ),
+  //   createData(
+  //     "Ice cream sandwich",
+  //     237,
+  //     9.0,
+  //     37,
+  //     <Button variant="contained" color="primary">
+  //       Thêm Vào Cuộc Hẹn
+  //     </Button>
+  //   ),
+  //   createData(
+  //     "Eclair",
+  //     262,
+  //     16.0,
+  //     24,
+  //     <Button variant="contained" color="primary">
+  //       Thêm Vào Cuộc Hẹn
+  //     </Button>
+  //   ),
+  //   createData(
+  //     "Cupcake",
+  //     305,
+  //     3.7,
+  //     67,
+  //     <Button variant="contained" color="primary">
+  //       Thêm Vào Cuộc Hẹn
+  //     </Button>
+  //   ),
+  //   createData(
+  //     "Gingerbread",
+  //     356,
+  //     16.0,
+  //     49,
+  //     <Button variant="contained" color="primary">
+  //       Thêm Vào Cuộc Hẹn
+  //     </Button>
+  //   ),
+  // ];
+
+  const rows = [
+    createData(
+      "Grooming",
+      "Chăm sóc và tắm cho koi",
+      500000, // Giá dịch vụ (đơn vị: VND)
+      "30 phút", // Thời gian thực hiện
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleCreateKoiFishAppointmentClick}
+      >
+        Thêm Vào Cuộc Hẹn
+      </Button>
+    ),
+    createData(
+      "Health Checkup",
+      "Kiểm tra sức khỏe tổng quát cho koi",
+      700000,
+      "45 phút",
+      <Button variant="contained" color="primary">
+        Thêm Vào Cuộc Hẹn
+      </Button>
+    ),
+    createData(
+      "Spa Treatment",
+      "Liệu pháp spa thư giãn cho koi",
+      900000,
+      "1 giờ",
+      <Button variant="contained" color="primary">
+        Thêm Vào Cuộc Hẹn
+      </Button>
+    ),
+    createData(
+      "Water Quality Testing",
+      "Kiểm tra và phân tích chất lượng nước trong hồ",
+      400000,
+      "20 phút",
+      <Button variant="contained" color="primary">
+        Thêm Vào Cuộc Hẹn
+      </Button>
+    ),
+    createData(
+      "Parasite Treatment",
+      "Điều trị ký sinh trùng và làm sạch koi",
+      1200000,
+      "1 giờ 30 phút",
+      <Button variant="contained" color="primary">
+        Thêm Vào Cuộc Hẹn
+      </Button>
+    ),
+  ];
+
   return (
     <>
       <AppAppBar />

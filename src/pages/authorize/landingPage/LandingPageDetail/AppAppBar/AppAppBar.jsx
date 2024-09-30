@@ -37,21 +37,30 @@ function AppAppBar({ mode, toggleColorMode }) {
   };
   const handleLoginClick = () => {
     navigate("/login");
+    window.scrollTo(0, 0);
   };
   const handleSignUPClick = () => {
     navigate("/signup");
   };
   const handleServiceClick = () => {
     navigate("/service");
+    window.scrollTo(0, 0);
   };
   const handleLandingPageClick = () => {
     navigate("/");
+    window.scrollTo(0, 0);
   };
   const handlePersonalInformationPageClick = () => {
     navigate("/personalInformation");
+    window.scrollTo(0, 0);
   };
   const handleBookingPageClick = () => {
     navigate("/booking");
+    window.scrollTo(0, 0);
+  };
+  const handleAboutUsPageClick = () => {
+    navigate("/aboutUs");
+    window.scrollTo(0, 0);
   };
 
   const scrollToSection = (sectionId) => {
@@ -193,6 +202,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     // color="text.primary"
                     color="black"
                     fontSize="15px"
+                    onClick={handleAboutUsPageClick}
                   >
                     Về Chúng Tôi
                   </Typography>

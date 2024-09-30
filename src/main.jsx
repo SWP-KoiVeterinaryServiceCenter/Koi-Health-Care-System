@@ -58,7 +58,8 @@ import ServiceInformation from "./pages/customer/serviceInformation/ServiceInfor
 import PersonalInformation from "./pages/customer/personalInformation/PersonalInformation";
 import AddMoreFish from "./pages/customer/addMoreFish/AddMoreFish";
 import Booking from "./pages/customer/booking/booking";
-
+import AboutUs from "./pages/customer/aboutUs/aboutUs";
+import CreateKoiFishAppointment from "./pages/customer/createKoiFishAppointment/createKoiFishAppointment";
 
 const router = createBrowserRouter([
   {
@@ -121,7 +122,14 @@ const router = createBrowserRouter([
     path: "/booking",
     element: <Booking />,
   },
-
+  {
+    path: "/aboutUs",
+    element: <AboutUs />,
+  },
+  {
+    path: "/createKoiFishAppointment",
+    element: <CreateKoiFishAppointment />,
+  },
 
   //Admin
   {
