@@ -110,10 +110,7 @@ const router = createBrowserRouter([
     path: "/service",
     element: <Service />,
   },
-  {
-    path: "/personalInformation",
-    element: <PersonalInformation />,
-  },
+ 
   {
     path: "/addMoreFish",
     element: <AddMoreFish />,
@@ -300,6 +297,10 @@ const router = createBrowserRouter([
       {
         path: "serviceInformation",
         element: <ServiceInformation />,
+      },
+      {
+        path: "personalInformation",
+        element: <PersonalInformation />,
       },
     ],
   },

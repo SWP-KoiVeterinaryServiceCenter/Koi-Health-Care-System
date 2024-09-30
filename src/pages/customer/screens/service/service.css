@@ -250,3 +250,9 @@ padding-top: 200px;
   -webkit-box-orient: vertical;
   white-space: normal;
 }
+.article-wrapper figure img {
+  width: 100%; /* Đảm bảo ảnh lấp đầy bề ngang của container */
+  height: 200px; /* Thiết lập chiều cao cố định */
+  object-fit: cover; /* Giữ nguyên tỷ lệ ảnh và bao phủ toàn bộ khung */
+
+}

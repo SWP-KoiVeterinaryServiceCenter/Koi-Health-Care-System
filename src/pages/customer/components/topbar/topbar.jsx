@@ -236,7 +236,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   <MenuItem onClick={() => scrollToSection("features")}>
                   Profile
                   </MenuItem>
-                  <MenuItem onClick={() => scrollToSection("features")}>
+                  <MenuItem onClick={() => navigate("personalInformation")}>
                   Fish information
                   </MenuItem>
                
