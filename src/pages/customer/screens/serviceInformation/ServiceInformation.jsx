@@ -9,11 +9,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
 
-import Button from "@mui/material/Button"; // Import Button
-
+import Button from "@mui/material/Button";
+// import AppAppBar from "../../authorize/landingPage/LandingPageDetail/AppAppBar/AppAppBar";
+// import Footer from "../../authorize/landingPage/LandingPageDetail/Footer/Footer";
+import { Divider } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -90,7 +90,7 @@ const rows = [
 const ServiceInformation = () => {
   return (
     <>
-      <Header />
+      {/* <AppAppBar /> */}
       <div className="si-main">
         <p>Bảng Miêu Tả Dịch Vụ</p>
         <TableContainer component={Paper}>
@@ -117,14 +117,15 @@ const ServiceInformation = () => {
                   </StyledTableCell>
                   <StyledTableCell align="left">{row.Price}</StyledTableCell>
                   <StyledTableCell align="left">{row.Duration}</StyledTableCell>
-                    <StyledTableCell align="left">{row.Action}</StyledTableCell>
+                  <StyledTableCell align="left">{row.Action}</StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
       </div>
-      <Footer />
+      <Divider />
+      {/* <Footer /> */}
     </>
   );
 };

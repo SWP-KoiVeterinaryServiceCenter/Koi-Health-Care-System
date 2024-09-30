@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function createfish() {
   return (
-    <div>createfish</div>
+    <div color='black'>createfish</div>
   )
 }

@@ -9,24 +9,24 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
-import AppAppBar from "../landingPage/LandingPageDetail/AppAppBar/AppAppBar";
-import Hero from "../landingPage/LandingPageDetail/Hero/Hero";
+// import AppAppBar from "../landingPage/LandingPageDetail/AppAppBar/AppAppBar";
+// import Hero from "../landingPage/LandingPageDetail/Hero/Hero";
 
-import LogoCollection from "../landingPage/LandingPageDetail/LogoCollection/LogoCollection";
-import Highlights from "../landingPage/LandingPageDetail/Highlights/Highlights";
-import Pricing from "../landingPage/LandingPageDetail/Pricing/Pricing";
-import Features from "../landingPage/LandingPageDetail/Features/Features";
-import Testimonials from "../landingPage/LandingPageDetail/Testimonials/Testimonials";
-import FAQ from "../landingPage/LandingPageDetail/FAQ/FAQ";
-import Footer from "../landingPage/LandingPageDetail/Footer/Footer";
-import CarouselProducts from "../landingPage/LandingPageDetail/CarouselProduct/CarouselProduct";
-import getLPTheme from "./getLPTheme";
+// import LogoCollection from "../landingPage/LandingPageDetail/LogoCollection/LogoCollection";
+// import Highlights from "../landingPage/LandingPageDetail/Highlights/Highlights";
+// import Pricing from "../landingPage/LandingPageDetail/Pricing/Pricing";
+// import Features from "../landingPage/LandingPageDetail/Features/Features";
+// import Testimonials from "../landingPage/LandingPageDetail/Testimonials/Testimonials";
+// import FAQ from "../landingPage/LandingPageDetail/FAQ/FAQ";
+import Footer from "../../../authorize/landingPage/LandingPageDetail/Footer/Footer";
+// import CarouselProducts from "../landingPage/LandingPageDetail/CarouselProduct/CarouselProduct";
+// import getLPTheme from "./getLPTheme";
 import "./LandingPage.css";
 
-import koi_fish from "../../../assets/koi-fish-1.jpg";
-import fish_market from "../../../assets/fishmarket.jpg";
-import doctor from "../../../assets/doctor.jpg";
-import car from "../../../assets/car.jpg";
+import koi_fish from "../../../../assets/koi-fish-1.jpg";
+import fish_market from "../../../../assets/fishmarket.jpg";
+import doctor from "../../../../assets/doctor.jpg";
+import car from "../../../../assets/car.jpg";
 
 function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
   return (
@@ -71,7 +71,7 @@ ToggleCustomTheme.propTypes = {
 export default function LandingPage() {
   const [mode, setMode] = React.useState("light");
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
-  const LPtheme = createTheme(getLPTheme(mode));
+//   const LPtheme = createTheme(getLPTheme(mode));
   const defaultTheme = createTheme({ palette: { mode } });
 
   const toggleColorMode = () => {

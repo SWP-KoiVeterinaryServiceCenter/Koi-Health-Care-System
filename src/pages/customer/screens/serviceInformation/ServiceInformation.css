@@ -2,6 +2,7 @@
     margin: 10px 80px 50px 80px;
     display: grid;             
     place-items: center;       
+    margin-top: 100px;
   }
 
   .si-main p {

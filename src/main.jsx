@@ -53,8 +53,13 @@ import OrdertrackTable from "./pages/admin/screens/order/ordertrack";
 
 //Customer
 import CreateKoifish from "./pages/createKoifish/createfish";
-import Service from "./pages/service/service";
-
+import Service from "./pages/customer/screens/service/service";
+import ServiceInformation from "./pages/customer/screens/serviceInformation/ServiceInformation";
+import PersonalInformation from "./pages/customer/screens/personalInformation/PersonalInformation";
+import AddMoreFish from "./pages/customer/screens/addMoreFish/AddMoreFish";
+import Booking from "./pages/customer/screens/booking/booking";
+import CustomerHome from "./pages/customer/components/home/homeCustomer";
+import HomePage from "./pages/customer/screens/home/home";
 const router = createBrowserRouter([
   {
     path: "",
@@ -100,6 +105,24 @@ const router = createBrowserRouter([
     path: "/service",
     element: <Service />,
   },
+  {
+    path: "/serviceInformation",
+    element: <ServiceInformation />,
+  },
+  {
+    path: "/personalInformation",
+    element: <PersonalInformation />,
+  },
+  {
+    path: "/addMoreFish",
+    element: <AddMoreFish />,
+  },
+  {
+    path: "/booking",
+    element: <Booking />,
+  },
+
+
   //Admin
   {
     path: "/admin",
@@ -259,45 +282,14 @@ const router = createBrowserRouter([
   //Customer
   {
     path: "/customer",
-    element: <CreateKoifish />,
+    element: <CustomerHome />,
     errorElement: <Error404 />,
     children: [
       {
         path: "",
-        element: <CreateKoifish />,
+        element: <HomePage />,
       },
-      {
-        path: "shop",
-        element: <ShopTable />,
-      },
-      {
-        path: "dashboardDetail",
-        element: <DashboardDetail />,
-      },
-      {
-        path: "profile",
-        element: <ManagerProfile />,
-      },
-      {
-        path: "wallet",
-        element: <WalletTable />,
-      },
-      {
-        path: "order",
-        element: <OrderTable />,
-      },
-      {
-        path: "updateShop",
-        element: <UpdateShop />,
-      },
-      {
-        path: "createShopManager",
-        element: <CreateShopManager />,
-      },
-      {
-        path: "changePassword",
-        element: <ChangePassword />,
-      },
+    
     ],
   },
   //Manager

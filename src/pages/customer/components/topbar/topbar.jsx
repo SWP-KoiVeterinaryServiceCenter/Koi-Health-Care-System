@@ -10,8 +10,8 @@ import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
-import ToggleColorMode from "../ToggleColorMode/ToggleColorMode";
-import logo from "../../../../../assets/koi_loho.png";
+// import ToggleColorMode from "../../ToggleColorMode/ToggleColorMode";
+import logo from "../../../../assets/koi_loho.png";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MedicalServicesOutlinedIcon from "@mui/icons-material/MedicalServicesOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
@@ -174,7 +174,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     About Us
                   </Typography>
                 </MenuItem>
-                {/* <MenuItem
+                <MenuItem
                   onClick={() => scrollToSection("faq")}
                   sx={{ py: "6px", px: "12px" }}
                 >
@@ -184,7 +184,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                       onClick={handlePersonalInformationPageClick}
                     />
                   </Typography>
-                </MenuItem> */}
+                </MenuItem>
               </Box>
             </Box>
             <Box
@@ -205,7 +205,7 @@ function AppAppBar({ mode, toggleColorMode }) {
               >
                 Log in
               </Button> */}
-              <Button
+              {/* <Button
                sx={{background:"#005F5F"}}
                 variant="contained"
                 size="small"
@@ -214,7 +214,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 target="_blank"
               >
                 Login
-              </Button>
+              </Button> */}
             </Box>
             <Box sx={{ display: { sm: "", md: "none" } }}>
               <Button
