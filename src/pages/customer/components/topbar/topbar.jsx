@@ -239,6 +239,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                   <MenuItem onClick={() => navigate("personalInformation")}>
                   Fish information
                   </MenuItem>
+                  <MenuItem onClick={() => navigate("serviceInformation")}>
+                  Service information
+                  </MenuItem>
                
                  
                   <Divider />
