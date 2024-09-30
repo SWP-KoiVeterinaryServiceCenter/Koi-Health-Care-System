@@ -331,14 +331,28 @@ export const getUserDetailThunk = createAsyncThunk(
   }
 );
 
+// export const signupThunk = createAsyncThunk(
+//   "users/signup",
+//   async (data, thunkAPI) => {
+//     try {
+//       const response = await signup(data);
+//       return response;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error?.response?.data);
+//     }
+//   }
+// );
 export const signupThunk = createAsyncThunk(
-  "users/signup",
-  async (data, thunkAPI) => {
+  'user/signup',
+  async (userData, { rejectWithValue }) => {
+    console.log('Dispatching signup with data:', userData);
     try {
-      const response = await signup(data);
-      return response;
+      const result = await signup(userData);
+      console.log('User registered successfully:', result);
+      return result;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error?.response?.data);
+      console.error('Error in signup thunk:', error.response ? error.response.data : error.message);
+      return rejectWithValue(error.response ? error.response.data : error.message);
     }
   }
 );

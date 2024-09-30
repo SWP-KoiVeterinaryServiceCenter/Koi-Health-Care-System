@@ -18,7 +18,7 @@ import {
   loginThunk,
 } from "../../../store/apiThunk/userThunk";
 import Swal from "sweetalert2";
-import { auth } from "../../../../firebaseConfig";
+// import { auth } from "../../../../firebaseConfig";
 import Google from "../../../assets/google.png";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import Pet from "../../../assets/koi_bg.webp";

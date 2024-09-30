@@ -230,6 +230,9 @@ export default function Signup() {
                         },
                       },
                     }}
+                    InputLabelProps={{
+                      style: { color: "black" }, // Màu đen cho label
+                    }}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -244,6 +247,7 @@ export default function Signup() {
                           </IconButton>
                         </InputAdornment>
                       ),
+                      style: { color: "black" }, // Màu đen cho chữ trong input
                     }}
                   />
                   {formik.touched.password && formik.errors.password && (

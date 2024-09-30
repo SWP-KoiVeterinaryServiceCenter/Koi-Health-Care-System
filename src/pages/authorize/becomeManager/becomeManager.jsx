@@ -10,7 +10,7 @@ import {
     TruncateText,
 } from "../../../components/format/formatText/formatText";
 import { signOut } from "firebase/auth";
-import { auth } from "../../../../firebaseConfig";
+// import { auth } from "../../../../firebaseConfig";
 import { PetType, ShopStatus } from "../../../components/mapping/mapping";
 
 export default function BecomeManager() {

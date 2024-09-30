@@ -1,5 +1,3 @@
-import { signOut } from "firebase/auth";
-import { auth } from "../../../../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 
@@ -7,14 +5,16 @@ export function LogoutButton() {
     const navigate = useNavigate();
 
     const handleSignOut = () => {
-        signOut(auth)
-            .then(() => {
-                localStorage.clear();
-                navigate("/");
-            })
-            .catch((error) => {
-                console.log({ error });
-            });
+        try {
+            // Clear storage
+            localStorage.clear();
+            sessionStorage.clear();
+            
+            // Navigate to home page
+            navigate("/");
+        } catch (error) {
+            console.log({ error });
+        }
     };
 
     return (

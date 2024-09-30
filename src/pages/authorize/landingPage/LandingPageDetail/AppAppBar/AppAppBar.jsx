@@ -114,7 +114,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     color="text.primary"
                     onClick={handleLandingPageClick}
                   >
-                    Nhà
+                    Home
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -126,7 +126,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     color="text.primary"
                     onClick={handleServiceClick}
                   >
-                    Dịch Vụ
+                    Service
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -134,7 +134,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   sx={{ py: "6px", px: "12px" }}
                 >
                   <Typography variant="body2" color="text.primary">
-                    Lịch Đặt
+                    Appointment
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -142,7 +142,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   sx={{ py: "6px", px: "12px" }}
                 >
                   <Typography variant="body2" color="text.primary">
-                    Phản Hồi
+                    Feedback
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -150,7 +150,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   sx={{ py: "6px", px: "12px" }}
                 >
                   <Typography variant="body2" color="text.primary">
-                    Về Chúng Tôi
+                    About Us
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -180,14 +180,14 @@ function AppAppBar({ mode, toggleColorMode }) {
                 Log in
               </Button> */}
               <Button
-                color="primary"
+               sx={{background:"#005F5F"}}
                 variant="contained"
                 size="small"
                 component="a"
                 onClick={handleLoginClick}
                 target="_blank"
               >
-                Đăng Nhập
+                Login
               </Button>
             </Box>
             <Box sx={{ display: { sm: "", md: "none" } }}>
