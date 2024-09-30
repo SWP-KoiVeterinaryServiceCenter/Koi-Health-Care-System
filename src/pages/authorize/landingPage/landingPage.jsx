@@ -84,7 +84,7 @@ export default function LandingPage() {
 
   return (
     <div>
-      {/* <AppAppBar mode={mode} toggleColorMode={toggleColorMode} /> */}
+      <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
       <div className="card-1">
         <div className="koi-img-1">
           <div className="overlay"></div>

@@ -1,23 +1,27 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
+// import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import { ClickAwayListener } from "@mui/base/ClickAwayListener";
+// import { IconButton } from "@mui/material";
 // import ToggleColorMode from "../../ToggleColorMode/ToggleColorMode";
+import { LogoutButton } from "../../../../components/function/logout/logout";
 import logo from "../../../../assets/koi_loho.png";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MedicalServicesOutlinedIcon from "@mui/icons-material/MedicalServicesOutlined";
-import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
-import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import { Button } from "antd";
+import IconButton from "@mui/material/IconButton";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 import { Link, useNavigate } from "react-router-dom";
 import { colors } from "@mui/material";
@@ -31,6 +35,21 @@ const logoStyle = {
 function AppAppBar({ mode, toggleColorMode }) {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+
+  const handleCloseDrawer = () => {
+    setIsDrawerVisible(false);
+  };
+
+  const handleLogout = () => {
+    try {
+      localStorage.clear();
+      sessionStorage.clear();
+      navigate("/");
+    } catch (error) {
+      console.log({ error });
+    }
+  };
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -52,6 +71,14 @@ function AppAppBar({ mode, toggleColorMode }) {
   };
   const handleBookingPageClick = () => {
     navigate("/booking");
+  };
+
+  const handleClick = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const handleClickAway = () => {
+    setOpen(false);
   };
 
   const scrollToSection = (sectionId) => {
@@ -155,7 +182,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   // sx={{ py: "6px", px: "12px" }}
                 >
                   <Typography variant="body2" color="text.primary">
-                  Appointment
+                    Appointment
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -163,7 +190,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   // sx={{ py: "6px", px: "12px" }}
                 >
                   <Typography variant="body2" color="text.primary">
-                  Feedback
+                    Feedback
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -174,17 +201,69 @@ function AppAppBar({ mode, toggleColorMode }) {
                     About Us
                   </Typography>
                 </MenuItem>
-                <MenuItem
-                  onClick={() => scrollToSection("faq")}
-                  sx={{ py: "6px", px: "12px" }}
+                {/* IconButton to trigger Drawer */}
+                <IconButton onClick={() => setIsDrawerVisible(true)}>
+                  <PersonOutlinedIcon
+                    fontSize="large"
+                    sx={{ color: "black" }}
+                  />
+                </IconButton>
+
+                {/* Material UI Drawer */}
+                <Drawer
+                  anchor="right"
+                  open={isDrawerVisible}
+                  onClose={handleCloseDrawer}
                 >
-                  <Typography variant="body2" color="text.primary">
-                    <PersonOutlineOutlinedIcon
-                      sx={{ color: "black", fontSize: "20px" }}
-                      onClick={handlePersonalInformationPageClick}
-                    />
-                  </Typography>
-                </MenuItem>
+              <Box
+                  sx={{
+                    width: 300,
+                    p: 2,
+                    backgroundColor: "background.paper",
+                    flexGrow: 1,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "end",
+                      flexGrow: 1,
+                    }}
+                  >
+                    {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
+                  </Box>
+                  <MenuItem onClick={() => scrollToSection("features")}>
+                    Features
+                  </MenuItem>
+                 
+                  <Divider />
+                  <MenuItem>
+                    {/* <Button
+                      color="primary"
+                      variant="contained"
+                      component="a"
+                      onClick={handleLoginClick}
+                      target="_blank"
+                      sx={{ width: "100%" }}
+                    >
+                      Login
+                    </Button> */}
+                  </MenuItem>
+                  <MenuItem>
+                    <Button
+                      color="primary"
+                      variant="outlined"
+                      component="a"
+                      onClick={handleLogout}
+                      target="_blank"
+                      sx={{ width: "100%" }}
+                    >
+                      Logout
+                    </Button>
+                  </MenuItem>
+                </Box>
+                </Drawer>
               </Box>
             </Box>
             <Box
@@ -193,29 +272,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 gap: 0.5,
                 alignItems: "center",
               }}
-            >
-              {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
-              {/* <Button
-                color="primary"
-                variant="text"
-                size="small"
-                component="a"
-                onClick={handleLoginClick}
-                target="_blank"
-              >
-                Log in
-              </Button> */}
-              {/* <Button
-               sx={{background:"#005F5F"}}
-                variant="contained"
-                size="small"
-                component="a"
-                onClick={handleLoginClick}
-                target="_blank"
-              >
-                Login
-              </Button> */}
-            </Box>
+            ></Box>
             <Box sx={{ display: { sm: "", md: "none" } }}>
               <Button
                 variant="text"
@@ -294,10 +351,5 @@ function AppAppBar({ mode, toggleColorMode }) {
     </div>
   );
 }
-
-AppAppBar.propTypes = {
-  mode: PropTypes.oneOf(["dark", "light"]).isRequired,
-  toggleColorMode: PropTypes.func.isRequired,
-};
 
 export default AppAppBar;
