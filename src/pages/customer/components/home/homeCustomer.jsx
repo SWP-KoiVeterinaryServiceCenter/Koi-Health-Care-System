@@ -7,47 +7,47 @@ import Topbar from "../../components/topbar/topbar";
 import { useDispatch } from "react-redux";
 import { getUserDataThunk } from "../../../../store/apiThunk/userThunk";
 import {
-    getAllNotificationsThunk,
-    getUnreadNotificationsThunk,
+  getAllNotificationsThunk,
+  getUnreadNotificationsThunk,
 } from "../../../../store/apiThunk/notificationThunk";
 import {
-    getPlatformIncomeThunk,
-    getWalletThunk,
+  getPlatformIncomeThunk,
+  getWalletThunk,
 } from "../../../../store/apiThunk/walletThunk";
 
 export default function CustomerHome() {
-    const [theme, colorMode] = useMode();
-    const [isCollapsed, setIsCollapsed] = useState(false);
-    const [check, setCheck] = useState(false);
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const location = useLocation();
-    const [pageEntered, setPageEntered] = useState(false);
+  const [theme, colorMode] = useMode();
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [check, setCheck] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const [pageEntered, setPageEntered] = useState(false);
 
-    useEffect(() => {
-        setPageEntered(true);
-    }, [location]);
+  useEffect(() => {
+    setPageEntered(true);
+  }, [location]);
 
-    useEffect(() => {
-        if (pageEntered) {
-            const hasToken = localStorage.getItem("accessToken");
-            if (!hasToken) {
-                setCheck(true);
-                navigate("/");
-            } else {
-                dispatch(getUserDataThunk());
-                // dispatch(getWalletThunk());
-                // dispatch(getAllNotificationsThunk());
-                // dispatch(getUnreadNotificationsThunk());
-                // dispatch(getPlatformIncomeThunk());
-            }
-        }
-    }, [pageEntered, navigate, dispatch]);
+  useEffect(() => {
+    if (pageEntered) {
+      const hasToken = localStorage.getItem("accessToken");
+      if (!hasToken) {
+        setCheck(true);
+        navigate("/");
+      } else {
+        dispatch(getUserDataThunk());
+        // dispatch(getWalletThunk());
+        // dispatch(getAllNotificationsThunk());
+        // dispatch(getUnreadNotificationsThunk());
+        // dispatch(getPlatformIncomeThunk());
+      }
+    }
+  }, [pageEntered, navigate, dispatch]);
 
-    return (
-        <div >
-        <Topbar />
-        <Outlet />
-        </div>
-    );
+  return (
+    <div>
+      <Topbar />
+      <Outlet />
+    </div>
+  );
 }

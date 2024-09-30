@@ -101,7 +101,7 @@ const router = createBrowserRouter([
     path: "/transferStatus",
     element: <TransferStatus />,
   },
- 
+
   {
     path: "/serviceInformation",
     element: <ServiceInformation />,
@@ -122,7 +122,6 @@ const router = createBrowserRouter([
     path: "/booking",
     element: <Booking />,
   },
-
 
   //Admin
   {
@@ -292,7 +291,7 @@ const router = createBrowserRouter([
       },
       {
         path: "service",
-        element: <Service direction="customer"/>,
+        element: <Service direction="customer" />,
       },
       {
         path: "personalInformation",
@@ -302,7 +301,6 @@ const router = createBrowserRouter([
         path: "serviceInformation",
         element: <ServiceInformation />,
       },
-    
     ],
   },
   //Manager
