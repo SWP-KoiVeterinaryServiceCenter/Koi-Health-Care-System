@@ -63,6 +63,11 @@ function AppAppBar({ mode, toggleColorMode }) {
     window.scrollTo(0, 0);
   };
 
+  const handleFeedBackClick = () => {
+    navigate("/feedback");
+    window.scrollTo(0, 0);
+  };
+
   const scrollToSection = (sectionId) => {
     const sectionElement = document.getElementById(sectionId);
     const offset = 128;
@@ -188,6 +193,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     // color="text.primary"
                     color="black"
                     fontSize="15px"
+                    onClick={handleFeedBackClick}
                   >
                     Phản Hồi
                   </Typography>

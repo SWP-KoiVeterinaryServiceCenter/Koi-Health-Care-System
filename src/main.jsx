@@ -60,6 +60,7 @@ import AddMoreFish from "./pages/customer/addMoreFish/AddMoreFish";
 import Booking from "./pages/customer/booking/booking";
 import AboutUs from "./pages/customer/aboutUs/aboutUs";
 import CreateKoiFishAppointment from "./pages/customer/createKoiFishAppointment/createKoiFishAppointment";
+import Feedback from "./pages/customer/feedback/feedback";
 
 const router = createBrowserRouter([
   {
@@ -129,6 +130,10 @@ const router = createBrowserRouter([
   {
     path: "/createKoiFishAppointment",
     element: <CreateKoiFishAppointment />,
+  },
+  {
+    path: "/feedback",
+    element: <Feedback />,
   },
 
   //Admin

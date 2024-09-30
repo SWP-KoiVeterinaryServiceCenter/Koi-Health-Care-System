@@ -1,0 +1,15 @@
+.feedback_container {
+  margin: 10px 80px 50px 80px;
+  display: grid;
+  place-items: center;
+  margin-top: 100px;
+}
+.feedback-table {
+  margin: 20px;
+  font-family: "Arial", sans-serif;
+}
+
+.MuiDataGrid-root .MuiDataGrid-cell {
+  justify-content: center;
+  align-items: center;
+}
