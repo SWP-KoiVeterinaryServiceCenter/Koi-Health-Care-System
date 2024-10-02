@@ -29,18 +29,19 @@ export default function Service(props) {
             />
           </figure>
           <div className="article-body">
-            <h2>Aquatic Veterinary </h2>
+            <h2>Thú Y Cá KoI</h2>
             <p>
-              All of our services are delivered tank or pond side. We charge a
-              small mileage fee for clients outside of Santa Cruz County.
-              Estimates are available upon request. Our Ideal Client is one who
-              is ready to learn and understands that pet fish deserve the same
-              care and compassion as other pets. Our service strives to provide
-              high level pet fish owner education and instills confidence in
-              keeping pet fish happy and healthy.
+              Tất cả các dịch vụ của chúng tôi đều được cung cấp tại bể hoặc ao.
+              Chúng tôi tính một khoản phí nhỏ cho những khách hàng ở bên ngoài
+              Quận Santa Cruz. Có thể ước tính theo yêu cầu. Khách hàng lý tưởng
+              của chúng tôi là người sẵn sàng học hỏi và hiểu rằng cá cảnh xứng
+              đáng được chăm sóc và yêu thương như những loài vật nuôi khác.
+              Dịch vụ của chúng tôi cố gắng cung cấp giáo dục cho chủ sở hữu cá
+              cảnh ở trình độ cao và tạo sự tự tin trong việc giữ cho cá cảnh
+              luôn vui vẻ và khỏe mạnh.
             </p>
             <a href="#" className="read-more">
-              Read more{" "}
+              Tìm hiểu thêm{" "}
               <span className="sr-only">about this is some title</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -68,18 +69,19 @@ export default function Service(props) {
             />
           </figure>
           <div className="article-body">
-            <h2>Fish Surgery</h2>
+            <h2>Phẫu thuật cá</h2>
             <p>
-              Yes, even fish can undergo surgery. From a simple wen trim to a
-              fully open coelomic cavity, our surgical skills are exceptional.
-              Our chief veterinarian, Dr. Sanders, has developed specialty
-              skills in fish surgery. For an example of her surgical skill,
-              please see this video of an abdominal tumor removal. We also have
-              a post on Fish Surgery FAQs. We also offer cryotherapy for skin
-              ailments.
+              Vâng, ngay cả cá cũng có thể phẫu thuật. Từ việc cắt bỏ wen đơn
+              giản đến khoang coelomic mở hoàn toàn, kỹ năng phẫu thuật của
+              chúng tôi là đặc biệt. Bác sĩ thú y trưởng của chúng tôi, Tiến sĩ
+              Sanders, đã phát triển các kỹ năng chuyên khoa trong phẫu thuật
+              cá. Để biết ví dụ về kỹ năng phẫu thuật của cô ấy, vui lòng xem
+              video này về việc cắt bỏ khối u bụng. Chúng tôi cũng có một bài
+              đăng trên Câu hỏi thường gặp về phẫu thuật cá. Chúng tôi cũng cung
+              cấp liệu pháp đông lạnh cho các bệnh về da
             </p>
             <a href="#" className="read-more">
-              Read more{" "}
+              Tìm hiểu thêm{" "}
               <span className="sr-only">about this is some title</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -107,17 +109,17 @@ export default function Service(props) {
             />
           </figure>
           <div className="article-body">
-            <h2>Aquatic Consult</h2>
+            <h2>Tư vấn thủy sinh</h2>
             <p>
-              We offer consultation services to other veterinary professionals
-              looking for guidance and assistance with pet fish cases. We are
-              here to help virtually demonstrate diagnostic techniques,
-              interpret diagnostics, differentiate diagnoses and develop
-              treatment plans. This product is only available to veterinary
-              professionals whose licensing and employment can be verified.
+              Chúng tôi cung cấp dịch vụ tư vấn cho các chuyên gia thú y khác
+              đang tìm kiếm sự hướng dẫn và hỗ trợ cho các trường hợp cá cảnh.
+              Chúng tôi ở đây để giúp trình diễn trực tuyến các kỹ thuật chẩn
+              đoán, giải thích chẩn đoán, phân biệt chẩn đoán và phát triển các
+              kế hoạch điều trị. Sản phẩm này chỉ dành cho các chuyên gia thú y
+              có giấy phép và việc làm có thể được xác minh.
             </p>
             <a href="#" className="read-more">
-              Read more{" "}
+              Tìm hiểu thêm{" "}
               <span className="sr-only">about this is some title</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -145,17 +147,17 @@ export default function Service(props) {
             />
           </figure>
           <div className="article-body">
-            <h2>Feeding service</h2>
+            <h2>Dịch vụ cho ăn</h2>
             <p>
-              We offer professional feeding care for aquarium or pond fish. This
-              service ensures that your fish receive the right type and amount
-              of food on a regular schedule, tailored to their specific dietary
-              needs. It promotes optimal health, growth, and vibrant coloration
-              while maintaining a clean and biologically balanced environment in
-              the aquarium or pond.
+              Chúng tôi cung cấp dịch vụ chăm sóc thức ăn chuyên nghiệp cho cá
+              cảnh hoặc cá ao. Dịch vụ này đảm bảo rằng cá của bạn nhận được
+              đúng loại và lượng thức ăn theo lịch trình thường xuyên, phù hợp
+              với nhu cầu chế độ ăn uống cụ thể của chúng. Dịch vụ này thúc đẩy
+              sức khỏe, sự phát triển và màu sắc rực rỡ tối ưu trong khi vẫn duy
+              trì môi trường sạch sẽ và cân bằng sinh học trong bể cá hoặc ao.
             </p>
             <a href="#" className="read-more">
-              Read more{" "}
+              Tìm hiểu thêm{" "}
               <span className="sr-only">about this is some title</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

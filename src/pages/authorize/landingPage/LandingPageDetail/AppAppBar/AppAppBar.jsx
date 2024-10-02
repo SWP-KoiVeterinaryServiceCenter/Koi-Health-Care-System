@@ -14,10 +14,10 @@ import ToggleColorMode from "../ToggleColorMode/ToggleColorMode";
 import logo from "../../../../../assets/koi_loho.png";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MedicalServicesOutlinedIcon from "@mui/icons-material/MedicalServicesOutlined";
-import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
-import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import EditCalendarIcon from "@mui/icons-material/EditCalendar";
+import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
 
 import { Link, useNavigate } from "react-router-dom";
 import { colors } from "@mui/material";
@@ -120,58 +120,96 @@ function AppAppBar({ mode, toggleColorMode }) {
               >
                 <MenuItem
                   onClick={() => scrollToSection("features")}
-                  // sx={{ py: "6px", px: "12px" }}
+                  sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <HomeOutlinedIcon sx={{ color: "black", fontSize: "20px" }} />
+                  <HomeOutlinedIcon sx={{ color: "black", fontSize: "19px" }} />
                   <Typography
-                    // variant="body2"
-                    // color="text.primary"
                     color="black"
-                    fontSize="15px"
+                    fontSize="16px"
                     onClick={handleLandingPageClick}
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    Home
+                    Trang chủ
                   </Typography>
                 </MenuItem>
+
+                <MenuItem
+                  onClick={() => scrollToSection("features")}
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
+                  <NewspaperOutlinedIcon sx={{ color: "black", fontSize: "19px" }} />
+                  <Typography
+                    color="black"
+                    fontSize="16px"
+                    onClick={handleLandingPageClick}
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                  >
+                    Tin tức
+                  </Typography>
+                </MenuItem>
+
                 <MenuItem
                   onClick={() => scrollToSection("testimonials")}
-                  // sx={{ py: "6px", px: "12px" }}
+                  sx={{ display: "flex", alignItems: "center" }}
                 >
                   <MedicalServicesOutlinedIcon
-                    sx={{ color: "black", fontSize: "20px" }}
+                    sx={{ color: "black", fontSize: "19px" }}
                   />
                   <Typography
                     // variant="body2"
                     // color="text.primary"
                     color="black"
-                    fontSize="15px"
+                    fontSize="16px"
                     onClick={handleServiceClick}
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    Service
+                    Dịch vụ
                   </Typography>
                 </MenuItem>
+
                 <MenuItem
                   onClick={() => scrollToSection("highlights")}
-                  // sx={{ py: "6px", px: "12px" }}
+                  sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Typography variant="body2" color="text.primary">
-                  Appointment
+                  <EditCalendarIcon sx={{ color: "black", fontSize: "19px" }} />
+                  <Typography
+                    color="black"
+                    fontSize="16px"
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                  >
+                    Lịch Hẹn
                   </Typography>
                 </MenuItem>
+
                 <MenuItem
                   onClick={() => scrollToSection("pricing")}
-                  // sx={{ py: "6px", px: "12px" }}
+                  sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Typography variant="body2" color="text.primary">
-                  Feedback
+                  <PermContactCalendarOutlinedIcon
+                    sx={{ color: "black", fontSize: "19px" }}
+                  />
+                  <Typography
+                    color="black"
+                    fontSize="16px"
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                  >
+                    Phản hồi
                   </Typography>
                 </MenuItem>
+
                 <MenuItem
                   onClick={() => scrollToSection("faq")}
-                  // sx={{ py: "6px", px: "12px" }}
+                  sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Typography variant="body2" color="text.primary">
-                    About Us
+                  <HelpOutlineOutlinedIcon
+                    sx={{ color: "black", fontSize: "19px" }}
+                  />
+                  <Typography
+                    color="black"
+                    fontSize="16px"
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                  >
+                    Thông tin
                   </Typography>
                 </MenuItem>
                 {/* <MenuItem
@@ -206,7 +244,17 @@ function AppAppBar({ mode, toggleColorMode }) {
                 Log in
               </Button> */}
               <Button
-               sx={{background:"#005F5F"}}
+                sx={{ background: "#D5762B" }}
+                variant="contained"
+                size="small"
+                component="a"
+                onClick={handleLoginClick}
+                target="_blank"
+              >
+                Đặt lịch hẹn
+              </Button>
+              <Button
+                sx={{ background: "#005F5F" }}
                 variant="contained"
                 size="small"
                 component="a"
