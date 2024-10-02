@@ -4,6 +4,12 @@ export const getPost = async () => {
     const response = await api.get(`/api/v1/Post/GetAllPost`); //get all posts
     return response.data;
 };
+export const gettotalPost = async () => {
+    const response = await api.get(`/api/v1/Post/GetTotalPost`); //get all posts
+    return response.data;
+};
+
+
 export const banPost = async (id) => {
     const response = await api.delete(`/api/v1/Post/BanPost/${id}`); //ban posst
     return response.data;
@@ -34,7 +40,7 @@ export const createPost = async data => {
 };
 
 export const getPostDetail = async id => {
-    const response = await api.get(`/api/v1/posts/${id}`);
+    const response = await api.get(`/api/v1/Post/PostDetail/${id}`);
     return response.data;
 };
 

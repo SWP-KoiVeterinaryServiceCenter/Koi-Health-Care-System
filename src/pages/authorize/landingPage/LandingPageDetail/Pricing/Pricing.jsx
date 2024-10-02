@@ -43,7 +43,7 @@ const tiers = [
   },
   {
     title: 'Enterprise',
-    price: '15.000',
+    price: '10.000',
     description: [
       'All limited links',
       'Help center access',
@@ -149,7 +149,7 @@ export default function Pricing() {
                     {tier.price} vnđ
                   </Typography>
                   <Typography component="h3" variant="h6">
-                    &nbsp; per month
+                    &nbsp; per DAY
                   </Typography>
                 </Box>
                 <Divider
@@ -196,7 +196,7 @@ export default function Pricing() {
                   fullWidth
                   variant={tier.buttonVariant}
                   component="a"
-                  href="/material-ui/getting-started/templates/checkout/"
+                  href="https://expo.dev/artifacts/eas/9yJyRqE4484PY7wkdhKG2F.apk"
                   target="_blank"
                 >
                   {tier.buttonText}

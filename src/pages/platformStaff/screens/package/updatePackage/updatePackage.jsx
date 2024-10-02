@@ -42,14 +42,14 @@
 //     enableReinitialize: true,
 //     initialValues: {
 //       description: packageDetail.description,
-//       expiryMonth: packageDetail.expiryMonth,
+//       expiryDay: packageDetail.expiryDay,
 //       price: packageDetail.price,
 //       subcriptionType: packageDetail.subcriptionType,
      
 //     },
 //     validationSchema: Yup.object({
 //       description: Yup.string().required("Mô tả không thể trống"),
-//       expiryMonth: Yup.number().required("Tháng không thể trống"),
+//       expiryDay: Yup.number().required("Tháng không thể trống"),
 //     }),
 //     onSubmit: async (values) => {
 //       setShowLoadingModal(true);
@@ -57,7 +57,7 @@
 //         updatePackageThunk({
 //           id: packageId,
 //           description: values.description,
-//           expiryMonth: values.expiryMonth,
+//           expiryDay: values.expiryDay,
 //           price: values.price,
 //           subcriptionType: values.subcriptionType,
 //         })
@@ -144,20 +144,20 @@
 //                 </div>
 //               )}
 //           </>
-//           {/* expiryMonth */}
+//           {/* expiryDay */}
 //           <>
 //             <TextField
-//               id="expiryMonth"
+//               id="expiryDay"
 //               label={
 //                 <span>
 //                   Thời Hạn (tháng) <span style={{ color: "red" }}>*</span>
 //                 </span>
 //               }
 //               variant="outlined"
-//               value={formik.values.expiryMonth}
+//               value={formik.values.expiryDay}
 //               onChange={formik.handleChange}
 //               fullWidth
-//               autoComplete="expiryMonth"
+//               autoComplete="expiryDay"
 //               margin="dense"
 //               type="number"
 //               color="secondary"
@@ -172,9 +172,9 @@
 //                 },
 //               }}
 //             />
-//             {formik.touched.expiryMonth && formik.errors.expiryMonth && (
+//             {formik.touched.expiryDay && formik.errors.expiryDay && (
 //               <div className="login__validation__error">
-//                 <p>{formik.errors.expiryMonth}</p>
+//                 <p>{formik.errors.expiryDay}</p>
 //               </div>
 //             )}
 //           </>
@@ -276,7 +276,7 @@
 // }
 import * as React from "react";
 import "./updatePackage.css";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField,Box,Typography   } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
@@ -305,6 +305,34 @@ export default function UpdatePackage() {
   const packageDetail = useSelector(packageDetailSelector);
   const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [showRender, setShowRender] = useState(false);
+  const Header = ({
+    title,
+    subtitle,
+    titleColor = "gray",
+    subtitleColor = "gray",
+  }) => {
+    return (
+      <Box mb={2}>
+        <Typography
+          style={{
+            fontFamily: "Source Sans Pro, sans-serif",
+            fontSize: "32px",
+            color: titleColor,
+            fontWeight: "700",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", // Shadow effect
+            // border: "1px solid rgba(255, 255, 255, 0.5)", // Light white border
+            padding: "4px", // Optional: padding to make the border more visible
+            borderRadius: "4px" // Optional: rounded corners for the border
+          }}
+        >
+          {title}
+        </Typography>
+        <Typography variant="subtitle1" style={{ color: subtitleColor }}>
+          {subtitle}
+        </Typography>
+      </Box>
+    );
+  };
 
   useEffect(() => {
     setShowRender(true);
@@ -315,14 +343,18 @@ export default function UpdatePackage() {
     enableReinitialize: true,
     initialValues: {
       // description: packageDetail.description || '',
-      expiryMonth: packageDetail.expiryMonth || '',
+      expiryDay: packageDetail.expiryDay || '',
       price: packageDetail.price || '',
       subcriptionType: packageDetail.subcriptionType || '',
     },
     validationSchema: Yup.object({
-      expiryMonth: Yup.number().required("Tháng không thể trống"),
-      price: Yup.number().required("Giá không thể trống"),
-      subcriptionType: Yup.string().required("Mô tả không thể trống"),
+      expiryDay: Yup.number().required("Date cannot be empty").max(31, "Day cannot exceed 31 Days"),
+      price: Yup.number()
+          .required("Price cannot be empty")
+          .min(0, "Price cannot be negative")
+          .integer("Price must be an integer")
+          .max(1000000, "Price cannot exceed 1.000.000"),
+      subcriptionType: Yup.string().required("Description cannot be empty"),
     }),
     onSubmit: async (values) => {
       setShowLoadingModal(true);
@@ -330,7 +362,7 @@ export default function UpdatePackage() {
         updatePackageThunk({
           id: packageId,
           // description: values.description,
-          expiryMonth: values.expiryMonth,
+          expiryDay: values.expiryDay,
           price: values.price,
           subcriptionType: values.subcriptionType,
         })
@@ -371,8 +403,8 @@ export default function UpdatePackage() {
   return (
     <div className="updatePackage">
       <Header
-        title="Cập Nhật Gói Đăng Ký"
-        subtitle="Cung cấp thông tin gói đăng ký"
+        title="Update Subscription"
+        subtitle="Provide subscription package information"
       />
       {!showRender ? (
         <form onSubmit={formik.handleSubmit}>
@@ -381,7 +413,7 @@ export default function UpdatePackage() {
             id="subcriptionType"
             label={
               <span>
-                Loại Gói <span style={{ color: "red" }}>*</span>
+                Subscription Name <span style={{ color: "red" }}>*</span>
               </span>
             }
             variant="outlined"
@@ -407,19 +439,19 @@ export default function UpdatePackage() {
               <p>{formik.errors.subcriptionType}</p>
             </div>
           )}
-          {/* expiryMonth */}
+          {/* expiryDay */}
           <TextField
-            id="expiryMonth"
+            id="expiryDay"
             label={
               <span>
-                Thời Hạn (Date) <span style={{ color: "red" }}>*</span>
+                Expiry Date (Date) <span style={{ color: "red" }}>*</span>
               </span>
             }
             variant="outlined"
-            value={formik.values.expiryMonth}
+            value={formik.values.expiryDay}
             onChange={formik.handleChange}
             fullWidth
-            autoComplete="expiryMonth"
+            autoComplete="expiryDay"
             margin="dense"
             type="number"
             color="secondary"
@@ -434,9 +466,9 @@ export default function UpdatePackage() {
               },
             }}
           />
-          {formik.touched.expiryMonth && formik.errors.expiryMonth && (
+          {formik.touched.expiryDay && formik.errors.expiryDay && (
             <div className="login__validation__error">
-              <p>{formik.errors.expiryMonth}</p>
+              <p>{formik.errors.expiryDay}</p>
             </div>
           )}
           {/* description */}
@@ -473,7 +505,7 @@ export default function UpdatePackage() {
           {/* price */}
           <TextField
             id="price"
-            label="Gía tiền"
+            label="Price"
             variant="outlined"
             value={formik.values.price}
             onChange={formik.handleChange}
@@ -519,7 +551,7 @@ export default function UpdatePackage() {
                 variant="contained"
                 type="submit"
               >
-                Cập Nhật
+                Update
               </Button>
             </div>
           ) : (

@@ -15,7 +15,7 @@ export const getOrdersFromShop = async (id, pageNumber, pageSize) => {
 };
 
 export const getOrderDetail = async (id) => {
-    const response = await api.get(`/api/v1/Order/CancleOrder`);
+    const response = await api.get(`/api/v1/Order/GetOrderDetail/${id}`);
     return response.data;
 };
 

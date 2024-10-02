@@ -312,7 +312,7 @@ export default function DashboardDetail() {
                     variant="contained"
                     onClick={() => navigate(-1)}
                 >
-                    Quay lại
+                    Back
                 </Button>
             </Box>
         </div>

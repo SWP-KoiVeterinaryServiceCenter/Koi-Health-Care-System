@@ -1,7 +1,19 @@
 import api from "./api";
 
+// export const login = async (data) => {
+//   const response = await api.post(`/api/v1/User/Login`, data); //lay POST login
+//   return response.data;
+// };
+
+///////////////////////////////////////////////////////////////////LOGIN/////////////////////////////////////////////
 export const login = async (data) => {
-  const response = await api.post(`/api/v1/User/Login`, data); //lay POST login
+  const response = await api.post(`/api/v1/Account/Login`, data);
+  return response.data;
+};
+
+//////////////////////////////////////////////////////////////////CURRENT LOGIN/////////////////////////////////////////////
+export const getUserData = async () => {
+  const response = await api.get(`/api/v1/Account/GetCurrentLoginUser`);
   return response.data;
 };
 
@@ -32,10 +44,10 @@ export const newPassword = async (data) => {
   return response.data;
 };
 
-export const getUserData = async () => {
-  const response = await api.get(`/api/v1/User/GetCurrentUser`); //La get API CurrentLoginUserInfo
-  return response.data;
-};
+// export const getUserData = async () => {
+//   const response = await api.get(`/api/v1/User/GetCurrentUser`); //La get API CurrentLoginUserInfo
+//   return response.data;
+// };
 
 export const updateUserData = async (data) => {
   const response = await api.put(`/api/v1/auths`, data, {
@@ -83,12 +95,16 @@ export const getUserDetail = async (id) => {
   return response.data;
 };
 
+// export const signup = async (data) => {
+//   const response = await api.post(`/api/v1/auths/register`, data, {
+//     headers: {
+//       "Content-Type": "multipart/form-data",
+//     },
+//   });
+//   return response.data;
+// };
 export const signup = async (data) => {
-  const response = await api.post(`/api/v1/auths/register`, data, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  const response = await api.post(`/api/v1/Account/Register`, data);
   return response.data;
 };
 
@@ -137,6 +153,11 @@ export const getAllVerifyUsers = async () => {
 
 export const getAllUsers = async () => {
   const response = await api.get(`/api/v1/User/GetAllUsers`); //La get API All users
+  return response.data;
+};
+
+export const getTotalUsers = async () => {
+  const response = await api.get(`/api/v1/User/GetTotalUser`); //La get API All users
   return response.data;
 };
 

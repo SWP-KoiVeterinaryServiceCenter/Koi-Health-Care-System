@@ -11,7 +11,7 @@ import Header from "../../../pages/manager/components/header/Header";
 import { VisibilityOutlined, VisibilityOffOutlined } from "@mui/icons-material";
 import LoadingModal from "../../../components/modal/loadingModal/loadingModal";
 import { signOut } from "firebase/auth";
-import { auth } from "../../../../firebaseConfig";
+// import { auth } from "../../../../firebaseConfig";
 import {
     ERRORTEXT,
     SUCCESSTEXT,

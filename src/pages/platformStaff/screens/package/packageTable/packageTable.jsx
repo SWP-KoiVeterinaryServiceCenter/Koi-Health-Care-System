@@ -46,7 +46,7 @@ export default function PackageTable(props) {
   const navigate = useNavigate();
   const packages = useSelector(packagesSelector);
   const [showLoadingModal, setShowLoadingModal] = useState(false);
-  const [pageSize, setPageSize] = useState(20);
+  const [pageSize, setPageSize] = useState(30);
   const [pageNumber, setPageNumber] = useState(1);
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedPackage, setSelectedPackage] = useState(null);
@@ -131,7 +131,7 @@ export default function PackageTable(props) {
   const Header = ({
     title,
     subtitle,
-    titleColor = "black",
+    titleColor = "gray",
     subtitleColor = "gray",
   }) => {
     return (
@@ -142,6 +142,10 @@ export default function PackageTable(props) {
             fontSize: "32px",
             color: titleColor,
             fontWeight: "700",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", // Shadow effect
+            border: "1px solid rgba(255, 255, 255, 0.5)", // Light white border
+            padding: "4px", // Optional: padding to make the border more visible
+            borderRadius: "4px" // Optional: rounded corners for the border
           }}
         >
           {title}
@@ -170,15 +174,15 @@ export default function PackageTable(props) {
     },
     {
       field: "subcriptionType",
-      headerName: "Subscription Type",
+      headerName: "Subscription Name",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     {
-      field: "expiryMonth",
+      field: "expiryDay",
       flex: 1,
       headerName: "Expiry Date",
-      renderCell: ({ row: { expiryMonth } }) => <div>{expiryMonth} Ngày</div>,
+      renderCell: ({ row: { expiryDay } }) => <div>{expiryDay} Date</div>,
     },
     {
       field: "price",
@@ -206,7 +210,7 @@ export default function PackageTable(props) {
     // },
     {
       field: "action",
-      headerName: "Action",
+      headerName: "Type",
       headerAlign: "center",
       flex: 1,
       renderCell: ({ row: { id, description } }) => (
@@ -262,7 +266,7 @@ export default function PackageTable(props) {
             }
             style={{ color: "white", textTransform: "capitalize" }}
           >
-            Sửa
+            Edit
           </Button>
           <Button
             variant="contained"
@@ -270,7 +274,7 @@ export default function PackageTable(props) {
             style={{ textTransform: "capitalize" }}
             onClick={() => handleDeletePackage(id)}
           >
-            Xóa
+            Delete
           </Button>
         </Box>
       ),
@@ -292,12 +296,12 @@ export default function PackageTable(props) {
             justifyContent: "space-between",
           }}
         >
-          <Header title="GÓI ĐĂNG KÝ" subtitle="Quản Lý Gói Đăng Ký Hệ Thống" />
+          <Header title="SUBSCRIPTION" subtitle="System Subscription Package Management" />
           <Button
             onClick={() => navigate(`/${direction}/createPackage`)}
             className="createBtn"
           >
-            Tạo Gói
+            Create 
           </Button>
         </div>
         <Box height="100%" sx={StyledBox}>

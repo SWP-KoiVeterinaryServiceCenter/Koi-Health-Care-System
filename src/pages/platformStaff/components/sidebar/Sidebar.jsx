@@ -163,12 +163,12 @@ const Sidebar = (props) => {
                   }}
                 >
                   <Item
-                                        title="Account"
-                                        to="account"
-                                        icon={<AccountCircleOutlined />}
-                                        selected={selected}
-                                        setSelected={setSelected}
-                                    />
+                    title="Account"
+                    to="account"
+                    icon={<AccountCircleOutlined />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
                   <Item
                     title="Post Management"
                     to=""
@@ -183,7 +183,7 @@ const Sidebar = (props) => {
                     selected={selected}
                     setSelected={setSelected}
                   /> */}
-                
+
                   <Item
                     title="Report"
                     to="report"

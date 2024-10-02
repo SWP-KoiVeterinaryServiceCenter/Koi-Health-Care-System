@@ -1,24 +1,31 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
-import Typography from '@mui/material/Typography';
-import MenuItem from '@mui/material/MenuItem';
-import Drawer from '@mui/material/Drawer';
-import MenuIcon from '@mui/icons-material/Menu';
-import ToggleColorMode from '../ToggleColorMode/ToggleColorMode';
-import logo from '../../../../../assets/logoGX.png';
+import * as React from "react";
+import PropTypes from "prop-types";
+import Box from "@mui/material/Box";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
+import Typography from "@mui/material/Typography";
+import MenuItem from "@mui/material/MenuItem";
+import Drawer from "@mui/material/Drawer";
+import MenuIcon from "@mui/icons-material/Menu";
+import ToggleColorMode from "../ToggleColorMode/ToggleColorMode";
+import logo from "../../../../../assets/koi_loho.png";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import MedicalServicesOutlinedIcon from "@mui/icons-material/MedicalServicesOutlined";
+import EditCalendarIcon from "@mui/icons-material/EditCalendar";
+import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
 
 import { Link, useNavigate } from "react-router-dom";
+import { colors } from "@mui/material";
 
 const logoStyle = {
-  width: '140px',
-  height: 'auto',
-  cursor: 'pointer',
+  width: "140px",
+  height: "auto",
+  cursor: "pointer",
 };
 
 function AppAppBar({ mode, toggleColorMode }) {
@@ -31,28 +38,44 @@ function AppAppBar({ mode, toggleColorMode }) {
   const handleLoginClick = () => {
     navigate("/login");
   };
+  const handleSignUPClick = () => {
+    navigate("/signup");
+  };
+  const handleServiceClick = () => {
+    navigate("/service");
+  };
+  const handleLandingPageClick = () => {
+    navigate("/");
+  };
+  const handlePersonalInformationPageClick = () => {
+    navigate("/personalInformation");
+  };
+  const handleBookingPageClick = () => {
+    navigate("/booking");
+  };
+
   const scrollToSection = (sectionId) => {
     const sectionElement = document.getElementById(sectionId);
     const offset = 128;
     if (sectionElement) {
       const targetScroll = sectionElement.offsetTop - offset;
-      sectionElement.scrollIntoView({ behavior: 'smooth' });
+      sectionElement.scrollIntoView({ behavior: "smooth" });
       window.scrollTo({
         top: targetScroll,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
       setOpen(false);
     }
   };
 
   return (
-    <div>
+    <div className="">
       <AppBar
         position="fixed"
         sx={{
           boxShadow: 0,
-          bgcolor: 'transparent',
-          backgroundImage: 'none',
+          bgcolor: "transparent",
+          backgroundImage: "none",
           mt: 2,
         }}
       >
@@ -60,93 +83,157 @@ function AppAppBar({ mode, toggleColorMode }) {
           <Toolbar
             variant="regular"
             sx={(theme) => ({
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
               flexShrink: 0,
-              borderRadius: '999px',
+              borderRadius: "999px",
               bgcolor:
-                theme.palette.mode === 'light'
-                  ? 'rgba(255, 255, 255, 0.4)'
-                  : 'rgba(0, 0, 0, 0.4)',
-              backdropFilter: 'blur(24px)',
+                theme.palette.mode === "light"
+                  ? "rgba(255, 255, 255, 0.4)"
+                  : "rgba(0, 0, 0, 0.4)",
+              backdropFilter: "blur(24px)",
               maxHeight: 40,
-              border: '1px solid',
-              borderColor: 'divider',
+              border: "1px solid",
+              borderColor: "divider",
               boxShadow:
-                theme.palette.mode === 'light'
+                theme.palette.mode === "light"
                   ? `0 0 1px rgba(85, 166, 246, 0.1), 1px 1.5px 2px -1px rgba(85, 166, 246, 0.15), 4px 4px 12px -2.5px rgba(85, 166, 246, 0.15)`
-                  : '0 0 1px rgba(2, 31, 59, 0.7), 1px 1.5px 2px -1px rgba(2, 31, 59, 0.65), 4px 4px 12px -2.5px rgba(2, 31, 59, 0.65)',
+                  : "0 0 1px rgba(2, 31, 59, 0.7), 1px 1.5px 2px -1px rgba(2, 31, 59, 0.65), 4px 4px 12px -2.5px rgba(2, 31, 59, 0.65)",
             })}
           >
             <Box
               sx={{
                 flexGrow: 1,
-                display: 'flex',
-                alignItems: 'center',
-                ml: '-18px',
+                display: "flex",
+                alignItems: "center",
+                ml: "-18px",
                 px: 0,
               }}
             >
-              <img
-                src={
-                  logo
-                }
-                style={logoStyle}
-                alt="logo of sitemark"
-              />
-              <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              <img src={logo} style={logoStyle} alt="logo of sitemark" />
+              <Box
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  ml: "auto", // Đẩy MenuItem sang phải
+                }}
+              >
                 <MenuItem
-                  onClick={() => scrollToSection('features')}
-                  sx={{ py: '6px', px: '12px' }}
+                  onClick={() => scrollToSection("features")}
+                  sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Typography variant="body2" color="text.primary">
-                    HOME
+                  <HomeOutlinedIcon sx={{ color: "black", fontSize: "19px" }} />
+                  <Typography
+                    color="black"
+                    fontSize="16px"
+                    onClick={handleLandingPageClick}
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                  >
+                    Trang chủ
                   </Typography>
                 </MenuItem>
+
                 <MenuItem
-                  onClick={() => scrollToSection('testimonials')}
-                  sx={{ py: '6px', px: '12px' }}
+                  onClick={() => scrollToSection("features")}
+                  sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Typography variant="body2" color="text.primary">
-                    CONTACT
+                  <NewspaperOutlinedIcon sx={{ color: "black", fontSize: "19px" }} />
+                  <Typography
+                    color="black"
+                    fontSize="16px"
+                    onClick={handleLandingPageClick}
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                  >
+                    Tin tức
                   </Typography>
                 </MenuItem>
+
                 <MenuItem
-                  onClick={() => scrollToSection('highlights')}
-                  sx={{ py: '6px', px: '12px' }}
+                  onClick={() => scrollToSection("testimonials")}
+                  sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Typography variant="body2" color="text.primary">
-                    ABOUT
+                  <MedicalServicesOutlinedIcon
+                    sx={{ color: "black", fontSize: "19px" }}
+                  />
+                  <Typography
+                    // variant="body2"
+                    // color="text.primary"
+                    color="black"
+                    fontSize="16px"
+                    onClick={handleServiceClick}
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                  >
+                    Dịch vụ
                   </Typography>
                 </MenuItem>
+
                 <MenuItem
-                  onClick={() => scrollToSection('pricing')}
-                  sx={{ py: '6px', px: '12px' }}
+                  onClick={() => scrollToSection("highlights")}
+                  sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Typography variant="body2" color="text.primary">
-                    SUBSCRIPTION
+                  <EditCalendarIcon sx={{ color: "black", fontSize: "19px" }} />
+                  <Typography
+                    color="black"
+                    fontSize="16px"
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                  >
+                    Lịch Hẹn
                   </Typography>
                 </MenuItem>
+
                 <MenuItem
-                  onClick={() => scrollToSection('faq')}
-                  sx={{ py: '6px', px: '12px' }}
+                  onClick={() => scrollToSection("pricing")}
+                  sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Typography variant="body2" color="text.primary">
-                    FAQ
+                  <PermContactCalendarOutlinedIcon
+                    sx={{ color: "black", fontSize: "19px" }}
+                  />
+                  <Typography
+                    color="black"
+                    fontSize="16px"
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                  >
+                    Phản hồi
                   </Typography>
                 </MenuItem>
+
+                <MenuItem
+                  onClick={() => scrollToSection("faq")}
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
+                  <HelpOutlineOutlinedIcon
+                    sx={{ color: "black", fontSize: "19px" }}
+                  />
+                  <Typography
+                    color="black"
+                    fontSize="16px"
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                  >
+                    Thông tin
+                  </Typography>
+                </MenuItem>
+                {/* <MenuItem
+                  onClick={() => scrollToSection("faq")}
+                  sx={{ py: "6px", px: "12px" }}
+                >
+                  <Typography variant="body2" color="text.primary">
+                    <PersonOutlineOutlinedIcon
+                      sx={{ color: "black", fontSize: "20px" }}
+                      onClick={handlePersonalInformationPageClick}
+                    />
+                  </Typography>
+                </MenuItem> */}
               </Box>
             </Box>
             <Box
               sx={{
-                display: { xs: 'none', md: 'flex' },
+                display: { xs: "none", md: "flex" },
                 gap: 0.5,
-                alignItems: 'center',
+                alignItems: "center",
               }}
             >
-              <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
-              <Button
+              {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
+              {/* <Button
                 color="primary"
                 variant="text"
                 size="small"
@@ -155,83 +242,95 @@ function AppAppBar({ mode, toggleColorMode }) {
                 target="_blank"
               >
                 Log in
-              </Button>
+              </Button> */}
               <Button
-                color="primary"
+                sx={{ background: "#D5762B" }}
                 variant="contained"
                 size="small"
                 component="a"
-                href="https://expo.dev/accounts/dieuanh14/projects/goods-exchange/builds/486e820b-d147-4386-bd88-0bdf6d23fee5?fbclid=IwY2xjawEZ67lleHRuA2FlbQIxMAABHY22SLNGOEE1T3adoLiXQF8xERUXKhQ6b_vxXlQYZd2C-FaQ6ja3NNFKwg_aem_Vf37TouB4Kc4Z9jw6pRU8A" // Replace with actual link
+                onClick={handleLoginClick}
                 target="_blank"
               >
-                Free Download
+                Đặt lịch hẹn
+              </Button>
+              <Button
+                sx={{ background: "#005F5F" }}
+                variant="contained"
+                size="small"
+                component="a"
+                onClick={handleLoginClick}
+                target="_blank"
+              >
+                Login
               </Button>
             </Box>
-            <Box sx={{ display: { sm: '', md: 'none' } }}>
+            <Box sx={{ display: { sm: "", md: "none" } }}>
               <Button
                 variant="text"
                 color="primary"
                 aria-label="menu"
                 onClick={toggleDrawer(true)}
-                sx={{ minWidth: '30px', p: '4px' }}
+                sx={{ minWidth: "30px", p: "4px" }}
               >
                 <MenuIcon />
               </Button>
               <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
                 <Box
                   sx={{
-                    minWidth: '60dvw',
+                    minWidth: "60dvw",
                     p: 2,
-                    backgroundColor: 'background.paper',
+                    backgroundColor: "background.paper",
                     flexGrow: 1,
                   }}
                 >
                   <Box
                     sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'end',
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "end",
                       flexGrow: 1,
                     }}
                   >
-                    <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+                    {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
                   </Box>
-                  <MenuItem onClick={() => scrollToSection('features')}>
+                  <MenuItem onClick={() => scrollToSection("features")}>
                     Features
                   </MenuItem>
-                  <MenuItem onClick={() => scrollToSection('testimonials')}>
+                  <MenuItem onClick={() => scrollToSection("testimonials")}>
                     Testimonials
                   </MenuItem>
-                  <MenuItem onClick={() => scrollToSection('highlights')}>
+                  <MenuItem onClick={() => scrollToSection("highlights")}>
                     Highlights
                   </MenuItem>
-                  <MenuItem onClick={() => scrollToSection('pricing')}>
+                  <MenuItem onClick={() => scrollToSection("pricing")}>
                     Pricing
                   </MenuItem>
-                  <MenuItem onClick={() => scrollToSection('faq')}>FAQ</MenuItem>
+                  <MenuItem onClick={() => scrollToSection("faq")}>
+                    FAQ
+                  </MenuItem>
                   <Divider />
                   <MenuItem>
-                    <Button
+                    {/* <Button
                       color="primary"
                       variant="contained"
                       component="a"
-                      href="/material-ui/getting-started/templates/sign-up/"
+                      onClick={handleLoginClick}
                       target="_blank"
-                      sx={{ width: '100%' }}
+                      sx={{ width: "100%" }}
                     >
-                      Sign up
-                    </Button>
+                      Login
+                    </Button> */}
                   </MenuItem>
                   <MenuItem>
                     <Button
                       color="primary"
                       variant="outlined"
                       component="a"
-                      href="/material-ui/getting-started/templates/sign-in/"
+                      onClick={handleLoginClick}
                       target="_blank"
-                      sx={{ width: '100%' }}
+                      sx={{ width: "100%" }}
                     >
-                      Sign in
+                      Login
                     </Button>
                   </MenuItem>
                 </Box>
@@ -245,7 +344,7 @@ function AppAppBar({ mode, toggleColorMode }) {
 }
 
 AppAppBar.propTypes = {
-  mode: PropTypes.oneOf(['dark', 'light']).isRequired,
+  mode: PropTypes.oneOf(["dark", "light"]).isRequired,
   toggleColorMode: PropTypes.func.isRequired,
 };
 

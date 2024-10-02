@@ -9,6 +9,7 @@ import {
   UnlikePost,
   banPost,
   unbanPost,
+  gettotalPost
 } from "../../api/post";
 
 export const getPostThunk = createAsyncThunk(
@@ -23,6 +24,21 @@ export const getPostThunk = createAsyncThunk(
     }
   }
 );
+
+export const gettotalPostThunk = createAsyncThunk(
+  //Get posts
+  "post/gettotalPost",
+  async (thunkAPI) => {
+    try {
+      const response = await gettotalPost();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+
 export const banPostThunk = createAsyncThunk(
   "users/banPost",
   async (id, thunkAPI) => {

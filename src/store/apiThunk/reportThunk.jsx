@@ -3,6 +3,9 @@ import {
     getAllReports,
     updateReportStatus,
     getShopReports,
+    getReportsUserDetail,
+    getAllPostReports,
+    getReportsPostDetail
 } from "../../api/report";
 
 export const getShopReportsThunk = createAsyncThunk(
@@ -22,6 +25,42 @@ export const getAllReportsThunk = createAsyncThunk(
     async (thunkAPI) => {
         try {
             const response = await getAllReports();
+            return response;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+
+export const getAllPostsReportsThunk = createAsyncThunk(
+    "report/getAllPostReports",
+    async (thunkAPI) => {
+        try {
+            const response = await getAllPostReports();
+            return response;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+
+
+export const getReportsUserDetailThunk = createAsyncThunk(
+    "report/getReportsUserDetail",
+    async (id,thunkAPI) => {
+        try {
+            const response = await getReportsUserDetail(id);
+            return response;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+export const getReportsPostDetailThunk = createAsyncThunk(
+    "report/getReportsPostDetail",
+    async (id,thunkAPI) => {
+        try {
+            const response = await getReportsPostDetail(id);
             return response;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data);

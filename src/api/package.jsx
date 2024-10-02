@@ -8,6 +8,18 @@ export const getAllSubscription = async () => {
     const response = await api.get(`/api/v1/Subcription/GetAllSubscription`);
     return response.data;
 };
+export const getTotalBuyStandardSubs = async () => {
+    const response = await api.get(`/api/v1/SubscriptionHistory/TotalBuyStandardSubscription`);
+    return response.data;
+};
+export const getTotalBuy = async () => {
+    const response = await api.get(`/api/v1/SubscriptionHistory/TotalBuySubscription`);
+    return response.data;
+};
+export const getTotalBuyPrioritySubs = async () => {
+    const response = await api.get(`/api/v1/SubscriptionHistory/TotalBuyPrioritySubscription`);
+    return response.data;
+};
 
 export const getPackageDetail = async (id) => {
     const response = await api.get(`/api/v1/Subcription/SubscriptionDetail/${id}`);

@@ -1,8 +1,10 @@
-export const userDetailSelector = (state) => state.userDetail.entities;
+export const userDetailSelector = (state) => state.userDetail.entities; //lấy ở verify user Detail
 export const userDataSelector = (state) => state.userData.entities;
 export const staffsSelector = (state) => state.staffs.entities;
 
 export const allAccountsSelector = (state) => state.allAccounts.entities; //allAccountUsers
+export const totalUserssSelector = (state) => state.totalUsers.entities; //allAccountUsers
+
 export const allVerifyUsersSelector = (state) => state.allVerifyUsers.entities; //allVerifyUsers
 
 export const petDetailSelector = (state) => state.petDetail.entities;
@@ -45,20 +47,25 @@ export const vaccinationDetailSelector = (state) =>
 
 export const postDetailSelector = (state) => state.postDetail.entities;
 export const postSelector = (state) => state.post.entities;
+export const totalPostSelector = (state) => state.totalPost.entities;
+export const totalAmountsSelector = (state) => state.totalAmounts.entities;
+export const AmountsSelector = (state) => state.Amounts.entities;
+
 
 export const replySelector = (state) => state.reply.entities;
 export const commentSelector = (state) => state.comment.entities;
 export const commentDetailSelector = (state) => state.commentDetail.entities;
 
 export const postCategorySelector = (state) => state.postCategory.entities;
-export const postCategoryDetailSelector = (state) => state.postCategoryDetail?.entities || [];
-
+export const postCategoryDetailSelector = (state) =>
+  state.postCategoryDetail?.entities || [];
 
 export const allItemsSelector = (state) => state.allItems.entities;
 export const itemDetailSelector = (state) => state.itemDetail.entities;
 export const itemsFromUserSelector = (state) => state.itemsFromUser.entities;
 
 export const walletSelector = (state) => state.wallet.entities;
+export const walletDetailSelector = (state) => state.walletDetail.entities;
 export const managerIncomeSelector = (state) => state.managerIncome.entities;
 export const managerOutcomeSelector = (state) => state.managerOutcome.entities;
 export const shopMonthIncomeSelector = (state) =>
@@ -76,9 +83,21 @@ export const platformMonthIncomeSelector = (state) =>
   state.platformMonthIncome.entities;
 
 export const packagesSelector = (state) => state.packages.entities; //GetAllSubscription
+export const totalBuySelector = (state) => state.totalBuy.entities; //GetAllSubscription
+export const totalBuyPrioritySubsSelector = (state) => state.totalBuyPrioritySubs.entities; //GetAllSubscription
+export const totalBuyStandardSubsSelector = (state) => state.totalBuyStandardSubs.entities; //GetAllSubscription
+
+export const allCancelAmountSelector = (state) => state.cancelAmount.entities; //getCancelledAmount
+export const allPriceAmountSelector = (state) => state.priceAmount.entities; //getPriceAmount
+
 export const packageDetailSelector = (state) => state.packageDetail.entities;
 
 export const allReportsSelector = (state) => state.allReports.entities;
+export const allPostReportsSelector = (state) => state.allPostReports.entities;
+
+export const userReportsSelector = (state) => state.userReports.entities;
+export const postReportsSelector = (state) => state.postReports.entities;
+
 export const shopReportsSelector = (state) => state.shopReports.entities;
 
 export const transactionDetailSelector = (state) =>

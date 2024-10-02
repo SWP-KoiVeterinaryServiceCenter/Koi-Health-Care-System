@@ -41,7 +41,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./../../../theme";
 import LoadingModal from "../../../components/modal/loadingModal/loadingModal";
 import { signOut } from "firebase/auth";
-import { auth } from "../../../../firebaseConfig";
+// import { auth } from "../../../../firebaseConfig";
 import {
     ADDSHOPSUCCESS,
     ERRORTEXT,

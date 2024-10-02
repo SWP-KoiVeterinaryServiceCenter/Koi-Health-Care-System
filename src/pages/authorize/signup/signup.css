@@ -1,15 +1,40 @@
 .signup {
-    background-color: #141b2d;
+    position: relative;
+    height:100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    display: flex;  
 }
 
 .signup .signup__form {
-    width: 80%;
-    padding-block: 3em;
+    width: 90%; /* Example styling */
+    height: 120%;
+    border-radius: 40px; /* Thêm bo tròn 15px vào mỗi góc */
+    
+    padding: 25px;
+      background: rgba(255, 255, 255, 0.2); /* Màu nền trắng nhưng có độ trong suốt */
+    backdrop-filter: blur(10px); /* Hiệu ứng mờ nền phía sau */
+    -webkit-backdrop-filter: blur(10px); /* Đảm bảo hoạt động trên các trình duyệt WebKit */
+    border-radius: 15px; /* Bo góc cho đẹp */
+  
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ cho form */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Viền nhẹ màu trắng trong suốt */
 }
-
+.login__video_background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Đảm bảo video nằm dưới nội dung khác */
+  }
+  
 .signup .sticky {
     position: sticky;
     top: 7em;
+    border-radius: 40px; /* Thêm bo tròn 15px vào mỗi góc */
 }
 
 .signup .flex-center {
@@ -19,10 +44,10 @@
 }
 
 .signup .login__title {
-    font-size: 28px;
+    font-size: 40px;
     text-align: center;
     text-transform: uppercase;
-    color: #70d8bd;
+    color:#007167;
 }
 
 .signup .login__view__password__btn {
@@ -44,7 +69,7 @@
     font-weight: 700 !important;
     font-family: "Inter", sans-serif !important;
     font-size: 20px;
-    background-color: #55ab95;
+    background-color:#007167;
 }
 
 .signup .login__btn:hover {

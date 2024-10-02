@@ -11,6 +11,9 @@ import {
     getPlatformMonthIncome,
     getShopIncome,
     getShopOutcome,
+    getTotalAmounts,
+    getAmounts,
+    getWalletDetail
 } from "../../api/wallet";
 
 export const getPlatformIncomeThunk = createAsyncThunk(
@@ -138,6 +141,41 @@ export const getWalletThunk = createAsyncThunk(
     async (thunkAPI) => {
         try {
             const response = await getWallet();
+            return response;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+export const getWalletDetailThunk = createAsyncThunk(
+    "wallet/getWalletDetail",
+    async (id,thunkAPI) => {
+        try {
+            const response = await getWalletDetail(id);
+            return response;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+
+
+export const getTotalTransactionAmountsThunk  = createAsyncThunk(
+    "wallet/getTotalAmounts",
+    async (thunkAPI) => {
+        try {
+            const response = await getTotalAmounts();
+            return response;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+export const getTransactionAmountsThunk  = createAsyncThunk(
+    "wallet/getAmounts",
+    async (thunkAPI) => {
+        try {
+            const response = await getAmounts();
             return response;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data);
