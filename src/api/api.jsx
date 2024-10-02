@@ -1,6 +1,8 @@
 import axios from "axios";
 
+
 const url = "https://ttmq2024-001-site1.gtempurl.com/";
+
 
 const api = axios.create({
     baseURL: url,
