@@ -52,8 +52,10 @@ import UpdateCategoryList from "./pages/platformStaff/screens/categoryList/updat
 import OrdertrackTable from "./pages/admin/screens/order/ordertrack";
 
 //Customer
-import CreateKoifish from "./pages/createKoifish/createfish";
-import Service from "./pages/customer/screens/service/service";
+// import CreateKoifish from "./pages/createKoifish/createfish";
+import NewsOnPage from "./pages/customer/screens/news/news";
+import ServiceKoifish from "./pages/customer/screens/service/service";
+import GuestServiceKoifish from "./pages/guest/guestService/guestService";
 import ServiceInformation from "./pages/customer/screens/serviceInformation/ServiceInformation";
 import PersonalInformation from "./pages/customer/screens/personalInformation/PersonalInformation";
 import AddMoreFish from "./pages/customer/screens/addMoreFish/AddMoreFish";
@@ -107,8 +109,8 @@ const router = createBrowserRouter([
     element: <ServiceInformation />,
   },
   {
-    path: "/service",
-    element: <Service />,
+    path: "/guestservice",
+    element: <GuestServiceKoifish />,
   },
  
   {
@@ -118,6 +120,10 @@ const router = createBrowserRouter([
   {
     path: "/booking",
     element: <Booking />,
+  },
+  {
+    path: "/news",
+    element: <NewsOnPage />,
   },
 
   //Admin
@@ -288,7 +294,7 @@ const router = createBrowserRouter([
       },
       {
         path: "service",
-        element: <Service direction="customer" />,
+        element: <ServiceKoifish direction="customer" />,
       },
       {
         path: "personalInformation",
@@ -302,6 +308,11 @@ const router = createBrowserRouter([
         path: "personalInformation",
         element: <PersonalInformation />,
       },
+      {
+        path: "news",
+        element: <NewsOnPage direction="customer"  />,
+      },
+    
     ],
   },
   //Manager

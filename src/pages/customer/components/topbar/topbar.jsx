@@ -58,15 +58,11 @@ function AppAppBar({ mode, toggleColorMode }) {
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
-  const handleLoginClick = () => {
-    navigate("/login");
-  };
+
   const handleSignUPClick = () => {
     navigate("/signup");
   };
-  const handleServiceClick = () => {
-    navigate("service");
-  };
+
   const handleLandingPageClick = () => {
     navigate("");
   };
@@ -77,13 +73,6 @@ function AppAppBar({ mode, toggleColorMode }) {
     navigate("/booking");
   };
 
-  const handleClick = () => {
-    setOpen((prev) => !prev);
-  };
-
-  const handleClickAway = () => {
-    setOpen(false);
-  };
 
   const scrollToSection = (sectionId) => {
     const sectionElement = document.getElementById(sectionId);
@@ -157,7 +146,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                   <Typography
                     color="black"
                     fontSize="16px"
-                    onClick={handleLandingPageClick}
+                    onClick={() => {
+                      navigate("");
+                    }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
                     Trang chủ
@@ -172,7 +163,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                   <Typography
                     color="black"
                     fontSize="16px"
-                    onClick={handleLandingPageClick}
+                    onClick={() => {
+                      navigate("news");
+                    }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
                     Tin tức
@@ -191,7 +184,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                     // color="text.primary"
                     color="black"
                     fontSize="16px"
-                    onClick={handleServiceClick}
+                    onClick={() => {
+                      navigate("service");
+                    }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
                     Dịch vụ
@@ -384,7 +379,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                       color="primary"
                       variant="outlined"
                       component="a"
-                      onClick={handleLoginClick}
+                      onClick={() => {
+                        navigate("/login");
+                      }}
                       target="_blank"
                       sx={{ width: "100%" }}
                     >

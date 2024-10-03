@@ -31,22 +31,27 @@ const logoStyle = {
 function AppAppBar({ mode, toggleColorMode }) {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleMouseEnter = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMouseLeave = () => {
+    setAnchorEl(null);
+  };
+
+  const openMenuNews = Boolean(anchorEl); // Đổi tên từ open thành openMenuNews
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
-  const handleLoginClick = () => {
-    navigate("/login");
-  };
+
   const handleSignUPClick = () => {
     navigate("/signup");
   };
-  const handleServiceClick = () => {
-    navigate("/service");
-  };
-  const handleLandingPageClick = () => {
-    navigate("/");
-  };
+
+ 
   const handlePersonalInformationPageClick = () => {
     navigate("/personalInformation");
   };
@@ -67,6 +72,7 @@ function AppAppBar({ mode, toggleColorMode }) {
       setOpen(false);
     }
   };
+  
 
   return (
     <div className="">
@@ -126,7 +132,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                   <Typography
                     color="black"
                     fontSize="16px"
-                    onClick={handleLandingPageClick}
+                    onClick={() => {
+                      navigate("/");
+                    }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
                     Trang chủ
@@ -141,7 +149,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                   <Typography
                     color="black"
                     fontSize="16px"
-                    onClick={handleLandingPageClick}
+                    onClick={() => {
+                      navigate("/news");
+                    }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
                     Tin tức
@@ -160,7 +170,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                     // color="text.primary"
                     color="black"
                     fontSize="16px"
-                    onClick={handleServiceClick}
+                    onClick={() => {
+                      navigate("/guestservice");
+                    }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
                     Dịch vụ
@@ -248,7 +260,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                 variant="contained"
                 size="small"
                 component="a"
-                onClick={handleLoginClick}
+                onClick={() => {
+                  navigate("/login");
+                }}
                 target="_blank"
               >
                 Đặt lịch hẹn
@@ -258,7 +272,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                 variant="contained"
                 size="small"
                 component="a"
-                onClick={handleLoginClick}
+                onClick={() => {
+                  navigate("/login");
+                }}
                 target="_blank"
               >
                 Login
@@ -326,7 +342,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                       color="primary"
                       variant="outlined"
                       component="a"
-                      onClick={handleLoginClick}
+                      onClick={() => {
+                        navigate("/login");
+                      }}
                       target="_blank"
                       sx={{ width: "100%" }}
                     >
