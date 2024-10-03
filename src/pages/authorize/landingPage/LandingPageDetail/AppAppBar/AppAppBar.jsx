@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
@@ -10,7 +10,8 @@ import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
-import ToggleColorMode from "../ToggleColorMode/ToggleColorMode";
+import Menu from "@mui/material/Menu";
+// import ToggleColorMode from "../ToggleColorMode/ToggleColorMode";
 import logo from "../../../../../assets/koi_loho.png";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MedicalServicesOutlinedIcon from "@mui/icons-material/MedicalServicesOutlined";
@@ -31,17 +32,17 @@ const logoStyle = {
 function AppAppBar({ mode, toggleColorMode }) {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorElNews, setAnchorElNews] = React.useState(null);
 
-  const handleMouseEnter = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleClickMenuNews = (event) => {
+    setAnchorElNews(event.currentTarget); // Khi bấm vào Dịch vụ sẽ hiển thị menu
   };
 
-  const handleMouseLeave = () => {
-    setAnchorEl(null);
+  const handleCloseNews = () => {
+    setAnchorElNews(null); // Đóng menu khi bấm ra ngoài hoặc chọn mục
   };
 
-  const openMenuNews = Boolean(anchorEl); // Đổi tên từ open thành openMenuNews
+  const openNews = Boolean(anchorElNews);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -141,25 +142,32 @@ function AppAppBar({ mode, toggleColorMode }) {
                   </Typography>
                 </MenuItem>
 
-                <MenuItem
-                  onClick={() => scrollToSection("features")}
-                  sx={{ display: "flex", alignItems: "center" }}
-                >
-                  <NewspaperOutlinedIcon sx={{ color: "black", fontSize: "19px" }} />
-                  <Typography
-                    color="black"
-                    fontSize="16px"
-                    onClick={() => {
-                      navigate("/news");
-                    }}
-                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
-                  >
-                    Tin tức
-                  </Typography>
-                </MenuItem>
+                <>
+      {/* Mục Tin tức */}
+      <MenuItem
+        onClick={handleClickMenuNews} // Hiển thị menu khi bấm vào
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <NewspaperOutlinedIcon sx={{ color: "black", fontSize: "19px" }} />
+        <Typography color="black" fontSize="16px" sx={{ ml: 0.1 }}>
+          Tin tức
+        </Typography>
+      </MenuItem>
+
+      {/* Dropdown Menu */}
+      <Menu
+        anchorEl={anchorElNews}
+        open={openNews}
+        onClose={handleCloseNews}
+      >
+        <MenuItem onClick={() => navigate("/doctors")}>Bác sĩ</MenuItem>
+        <MenuItem onClick={() => navigate("/doctors")}>News</MenuItem>
+        <MenuItem onClick={() => navigate("/fact")}>Facts</MenuItem>
+      </Menu>
+    </>
 
                 <MenuItem
-                  onClick={() => scrollToSection("testimonials")}
+                
                   sx={{ display: "flex", alignItems: "center" }}
                 >
                   <MedicalServicesOutlinedIcon
@@ -171,7 +179,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     color="black"
                     fontSize="16px"
                     onClick={() => {
-                      navigate("/guestservice");
+                      navigate("guestservice");
                     }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >

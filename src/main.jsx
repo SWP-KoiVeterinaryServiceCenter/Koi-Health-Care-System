@@ -53,7 +53,7 @@ import OrdertrackTable from "./pages/admin/screens/order/ordertrack";
 
 //Customer
 // import CreateKoifish from "./pages/createKoifish/createfish";
-import NewsOnPage from "./pages/customer/screens/news/news";
+import DoctorOnNewsPage from "./pages/customer/screens/news/news";
 import ServiceKoifish from "./pages/customer/screens/service/service";
 import GuestServiceKoifish from "./pages/guest/guestService/guestService";
 import ServiceInformation from "./pages/customer/screens/serviceInformation/ServiceInformation";
@@ -61,12 +61,40 @@ import PersonalInformation from "./pages/customer/screens/personalInformation/Pe
 import AddMoreFish from "./pages/customer/screens/addMoreFish/AddMoreFish";
 import Booking from "./pages/customer/screens/booking/booking";
 import CustomerHome from "./pages/customer/components/home/homeCustomer";
+import GuestHome from "./pages/guest/guestHome/guestHome";
 import HomePage from "./pages/customer/screens/home/home";
 const router = createBrowserRouter([
+  //Guest
   {
-    path: "",
-    element: <LandingPage />,
+    path: "/",
+    element: <GuestHome />,
+    errorElement: <Error404 />,
+    children: [
+      {
+        path: "",
+        element: <LandingPage />,
+      },
+    
+      {
+        path: "doctors",
+        element: <DoctorOnNewsPage />,
+      },
+      {
+        path: "guestservice",
+        element: <GuestServiceKoifish />,
+      },
+    
+    ],
   },
+ 
+  {
+    path: "/serviceInformation",
+    element: <ServiceInformation />,
+  },
+  // {
+  //   path: "",
+  //   element: <LandingPage />,
+  // },
   {
     path: "/login",
     element: <Login />,
@@ -103,15 +131,7 @@ const router = createBrowserRouter([
     path: "/transferStatus",
     element: <TransferStatus />,
   },
-
-  {
-    path: "/serviceInformation",
-    element: <ServiceInformation />,
-  },
-  {
-    path: "/guestservice",
-    element: <GuestServiceKoifish />,
-  },
+  
  
   {
     path: "/addMoreFish",
@@ -121,10 +141,7 @@ const router = createBrowserRouter([
     path: "/booking",
     element: <Booking />,
   },
-  {
-    path: "/news",
-    element: <NewsOnPage />,
-  },
+ 
 
   //Admin
   {
@@ -309,8 +326,8 @@ const router = createBrowserRouter([
         element: <PersonalInformation />,
       },
       {
-        path: "news",
-        element: <NewsOnPage direction="customer"  />,
+        path: "doctors",
+        element: <DoctorOnNewsPage direction="customer"  />,
       },
     
     ],

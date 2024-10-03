@@ -2,10 +2,10 @@ import React from "react";
 import "./News.css"; // Import CSS for News component
 import AppAppBar from "../../../authorize/landingPage/LandingPageDetail/AppAppBar/AppAppBar";
 
-export default function News() {
+export default function Doctors() {
   return (
     <div>
-      <AppAppBar />
+      {/* <AppAppBar /> */}
       <div className="news-wrap">
         <div className="news-box">
           <div className="news-box-top">
@@ -16,7 +16,7 @@ export default function News() {
             />
             <div className="news-title-flex">
               <h3 className="news-box-title">Kelsie Meyer</h3>
-              <p className="news-user-follow-info">17 Projects</p>
+              <p className="news-user-follow-info">17 Ca khám</p>
             </div>
             <p className="news-description">
               Whipped steamed roast cream beans macchiato skinny grinder café.
@@ -37,7 +37,7 @@ export default function News() {
             />
             <div className="news-title-flex">
               <h3 className="news-box-title">Mark Carusso</h3>
-              <p className="news-user-follow-info">33 Projects</p>
+              <p className="news-user-follow-info">33 Ca khám</p>
             </div>
             <p className="news-description">
               Whipped steamed roast cream beans macchiato skinny grinder café.
@@ -58,7 +58,7 @@ export default function News() {
             />
             <div className="news-title-flex">
               <h3 className="news-box-title">Taylor Green</h3>
-              <p className="news-user-follow-info">26 Projects</p>
+              <p className="news-user-follow-info">26 Ca khám</p>
             </div>
             <p className="news-description">
               Whipped steamed roast cream beans macchiato skinny grinder café.
@@ -79,7 +79,7 @@ export default function News() {
             />
             <div className="news-title-flex">
               <h3 className="news-box-title">Isaiah Jian</h3>
-              <p className="news-user-follow-info">12 Projects</p>
+              <p className="news-user-follow-info">12 Ca khám</p>
             </div>
             <p className="news-description">
               Whipped steamed roast cream beans macchiato skinny grinder café.
@@ -99,7 +99,7 @@ export default function News() {
             />
             <div className="news-title-flex">
               <h3 className="news-box-title">Isaiah Jian</h3>
-              <p className="news-user-follow-info">12 Projects</p>
+              <p className="news-user-follow-info">12 Ca khám</p>
             </div>
             <p className="news-description">
               Whipped steamed roast cream beans macchiato skinny grinder café.
