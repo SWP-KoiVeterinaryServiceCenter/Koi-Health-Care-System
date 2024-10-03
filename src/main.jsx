@@ -62,7 +62,9 @@ import AddMoreFish from "./pages/customer/screens/addMoreFish/AddMoreFish";
 import Booking from "./pages/customer/screens/booking/booking";
 import CustomerHome from "./pages/customer/components/home/homeCustomer";
 import GuestHome from "./pages/guest/guestHome/guestHome";
+import GuestContact from "./pages/guest/guestContact/guestContact";
 import HomePage from "./pages/customer/screens/home/home";
+import ContactUs from "./pages/customer/screens/contactUs/contactUs";
 const router = createBrowserRouter([
   //Guest
   {
@@ -83,6 +85,11 @@ const router = createBrowserRouter([
         path: "guestservice",
         element: <GuestServiceKoifish />,
       },
+      {
+        path: "guestcontact",
+        element: <GuestContact />,
+      },
+    
     
     ],
   },
@@ -324,6 +331,10 @@ const router = createBrowserRouter([
       {
         path: "personalInformation",
         element: <PersonalInformation />,
+      },
+      {
+        path: "contactUs",
+        element: <ContactUs />,
       },
       {
         path: "doctors",

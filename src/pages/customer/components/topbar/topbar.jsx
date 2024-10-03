@@ -234,6 +234,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                     sx={{ color: "black", fontSize: "19px" }}
                   />
                   <Typography
+                   onClick={() => {
+                    navigate("contactUs");
+                  }}
                     color="black"
                     fontSize="16px"
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ

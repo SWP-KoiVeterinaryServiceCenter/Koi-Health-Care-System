@@ -179,7 +179,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     color="black"
                     fontSize="16px"
                     onClick={() => {
-                      navigate("guestservice");
+                      navigate("/guestservice");
                     }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
@@ -209,6 +209,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                     sx={{ color: "black", fontSize: "19px" }}
                   />
                   <Typography
+                   onClick={() => {
+                    navigate("/guestcontact");
+                  }}
                     color="black"
                     fontSize="16px"
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ

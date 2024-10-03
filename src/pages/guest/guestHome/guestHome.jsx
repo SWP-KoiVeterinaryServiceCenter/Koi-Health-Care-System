@@ -4,6 +4,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "../../../theme";
 // import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../../pages/authorize/landingPage/LandingPageDetail/AppAppBar/AppAppBar";
+import Footer from "../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 import { useDispatch } from "react-redux";
 import { getUserDataThunk } from "../../../store/apiThunk/userThunk";
 
@@ -41,6 +42,7 @@ export default function GuestHome() {
     <div>
       <Topbar />
       <Outlet />
+      <Footer />
     </div>
   );
 }

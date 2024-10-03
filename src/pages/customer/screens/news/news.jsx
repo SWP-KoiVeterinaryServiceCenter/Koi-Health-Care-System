@@ -11,7 +11,7 @@ export default function Doctors() {
           <div className="news-box-top">
             <img
               className="news-box-image"
-              src="https://images.unsplash.com/photo-1622219809260-ce065fc5277f?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYyMzMwNjYxOQ&ixlib=rb-1.2.1&q=85"
+              src="https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-happy-young-doctor-in-his-clinic-royalty-free-image-1661432441.jpg?crop=0.66698xw:1xh;center,top&resize=1200:*"
               alt="Girl Eating Pizza"
             />
             <div className="news-title-flex">
@@ -32,7 +32,7 @@ export default function Doctors() {
           <div className="news-box-top">
             <img
               className="news-box-image"
-              src="https://images.unsplash.com/photo-1488161628813-04466f872be2?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYyMzMxNTMwNQ&ixlib=rb-1.2.1&q=85"
+              src="https://www.scripps.org/sparkle-assets/variants/hi_res_new_doctor_fb-32abb9ba141c8223aadebce90782ac68_desktop_x++-1200x1200.jpeg"
               alt="Girl Eating Pizza"
             />
             <div className="news-title-flex">
@@ -53,7 +53,7 @@ export default function Doctors() {
           <div className="news-box-top">
             <img
               className="news-box-image"
-              src="https://images.unsplash.com/photo-1456885284447-7dd4bb8720bf?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYyMzMxNTQzNA&ixlib=rb-1.2.1&q=85"
+              src="https://www.humanitas.net/content/uploads/2017/10/doctors.jpg"
               alt="Girl Eating Pizza"
             />
             <div className="news-title-flex">
@@ -74,7 +74,7 @@ export default function Doctors() {
           <div className="news-box-top">
             <img
               className="news-box-image"
-              src="https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYyMzMxNjA1MA&ixlib=rb-1.2.1&q=85"
+              src="https://cdn-jollh.nitrocdn.com/gjpJcIohIDsAZvjCTUcigiPybkwNyUwE/assets/images/optimized/rev-02c0a7d/www.collegetransitions.com/wp-content/uploads/2023/06/blog-HowLongDoesTakeDoctor-1460x822-1.webp"
               alt="Girl Eating Pizza"
             />
             <div className="news-title-flex">
@@ -94,7 +94,7 @@ export default function Doctors() {
           <div className="news-box-top">
             <img
               className="news-box-image"
-              src="https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYyMzMxNjA1MA&ixlib=rb-1.2.1&q=85"
+              src="https://www.postbaccprogramguide.com/app/uploads/2022/07/iStock-1189304032.jpg"
               alt="Girl Eating Pizza"
             />
             <div className="news-title-flex">
