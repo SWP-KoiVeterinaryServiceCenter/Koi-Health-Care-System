@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import "./createKoiFishAppointment.css";
 // import AppAppBar from "../../authorize/landingPage/LandingPageDetail/AppAppBar/AppAppBar";
 // import Footer from "../../authorize/landingPage/LandingPageDetail/Footer/Footer";
-// import { Divider } from "@mui/material";
+import { Divider } from "@mui/material";
 
 const CreateKoiFishAppointment = () => {
   const [koiName, setKoiName] = useState("");
   const [service, setService] = useState("");
   const [doctor, setDoctor] = useState("");
+  const [date, setDate] = useState(""); // New state for the date
 
   // Mock data for services and doctors
   const koiNames = [
@@ -30,7 +31,7 @@ const CreateKoiFishAppointment = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const appointmentData = { koiName, service, doctor };
+    const appointmentData = { koiName, service, doctor,date };
     console.log("Appointment Created:", appointmentData);
     // You can handle the submission logic here
   };
@@ -85,10 +86,20 @@ const CreateKoiFishAppointment = () => {
             ))}
           </select>
 
+
+          <label htmlFor="date">Appointment Date:</label> {/* New Date Label */}
+          <input
+            type="date"
+            id="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            required
+          />
+
           <button type="submit">Create Appointment</button>
         </form>
       </div>
-      {/* <Divider /> */}
+      <Divider />
       {/* <Footer /> */}
     </div>
   );
