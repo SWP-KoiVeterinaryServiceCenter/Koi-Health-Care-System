@@ -84,7 +84,7 @@ export default function LandingPage() {
 
   return (
     <div>
-      <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+      {/* <AppAppBar mode={mode} toggleColorMode={toggleColorMode} /> */}
       <div className="card-1">
         <div className="koi-img-1">
           <div className="overlay"></div>
@@ -180,31 +180,5 @@ export default function LandingPage() {
       <Footer />
     </div>
 
-    // <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
-    //   <CssBaseline />
-
-    //   <Hero />
-
-    //   <Box sx={{ bgcolor: "background.default" }}>
-    //     {/* <LogoCollection /> */}
-
-    //     <Features />
-    //     <CarouselProducts />
-    //     <Divider />
-    //     {/* <Testimonials /> */}
-    //     <Divider />
-    //     <Highlights />
-    //     <Divider />
-    //     <Pricing />
-    //     <Divider />
-    //     <FAQ />
-    //     <Divider />
-    //     <Footer />
-    //   </Box>
-    //   <ToggleCustomTheme
-    //     showCustomTheme={showCustomTheme}
-    //     toggleCustomTheme={toggleCustomTheme}
-    //   />
-    // </ThemeProvider>
   );
 }

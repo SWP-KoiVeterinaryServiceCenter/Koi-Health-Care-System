@@ -1,0 +1,92 @@
+.news-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+    gap: 24px;
+    padding: 24px;
+    flex-wrap: wrap;
+    margin-top: 70px;
+    
+  }
+  
+  .news-box {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    position: relative;
+    padding: 24px;
+    background-color:#ACE1F0;
+  }
+  
+  .news-box-top {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  
+  .news-box-image {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    object-position: 50% 20%;
+  }
+  
+  .news-title-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .news-box-title {
+    border-left: 3px solid var(--purple);
+    padding-left: 12px;
+  }
+  
+  .news-user-follow-info {
+    color: hsl(0, 0%, 60%);
+  }
+  
+  .news-description {
+    white-space: wrap;
+  }
+  
+  .news-button {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: auto;
+    padding: 16px;
+    color: #000;
+    background: hsl(240, 80%, 89%); /* Đặt màu nền */
+    box-shadow: 0px 0px 0px 1px black inset;
+    transition: background 0.4s ease;
+    text-decoration: none; /* Loại bỏ gạch chân */
+  }
+  
+  .news-button:hover {
+    background: var(--purple); /* Giữ hiệu ứng khi hover */
+  }
+  
+  /* RESPONSIVE QUERIES */
+  @media (min-width: 640px) {
+    .news-box {
+      flex-basis: calc(50% - 12px);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .news-box {
+      flex-basis: calc(33.3% - 16px);
+    }
+  }
+  
+  @media (min-width: 1100px) {
+    .news-box {
+      flex-basis: calc(25% - 18px);
+    }
+  }
+  

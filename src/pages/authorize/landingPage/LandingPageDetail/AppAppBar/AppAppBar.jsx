@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
@@ -10,7 +10,8 @@ import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
-import ToggleColorMode from "../ToggleColorMode/ToggleColorMode";
+import Menu from "@mui/material/Menu";
+// import ToggleColorMode from "../ToggleColorMode/ToggleColorMode";
 import logo from "../../../../../assets/koi_loho.png";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MedicalServicesOutlinedIcon from "@mui/icons-material/MedicalServicesOutlined";
@@ -31,22 +32,27 @@ const logoStyle = {
 function AppAppBar({ mode, toggleColorMode }) {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const [anchorElNews, setAnchorElNews] = React.useState(null);
+
+  const handleClickMenuNews = (event) => {
+    setAnchorElNews(event.currentTarget); // Khi bấm vào Dịch vụ sẽ hiển thị menu
+  };
+
+  const handleCloseNews = () => {
+    setAnchorElNews(null); // Đóng menu khi bấm ra ngoài hoặc chọn mục
+  };
+
+  const openNews = Boolean(anchorElNews);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
-  const handleLoginClick = () => {
-    navigate("/login");
-  };
+
   const handleSignUPClick = () => {
     navigate("/signup");
   };
-  const handleServiceClick = () => {
-    navigate("/service");
-  };
-  const handleLandingPageClick = () => {
-    navigate("/");
-  };
+
+ 
   const handlePersonalInformationPageClick = () => {
     navigate("/personalInformation");
   };
@@ -67,6 +73,7 @@ function AppAppBar({ mode, toggleColorMode }) {
       setOpen(false);
     }
   };
+  
 
   return (
     <div className="">
@@ -126,30 +133,41 @@ function AppAppBar({ mode, toggleColorMode }) {
                   <Typography
                     color="black"
                     fontSize="16px"
-                    onClick={handleLandingPageClick}
+                    onClick={() => {
+                      navigate("/");
+                    }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
                     Trang chủ
                   </Typography>
                 </MenuItem>
 
-                <MenuItem
-                  onClick={() => scrollToSection("features")}
-                  sx={{ display: "flex", alignItems: "center" }}
-                >
-                  <NewspaperOutlinedIcon sx={{ color: "black", fontSize: "19px" }} />
-                  <Typography
-                    color="black"
-                    fontSize="16px"
-                    onClick={handleLandingPageClick}
-                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
-                  >
-                    Tin tức
-                  </Typography>
-                </MenuItem>
+                <>
+      {/* Mục Tin tức */}
+      <MenuItem
+        onClick={handleClickMenuNews} // Hiển thị menu khi bấm vào
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <NewspaperOutlinedIcon sx={{ color: "black", fontSize: "19px" }} />
+        <Typography color="black" fontSize="16px" sx={{ ml: 0.1 }}>
+          Tin tức
+        </Typography>
+      </MenuItem>
+
+      {/* Dropdown Menu */}
+      <Menu
+        anchorEl={anchorElNews}
+        open={openNews}
+        onClose={handleCloseNews}
+      >
+        <MenuItem onClick={() => navigate("/doctors")}>Bác sĩ</MenuItem>
+        <MenuItem onClick={() => navigate("/doctors")}>News</MenuItem>
+        <MenuItem onClick={() => navigate("/fact")}>Facts</MenuItem>
+      </Menu>
+    </>
 
                 <MenuItem
-                  onClick={() => scrollToSection("testimonials")}
+                
                   sx={{ display: "flex", alignItems: "center" }}
                 >
                   <MedicalServicesOutlinedIcon
@@ -160,7 +178,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                     // color="text.primary"
                     color="black"
                     fontSize="16px"
-                    onClick={handleServiceClick}
+                    onClick={() => {
+                      navigate("/guestservice");
+                    }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
                     Dịch vụ
@@ -189,6 +209,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                     sx={{ color: "black", fontSize: "19px" }}
                   />
                   <Typography
+                   onClick={() => {
+                    navigate("/guestcontact");
+                  }}
                     color="black"
                     fontSize="16px"
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
@@ -248,7 +271,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                 variant="contained"
                 size="small"
                 component="a"
-                onClick={handleLoginClick}
+                onClick={() => {
+                  navigate("/login");
+                }}
                 target="_blank"
               >
                 Đặt lịch hẹn
@@ -258,7 +283,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                 variant="contained"
                 size="small"
                 component="a"
-                onClick={handleLoginClick}
+                onClick={() => {
+                  navigate("/login");
+                }}
                 target="_blank"
               >
                 Login
@@ -326,7 +353,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                       color="primary"
                       variant="outlined"
                       component="a"
-                      onClick={handleLoginClick}
+                      onClick={() => {
+                        navigate("/login");
+                      }}
                       target="_blank"
                       sx={{ width: "100%" }}
                     >
