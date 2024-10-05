@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./PersonalInformation.css";
-import koi from "../../../../assets/koi-fish-1.jpg";
+import koifish from "../../../../assets/koi-fish-1.jpg";
 import pen from "../../../../assets/pen.png";
 import add from "../../../../assets/add.png";
 import trash from "../../../../assets/bin.png";
@@ -55,11 +55,11 @@ export default function PersonalInformation(props) {
     <div>
       <div className="pi-giant-card">
         <div className="pi-container-1">
-          <img src={koi} alt="Koi Fish" />
-          <div className="divider"></div>
+          <img src={koifish} alt="Koi Fish" />
+          {/* <div className="divider"></div> */}
           <div className="user-info">
             <p>
-              User-Name: <span>{userDetail.username}</span>
+              Name: <span>{userDetail.username}</span>
             </p>
             <p>
               Email: <span>{userDetail.email}</span>
@@ -72,30 +72,7 @@ export default function PersonalInformation(props) {
             </p>
           </div>
         </div>
-
-        <div className="horizontal-divider"></div>
-
-        <div className="Koi-Management-Chart">
-          <p>Koi Management</p>
-          {allKoiByAccountId &&
-            allKoiByAccountId.map((koi) => (
-              <div className="KoiName" key={koi.id}>
-                <p>Koi Name: {koi.koiName}</p>
-                <p>Weight: {koi.weight} kg</p>
-                <p>Age: {koi.age} years</p>
-                <p>Gender: {koi.gender}</p>
-                <p>Varieties: {koi.varieties}</p>
-                <img src={pen} alt="Edit" />
-                <img
-                  src={trash}
-                  alt="Delete"
-                  onClick={() => handleDeleteKoi(koi.id)} // Deleting koi by ID
-                  style={{ cursor: "pointer" }} // Make the icon clickable
-                />
-              </div>
-            ))}
-        </div>
-
+        <Divider />
         <div
           className="pi-add-button"
           onClick={() => {
@@ -108,6 +85,37 @@ export default function PersonalInformation(props) {
         >
           <p>Add More Fish</p>
           <img src={add} alt="Add" />
+        </div>
+        {/* <p className="koi_management_chart_title">Koi Management</p> */}
+
+        <div className="Koi-Management-Chart">
+          {allKoiByAccountId &&
+            allKoiByAccountId.map((koi) => (
+              <div className="KoiName" key={koi.id}>
+                <div className="koi_card">
+                  <div className="koi_info">
+                    <img src={koifish} alt="Koi Fish" className="koi_image" />
+                    <div className="koi_details">
+                      <p>Name: {koi.koiName}</p>
+                      <p>Weight: {koi.weight} kg</p>
+                      <p>Age: {koi.age} years</p>
+                      <p>Gender: {koi.gender}</p>
+                      <p>Varieties: {koi.varieties}</p>
+                      <div className="icon_container">
+                        <img src={pen} alt="Edit" className="edit_icon" />
+                        <img
+                          src={trash}
+                          alt="Delete"
+                          onClick={() => handleDeleteKoi(koi.id)} // Deleting koi by ID
+                          className="delete_icon"
+                          style={{ cursor: "pointer" }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
       <Divider />
