@@ -3,6 +3,7 @@
     top: 0;
     height: 100%;
   
+  
 }
 
 .adminSidebar .box {
@@ -16,7 +17,7 @@
    
 }
 .adminSidebar .box:hover {
-    /* background-color: #aaaaaa47; */
+
     color: rgb(51, 102, 255);
     background-color: rgb(9, 148, 248);
     cursor: pointer;
@@ -47,3 +48,8 @@
 } */
 
 
+
+.typography-logo {
+  background-color: white;
+  padding: 10px; 
+}
