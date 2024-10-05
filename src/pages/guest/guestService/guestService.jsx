@@ -175,10 +175,9 @@ export default function Service() {
         <Modal open={open} onClose={handleCloseModal}>
           <div className="modal-content">
             <h2>Cần đăng nhập để trải nghiệm dịch vụ!</h2>
-            <Lottie animationData={LoadingFish}/>
+            <Lottie animationData={LoadingFish} />
             <Divider />
             <div className="modal-actions">
-             
               <Button
                 className="login-button"
                 variant="contained"
