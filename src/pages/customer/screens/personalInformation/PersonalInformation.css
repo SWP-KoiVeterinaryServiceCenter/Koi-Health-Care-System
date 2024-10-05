@@ -53,11 +53,11 @@
   margin: 40px 0px;
 }
 
-.KoiName {
+/* .KoiName {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 20px auto; /* Add margin to create space between elements */
+  margin: 20px auto;
   width: 480px;
   height: 80px;
   background: #ffffff;
@@ -74,6 +74,82 @@
 .KoiName p {
   font-size: x-large;
   font-weight: 500;
+} */
+
+.Koi-Management-Chart {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.Koi-Management-Chart p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.KoiName {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.KoiName:last-child {
+  border-bottom: none;
+}
+
+.KoiName p {
+  margin: 5px 0;
+  font-size: 18px;
+  color: #555;
+}
+
+.KoiName img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.KoiName img:hover {
+  opacity: 0.8;
+}
+
+.KoiName div {
+  display: flex;
+  align-items: center;
+}
+
+.KoiName p span {
+  font-weight: bold;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .KoiName {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .KoiName div {
+    margin-top: 10px;
+  }
+
+  .KoiName p {
+    font-size: 16px;
+  }
+
+  .KoiName img {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .pi-giant-card {
@@ -108,7 +184,6 @@
   font-size: x-large;
   font-weight: 500;
 }
-
 
 .pi-add-button:hover {
   background-color: #cce7ff; /* Changes the background color */

@@ -1,38 +1,61 @@
 import React, { useState, useEffect } from "react";
 import "./PersonalInformation.css";
-
 import koi from "../../../../assets/koi-fish-1.jpg";
 import pen from "../../../../assets/pen.png";
 import add from "../../../../assets/add.png";
 import trash from "../../../../assets/bin.png";
 import { Divider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
+
 import { getUserDataThunk } from "../../../../store/apiThunk/userThunk";
 import { userDataSelector } from "../../../../store/sellectors";
 
-const PersonalInformation = () => {
+import { getKoiByAccountIdThunk } from "../../../../store/apiThunk/koiThunk";
+import { allKoiByAccountIdSelector } from "../../../../store/sellectors";
+
+import { deleteKoiByAccountIdThunk } from "../../../../store/apiThunk/koiThunk";
+
+export default function PersonalInformation(props) {
   const navigate = useNavigate();
-
-  const handleAddMoreFishPageClick = () => {
-    navigate("/addMoreFish");
-    window.scrollTo(0, 0);
-  };
-
-  const userDetail = useSelector(userDataSelector);
   const dispatch = useDispatch();
-console.log(userDetail);
+  const direction = props.direction; // Destructure direction from props
+
+  // Get user details and koi details from Redux state
+  const userDetail = useSelector(userDataSelector);
+  const allKoiByAccountId = useSelector(allKoiByAccountIdSelector);
 
   useEffect(() => {
-    dispatch(getUserDataThunk());
+    const fetchUserAndKoiData = async () => {
+      const user = await dispatch(getUserDataThunk()).unwrap();
+      const accountId = user?.accountId;
+
+      if (accountId) {
+        dispatch(getKoiByAccountIdThunk(accountId));
+      } else {
+        console.error("AccountId is undefined.");
+      }
+    };
+
+    fetchUserAndKoiData();
   }, [dispatch]);
+
+  const handleDeleteKoi = (koiId) => {
+    dispatch(deleteKoiByAccountIdThunk(koiId))
+      .unwrap()
+      .then(() => {
+        console.log(`Koi with ID ${koiId} deleted.`);
+      })
+      .catch((error) => {
+        console.error("Error deleting koi:", error);
+      });
+  };
 
   return (
     <div>
       <div className="pi-giant-card">
         <div className="pi-container-1">
-          <img src={koi} />
+          <img src={koi} alt="Koi Fish" />
           <div className="divider"></div>
           <div className="user-info">
             <p>
@@ -46,7 +69,7 @@ console.log(userDetail);
             </p>
             <p>
               Contact-Link: <span>{userDetail.contactLink}</span>
-            </p>            
+            </p>
           </div>
         </div>
 
@@ -54,37 +77,40 @@ console.log(userDetail);
 
         <div className="Koi-Management-Chart">
           <p>Koi Management</p>
-
-          <div className="KoiName">
-            <p>Koi Name 1 </p>
-            <img src={pen} />
-            <img src={trash} />
-          </div>
-          <div className="KoiName">
-            <p>Koi Name 2 </p>
-            <img src={pen} />
-            <img src={trash} />
-          </div>
-          <div className="KoiName">
-            <p>Koi Name 3 </p>
-            <img src={pen} />
-            <img src={trash} />
-          </div>
-          <div className="KoiName">
-            <p>Koi Name 4 </p>
-            <img src={pen} />
-            <img src={trash} />
-          </div>
+          {allKoiByAccountId &&
+            allKoiByAccountId.map((koi) => (
+              <div className="KoiName" key={koi.id}>
+                <p>Koi Name: {koi.koiName}</p>
+                <p>Weight: {koi.weight} kg</p>
+                <p>Age: {koi.age} years</p>
+                <p>Gender: {koi.gender}</p>
+                <p>Varieties: {koi.varieties}</p>
+                <img src={pen} alt="Edit" />
+                <img
+                  src={trash}
+                  alt="Delete"
+                  onClick={() => handleDeleteKoi(koi.id)} // Deleting koi by ID
+                  style={{ cursor: "pointer" }} // Make the icon clickable
+                />
+              </div>
+            ))}
         </div>
 
-        <div className="pi-add-button" onClick={handleAddMoreFishPageClick}>
+        <div
+          className="pi-add-button"
+          onClick={() => {
+            if (direction) {
+              navigate(`/${direction}/addMoreFish`);
+            } else {
+              console.error("Direction is undefined.");
+            }
+          }}
+        >
           <p>Add More Fish</p>
-          <img src={add} />
+          <img src={add} alt="Add" />
         </div>
       </div>
       <Divider />
     </div>
   );
-};
-
-export default PersonalInformation;
+}
