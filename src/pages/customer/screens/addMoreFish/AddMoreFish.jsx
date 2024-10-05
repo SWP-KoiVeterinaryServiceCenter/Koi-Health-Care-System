@@ -7,7 +7,7 @@ import { Divider } from "@mui/material";
 const AddMoreFish = () => {
   return (
     <div>
-      <AppAppBar />
+      {/* <AppAppBar /> */}
       <div className="add-more-fish">
         <div className="form-group">
           <label htmlFor="name">Name:</label>

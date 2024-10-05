@@ -72,12 +72,12 @@ export const approveUser = async (id) => {
   const response = await api.put(`/api/v1/VerifyUses/ApproveUser/${id}`); //approve the user in verification
   return response.data;
 };
-export const unbanUser = async (userId) => {
-  const response = await api.put(`/api/v1/User/UnbanUser/${userId}`); //unban the user in account
+export const unbanUser = async (accountId) => {
+  const response = await api.patch(`/api/v1/Account/UnBanAccount/${accountId}`); //unban the user in account
   return response.data;
 };
-export const banUser = async (userId) => {
-  const response = await api.delete(`/api/v1/User/BanUser/${userId}`); //ban the user in account
+export const banUser = async (accountId ) => {
+  const response = await api.delete(`/api/v1/Account/BanAccount/${accountId}`); //ban the user in account
   return response.data;
 };
 export const changeRoleUser = async (userId) => {
@@ -91,7 +91,7 @@ export const denyUser = async (id) => {
 };
 
 export const getUserDetail = async (id) => {
-  const response = await api.get(`/api/v1/VerifyUses/detail/${id}`);
+  const response = await api.get(`/api/v1/Account/Accounts/${id}`);
   return response.data;
 };
 
@@ -152,7 +152,7 @@ export const getAllVerifyUsers = async () => {
 };
 
 export const getAllUsers = async () => {
-  const response = await api.get(`/api/v1/User/GetAllUsers`); //La get API All users
+  const response = await api.get(`/api/v1/Account/Accounts`); //La get API All users
   return response.data;
 };
 

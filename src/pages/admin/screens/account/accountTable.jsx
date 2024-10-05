@@ -40,6 +40,7 @@ const AccountTable = () => {
   const [pageNumber, setPageNumber] = useState(0); // Current page index
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredRows, setFilteredRows] = useState([]);
+console.log(accounts);
 
   useEffect(() => {
     dispatch(getAllUsersThunk());
@@ -49,11 +50,29 @@ const AccountTable = () => {
     setFilteredRows(
       accounts?.map((account, index) => ({
         ...account,
+        id: account.accountId,  // Sử dụng `accountId` làm id
         order: index + 1,
       })) || []
     );
   }, [accounts]);
+  
 
+  // const handleSearch = () => {
+  //   const lowercasedQuery = searchQuery.toLowerCase();
+  //   const filteredData = accounts.filter((account) =>
+  //     Object.values(account).some((value) =>
+  //       value.toString().toLowerCase().includes(lowercasedQuery)
+  //     )
+  //   );
+
+  //   setFilteredRows(
+  //     filteredData.map((account, index) => ({
+  //       ...account,
+  //       order: index + 1,
+  //     }))
+  //   );
+  //   setPageNumber(0); // Reset page number after search
+  // };
   const handleSearch = () => {
     const lowercasedQuery = searchQuery.toLowerCase();
     const filteredData = accounts.filter((account) =>
@@ -61,27 +80,53 @@ const AccountTable = () => {
         value.toString().toLowerCase().includes(lowercasedQuery)
       )
     );
-
+  
     setFilteredRows(
       filteredData.map((account, index) => ({
         ...account,
+        id: account.accountId,  // Đảm bảo rằng mỗi hàng có id duy nhất
         order: index + 1,
       }))
     );
     setPageNumber(0); // Reset page number after search
   };
+  
 
-  const handleAccept = (id) => {
+  // const handleAccept = (accountId) => {
+  //   setShowLoadingModal(true);
+  //   dispatch(banUserThunk(accountId))
+  //     .then(() => {
+  //       dispatch(getAllUsersThunk()).then(() => {
+  //         setShowLoadingModal(false);
+  //         Swal.fire({
+  //           title: "Success!",
+  //           text: "User has been banned.",
+  //           icon: "success",
+  //         });
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       setShowLoadingModal(false);
+  //       Swal.fire({
+  //         title: "Error!",
+  //         text: "There was an issue banning the user.",
+  //         icon: "error",
+  //       });
+  //     });
+  // };
+  const handleAccept = (accountId) => {
+    console.log('Banning user with id:', accountId);  // Thêm log để kiểm tra
     setShowLoadingModal(true);
-    dispatch(banUserThunk(id))
+    dispatch(banUserThunk(accountId))
       .then(() => {
-        dispatch(getAllUsersThunk()).then(() => {
-          setShowLoadingModal(false);
-          Swal.fire({
-            title: "Success!",
-            text: "User has been banned.",
-            icon: "success",
-          });
+        return dispatch(getAllUsersThunk());
+      })
+      .then(() => {
+        setShowLoadingModal(false);
+        Swal.fire({
+          title: "Success!",
+          text: "User has been banned.",
+          icon: "success",
         });
       })
       .catch((error) => {
@@ -93,7 +138,7 @@ const AccountTable = () => {
         });
       });
   };
-
+  
   const handleChangeRole = (id) => {
     setShowLoadingModal(true);
     dispatch(changeRoleUserThunk(id))
@@ -117,7 +162,7 @@ const AccountTable = () => {
       });
   };
 
-  const handleDeny = (id) => {
+  const handleDeny = (accountId) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You will update the status of this account!",
@@ -129,7 +174,7 @@ const AccountTable = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         setShowLoadingModal(true);
-        dispatch(unbanUserThunk(id)).then(() => {
+        dispatch(unbanUserThunk(accountId)).then(() => {
           dispatch(getAllUsersThunk()).then(() => {
             Swal.fire({
               title: "Deleted!",
@@ -200,6 +245,7 @@ const AccountTable = () => {
     {
       field: "email",
       headerName: "Email",
+   
       flex: 1,
       cellClassName: "name-column--cell",
       renderCell: ({ row: { id, email } }) => {
@@ -223,88 +269,58 @@ const AccountTable = () => {
       flex: 1,
       renderCell: ({ row: { username } }) => <div>{username}</div>,
     },
-    {
-      field: "fullName",
-      headerName: "Full Name",
-      flex: 1,
-      renderCell: ({ row: { fullname } }) => <div>{fullname}</div>,
-    },
-    {
-      field: "changeRole",
-      headerName: "Change Role",
-      headerAlign: "center",
-      flex: 1,
-      renderCell: ({ row: { id, role } }) => {
-        if (role === "Moderator") return null;
-
-        return (
-          <Box width="100%" display="flex" justifyContent="center" alignItems="center">
-            <Button>
-              <SwapHorizIcon
-                color="primary"
-                style={{ cursor: "pointer", fontSize: 30 }}
-                onClick={() => {
-                  Swal.fire({
-                    title: "Confirm Role Change",
-                    text: "This account will be given the Moderator role, you cannot change the role from here!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, change role!",
-                    cancelButtonText: "No, cancel!",
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                      handleChangeRole(id);
-                    }
-                  });
-                }}
-              />
-            </Button>
-          </Box>
-        );
-      },
-    },
-    {
-      field: "role",
-      headerName: "Role",
-      flex: 1,
-      renderCell: ({ row: { role } }) => <div>{role}</div>,
-    },
     // {
-    //   field: "action",
-    //   headerName: "Action",
+    //   field: "changeRole",
+    //   headerName: "Change Role",
     //   headerAlign: "center",
     //   flex: 1,
-    //   renderCell: ({ row: { id } }) => {
+    //   renderCell: ({ row: { id, role } }) => {
+    //     if (role === "Moderator") return null;
+
     //     return (
-    //       <Box width="100%" display="flex" justifyContent="center" gap="4px">
-    //         <Button
-    //           variant="contained"
-    //           style={{
-    //             backgroundColor: "#55ab95",
-    //             minWidth: "50px",
-    //             textTransform: "capitalize",
-    //           }}
-    //           onClick={() => handleAccept(id)}
-    //         >
-    //           Ban
-    //         </Button>
-    //         <Button
-    //           variant="contained"
-    //           style={{
-    //             backgroundColor: colors.redAccent[600],
-    //             minWidth: "50px",
-    //             textTransform: "capitalize",
-    //           }}
-    //           onClick={() => handleDeny(id)}
-    //         >
-    //           Unban
+    //       <Box width="100%" display="flex" justifyContent="center" alignItems="center">
+    //         <Button>
+    //           <SwapHorizIcon
+    //             color="primary"
+    //             style={{ cursor: "pointer", fontSize: 30 }}
+    //             onClick={() => {
+    //               Swal.fire({
+    //                 title: "Confirm Role Change",
+    //                 text: "This account will be given the Moderator role, you cannot change the role from here!",
+    //                 icon: "warning",
+    //                 showCancelButton: true,
+    //                 confirmButtonColor: "#3085d6",
+    //                 cancelButtonColor: "#d33",
+    //                 confirmButtonText: "Yes, change role!",
+    //                 cancelButtonText: "No, cancel!",
+    //               }).then((result) => {
+    //                 if (result.isConfirmed) {
+    //                   handleChangeRole(id);
+    //                 }
+    //               });
+    //             }}
+    //           />
     //         </Button>
     //       </Box>
     //     );
     //   },
     // },
+    {
+      field: "location",
+      headerName: "Location",
+
+      flex: 1,
+      renderCell: ({ row: { location } }) => <div>{location}</div>,
+    },
+    {
+      field: "role",
+      headerName: "Role",
+      headerAlign: "center",
+     
+      flex: 1,
+      renderCell: ({ row: { role } }) =>  <Box width="100%" display="flex" justifyContent="center" gap="4px">{role}</Box>,
+    },
+
     {
       field: "action",
       headerName: "Action",
@@ -346,10 +362,13 @@ const AccountTable = () => {
   ];
 
   const rows =
-    accounts?.map((account, index) => ({
-      ...account,
-      order: index + 1,
-    })) || [];
+  accounts?.map((account, index) => ({
+    ...account,
+    id: account.accountId,  // Sử dụng `accountId` làm id
+    order: index + 1,
+  })) || [];
+
+
 
   const handlePageChange = (newPage) => {
     setPageNumber(newPage);
