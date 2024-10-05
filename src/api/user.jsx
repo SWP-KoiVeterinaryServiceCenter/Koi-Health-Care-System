@@ -91,7 +91,7 @@ export const denyUser = async (id) => {
 };
 
 export const getUserDetail = async (id) => {
-  const response = await api.get(`/api/v1/VerifyUses/detail/${id}`);
+  const response = await api.get(`/api/v1/Account/Accounts/${id}`);
   return response.data;
 };
 

@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./PersonalInformation.css";
 
 import koi from "../../../../assets/koi-fish-1.jpg";
 import pen from "../../../../assets/pen.png";
 import add from "../../../../assets/add.png";
 import trash from "../../../../assets/bin.png";
-// import AppAppBar from "../../authorize/landingPage/LandingPageDetail/AppAppBar/AppAppBar";
-// import Footer from "../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 import { Divider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { getUserDataThunk } from "../../../../store/apiThunk/userThunk";
+import { userDataSelector } from "../../../../store/sellectors";
 
 const PersonalInformation = () => {
   const navigate = useNavigate();
@@ -18,29 +20,33 @@ const PersonalInformation = () => {
     window.scrollTo(0, 0);
   };
 
+  const userDetail = useSelector(userDataSelector);
+  const dispatch = useDispatch();
+console.log(userDetail);
+
+  useEffect(() => {
+    dispatch(getUserDataThunk());
+  }, [dispatch]);
+
   return (
     <div>
-      {/* <AppAppBar /> */}
       <div className="pi-giant-card">
         <div className="pi-container-1">
           <img src={koi} />
           <div className="divider"></div>
           <div className="user-info">
             <p>
-              User-Name: <span>Van A</span>
+              User-Name: <span>{userDetail.username}</span>
             </p>
             <p>
-              Full-Name: <span>Nguyen Van A</span>
+              Email: <span>{userDetail.email}</span>
             </p>
             <p>
-              Email: <span>nguyenvana@gmail.com</span>
+              Location: <span>{userDetail.location}</span>
             </p>
             <p>
-              Phone: <span>0908765779</span>
-            </p>
-            <p>
-              Address: <span>145/66/4 Phuong 4 Quan 9 Ho Chi Minh</span>
-            </p>
+              Contact-Link: <span>{userDetail.contactLink}</span>
+            </p>            
           </div>
         </div>
 
@@ -77,7 +83,6 @@ const PersonalInformation = () => {
         </div>
       </div>
       <Divider />
-      {/* <Footer /> */}
     </div>
   );
 };
