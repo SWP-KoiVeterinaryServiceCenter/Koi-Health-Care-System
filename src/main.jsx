@@ -55,6 +55,7 @@ import OrdertrackTable from "./pages/admin/screens/order/ordertrack";
 // import CreateKoifish from "./pages/createKoifish/createfish";
 import DoctorOnNewsPage from "./pages/customer/screens/news/news";
 import ServiceKoifish from "./pages/customer/screens/service/service";
+import ServiceHome from "./pages/customer/screens/serviceHome/serviceHome";
 import GuestServiceKoifish from "./pages/guest/guestService/guestService";
 import ServiceInformation from "./pages/customer/screens/serviceInformation/ServiceInformation";
 import PersonalInformation from "./pages/customer/screens/personalInformation/PersonalInformation";
@@ -65,6 +66,7 @@ import GuestHome from "./pages/guest/guestHome/guestHome";
 import GuestContact from "./pages/guest/guestContact/guestContact";
 import HomePage from "./pages/customer/screens/home/home";
 import ContactUs from "./pages/customer/screens/contactUs/contactUs";
+import CreateKoiFishAppointment from "./pages/customer/screens/createKoiFishAppointment/createKoiFishAppointment";
 const router = createBrowserRouter([
   //Guest
   {
@@ -76,7 +78,7 @@ const router = createBrowserRouter([
         path: "",
         element: <LandingPage />,
       },
-    
+
       {
         path: "doctors",
         element: <DoctorOnNewsPage />,
@@ -89,11 +91,9 @@ const router = createBrowserRouter([
         path: "guestcontact",
         element: <GuestContact />,
       },
-    
-    
     ],
   },
- 
+
   {
     path: "/serviceInformation",
     element: <ServiceInformation />,
@@ -138,8 +138,7 @@ const router = createBrowserRouter([
     path: "/transferStatus",
     element: <TransferStatus />,
   },
-  
- 
+
   {
     path: "/addMoreFish",
     element: <AddMoreFish />,
@@ -148,7 +147,6 @@ const router = createBrowserRouter([
     path: "/booking",
     element: <Booking />,
   },
- 
 
   //Admin
   {
@@ -313,12 +311,22 @@ const router = createBrowserRouter([
     errorElement: <Error404 />,
     children: [
       {
-        path: "",
+        path: "", 
         element: <HomePage />,
       },
       {
-        path: "service",
-        element: <ServiceKoifish direction="customer" />,
+        path: "service", 
+        element: <ServiceHome direction="customer" />,
+        children: [
+          {
+            path: "",
+            element: <ServiceKoifish direction="customer" />,
+          },
+          {
+            path: "createKoiFishAppointment", 
+            element: <CreateKoiFishAppointment />,
+          },
+        ],
       },
       {
         path: "personalInformation",
@@ -329,20 +337,16 @@ const router = createBrowserRouter([
         element: <ServiceInformation />,
       },
       {
-        path: "personalInformation",
-        element: <PersonalInformation />,
-      },
-      {
         path: "contactUs",
         element: <ContactUs />,
       },
       {
         path: "doctors",
-        element: <DoctorOnNewsPage direction="customer"  />,
+        element: <DoctorOnNewsPage direction="customer" />,
       },
-    
     ],
   },
+
   //Manager
   {
     path: "/manager",

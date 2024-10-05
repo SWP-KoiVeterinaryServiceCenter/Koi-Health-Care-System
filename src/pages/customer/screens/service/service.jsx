@@ -20,7 +20,9 @@ export default function Service(props) {
   return (
     <section className="articles">
       {/* ////////////////////////////////Aquatic Veterinary ////////////////////////////////// */}
-      <article>
+      <article
+     onClick={() => navigate("createKoiFishAppointment")}
+      >
         <div className="article-wrapper">
           <figure>
             <img
