@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
-import { useFormik } from "formik";
+import { Formik, useFormik } from "formik";
 import { createPackageThunk } from "../../../../../store/apiThunk/packageThunk";
 import { createPostCategoryThunk } from "../../../../../store/apiThunk/postCategoryThunk";
 import Header from "../../../components/header/Header";
@@ -31,6 +31,7 @@ export default function createCategory() {
             </Box>
         );
     };
+
 
     const formik = useFormik({
         initialValues: {
@@ -81,6 +82,8 @@ export default function createCategory() {
                 });
         },
     });
+console.log(formik);
+
 
     return (
         <div className="createPackage">

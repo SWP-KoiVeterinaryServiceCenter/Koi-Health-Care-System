@@ -56,9 +56,9 @@ export default function AdminHome() {
             />
             <div
               style={{
-                width: isCollapsed === true ? "100%" : "82.3%",
+                width: isCollapsed === true ? "94.75%" : "82.3%",
 
-                // backgroundColor: "#F9FAFB",
+               
                 backgroundColor: "#F2F3F4",
               }}
             >

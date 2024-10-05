@@ -152,9 +152,9 @@ export const approveUserThunk = createAsyncThunk(
 //unban user from account
 export const unbanUserThunk = createAsyncThunk(
   "users/unbanUser",
-  async (userId, thunkAPI) => {
+  async (accountId, thunkAPI) => {
     try {
-      const response = await unbanUser(userId);
+      const response = await unbanUser(accountId);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error?.response?.data);
@@ -177,9 +177,9 @@ export const denyUserThunk = createAsyncThunk(
 //ban user from account
 export const banUserThunk = createAsyncThunk(
   "users/banUser",
-  async (userId, thunkAPI) => {
+  async (accountId, thunkAPI) => {
     try {
-      const response = await banUser(userId);
+      const response = await banUser(accountId);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error?.response?.data);

@@ -32,10 +32,17 @@ import PaidIcon from "@mui/icons-material/Paid";
 import ManageHistoryIcon from "@mui/icons-material/ManageHistory";
 import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
-import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
+import LocalPoliceIcon from "@mui/icons-material/LocalPolice";
+import logo from "../../../../assets/koi_loho.png";
+const logoStyle = {
+  width: "140px",
+  height: "auto",
+  cursor: "pointer",
+};
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
   return (
     <MenuItem
       active={selected === title}
@@ -57,7 +64,7 @@ const Sidebar = (props) => {
   const colors = tokens(theme.palette.mode);
   let isCollapsed = props.isCollapsed;
   let setIsCollapsed = props.setIsCollapsed;
-  const [selected, setSelected] = useState("Thu Nhập");
+  const [selected, setSelected] = useState();
   const [open, setOpen] = useState(true);
   const [openCPM, setOpenCPM] = useState(false);
   const [openTran, setOpenTran] = useState(false);
@@ -81,27 +88,6 @@ const Sidebar = (props) => {
   const parts = pathName?.split("/");
   const locationValue = parts[parts.length - 1];
 
-  useEffect(() => {
-    if (locationValue === "item") {
-      setSelected("Quà Tặng");
-    } else if (locationValue === "package") {
-      setSelected("Gói Đăng Ký");
-    } else if (
-      locationValue === "admin" ||
-      locationValue === "dashboardDetail"
-    ) {
-      setSelected("Thu Nhập");
-    } else if (locationValue === "shop") {
-      setSelected("Cửa Hàng");
-    } else if (locationValue === "account") {
-      setSelected("Tài Khoản");
-    } else if (locationValue === "wallet") {
-      setSelected("Ví Và Giao Dịch");
-    } else if (locationValue === "report") {
-      setSelected("Báo Cáo");
-    }
-  }, [locationValue]);
-
   return (
     <div className="adminSidebar">
       <Box sx={StyledSidebar}>
@@ -119,26 +105,16 @@ const Sidebar = (props) => {
                   <MenuOutlinedIcon fontSize="large" className="icon-box" />
                 </IconButton>
               }
-            ></MenuItem>
-            {!isCollapsed && (
-              <div className="box">
-                <img
-                  alt="profile-user"
-                  width="50px"
-                  height="50px"
-                  src={Admin}
-                  style={{
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                  }}
-                />
-                <Typography variant="h5" color={"white"} fontWeight="bold">
-                  {userData.role}
-                </Typography>
-              </div>
-            )}
+            >
+              <Typography variant="h5" color={"white"} fontWeight="bold">
+                {userData.role}
+              </Typography>
+            </MenuItem>
+            <Typography className="typography-logo">
+              <img src={logo} style={logoStyle} alt="logo of sitemark" />
+            </Typography>
             <Box>
-              <Typography
+              {/* <Typography
                 variant="h6"
                 color={colors.grey[300]}
                 sx={{ m: "15px 0 5px 20px" }}
@@ -151,7 +127,7 @@ const Sidebar = (props) => {
                 icon={<BarChartIcon />}
                 selected={selected}
                 setSelected={setSelected}
-              />
+              /> */}
               <Divider />
               <Typography
                 variant="h6"
@@ -389,32 +365,30 @@ const Sidebar = (props) => {
                         paddingLeft: !isCollapsed ? "20px" : 0,
                       }}
                     >
-                       <Item
-                    title="Daily cancellation limit"
-                    to="cancelAmount"
-                    icon={<EventRepeatIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  <Item
-                    title="Adjust Money"
-                    to="adjustMoney"
-                    icon={<CurrencyExchangeIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  <Item
-                    title="Report"
-                    to="report"
-                    icon={<ReportGmailerrorredIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
+                      <Item
+                        title="Daily cancellation limit"
+                        to="cancelAmount"
+                        icon={<EventRepeatIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                      />
+                      <Item
+                        title="Adjust Money"
+                        to="adjustMoney"
+                        icon={<CurrencyExchangeIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                      />
+                      <Item
+                        title="Report"
+                        to="report"
+                        icon={<ReportGmailerrorredIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                      />
                     </Collapse>
                   </List>
                   {/* ///////////////////////////////////////////////////////////////////// */}
-
-                 
                 </Collapse>
               </List>
             </Box>
