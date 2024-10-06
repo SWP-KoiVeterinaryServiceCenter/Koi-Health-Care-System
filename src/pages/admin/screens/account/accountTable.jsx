@@ -8,7 +8,7 @@ import {
   Select,
   MenuItem,
   Typography,
-  TextField 
+  TextField,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,15 +20,16 @@ import {
   getAllUsersThunk,
   banUserThunk,
   unbanUserThunk,
-  changeRoleUserThunk
+  changeRoleUserThunk,
 } from "../../../../store/apiThunk/userThunk";
 import {
   StyledBox,
   CustomNoRowsOverlay,
   GridLoadingOverlay,
 } from "../../../../components/styledTable/styledTable";
-import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import "./accountTable.css";
+import AddIcon from '@mui/icons-material/Add';
 
 const AccountTable = () => {
   const theme = useTheme();
@@ -40,7 +41,7 @@ const AccountTable = () => {
   const [pageNumber, setPageNumber] = useState(0); // Current page index
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredRows, setFilteredRows] = useState([]);
-console.log(accounts);
+  console.log(accounts);
 
   useEffect(() => {
     dispatch(getAllUsersThunk());
@@ -50,12 +51,11 @@ console.log(accounts);
     setFilteredRows(
       accounts?.map((account, index) => ({
         ...account,
-        id: account.accountId,  // Sử dụng `accountId` làm id
+        id: account.accountId, // Sử dụng `accountId` làm id
         order: index + 1,
       })) || []
     );
   }, [accounts]);
-  
 
   // const handleSearch = () => {
   //   const lowercasedQuery = searchQuery.toLowerCase();
@@ -80,17 +80,16 @@ console.log(accounts);
         value.toString().toLowerCase().includes(lowercasedQuery)
       )
     );
-  
+
     setFilteredRows(
       filteredData.map((account, index) => ({
         ...account,
-        id: account.accountId,  // Đảm bảo rằng mỗi hàng có id duy nhất
+        id: account.accountId, // Đảm bảo rằng mỗi hàng có id duy nhất
         order: index + 1,
       }))
     );
     setPageNumber(0); // Reset page number after search
   };
-  
 
   // const handleAccept = (accountId) => {
   //   setShowLoadingModal(true);
@@ -115,7 +114,7 @@ console.log(accounts);
   //     });
   // };
   const handleAccept = (accountId) => {
-    console.log('Banning user with id:', accountId);  // Thêm log để kiểm tra
+    console.log("Banning user with id:", accountId); // Thêm log để kiểm tra
     setShowLoadingModal(true);
     dispatch(banUserThunk(accountId))
       .then(() => {
@@ -138,7 +137,7 @@ console.log(accounts);
         });
       });
   };
-  
+
   const handleChangeRole = (id) => {
     setShowLoadingModal(true);
     dispatch(changeRoleUserThunk(id))
@@ -205,7 +204,7 @@ console.log(accounts);
             fontWeight: "700",
             textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
             padding: "4px",
-            borderRadius: "4px"
+            borderRadius: "4px",
           }}
         >
           {title}
@@ -245,7 +244,7 @@ console.log(accounts);
     {
       field: "email",
       headerName: "Email",
-   
+
       flex: 1,
       cellClassName: "name-column--cell",
       renderCell: ({ row: { id, email } }) => {
@@ -316,9 +315,13 @@ console.log(accounts);
       field: "role",
       headerName: "Role",
       headerAlign: "center",
-     
+
       flex: 1,
-      renderCell: ({ row: { role } }) =>  <Box width="100%" display="flex" justifyContent="center" gap="4px">{role}</Box>,
+      renderCell: ({ row: { role } }) => (
+        <Box width="100%" display="flex" justifyContent="center" gap="4px">
+          {role}
+        </Box>
+      ),
     },
 
     {
@@ -362,13 +365,11 @@ console.log(accounts);
   ];
 
   const rows =
-  accounts?.map((account, index) => ({
-    ...account,
-    id: account.accountId,  // Sử dụng `accountId` làm id
-    order: index + 1,
-  })) || [];
-
-
+    accounts?.map((account, index) => ({
+      ...account,
+      id: account.accountId, // Sử dụng `accountId` làm id
+      order: index + 1,
+    })) || [];
 
   const handlePageChange = (newPage) => {
     setPageNumber(newPage);
@@ -378,7 +379,10 @@ console.log(accounts);
     setPageSize(Number(event.target.value));
   };
 
-  const paginatedRows = filteredRows.slice(pageNumber * pageSize, pageNumber * pageSize + pageSize);
+  const paginatedRows = filteredRows.slice(
+    pageNumber * pageSize,
+    pageNumber * pageSize + pageSize
+  );
 
   const CustomFooter = () => (
     <Box
@@ -444,40 +448,46 @@ console.log(accounts);
 
   return (
     <Box m="20px">
-      <Header
-        title="ACCOUNT"
-        subtitle="System Account Management"
-      />
-      <Box display="flex" alignItems="center">
-        <TextField
-          label="Search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              handleSearch();
-            }
-          }}
-          placeholder="Search Information"
-          InputProps={{
-            style: { color: 'black' }, // Text color
-          }}
-          sx={{
-            mb: 2,
-            width: "200px",
-            "& .MuiInputBase-input": { color: "black" },
-            "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
-            "& .MuiInputLabel-root": { color: "black" } // Label color
-          }}
-        />
-        <Button
-          variant="contained"
-          onClick={handleSearch}
-          sx={{ mb: 2, ml: 1, height: "50px",backgroundColor: "#7CB9E8"}}
-        >
-          Search
-        </Button>
-      </Box>
+      <Header title="ACCOUNT" subtitle="System Account Management" />
+      <Box display="flex" alignItems="center" justifyContent="space-between">
+  <Box display="flex" alignItems="center">
+    <TextField
+      label="Search"
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      onKeyPress={(e) => {
+        if (e.key === "Enter") {
+          handleSearch();
+        }
+      }}
+      placeholder="Search Information"
+      InputProps={{
+        style: { color: "black" }, // Text color
+      }}
+      sx={{
+        mb: 2,
+        width: "200px",
+        "& .MuiInputBase-input": { color: "black" },
+        "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
+        "& .MuiInputLabel-root": { color: "black" }, // Label color
+      }}
+    />
+    <Button
+      variant="contained"
+      onClick={handleSearch}
+      sx={{ mb: 2, ml: 1, height: "50px", backgroundColor: "#7CB9E8" }}
+    >
+      Search
+    </Button>
+  </Box>
+  
+  <div className="custom-buttons">
+    <button>Create Vet Account</button>
+    <button>Create Staff</button>
+  </div>
+</Box>
+
+
       <Box sx={StyledBox} height="100%">
         <DataGrid
           disableRowSelectionOnClick

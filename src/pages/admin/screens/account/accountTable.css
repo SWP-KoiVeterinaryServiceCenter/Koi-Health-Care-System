@@ -20,3 +20,69 @@
 .searchbar_accounts_button{
   color: black;
 }
+
+/* ///////////////////////////////////////////////////////Create Account///////////////////////////////////////////////////////// */
+.custom-buttons {
+  display: flex;               /* Đặt các button trong một layout linh hoạt, giúp chúng nằm cạnh nhau theo chiều ngang. */
+  width: 400px;                /* Chiều rộng của container chứa các button. */
+  gap: 8px;                   /* Khoảng cách giữa các button là 10px. */
+  --b: 1px;                    /* Độ dày của viền (3px). */
+  --h: 1.8em;                  /* Chiều cao của button. */
+}
+
+.custom-buttons button {
+  --_c: #7CB9E8;               /* Màu sắc chính của button. */
+  flex: calc(1.25 + var(--_s, 0)); /* Chiếm không gian dựa trên công thức tính toán. */
+  min-width: 0;                /* Không có độ rộng tối thiểu. */
+  font-size: 16px;             /* Cỡ chữ của button. */
+  font-weight: bold;           /* Chữ trong button được làm đậm. */
+  height: var(--h);            /* Chiều cao của button. */
+  cursor: pointer;             /* Thay đổi con trỏ chuột khi hover. */
+  color: #fff;                 /* Màu chữ bên trong button. */
+  border: var(--b) solid black; /* Viền của button. */
+  
+  background-color: var(--_c); /* Màu nền của button. */
+  
+  clip-path: polygon(0 0, 100% 0, calc(100% - 0.577*var(--h)) 100%, 0 100%); 
+                              /* Tạo hình dạng đặc biệt cho button. */
+  
+  padding: 0 calc(0.288*var(--h)) 0 0; /* Đặt khoảng cách (padding) bên phải button. */
+  
+  margin: 0 calc(-0.288*var(--h)) 0 0; /* Khoảng cách âm ở phía trái. */
+  
+  box-sizing: border-box;      /* Bao gồm cả viền trong tính toán kích thước. */
+  transition: flex 0.4s, box-shadow 0.4s; /* Hiệu ứng chuyển đổi cho flex và box-shadow. */
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0.5), 
+              0 0 0px rgba(0, 0, 0, 0.5), 
+              0 0 9px rgba(0, 0, 0, 0.5); /* Hiệu ứng bóng cho button. */
+}
+
+.custom-buttons button + button { 
+  --_c: #599F99;               /* Màu chủ đạo của button thứ hai. */
+  flex: calc(0.75 + var(--_s, 0)); /* Kích thước button thứ hai. */
+  color:  #fff;                      /* Màu chữ của button thứ hai. */
+  background-color: var(--_c);        /* Màu nền của button thứ hai. */
+  clip-path: polygon(calc(0.577*var(--h)) 0, 100% 0, 100% 100%, 0 100%); 
+                              /* Tạo hình dạng đặc biệt cho button thứ hai. */
+  
+  margin: 0 0 0 calc(-0.288*var(--h)); /* Khoảng cách âm bên phải. */
+  
+  padding: 0 0 0 calc(0.288*var(--h)); /* Thêm khoảng cách padding ở bên trái button. */
+  
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0.5), 
+              0 0 0px rgba(0, 0, 0, 0.5), 
+              0 0 9px rgba(0, 0, 0, 0.5); /* Hiệu ứng bóng cho button thứ hai. */
+}
+
+.custom-buttons button:hover,
+.custom-buttons button:active:not(:focus-visible) {
+  --_s: .75;                     /* Tăng giá trị flex khi hover hoặc active. */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5), 
+              0 0 15px rgba(0, 0, 0, 0.5), 
+              0 0 20px rgba(0, 0, 0, 0.5); /* Tăng cường hiệu ứng bóng khi hover. */
+}
+
+.custom-buttons button:active {
+  box-shadow: inset 0 0 0 100vmax var(--_c); /* Tạo hiệu ứng bóng mờ bên trong button khi được nhấn. */
+  color: #fff;                /* Màu chữ khi button được nhấn. */
+}
