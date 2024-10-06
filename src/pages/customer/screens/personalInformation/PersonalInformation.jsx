@@ -77,6 +77,7 @@ export default function PersonalInformation(props) {
           className="pi-add-button"
           onClick={() => {
             if (direction) {
+              window.scrollTo(0, 0); // Scroll to the top of the page
               navigate(`/${direction}/addMoreFish`);
             } else {
               console.error("Direction is undefined.");
