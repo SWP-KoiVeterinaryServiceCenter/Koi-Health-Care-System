@@ -177,7 +177,7 @@ export default function LandingPage() {
         </div>
       </div>
       <Divider/>
-      <Footer />
+      {/* <Footer /> */}
     </div>
 
   );
