@@ -57,10 +57,10 @@
               0 0 9px rgba(0, 0, 0, 0.5); /* Hiệu ứng bóng cho button. */
 }
 
-.custom-buttons button + button {
-  --_c: #FFD39D;               /* Màu chủ đạo của button thứ hai. */
+.custom-buttons button + button { 
+  --_c: #599F99;               /* Màu chủ đạo của button thứ hai. */
   flex: calc(0.75 + var(--_s, 0)); /* Kích thước button thứ hai. */
-  color: #401D83;                      /* Màu chữ của button thứ hai. */
+  color:  #fff;                      /* Màu chữ của button thứ hai. */
   background-color: var(--_c);        /* Màu nền của button thứ hai. */
   clip-path: polygon(calc(0.577*var(--h)) 0, 100% 0, 100% 100%, 0 100%); 
                               /* Tạo hình dạng đặc biệt cho button thứ hai. */
