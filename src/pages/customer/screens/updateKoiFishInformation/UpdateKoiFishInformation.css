@@ -1,4 +1,4 @@
-/* .updatePackage {
+.updatePackage {
     background-color: #DBE9F4;
     margin: 80px;
     padding: 20px;
@@ -95,4 +95,4 @@
 
 .updatePackage .background_formik_box:hover .background_formik_icon_box {
     opacity: 1;
-} */
+}

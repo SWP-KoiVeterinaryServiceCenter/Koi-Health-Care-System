@@ -89,7 +89,7 @@ const AddMoreFish = () => {
         addKoiByAccountIdThunk({
           koiName: values.koiName,
           weight: values.weight,
-          age: values.weight,
+          age: values.age,
           gender: values.gender,
           varieties: values.varieties,
         })
@@ -162,6 +162,7 @@ const AddMoreFish = () => {
                   color: "black",
                 },
               }}
+              
             />
             {formik.touched.koiName && formik.errors.koiName && (
               <div className="login__validation__error">

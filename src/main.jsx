@@ -67,7 +67,7 @@ import GuestContact from "./pages/guest/guestContact/guestContact";
 import HomePage from "./pages/customer/screens/home/home";
 import ContactUs from "./pages/customer/screens/contactUs/contactUs";
 import CreateKoiFishAppointment from "./pages/customer/screens/createKoiFishAppointment/createKoiFishAppointment";
-import UpdateKoiFishInformation from "./pages/customer/screens/updateKoiFishInformation/updateKoiFishInformation";
+import UpdateKoiFishInformation from "./pages/customer/screens/updateKoiFishInformation/UpdateKoiFishInformation";
 const router = createBrowserRouter([
   //Guest
   {
