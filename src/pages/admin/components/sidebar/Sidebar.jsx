@@ -34,10 +34,17 @@ import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import LocalPoliceIcon from "@mui/icons-material/LocalPolice";
 import logo from "../../../../assets/koi_loho.png";
+import backgroundGif from "../../../../assets/gif/koi_logo_sidebar.gif";
 const logoStyle = {
   width: "140px",
   height: "auto",
   cursor: "pointer",
+};
+const backgroundStyle = {
+  background: `url(${backgroundGif}) no-repeat center center`, // Sử dụng ảnh GIF làm background
+  backgroundSize: "270px 150px", // Điều chỉnh kích thước của ảnh GIF, ví dụ 150x150px
+
+  padding: "10px", // Thêm khoảng cách cho logo nếu cần
 };
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -110,7 +117,7 @@ const Sidebar = (props) => {
                 {userData.role}
               </Typography>
             </MenuItem>
-            <Typography className="typography-logo">
+            <Typography className="typography-logo" style={backgroundStyle}>
               <img src={logo} style={logoStyle} alt="logo of sitemark" />
             </Typography>
             <Box>
@@ -186,13 +193,13 @@ const Sidebar = (props) => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                  <Item
+                  {/* <Item
                     title="Verify Account"
                     to="verifyAccount"
                     icon={<HowToRegIcon />}
                     selected={selected}
                     setSelected={setSelected}
-                  />
+                  /> */}
                   <Item
                     title="Subscription"
                     to="package"

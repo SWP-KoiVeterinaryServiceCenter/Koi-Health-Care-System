@@ -29,7 +29,9 @@ import {
 } from "../../../../components/styledTable/styledTable";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import "./accountTable.css";
-import AddIcon from '@mui/icons-material/Add';
+
+import AddIcon from "@mui/icons-material/Add";
+
 
 const AccountTable = () => {
   const theme = useTheme();
@@ -447,45 +449,46 @@ const AccountTable = () => {
   );
 
   return (
-    <Box m="20px">
+
+    <Box m="20px" >
       <Header title="ACCOUNT" subtitle="System Account Management" />
       <Box display="flex" alignItems="center" justifyContent="space-between">
-  <Box display="flex" alignItems="center">
-    <TextField
-      label="Search"
-      value={searchQuery}
-      onChange={(e) => setSearchQuery(e.target.value)}
-      onKeyPress={(e) => {
-        if (e.key === "Enter") {
-          handleSearch();
-        }
-      }}
-      placeholder="Search Information"
-      InputProps={{
-        style: { color: "black" }, // Text color
-      }}
-      sx={{
-        mb: 2,
-        width: "200px",
-        "& .MuiInputBase-input": { color: "black" },
-        "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
-        "& .MuiInputLabel-root": { color: "black" }, // Label color
-      }}
-    />
-    <Button
-      variant="contained"
-      onClick={handleSearch}
-      sx={{ mb: 2, ml: 1, height: "50px", backgroundColor: "#7CB9E8" }}
-    >
-      Search
-    </Button>
-  </Box>
-  
-  <div className="custom-buttons">
-    <button>Create Vet Account</button>
-    <button>Create Staff</button>
-  </div>
-</Box>
+        <Box display="flex" alignItems="center">
+          <TextField
+            label="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
+            placeholder="Search Information"
+            InputProps={{
+              style: { color: "black" }, // Text color
+            }}
+            sx={{
+              mb: 2,
+              width: "200px",
+              "& .MuiInputBase-input": { color: "black" },
+              "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
+              "& .MuiInputLabel-root": { color: "black" }, // Label color
+            }}
+          />
+          <Button
+            variant="contained"
+            onClick={handleSearch}
+            sx={{ mb: 2, ml: 1, height: "50px", backgroundColor: "#7CB9E8" }}
+          >
+            Search
+          </Button>
+        </Box>
+
+        <div className="custom-buttons">
+          <button>Create Vet Account</button>
+          <button>Create Staff</button>
+        </div>
+      </Box>
 
 
       <Box sx={StyledBox} height="100%">
