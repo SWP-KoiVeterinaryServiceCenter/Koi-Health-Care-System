@@ -1,35 +1,35 @@
-import React, { useState, useEffect } from "react";
-import "./AddMoreFish.css";
-import {
-  TextField,
-  Box,
-  Button,
-  Typography,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
-} from "@mui/material";
-import { Divider } from "@mui/material";
-import * as Yup from "yup";
-import { useFormik } from "formik";
+import React from "react";
+import "./UpdateKoiFishInformation.css";
+import { Button, TextField, Box, Typography } from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addKoiByAccountIdThunk } from "../../../../store/apiThunk/koiThunk";
+import { useState, useEffect } from "react";
+import * as Yup from "yup";
+import Swal from "sweetalert2";
+import { useFormik } from "formik";
 import {
-  ADDPACKAGESUCCESS,
+  UPDATEPACKAGESUCCESS,
   ERRORTEXT,
   SUCCESSTEXT,
 } from "../../../../components/text/notiText/notiText";
 import { BackButton } from "../../../../components/modal/backModal/backModal";
-import { useNavigate } from "react-router-dom";
 import LoadingModal from "../../../../components/modal/loadingModal/loadingModal";
-import Swal from "sweetalert2";
+import {
+  getKoiByIdThunk,
+  updateKoiByAccountIdThunk,
+} from "../../../../store/apiThunk/koiThunk";
 
-const AddMoreFish = () => {
+import { allKoiByIdSelector } from "../../../../store/sellectors";
+import { Divider } from "antd";
+
+export default function updateKoiFishInformation() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const koiId = location.state?.koiId;
+  const allKoiById = useSelector(allKoiByIdSelector);
   const [showLoadingModal, setShowLoadingModal] = useState(false);
-
+  const [showRender, setShowRender] = useState(false);
   const Header = ({
     title,
     subtitle,
@@ -37,17 +37,17 @@ const AddMoreFish = () => {
     subtitleColor = "gray",
   }) => {
     return (
-      <Box>
+      <Box mb={2}>
         <Typography
           style={{
             fontFamily: "Source Sans Pro, sans-serif",
             fontSize: "32px",
             color: titleColor,
             fontWeight: "700",
-            textShadow:
-              "1px 1px 2px rgba(0, 0, 0, 0.3), 0 0 25px rgba(0, 0, 0, 0.2)",
-            padding: "10px",
-            borderRadius: "4px",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", // Shadow effect
+            // border: "1px solid rgba(255, 255, 255, 0.5)", // Light white border
+            padding: "4px", // Optional: padding to make the border more visible
+            borderRadius: "4px", // Optional: rounded corners for the border
           }}
         >
           {title}
@@ -59,13 +59,19 @@ const AddMoreFish = () => {
     );
   };
 
+  useEffect(() => {
+    setShowRender(true);
+    dispatch(getKoiByIdThunk(koiId)).then(() => setShowRender(false));
+  }, [koiId, dispatch]);
+
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      koiName: "",
-      weight: "",
-      age: "",
-      gender: "",
-      varieties: "",
+      koiName: allKoiById.koiName || "",
+      weight: allKoiById.weight || "",
+      age: allKoiById.age || "",
+      gender: allKoiById.gender || "",
+      varieties: allKoiById.varieties || "",
     },
     validationSchema: Yup.object({
       koiName: Yup.string().required("Koi Name cannot be empty"),
@@ -86,10 +92,11 @@ const AddMoreFish = () => {
     onSubmit: async (values) => {
       setShowLoadingModal(true);
       dispatch(
-        addKoiByAccountIdThunk({
+        updateKoiByAccountIdThunk({
+          id: koiId,
           koiName: values.koiName,
           weight: values.weight,
-          age: values.age,
+          age: values.weight,
           gender: values.gender,
           varieties: values.varieties,
         })
@@ -99,7 +106,7 @@ const AddMoreFish = () => {
           setShowLoadingModal(false);
           Swal.fire({
             title: SUCCESSTEXT,
-            text: ADDPACKAGESUCCESS,
+            text: UPDATEPACKAGESUCCESS,
             icon: "success",
             showCancelButton: false,
             showConfirmButton: false,
@@ -127,23 +134,21 @@ const AddMoreFish = () => {
     },
   });
 
-  console.log(formik);
-
   return (
     <>
-      <div className="add_more_fish">
+      <div className="updatePackage">
         <Header
-          title="Add More Fish "
-          subtitle="Provide Koi Fish Information"
+          title="Update Koi Information"
+          subtitle="Provide Koi Information"
         />
-        <form onSubmit={formik.handleSubmit} className="form-container">
-          <div className="text-field-grid">
+        {!showRender ? (
+          <form onSubmit={formik.handleSubmit}>
             {/* koiName */}
             <TextField
               id="koiName"
               label={
                 <span>
-                  Koi Name: <span style={{ color: "red" }}>*</span>
+                  Koi Name <span style={{ color: "red" }}>*</span>
                 </span>
               }
               variant="outlined"
@@ -152,9 +157,10 @@ const AddMoreFish = () => {
               fullWidth
               autoComplete="koiName"
               margin="dense"
-              type="string"
               color="secondary"
-              InputLabelProps={{ style: { color: "black" } }}
+              InputLabelProps={{
+                style: { color: "black" },
+              }}
               InputProps={{
                 style: {
                   backgroundColor: "#f5f5f5",
@@ -162,7 +168,6 @@ const AddMoreFish = () => {
                   color: "black",
                 },
               }}
-              
             />
             {formik.touched.koiName && formik.errors.koiName && (
               <div className="login__validation__error">
@@ -175,7 +180,7 @@ const AddMoreFish = () => {
               id="weight"
               label={
                 <span>
-                  Weight (kg) <span style={{ color: "red" }}>*</span>
+                  Weight (Kg) <span style={{ color: "red" }}>*</span>
                 </span>
               }
               variant="outlined"
@@ -186,7 +191,9 @@ const AddMoreFish = () => {
               margin="dense"
               type="number"
               color="secondary"
-              InputLabelProps={{ style: { color: "black" } }}
+              InputLabelProps={{
+                style: { color: "black" },
+              }}
               InputProps={{
                 style: {
                   backgroundColor: "#f5f5f5",
@@ -206,7 +213,7 @@ const AddMoreFish = () => {
               id="age"
               label={
                 <span>
-                  Age (years old) <span style={{ color: "red" }}>*</span>
+                  Age (Years Old) <span style={{ color: "red" }}>*</span>
                 </span>
               }
               variant="outlined"
@@ -217,7 +224,9 @@ const AddMoreFish = () => {
               margin="dense"
               type="number"
               color="secondary"
-              InputLabelProps={{ style: { color: "black" } }}
+              InputLabelProps={{
+                style: { color: "black" },
+              }}
               InputProps={{
                 style: {
                   backgroundColor: "#f5f5f5",
@@ -232,22 +241,21 @@ const AddMoreFish = () => {
               </div>
             )}
 
-            {/* <TextField
+            {/* gender */}
+            <TextField
               id="gender"
-              label={
-                <span>
-                  Gender <span style={{ color: "red" }}>*</span>
-                </span>
-              }
+              label="Price"
               variant="outlined"
               value={formik.values.gender}
               onChange={formik.handleChange}
               fullWidth
               autoComplete="gender"
               margin="dense"
-              type="string"
+              type="number"
               color="secondary"
-              InputLabelProps={{ style: { color: "black" } }}
+              InputLabelProps={{
+                style: { color: "black" },
+              }}
               InputProps={{
                 style: {
                   backgroundColor: "#f5f5f5",
@@ -260,58 +268,23 @@ const AddMoreFish = () => {
               <div className="login__validation__error">
                 <p>{formik.errors.gender}</p>
               </div>
-            )} */}
-
-            {/* gender */}
-            <FormControl fullWidth margin="dense">
-              <InputLabel id="gender-label">
-                <span>
-                  Gender <span style={{ color: "red" }}>*</span>
-                </span>
-              </InputLabel>
-              <Select
-                labelId="gender-label"
-                id="gender"
-                name="gender" // Ensure the name matches the formik field name
-                value={formik.values.gender}
-                onChange={(event) =>
-                  formik.setFieldValue("gender", event.target.value)
-                } // Explicitly set the field value
-                fullWidth
-                color="secondary"
-                style={{
-                  backgroundColor: "#f5f5f5",
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                  color: "black",
-                }}
-              >
-                <MenuItem value="Male">Male</MenuItem>
-                <MenuItem value="Female">Female</MenuItem>
-              </Select>
-            </FormControl>
-            {formik.touched.gender && formik.errors.gender && (
-              <div className="login__validation__error">
-                <p>{formik.errors.gender}</p>
-              </div>
             )}
 
             {/* varieties */}
             <TextField
               id="varieties"
-              label={
-                <span>
-                  Varieties <span style={{ color: "red" }}>*</span>
-                </span>
-              }
+              label="Price"
               variant="outlined"
               value={formik.values.varieties}
               onChange={formik.handleChange}
               fullWidth
               autoComplete="varieties"
               margin="dense"
-              type="string"
+              type="number"
               color="secondary"
-              InputLabelProps={{ style: { color: "black" } }}
+              InputLabelProps={{
+                style: { color: "black" },
+              }}
               InputProps={{
                 style: {
                   backgroundColor: "#f5f5f5",
@@ -325,32 +298,39 @@ const AddMoreFish = () => {
                 <p>{formik.errors.varieties}</p>
               </div>
             )}
-          </div>
 
-          {!showLoadingModal ? (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                gap: "30px",
-                marginBottom: "10px",
-                marginTop: "10px",
-              }}
-            >
-              <BackButton style={{ fontSize: "14px" }} />
-              <Button className="btn" variant="contained" type="submit">
-                Create
-              </Button>
-            </div>
-          ) : (
-            <LoadingModal />
-          )}
-        </form>
+            {!showLoadingModal ? (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "30px",
+                  marginBottom: "50px",
+                  marginTop: "30px",
+                }}
+              >
+                <BackButton type="update" />
+                <Button
+                  className="login__btn"
+                  style={{
+                    backgroundColor: "#70d8bd",
+                    fontSize: "14px",
+                  }}
+                  variant="contained"
+                  type="submit"
+                >
+                  Update
+                </Button>
+              </div>
+            ) : (
+              <LoadingModal />
+            )}
+          </form>
+        ) : (
+          <LoadingModal />
+        )}
       </div>
       <Divider />
     </>
   );
-};
-
-export default AddMoreFish;
+}

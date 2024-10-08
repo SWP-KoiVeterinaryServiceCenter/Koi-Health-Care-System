@@ -5,13 +5,23 @@ export const getKoiByAccountId = async (accountId) => {
   return response.data;
 };
 
+export const getKoiById = async (id) => {
+  const response = await api.get(`/api/v1/Koi/GetKoiById/${id}`);
+  return response.data;
+};
+
 export const addKoiByAccountId = async (data) => {
-    const response = await api.post(`/api/v1/Koi/AddKoi`, data);
-    return response.data;
-  };
+  const response = await api.post(`/api/v1/Koi/AddKoi`, data);
+  return response.data;
+};
 
 export const deleteKoiByAccountId = async (id) => {
   const response = await api.delete(`/api/v1/Koi/DeleteKoi/${id}`);
+  return response.data; 
+};
+
+export const updateKoiByAccountId = async (id) => {
+  const response = await api.put(`/api/v1/Koi/UpdateKoi/${id}`);
   return response.data;
 };
 

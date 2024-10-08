@@ -29,7 +29,9 @@ import {
 } from "../../../../components/styledTable/styledTable";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import "./accountTable.css";
+
 import AddIcon from "@mui/icons-material/Add";
+
 
 const AccountTable = () => {
   const theme = useTheme();
@@ -447,6 +449,7 @@ const AccountTable = () => {
   );
 
   return (
+
     <Box m="20px" >
       <Header title="ACCOUNT" subtitle="System Account Management" />
       <Box display="flex" alignItems="center" justifyContent="space-between">
@@ -486,6 +489,7 @@ const AccountTable = () => {
           <button>Create Staff</button>
         </div>
       </Box>
+
 
       <Box sx={StyledBox} height="100%">
         <DataGrid
