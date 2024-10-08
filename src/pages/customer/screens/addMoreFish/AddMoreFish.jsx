@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./AddMoreFish.css";
-import { TextField, Box, Button, Typography } from "@mui/material";
+import {
+  TextField,
+  Box,
+  Button,
+  Typography,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 import { Divider } from "@mui/material";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -222,8 +231,7 @@ const AddMoreFish = () => {
               </div>
             )}
 
-            {/* gender */}
-            <TextField
+            {/* <TextField
               id="gender"
               label={
                 <span>
@@ -247,6 +255,39 @@ const AddMoreFish = () => {
                 },
               }}
             />
+            {formik.touched.gender && formik.errors.gender && (
+              <div className="login__validation__error">
+                <p>{formik.errors.gender}</p>
+              </div>
+            )} */}
+
+            {/* gender */}
+            <FormControl fullWidth margin="dense">
+              <InputLabel id="gender-label">
+                <span>
+                  Gender <span style={{ color: "red" }}>*</span>
+                </span>
+              </InputLabel>
+              <Select
+                labelId="gender-label"
+                id="gender"
+                name="gender" // Ensure the name matches the formik field name
+                value={formik.values.gender}
+                onChange={(event) =>
+                  formik.setFieldValue("gender", event.target.value)
+                } // Explicitly set the field value
+                fullWidth
+                color="secondary"
+                style={{
+                  backgroundColor: "#f5f5f5",
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                  color: "black",
+                }}
+              >
+                <MenuItem value="Male">Male</MenuItem>
+                <MenuItem value="Female">Female</MenuItem>
+              </Select>
+            </FormControl>
             {formik.touched.gender && formik.errors.gender && (
               <div className="login__validation__error">
                 <p>{formik.errors.gender}</p>
@@ -290,7 +331,7 @@ const AddMoreFish = () => {
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent:"flex-end",
+                justifyContent: "flex-end",
                 gap: "30px",
                 marginBottom: "10px",
                 marginTop: "10px",
