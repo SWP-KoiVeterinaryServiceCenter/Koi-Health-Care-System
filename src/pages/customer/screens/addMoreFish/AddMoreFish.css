@@ -1,36 +1,36 @@
-/* General form container styling */
-.createPackage {
+.add_more_fish {
   background-color: #fff;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  padding: 20px 40px;
+  padding: 0px 40px 0px 40px;
   max-width: 500px;
   margin: 100px auto 10px auto;
-  max-height: 550px;
+  max-height: 600px;
+  border: 2px solid black;
 }
 
-.createPackage h1, 
-.createPackage h2 {
+.add_more_fish h1,
+.add_more_fish h2 {
   text-align: center;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
   color: #344055;
   margin-bottom: 20px;
 }
 
-.createPackage p {
-  font-family: 'EB Garamond', serif;
+.add_more_fish p {
+  font-family: "EB Garamond", serif;
   font-size: 18px;
   color: #7d7d7d;
 }
 
 /* Text field container */
-.createPackage .MuiTextField-root {
+.add_more_fish .MuiTextField-root {
   margin-bottom: 5px;
 }
 
 /* Styling input labels */
 .MuiInputLabel-outlined {
-  font-family: 'EB Garamond', serif;
+  font-family: "EB Garamond", serif;
   color: #344055 !important;
 }
 
@@ -49,34 +49,32 @@
 }
 
 /* Form buttons (Back and Submit) */
-.createPackage .btn {
+.add_more_fish .btn {
   background-color: #70d8bd;
   color: white;
-  /* font-family: 'Bebas Neue', cursive; */
   padding: 10px 20px;
   border-radius: 5px;
-  /* text-transform: uppercase; */
   transition: background-color 0.3s ease;
 }
 
-.createPackage .btn:hover {
+.add_more_fish .btn:hover {
   background-color: #5bb49d;
 }
 
-.createPackage .back-btn {
+.add_more_fish .back-btn {
   background-color: #ddd;
   color: #333;
   padding: 10px 20px;
   border-radius: 5px;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
 }
 
-.createPackage .back-btn:hover {
+.add_more_fish .back-btn:hover {
   background-color: #ccc;
 }
 
 /* Loading modal styling */
-.createPackage .LoadingModal {
+.add_more_fish .LoadingModal {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,7 +82,7 @@
 }
 
 /* Align buttons in a row */
-.createPackage .button-container {
+.add_more_fish .button-container {
   display: flex;
   align-items: center;
   gap: 30px;
@@ -95,11 +93,34 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .createPackage {
+  .add_more_fish {
     padding: 20px;
   }
 
-  .createPackage .button-container {
+  .add_more_fish .button-container {
     flex-direction: column;
+  }
+}
+
+.add_more_fish .form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.add_more_fish .text-field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap: 20px; /* Space between fields */
+}
+
+/* Ensure that each TextField takes full width in the grid cell */
+.add_more_fish .text-field-grid .MuiTextField-root {
+  width: 100%; /* Make sure TextField takes full width */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .add_more_fish .text-field-grid {
+    grid-template-columns: 1fr; /* Switch to single column */
   }
 }
