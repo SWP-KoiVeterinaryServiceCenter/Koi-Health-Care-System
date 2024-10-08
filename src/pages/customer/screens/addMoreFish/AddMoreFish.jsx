@@ -1,58 +1,320 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./AddMoreFish.css";
-// import AppAppBar from "../../authorize/landingPage/LandingPageDetail/AppAppBar/AppAppBar";
-// import Footer from "../../authorize/landingPage/LandingPageDetail/Footer/Footer";
+import { TextField, Box, Button, Typography } from "@mui/material";
 import { Divider } from "@mui/material";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { addKoiByAccountIdThunk } from "../../../../store/apiThunk/koiThunk";
+import {
+  ADDPACKAGESUCCESS,
+  ERRORTEXT,
+  SUCCESSTEXT,
+} from "../../../../components/text/notiText/notiText";
+import { BackButton } from "../../../../components/modal/backModal/backModal";
+import { useNavigate } from "react-router-dom";
+import LoadingModal from "../../../../components/modal/loadingModal/loadingModal";
+import Swal from "sweetalert2";
 
 const AddMoreFish = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [showLoadingModal, setShowLoadingModal] = useState(false);
+
+  const Header = ({
+    title,
+    subtitle,
+    titleColor = "gray",
+    subtitleColor = "gray",
+  }) => {
+    return (
+      <Box mb={2}>
+        <Typography
+          style={{
+            fontFamily: "Source Sans Pro, sans-serif",
+            fontSize: "32px",
+            color: titleColor,
+            fontWeight: "700",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+            padding: "4px",
+            borderRadius: "4px",
+          }}
+        >
+          {title}
+        </Typography>
+        <Typography variant="subtitle1" style={{ color: subtitleColor }}>
+          {subtitle}
+        </Typography>
+      </Box>
+    );
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      koiName: "",
+      weight: "",
+      age: "",
+      gender: "",
+      varieties: "",
+    },
+    validationSchema: Yup.object({
+      koiName: Yup.string().required("Koi Name cannot be empty"),
+      weight: Yup.number()
+        .required("Weight cannot be empty")
+        .min(0, "Weight cannot be negative")
+        .integer("Weight must be an integer")
+        .max(50, "Weight cannot exceed 50kg"),
+      age: Yup.number()
+        .required("Age cannot be empty")
+        .min(0, "Age cannot be negative")
+        .integer("Age must be an integer")
+        .max(20, "Age cannot exceed 20 year"),
+      gender: Yup.string().required("Gender cannot be empty"),
+      varieties: Yup.string().required("Varieties cannot be empty"),
+    }),
+
+    onSubmit: async (values) => {
+      setShowLoadingModal(true);
+      dispatch(
+        addKoiByAccountIdThunk({
+          koiName: values.koiName,
+          weight: values.weight,
+          age: values.weight,
+          gender: values.gender,
+          varieties: values.varieties,
+        })
+      )
+        .unwrap()
+        .then(() => {
+          setShowLoadingModal(false);
+          Swal.fire({
+            title: SUCCESSTEXT,
+            text: ADDPACKAGESUCCESS,
+            icon: "success",
+            showCancelButton: false,
+            showConfirmButton: false,
+            background: "white",
+            timer: 1500,
+            timerProgressBar: true,
+            scrollbarPadding: false,
+          }).then(() => {
+            navigate(-1);
+          });
+        })
+        .catch((error) => {
+          setShowLoadingModal(false);
+          Swal.fire({
+            title: ERRORTEXT,
+            text: error.message,
+            icon: "error",
+            showConfirmButton: false,
+            background: "white",
+            timer: 2000,
+            timerProgressBar: true,
+            scrollbarPadding: false,
+          });
+        });
+    },
+  });
+
+  console.log(formik);
+
   return (
-    <div>
-      {/* <AppAppBar /> */}
-      <div className="add-more-fish">
-        <div className="form-group">
-          <label htmlFor="name">Name:</label>
-          <input type="text" id="name" placeholder="At Least 5 Character" />
-        </div>
+    <>
+      <div className="createPackage">
+        <Header
+          title="Add More Fish "
+          subtitle="Provide Koi Fish Information"
+        />
+        <form onSubmit={formik.handleSubmit}>
+          {/* koiName */}
+          <TextField
+            id="koiName"
+            label={
+              <span>
+                Koi Name: <span style={{ color: "red" }}>*</span>
+              </span>
+            }
+            variant="outlined"
+            value={formik.values.koiName}
+            onChange={formik.handleChange}
+            fullWidth
+            autoComplete="koiName"
+            margin="dense"
+            type="string"
+            color="secondary"
+            InputLabelProps={{
+              style: { color: "black" },
+            }}
+            InputProps={{
+              style: {
+                backgroundColor: "#f5f5f5",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                color: "black",
+              },
+            }}
+          />
+          {formik.touched.koiName && formik.errors.koiName && (
+            <div className="login__validation__error">
+              <p>{formik.errors.koiName}</p>
+            </div>
+          )}
 
-        <div className="form-group">
-          <label htmlFor="type">Type:</label>
-          <input type="text" id="type" />
-        </div>
+          {/* weight */}
+          <TextField
+            id="weight"
+            label={
+              <span>
+                Weight (kg) <span style={{ color: "red" }}>*</span>
+              </span>
+            }
+            variant="outlined"
+            value={formik.values.weight}
+            onChange={formik.handleChange}
+            fullWidth
+            autoComplete="weight"
+            margin="dense"
+            type="number"
+            color="secondary"
+            InputLabelProps={{
+              style: { color: "black" },
+            }}
+            InputProps={{
+              style: {
+                backgroundColor: "#f5f5f5",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                color: "black",
+              },
+            }}
+          />
+          {formik.touched.weight && formik.errors.weight && (
+            <div className="login__validation__error">
+              <p>{formik.errors.weight}</p>
+            </div>
+          )}
 
-        <div className="form-group">
-          <label htmlFor="age">Age:</label>
-          <input type="text" id="age" />
-        </div>
+          {/* age */}
+          <TextField
+            id="age"
+            label={
+              <span>
+                Age (years old) <span style={{ color: "red" }}>*</span>
+              </span>
+            }
+            variant="outlined"
+            value={formik.values.age}
+            onChange={formik.handleChange}
+            fullWidth
+            autoComplete="age"
+            margin="dense"
+            type="number"
+            color="secondary"
+            InputLabelProps={{
+              style: { color: "black" },
+            }}
+            InputProps={{
+              style: {
+                backgroundColor: "#f5f5f5",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                color: "black",
+              },
+            }}
+          />
+          {formik.touched.age && formik.errors.age && (
+            <div className="login__validation__error">
+              <p>{formik.errors.age}</p>
+            </div>
+          )}
 
-        <div className="form-group checkbox-group">
-          <label htmlFor="gender">Gender:</label>
-          <input type="checkbox" id="gender" />
-          <span>Male</span>
-          <input type="checkbox" id="gender" />
-          <span>Female</span>
-        </div>
+          {/* gender */}
+          <TextField
+            id="gender"
+            label={
+              <span>
+                Gender <span style={{ color: "red" }}>*</span>
+              </span>
+            }
+            variant="outlined"
+            value={formik.values.gender}
+            onChange={formik.handleChange}
+            fullWidth
+            autoComplete="gender"
+            margin="dense"
+            type="string"
+            color="secondary"
+            InputLabelProps={{
+              style: { color: "black" },
+            }}
+            InputProps={{
+              style: {
+                backgroundColor: "#f5f5f5",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                color: "black",
+              },
+            }}
+          />
+          {formik.touched.gender && formik.errors.gender && (
+            <div className="login__validation__error">
+              <p>{formik.errors.gender}</p>
+            </div>
+          )}
 
-        <div className="form-group">
-          <label htmlFor="weight">Weight (kg):</label>
-          <input type="number" id="weight" />
-        </div>
+          {/* varieties */}
+          <TextField
+            id="varieties"
+            label={
+              <span>
+                Varieties <span style={{ color: "red" }}>*</span>
+              </span>
+            }
+            variant="outlined"
+            value={formik.values.varieties}
+            onChange={formik.handleChange}
+            fullWidth
+            autoComplete="varieties"
+            margin="dense"
+            type="string"
+            color="secondary"
+            InputLabelProps={{
+              style: { color: "black" },
+            }}
+            InputProps={{
+              style: {
+                backgroundColor: "#f5f5f5",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                color: "black",
+              },
+            }}
+          />
+          {formik.touched.varieties && formik.errors.varieties && (
+            <div className="login__validation__error">
+              <p>{formik.errors.varieties}</p>
+            </div>
+          )}
 
-        <div className="form-group">
-          <label htmlFor="length">Length (cm):</label>
-          <input type="number" id="length" />
-        </div>
+          {!showLoadingModal ? (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "30px",
+                marginBottom: "50px",
+                marginTop: "30px",
+              }}
+            >
+              <BackButton style={{ fontSize: "14px" }} />
 
-        <div className="add-more-fish-button">
-          <button class="pushable">
-            <span class="shadow"></span>
-            <span class="edge"></span>
-            <span class="front"> Add More Fish </span>
-          </button>
-        </div>
+              <Button className="btn" variant="contained" type="submit">
+                Create
+              </Button>
+            </div>
+          ) : (
+            <LoadingModal />
+          )}
+        </form>
       </div>
       <Divider />
-      {/* <Footer /> */}
-    </div>
+    </>
   );
 };
 

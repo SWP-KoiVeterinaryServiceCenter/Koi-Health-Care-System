@@ -1,102 +1,209 @@
+/* Container for Profile Information */
 .pi-container-1 {
   display: flex;
-  align-items: center; /* Align items vertically centered */
-  margin-bottom: 30px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 900px;
 }
 
 .pi-container-1 img {
-  height: auto;
-  width: 40%;
-  border-radius: 50px;
-  margin-right: 20px; /* Space from the line */
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 60px 0 90px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.divider {
-  width: 2px; /* Width of the line */
-  height: 250px; /* Adjust to match the height of the image/user-info */
-  background-color: #ccc; /* Color of the line */
-  margin: 0 20px; /* Space around the line */
-}
-
-.horizontal-divider {
-  width: 100%; /* Full width */
-  height: 2px; /* Thickness of the line */
-  background-color: #ccc; /* Color of the line */
-  margin: 20px 0; /* Space above and below */
-}
-
+/* User Info Section */
 .user-info {
-  padding: 20px;
-  background: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex: 1;
 }
 
 .user-info p {
-  margin: 10px 0;
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 10px;
   color: #333;
-  display: flex; /* Use flexbox for alignment */
 }
 
-.user-info p span {
+.user-info span {
   font-weight: bold;
-  color: #008bf8; /* Highlight the values */
+  color: #555;
 }
 
-.Koi-Management-Chart p {
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pi-container-1 {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .pi-container-1 img {
+    margin: 0 0 20px 0;
+  }
+
+  .user-info p {
+    font-size: 16px;
+  }
+}
+
+/* Chart Title */
+.koi_management_chart_title {
   display: flex;
+  align-items: center;
   justify-content: center;
-  font-size: xx-large;
-  font-weight: 700;
-  margin: 40px 0px;
+  font-family: "Bebas Neue", cursive;
+  font-size: 30px;
+  color: #344055;
+  margin-bottom: 20px;
+}
+
+/* Koi Management Chart Layout */
+.Koi-Management-Chart {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .KoiName {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 20px auto; /* Add margin to create space between elements */
-  width: 480px;
-  height: 80px;
-  background: #ffffff;
-  border-radius: 6px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+  text-align: center;
 }
 
-.KoiName img {
-  height: 40px;
-  width: auto;
-  cursor: pointer;
+.KoiName:hover {
+  transform: scale(1.05);
 }
 
 .KoiName p {
-  font-size: x-large;
-  font-weight: 500;
+  font-family: "EB Garamond", serif;
+  color: #7d7d7d;
+  margin: 2px;
 }
 
+/* Koi Card */
+.koi_card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.koi_card:hover {
+  transform: translateY(-5px);
+}
+
+/* Koi Image Styling */
+.koi_info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.koi_image {
+  width: 150px;
+  height: auto;
+  border-radius: 4px;
+}
+
+.koi_details {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  width: 100%;
+}
+
+.koi_details p {
+  margin: 5px 0;
+  text-align: left;
+  width: 100%;
+}
+
+/* Edit and Delete Icons */
+.icon_container {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.edit_icon,
+.delete_icon {
+  width: 24px;
+  cursor: pointer;
+}
+
+/* Responsive Design for Koi Card */
+@media (max-width: 768px) {
+  .koi_card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .koi_image {
+    width: 100%;
+  }
+}
+
+/* Additional Responsive Design for Koi Names */
+@media (max-width: 768px) {
+  .KoiName {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .KoiName div {
+    margin-top: 10px;
+  }
+
+  .KoiName p {
+    font-size: 16px;
+  }
+
+  .KoiName img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Giant Card Margin */
 .pi-giant-card {
-  margin: 95px 203px;
-  padding: 80px 68px;
-  background: #ffffff;
-  border-radius: 86px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 95px 100px 50px 100px;
 }
 
+/* Add Button Styling */
 .pi-add-button {
   width: 200px;
   display: flex;
-  justify-content: space-evenly; /* Space out text and image */
-  align-items: center; /* Center vertically */
-  margin: 50px 0px 20px 600px; /* Adjust margins */
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 50px 0 20px 600px;
   background-color: #ffffff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 5px 10px; /* Add padding for better button feel */
-  border-radius: 60px; /* Rounded corners */
-  cursor: pointer; /* Change cursor to pointer */
-  position: relative; /* Change to relative for positioning within the card */
-  right: 0; /* Align to the right within the card */
+  padding: 5px 10px;
+  border-radius: 60px;
+  cursor: pointer;
+  position: relative;
 }
 
 .pi-add-button img {
@@ -109,17 +216,15 @@
   font-weight: 500;
 }
 
-
 .pi-add-button:hover {
-  background-color: #cce7ff; /* Changes the background color */
-  transform: scale(1.05); /* Slightly scales up the button */
+  background-color: #cce7ff;
+  transform: scale(1.05);
 }
 
-/* Optional: Adding hover effect for text and image color changes */
 .pi-add-button:hover p {
-  color: #007bff; /* Changes text color on hover */
+  color: #007bff;
 }
 
 .pi-add-button:hover img {
-  filter: brightness(1.2); /* Makes the image brighter on hover */
+  filter: brightness(1.2);
 }

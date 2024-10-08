@@ -138,11 +138,6 @@ const router = createBrowserRouter([
     path: "/transferStatus",
     element: <TransferStatus />,
   },
-
-  {
-    path: "/addMoreFish",
-    element: <AddMoreFish />,
-  },
   {
     path: "/booking",
     element: <Booking />,
@@ -311,11 +306,11 @@ const router = createBrowserRouter([
     errorElement: <Error404 />,
     children: [
       {
-        path: "", 
+        path: "",
         element: <HomePage />,
       },
       {
-        path: "service", 
+        path: "service",
         element: <ServiceHome direction="customer" />,
         children: [
           {
@@ -323,14 +318,14 @@ const router = createBrowserRouter([
             element: <ServiceKoifish direction="customer" />,
           },
           {
-            path: "createKoiFishAppointment", 
+            path: "createKoiFishAppointment",
             element: <CreateKoiFishAppointment />,
           },
         ],
       },
       {
         path: "personalInformation",
-        element: <PersonalInformation />,
+        element: <PersonalInformation direction="customer" />,
       },
       {
         path: "serviceInformation",
@@ -343,6 +338,10 @@ const router = createBrowserRouter([
       {
         path: "doctors",
         element: <DoctorOnNewsPage direction="customer" />,
+      },
+      {
+        path: "addMoreFish",
+        element: <AddMoreFish />,
       },
     ],
   },
