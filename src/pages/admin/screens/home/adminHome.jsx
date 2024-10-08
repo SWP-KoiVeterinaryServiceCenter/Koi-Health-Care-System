@@ -59,10 +59,10 @@ export default function AdminHome() {
                 width: isCollapsed === true ? "94.75%" : "82.3%",
 
                
-                backgroundColor: "#F2F3F4",
+                backgroundColor: "#FFF",
               }}
             >
-              <Topbar />
+              {/* <Topbar /> */}
               <Outlet />
             </div>
           </ThemeProvider>
