@@ -67,6 +67,7 @@ import GuestContact from "./pages/guest/guestContact/guestContact";
 import HomePage from "./pages/customer/screens/home/home";
 import ContactUs from "./pages/customer/screens/contactUs/contactUs";
 import CreateKoiFishAppointment from "./pages/customer/screens/createKoiFishAppointment/createKoiFishAppointment";
+import UpdateKoiFishInformation from "./pages/customer/screens/updateKoiFishInformation/UpdateKoiFishInformation";
 const router = createBrowserRouter([
   //Guest
   {
@@ -137,11 +138,6 @@ const router = createBrowserRouter([
   {
     path: "/transferStatus",
     element: <TransferStatus />,
-  },
-
-  {
-    path: "/addMoreFish",
-    element: <AddMoreFish />,
   },
   {
     path: "/booking",
@@ -311,11 +307,11 @@ const router = createBrowserRouter([
     errorElement: <Error404 />,
     children: [
       {
-        path: "", 
+        path: "",
         element: <HomePage />,
       },
       {
-        path: "service", 
+        path: "service",
         element: <ServiceHome direction="customer" />,
         children: [
           {
@@ -323,14 +319,14 @@ const router = createBrowserRouter([
             element: <ServiceKoifish direction="customer" />,
           },
           {
-            path: "createKoiFishAppointment", 
+            path: "createKoiFishAppointment",
             element: <CreateKoiFishAppointment />,
           },
         ],
       },
       {
         path: "personalInformation",
-        element: <PersonalInformation />,
+        element: <PersonalInformation direction="customer" />,
       },
       {
         path: "serviceInformation",
@@ -343,6 +339,14 @@ const router = createBrowserRouter([
       {
         path: "doctors",
         element: <DoctorOnNewsPage direction="customer" />,
+      },
+      {
+        path: "addMoreFish",
+        element: <AddMoreFish />,
+      },
+      {
+        path: "updateKoiFishInformation",
+        element: <UpdateKoiFishInformation />,
       },
     ],
   },

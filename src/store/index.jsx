@@ -96,6 +96,9 @@ import { promotionsFromShopSlice } from "./features/promotion.slice/promotionsFr
 import { productDetailSlice } from "./features/product.slice/productDetail.slice";
 import { productsFromShopSlice } from "./features/product.slice/productsFromShop.slice";
 
+import { allKoiByAccountIdSlice } from "./features/koi.slice/koiByAccountId.slice";
+import { allKoiByIdSlice } from "./features/koi.slice/koiById.slice";
+
 export const store = configureStore({
   reducer: {
     userDetail: userDetailSlice.reducer,
@@ -104,6 +107,9 @@ export const store = configureStore({
     allAccounts: allAccountsSlice.reducer,
     totalUsers: totalUsersSlice.reducer,
     allVerifyUsers: allVerifyUsersSlice.reducer,
+
+    allKoiByAccountId : allKoiByAccountIdSlice.reducer,
+    allKoiById: allKoiByIdSlice.reducer,
 
     petDetail: petDetailSlice.reducer,
     petsFromShop: petsFromShopSlice.reducer,
