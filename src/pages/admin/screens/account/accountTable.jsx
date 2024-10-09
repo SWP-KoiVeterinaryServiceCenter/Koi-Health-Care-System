@@ -9,6 +9,9 @@ import {
   MenuItem,
   Typography,
   TextField,
+  Container,
+  Grid,
+  Card,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,9 +32,13 @@ import {
 } from "../../../../components/styledTable/styledTable";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import "./accountTable.css";
-
+import Footer from "../../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 import AddIcon from "@mui/icons-material/Add";
-
+import IconButton from "@mui/material/IconButton";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import PinterestIcon from "@mui/icons-material/Pinterest";
+import bgImage from "../../../../assets/koibg_account.jpg";
 
 const AccountTable = () => {
   const theme = useTheme();
@@ -449,67 +456,213 @@ const AccountTable = () => {
   );
 
   return (
-
-    <Box m="20px" >
-      <Header title="ACCOUNT" subtitle="System Account Management" />
-      <Box display="flex" alignItems="center" justifyContent="space-between">
-        <Box display="flex" alignItems="center">
-          <TextField
-            label="Search"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === "Enter") {
-                handleSearch();
-              }
-            }}
-            placeholder="Search Information"
-            InputProps={{
-              style: { color: "black" }, // Text color
-            }}
-            sx={{
-              mb: 2,
-              width: "200px",
-              "& .MuiInputBase-input": { color: "black" },
-              "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
-              "& .MuiInputLabel-root": { color: "black" }, // Label color
-            }}
-          />
-          <Button
-            variant="contained"
-            onClick={handleSearch}
-            sx={{ mb: 2, ml: 1, height: "50px", backgroundColor: "#7CB9E8" }}
-          >
-            Search
-          </Button>
-        </Box>
-
-        <div className="custom-buttons">
-          <button>Create Vet Account</button>
-          <button>Create Staff</button>
-        </div>
-      </Box>
-
-
-      <Box sx={StyledBox} height="100%">
-        <DataGrid
-          disableRowSelectionOnClick
-          loading={showLoadingModal}
-          rows={paginatedRows}
-          columns={columns}
-          pagination
-          paginationMode="client"
-          pageSize={pageSize}
-          page={pageNumber}
-          onPageChange={handlePageChange}
-          rowCount={filteredRows.length}
-          rowsPerPageOptions={[]}
-          components={{
-            Pagination: CustomFooter,
+    <div>
+      <>
+        <Box
+          minHeight="45vh"
+          width="100%"
+          sx={{
+            backgroundImage: `url(${bgImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "top",
+            display: "grid",
+            placeItems: "center",
           }}
-        />
-      </Box>
-    </Box>
+        >
+          <Container>
+            <Grid
+              container
+              item
+              xs={12}
+              lg={7}
+              justifyContent="center"
+              mx="auto"
+            >
+              <Typography
+                variant="h1"
+                color="#00CAFF"
+                sx={({ breakpoints, typography: { fontSize } }) => ({
+                  marginTop: "-48px",
+                  marginBottom: "8px",
+                  [breakpoints.down("md")]: {
+                    fontSize: fontSize["h3"],
+                  },
+                  fontWeight: "700",
+                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+                   borderRadius: "4px"
+                })}
+              >
+                Account Management
+              </Typography>
+              <Typography
+                variant="body1"
+                color="black"
+                textAlign="center"
+                px={{ xs: 6, lg: 12 }}
+                mt={1}
+               
+              >
+            Account management system, which allows you to manage your accounts. Create accounts for staff/vet
+              </Typography>
+            </Grid>
+          </Container>
+        </Box>
+        <Card
+          sx={{
+            p: 2,
+            mx: { xs: 2, lg: 3 },
+            mt: -8,
+            mb: 4,
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            backdropFilter: "saturate(200%) blur(30px)",
+            boxShadow: (theme) => theme.shadows[24],
+        
+          }}
+        >
+          {/* //////////////////////////////////////////////////////////////TABLE///////////////////////////////////////////////////////////////////// */}
+
+          <Box m="20px" className="Box-Template-Modal">
+            {/* <Header title="ACCOUNT" subtitle="System Account Management" /> */}
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <Box display="flex" alignItems="center">
+                <TextField
+                  label="Search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      handleSearch();
+                    }
+                  }}
+                  placeholder="Search Information"
+                  InputProps={{
+                    style: { color: "black" }, // Text color
+                  }}
+                  sx={{
+                    mb: 2,
+                    width: "200px",
+                    "& .MuiInputBase-input": { color: "black" },
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "black",
+                    },
+                    "& .MuiInputLabel-root": { color: "black" }, // Label color
+                  }}
+                />
+                <Button
+                  variant="contained"
+                  onClick={handleSearch}
+                  sx={{
+                    mb: 2,
+                    ml: 1,
+                    height: "50px",
+                    backgroundColor: "#7CB9E8",
+                  }}
+                >
+                  Search
+                </Button>
+              </Box>
+
+              <div className="custom-buttons">
+                <button>Create Vet Account</button>
+                <button>Create Staff</button>
+              </div>
+            </Box>
+
+            <Box sx={StyledBox} height="100%">
+              <DataGrid
+                disableRowSelectionOnClick
+                loading={showLoadingModal}
+                rows={paginatedRows}
+                columns={columns}
+                pagination
+                paginationMode="client"
+                pageSize={pageSize}
+                page={pageNumber}
+                onPageChange={handlePageChange}
+                rowCount={filteredRows.length}
+                rowsPerPageOptions={[]}
+                components={{
+                  Pagination: CustomFooter,
+                }}
+              />
+            </Box>
+          </Box>
+
+          {/* //////////////////////////////////////////////////////////////END///////////////////////////////////////////////////////////////////// */}
+
+          <Box pt={18} pb={6}>
+            <Container>
+              <Grid container spacing={3}>
+                <Grid
+                  item
+                  xs={12}
+                  lg={5}
+                  ml="auto"
+                  sx={{ textAlign: { xs: "center", lg: "left" } }}
+                >
+                  <Typography
+                    variant="h4"
+                    fontWeight="bold"
+                    mb={0.5}
+                    color="black"
+                  >
+                    Thank you for your support!
+                  </Typography>
+                  <Typography variant="body1" color="black">
+                    We deliver the best web products
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  lg={5}
+                  my={{ xs: 5, lg: "auto" }}
+                  mr={{ xs: 0, lg: "auto" }}
+                  sx={{ textAlign: { xs: "center", lg: "right" } }}
+                >
+                  <IconButton
+                    component="a"
+                    href="https://twitter.com/intent/tweet?text=Check%20Material%20Design%20System%20made%20by%20%40CreativeTim%20%23webdesign%20%23designsystem%20%23mui5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fmaterial-kit-react"
+                    target="_blank"
+                    color="primary"
+                    sx={{ mr: 1 }}
+                  >
+                    <TwitterIcon />
+                  </IconButton>
+                  <IconButton
+                    component="a"
+                    href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-kit-react"
+                    target="_blank"
+                    color="primary"
+                    sx={{ mr: 1 }}
+                  >
+                    <FacebookIcon />
+                  </IconButton>
+                  <IconButton
+                    component="a"
+                    href="https://www.pinterest.com/pin/create/button/?url=https://www.creative-tim.com/product/material-kit-react"
+                    target="_blank"
+                    color="primary"
+                  >
+                    <PinterestIcon />
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </Container>
+          </Box>
+        </Card>
+        <Box pt={6} px={1} mt={6} sx={{color:"black",background:"#E5E5E5"}} >
+        <Footer/>
+        </Box>
+      </>
+
+      {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+
+    </div>
   );
 };
 

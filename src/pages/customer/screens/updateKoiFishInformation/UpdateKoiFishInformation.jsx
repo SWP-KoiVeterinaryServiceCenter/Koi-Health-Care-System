@@ -1,6 +1,15 @@
 import React from "react";
 import "./UpdateKoiFishInformation.css";
-import { Button, TextField, Box, Typography } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Box,
+  Typography,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
@@ -26,10 +35,15 @@ export default function updateKoiFishInformation() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
+
+  // console.log("Location state:", location.state);
   const koiId = location.state?.koiId;
+  // console.log("Koi ID:", koiId);
+
   const allKoiById = useSelector(allKoiByIdSelector);
   const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [showRender, setShowRender] = useState(false);
+
   const Header = ({
     title,
     subtitle,
@@ -88,7 +102,6 @@ export default function updateKoiFishInformation() {
       gender: Yup.string().required("Gender cannot be empty"),
       varieties: Yup.string().required("Varieties cannot be empty"),
     }),
-
     onSubmit: async (values) => {
       setShowLoadingModal(true);
       dispatch(
@@ -136,177 +149,194 @@ export default function updateKoiFishInformation() {
 
   return (
     <>
-      <div className="updatePackage">
+      <div className="update_koi_fish">
         <Header
           title="Update Koi Information"
           subtitle="Provide Koi Information"
         />
         {!showRender ? (
           <form onSubmit={formik.handleSubmit}>
-            {/* koiName */}
-            <TextField
-              id="koiName"
-              label={
-                <span>
-                  Koi Name <span style={{ color: "red" }}>*</span>
-                </span>
-              }
-              variant="outlined"
-              value={formik.values.koiName}
-              onChange={formik.handleChange}
-              fullWidth
-              autoComplete="koiName"
-              margin="dense"
-              color="secondary"
-              InputLabelProps={{
-                style: { color: "black" },
-              }}
-              InputProps={{
-                style: {
-                  backgroundColor: "#f5f5f5",
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                  color: "black",
-                },
-              }}
-            />
-            {formik.touched.koiName && formik.errors.koiName && (
-              <div className="login__validation__error">
-                <p>{formik.errors.koiName}</p>
+            <div className="text-field-grid">
+              <div className="text-field-container">
+                
+                {/* koiName */}
+                <TextField
+                  id="koiName"
+                  label={
+                    <span>
+                      Koi Name <span style={{ color: "red" }}>*</span>
+                    </span>
+                  }
+                  variant="outlined"
+                  value={formik.values.koiName}
+                  onChange={formik.handleChange}
+                  fullWidth
+                  autoComplete="koiName"
+                  margin="dense"
+                  color="secondary"
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
+                  InputProps={{
+                    style: {
+                      backgroundColor: "#f5f5f5",
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                      color: "black",
+                    },
+                  }}
+                />
+                {formik.touched.koiName && formik.errors.koiName && (
+                  <div className="login__validation__error">
+                    {formik.errors.koiName}
+                  </div>
+                )}
               </div>
-            )}
 
-            {/* weight */}
-            <TextField
-              id="weight"
-              label={
-                <span>
-                  Weight (Kg) <span style={{ color: "red" }}>*</span>
-                </span>
-              }
-              variant="outlined"
-              value={formik.values.weight}
-              onChange={formik.handleChange}
-              fullWidth
-              autoComplete="weight"
-              margin="dense"
-              type="number"
-              color="secondary"
-              InputLabelProps={{
-                style: { color: "black" },
-              }}
-              InputProps={{
-                style: {
-                  backgroundColor: "#f5f5f5",
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                  color: "black",
-                },
-              }}
-            />
-            {formik.touched.weight && formik.errors.weight && (
-              <div className="login__validation__error">
-                <p>{formik.errors.weight}</p>
+              <div className="text-field-container">
+                {/* weight */}
+                <TextField
+                  id="weight"
+                  label={
+                    <span>
+                      Weight (Kg) <span style={{ color: "red" }}>*</span>
+                    </span>
+                  }
+                  variant="outlined"
+                  value={formik.values.weight}
+                  onChange={formik.handleChange}
+                  fullWidth
+                  autoComplete="weight"
+                  margin="dense"
+                  type="number"
+                  color="secondary"
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
+                  InputProps={{
+                    style: {
+                      backgroundColor: "#f5f5f5",
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                      color: "black",
+                    },
+                  }}
+                />
+                {formik.touched.weight && formik.errors.weight && (
+                  <div className="login__validation__error">
+                    {formik.errors.weight}
+                  </div>
+                )}
               </div>
-            )}
 
-            {/* age */}
-            <TextField
-              id="age"
-              label={
-                <span>
-                  Age (Years Old) <span style={{ color: "red" }}>*</span>
-                </span>
-              }
-              variant="outlined"
-              value={formik.values.age}
-              onChange={formik.handleChange}
-              fullWidth
-              autoComplete="age"
-              margin="dense"
-              type="number"
-              color="secondary"
-              InputLabelProps={{
-                style: { color: "black" },
-              }}
-              InputProps={{
-                style: {
-                  backgroundColor: "#f5f5f5",
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                  color: "black",
-                },
-              }}
-            />
-            {formik.touched.age && formik.errors.age && (
-              <div className="login__validation__error">
-                <p>{formik.errors.age}</p>
+              <div className="text-field-container">
+                {/* age */}
+                <TextField
+                  id="age"
+                  label={
+                    <span>
+                      Age (Years Old) <span style={{ color: "red" }}>*</span>
+                    </span>
+                  }
+                  variant="outlined"
+                  value={formik.values.age}
+                  onChange={formik.handleChange}
+                  fullWidth
+                  autoComplete="age"
+                  margin="dense"
+                  type="number"
+                  color="secondary"
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
+                  InputProps={{
+                    style: {
+                      backgroundColor: "#f5f5f5",
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                      color: "black",
+                    },
+                  }}
+                />
+                {formik.touched.age && formik.errors.age && (
+                  <div className="login__validation__error">
+                    {formik.errors.age}
+                  </div>
+                )}
               </div>
-            )}
 
-            {/* gender */}
-            <TextField
-              id="gender"
-              label="Price"
-              variant="outlined"
-              value={formik.values.gender}
-              onChange={formik.handleChange}
-              fullWidth
-              autoComplete="gender"
-              margin="dense"
-              type="number"
-              color="secondary"
-              InputLabelProps={{
-                style: { color: "black" },
-              }}
-              InputProps={{
-                style: {
-                  backgroundColor: "#f5f5f5",
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                  color: "black",
-                },
-              }}
-            />
-            {formik.touched.gender && formik.errors.gender && (
-              <div className="login__validation__error">
-                <p>{formik.errors.gender}</p>
+              {/* gender */}
+              <div className="text-field-container">
+                <FormControl fullWidth margin="dense">
+                  <InputLabel id="gender-label">
+                    <span>
+                      Gender <span style={{ color: "red" }}>*</span>
+                    </span>
+                  </InputLabel>
+                  <Select
+                    labelId="gender-label"
+                    id="gender"
+                    name="gender" // Ensure the name matches the formik field name
+                    value={formik.values.gender}
+                    onChange={(event) =>
+                      formik.setFieldValue("gender", event.target.value)
+                    } // Explicitly set the field value
+                    fullWidth
+                    color="secondary"
+                    style={{
+                      backgroundColor: "#f5f5f5",
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                      color: "black",
+                    }}
+                  >
+                    <MenuItem value="Male">Male</MenuItem>
+                    <MenuItem value="Female">Female</MenuItem>
+                  </Select>
+                </FormControl>
+                {formik.touched.gender && formik.errors.gender && (
+                  <div className="login__validation__error">
+                    {formik.errors.gender}
+                  </div>
+                )}
               </div>
-            )}
 
-            {/* varieties */}
-            <TextField
-              id="varieties"
-              label="Price"
-              variant="outlined"
-              value={formik.values.varieties}
-              onChange={formik.handleChange}
-              fullWidth
-              autoComplete="varieties"
-              margin="dense"
-              type="number"
-              color="secondary"
-              InputLabelProps={{
-                style: { color: "black" },
-              }}
-              InputProps={{
-                style: {
-                  backgroundColor: "#f5f5f5",
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                  color: "black",
-                },
-              }}
-            />
-            {formik.touched.varieties && formik.errors.varieties && (
-              <div className="login__validation__error">
-                <p>{formik.errors.varieties}</p>
+              {/* varieties */}
+              <div className="text-field-container">
+                <TextField
+                  id="varieties"
+                  label="Varieties"
+                  variant="outlined"
+                  value={formik.values.varieties}
+                  onChange={formik.handleChange}
+                  fullWidth
+                  autoComplete="varieties"
+                  margin="dense"
+                  type="string"
+                  color="secondary"
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
+                  InputProps={{
+                    style: {
+                      backgroundColor: "#f5f5f5",
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                      color: "black",
+                    },
+                  }}
+                />
+                {formik.touched.varieties && formik.errors.varieties && (
+                  <div className="login__validation__error">
+                    {formik.errors.varieties}
+                  </div>
+                )}
               </div>
-            )}
+            </div>
 
             {!showLoadingModal ? (
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
+                  justifyContent: "flex-end",
                   gap: "30px",
-                  marginBottom: "50px",
-                  marginTop: "30px",
+                  marginBottom: "10px",
                 }}
               >
                 <BackButton type="update" />
