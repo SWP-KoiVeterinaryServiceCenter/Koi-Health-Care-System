@@ -17,11 +17,11 @@
   margin-bottom: 20px;
 }
 
-.add_more_fish p {
+/* .add_more_fish p {
   font-family: "EB Garamond", serif;
   font-size: 18px;
   color: #7d7d7d;
-}
+} */
 
 /* Text field container */
 .add_more_fish .MuiTextField-root {
@@ -41,11 +41,28 @@
   color: black;
 }
 
-/* Error validation message */
+/* .login__validation__error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+} */
+
+
+.text-field-container {
+  margin-bottom: 15px; /* Adds some space below each text field */
+  position: relative;
+}
+
 .login__validation__error {
   color: red;
   font-size: 14px;
   margin-top: 5px;
+  margin-bottom: 0; /* Keep it tight under the field */
+  position: absolute; /* Ensure it's positioned correctly */
+  bottom: -20px; /* Position it directly under the text field */
+  left: 0;
+  right: 0;
+  text-align: left;
 }
 
 /* Form buttons (Back and Submit) */

@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./PersonalInformation.css";
 import koifish from "../../../../assets/koi-fish-1.jpg";
 import pen from "../../../../assets/pen.png";
-import add from "../../../../assets/add.png";
 import trash from "../../../../assets/bin.png";
 import { Divider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { getUserDataThunk } from "../../../../store/apiThunk/userThunk";
 import { userDataSelector } from "../../../../store/sellectors";
 
@@ -25,7 +24,7 @@ export default function PersonalInformation(props) {
   const userDetail = useSelector(userDataSelector);
   const allKoiByAccountId = useSelector(allKoiByAccountIdSelector);
 
-  console.log({allKoiByAccountId});
+  console.log({ allKoiByAccountId });
 
   useEffect(() => {
     const fetchUserAndKoiData = async () => {
@@ -39,7 +38,7 @@ export default function PersonalInformation(props) {
       }
     };
 
-    fetchUserAndKoiData();    
+    fetchUserAndKoiData();
   }, [dispatch]);
 
   // const handleDeleteKoi = (id) => {
@@ -53,7 +52,6 @@ export default function PersonalInformation(props) {
   //     });
   // };
 
-  
   const handleDeleteKoi = (id) => {
     console.log(`Deleting koi with ID: ${id}`);
     dispatch(deleteKoiByAccountIdThunk(id))
@@ -71,7 +69,6 @@ export default function PersonalInformation(props) {
       <div className="pi-giant-card">
         <div className="pi-container-1">
           <img src={koifish} alt="Koi Fish" />
-          {/* <div className="divider"></div> */}
           <div className="user-info">
             <p>
               Name: <span>{userDetail.username}</span>
@@ -88,27 +85,32 @@ export default function PersonalInformation(props) {
           </div>
         </div>
         <Divider />
-        <div
-          className="pi-add-button"
-          onClick={() => {
-            if (direction) {
-              window.scrollTo(0, 0); // Scroll to the top of the page
-              navigate(`/${direction}/addMoreFish`);
-            } else {
-              console.error("Direction is undefined.");
-            }
-          }}
-        >
-          <p>Add More Fish</p>
-          <img src={add} alt="Add" />
+
+        <div className="button-container">
+          <div
+            className="pi-add-button"
+            onClick={() => {
+              if (direction) {
+                window.scrollTo(0, 0);
+                navigate(`/${direction}/addMoreFish`);
+              } else {
+                console.error("Direction is undefined.");
+              }
+            }}
+          >
+            <div style={{ display: "flex", gap: "5px" }}>
+              Add More Fish
+              <AddCircleOutlineIcon />
+            </div>
+          </div>
         </div>
+
         {/* <p className="koi_management_chart_title">Koi Management</p> */}
 
         <div className="Koi-Management-Chart">
           {allKoiByAccountId &&
             allKoiByAccountId.map((koi) => (
               <div className="KoiName">
-                
                 <div className="koi_card">
                   <div className="koi_info">
                     <img src={koifish} alt="Koi Fish" className="koi_image" />
