@@ -109,7 +109,7 @@ export default function updateKoiFishInformation() {
           id: koiId,
           koiName: values.koiName,
           weight: values.weight,
-          age: values.weight,
+          age: values.age,
           gender: values.gender,
           varieties: values.varieties,
         })
