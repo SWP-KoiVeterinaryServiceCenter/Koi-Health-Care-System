@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getKoiByAccountId} from "../../api/koi";
+import { getKoiByAccountId } from "../../api/koi";
 import { deleteKoiByAccountId } from "../../api/koi";
 import { addKoiByAccountId } from "../../api/koi";
 import { updateKoiByAccountId } from "../../api/koi";
@@ -43,12 +43,12 @@ export const addKoiByAccountIdThunk = createAsyncThunk(
 
 export const updateKoiByAccountIdThunk = createAsyncThunk(
   "kois/updateKoiByAccountIdThunk",
-  async (data, thunkAPI) => {
+  async ({ id, data }, thunkApi) => {
     try {
-      const response = await updateKoiByAccountId(data);
+      const response = await updateKoiByAccountId(id, data);
       return response;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error?.response?.data);
+      return thunkApi.rejectWithValue(error?.response?.data);
     }
   }
 );
