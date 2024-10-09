@@ -9,6 +9,12 @@ import { Divider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import {
+  ADDPACKAGESUCCESS,
+  ERRORTEXT,
+  SUCCESSTEXT,
+} from "../../../../components/text/notiText/notiText";
+import Swal from "sweetalert2";
 import { getUserDataThunk } from "../../../../store/apiThunk/userThunk";
 import { userDataSelector } from "../../../../store/sellectors";
 
@@ -21,6 +27,7 @@ export default function PersonalInformation(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const direction = props.direction; // Destructure direction from props
+  // const [showLoadingModal, setShowLoadingModal] = useState(false);
 
   // Get user details and koi details from Redux state
   const userDetail = useSelector(userDataSelector);
@@ -43,16 +50,65 @@ export default function PersonalInformation(props) {
     fetchUserAndKoiData();
   }, [dispatch]);
 
+  // const handleDeleteKoi = (id) => {
+  //   console.log(`Deleting koi with ID: ${id}`);
+  //   dispatch(deleteKoiByAccountIdThunk(id))
+  //     .unwrap()
+  //     // .then(() => {
+  //     //   console.log(`Koi with ID ${id} deleted.`);
+  //     // })
+  //     // .catch((error) => {
+  //     //   console.error("Error deleting koi:", error);
+  //     // })
+  //     .then(() => {
+  //       setShowLoadingModal(false);
+  //       Swal.fire({
+  //         title: SUCCESSTEXT,
+  //         // text: ADDPACKAGESUCCESS,
+  //         icon: "success",
+  //         showCancelButton: false,
+  //         showConfirmButton: false,
+  //         background: "white",
+  //         timer: 1500,
+  //         timerProgressBar: true,
+  //         scrollbarPadding: false,
+  //       }).then(() => {
+  //         navigate(-1);
+  //       });
+  //     })
+  // };
+
   const handleDeleteKoi = (id) => {
     console.log(`Deleting koi with ID: ${id}`);
+    // setShowLoadingModal(true); // Show loading modal while deleting
     dispatch(deleteKoiByAccountIdThunk(id))
       .unwrap()
       .then(() => {
-        console.log(`Koi with ID ${id} deleted.`);
+        Swal.fire({
+          title: SUCCESSTEXT,
+          icon: "success",
+          showCancelButton: false,
+          showConfirmButton: false,
+          background: "white",
+          timer: 1500,
+          timerProgressBar: true,
+          scrollbarPadding: false,
+        }).then(() => {
+          window.location.reload();
+        });
       })
       .catch((error) => {
-        console.error("Error deleting koi:", error);
+        Swal.fire({
+          title: "Error!",
+          text: error.message,
+          icon: "error",
+          showConfirmButton: true,
+          background: "white",
+        });
       });
+    // .finally(() => {
+    //   setShowLoadingModal(false); // Ensure loading modal is hidden regardless of success or error
+    // });
   };
 
   return (

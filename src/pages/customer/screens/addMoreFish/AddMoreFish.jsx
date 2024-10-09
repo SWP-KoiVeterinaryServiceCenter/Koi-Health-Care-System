@@ -99,7 +99,7 @@ const AddMoreFish = () => {
           setShowLoadingModal(false);
           Swal.fire({
             title: SUCCESSTEXT,
-            text: ADDPACKAGESUCCESS,
+            // text: ADDPACKAGESUCCESS,
             icon: "success",
             showCancelButton: false,
             showConfirmButton: false,

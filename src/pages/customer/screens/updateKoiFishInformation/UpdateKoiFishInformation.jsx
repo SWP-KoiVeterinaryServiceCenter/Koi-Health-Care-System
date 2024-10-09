@@ -158,6 +158,7 @@ export default function updateKoiFishInformation() {
           <form onSubmit={formik.handleSubmit}>
             <div className="text-field-grid">
               <div className="text-field-container">
+                
                 {/* koiName */}
                 <TextField
                   id="koiName"
