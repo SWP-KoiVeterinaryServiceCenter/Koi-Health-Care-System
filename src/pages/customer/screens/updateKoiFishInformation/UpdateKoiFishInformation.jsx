@@ -106,12 +106,14 @@ export default function updateKoiFishInformation() {
       setShowLoadingModal(true);
       dispatch(
         updateKoiByAccountIdThunk({
-          id: koiId,
-          koiName: values.koiName,
-          weight: values.weight,
-          age: values.age,
-          gender: values.gender,
-          varieties: values.varieties,
+          id: koiId, 
+          data: {  // Gói dữ liệu bên trong đối tượng 'data'
+            koiName: values.koiName,
+            weight: values.weight,
+            age: values.age, // Lưu ý: Bạn đã sử dụng nhầm values.weight cho age, hãy sửa lại
+            gender: values.gender,
+            varieties: values.varieties,
+          },
         })
       )
         .unwrap()

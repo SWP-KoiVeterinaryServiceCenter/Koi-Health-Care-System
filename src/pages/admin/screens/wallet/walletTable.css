@@ -2,11 +2,11 @@
     width: 99%;
 }
 
-.walletTableAdmin
+/* .walletTableAdmin
     .css-182u8a6-MuiInputBase-root-MuiOutlinedInput-root:hover
     .MuiOutlinedInput-notchedOutline {
     border-color: #4cceac !important;
-}
+} */
 .walletTableAdmin .box {
     padding-inline: 3%;
     padding-block: 20px;
