@@ -193,6 +193,13 @@ const Sidebar = (props) => {
                     selected={selected}
                     setSelected={setSelected}
                   />
+                     <Item
+                    title="Account"
+                    to="dashboardDetail"
+                    icon={<AccountCircleOutlined />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
                   {/* <Item
                     title="Verify Account"
                     to="verifyAccount"

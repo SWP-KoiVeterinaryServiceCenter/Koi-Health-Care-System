@@ -5,6 +5,8 @@ import { userDataSlice } from "./features/user.slice/userData.slice";
 import { staffsSlice } from "./features/user.slice/staffs.slice";
 import { allAccountsSlice } from "./features/user.slice/allAccounts.slice";
 import { totalUsersSlice } from "./features/user.slice/totalUsers.slice";
+import { totalStaffsSlice } from "./features/user.slice/totalStaffs.slice";
+import { totalVetsSlice } from "./features/user.slice/totalVets.slice";
 
 import { allVerifyUsersSlice } from "./features/user.slice/allVerifyUsers.slice"; //allVerifyUsers
 
@@ -106,6 +108,8 @@ export const store = configureStore({
     staffs: staffsSlice.reducer,
     allAccounts: allAccountsSlice.reducer,
     totalUsers: totalUsersSlice.reducer,
+    totalStaffs: totalStaffsSlice.reducer,
+    totalVets: totalVetsSlice.reducer,
     allVerifyUsers: allVerifyUsersSlice.reducer,
 
     allKoiByAccountId : allKoiByAccountIdSlice.reducer,

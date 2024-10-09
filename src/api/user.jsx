@@ -157,7 +157,15 @@ export const getAllUsers = async () => {
 };
 
 export const getTotalUsers = async () => {
-  const response = await api.get(`/api/v1/User/GetTotalUser`); //La get API All users
+  const response = await api.get(`/api/v1/Account/CustomerAmount`); //La get API All users
+  return response.data;
+};
+export const getTotalStaffs = async () => {
+  const response = await api.get(`/api/v1/Account/StaffAmount`); 
+  return response.data;
+};
+export const getTotalVets = async () => {
+  const response = await api.get(`/api/v1/Account/VetAmount`); 
   return response.data;
 };
 
@@ -170,5 +178,17 @@ export const getAllAccounts = async (role, pageNumber, pageSize) => {
 
 export const updateStatusAccount = async (data) => {
   const response = await api.put(`/api/v1/auths/accounts/status`, data);
+  return response.data;
+};
+
+export const createStaffAccount = async (data) => {
+  const response = await api.post(`/api/v1/Account/CreateStaffAccount`, data
+    );
+  return response.data;
+};
+
+export const createVetAccount = async (data) => {
+  const response = await api.post(`/api/v1/Account/CreateVetAccount`, data
+    );
   return response.data;
 };

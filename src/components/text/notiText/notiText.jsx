@@ -23,7 +23,7 @@ const ADDITEMSUCCESS = "Gift Created Successfully!!";
 const CONFIRMDELETEITEM = "Delete Gift?";
 const DELETEITEMSUCCESS = "Gift Deleted Successfully!!";
 const UPDATEITEMSUCCESS = "Gift Updated Successfully!!";
-const ADDPACKAGESUCCESS = "Subscription Package Created Successfully!!";
+const ADDPACKAGESUCCESS = "Account Created Successfully!!";
 const ADDCATEGORYSUCCESS = "Category Created Successfully!!";
 const CONFIRMDELETEPACKAGE = "Delete Subscription Package?";
 

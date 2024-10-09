@@ -25,7 +25,11 @@ import {
   banUser,
   unbanUser,
   changeRoleUser,
-  getTotalUsers
+  getTotalUsers,
+  createStaffAccount,
+  createVetAccount,
+  getTotalVets,
+  getTotalStaffs
 } from "../../api/user";
 
 export const updateStaffPasswordThunk = createAsyncThunk(
@@ -82,6 +86,28 @@ export const getTotalUsersThunk = createAsyncThunk(
   async (thunkAPI) => {
     try {
       const response = await getTotalUsers();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+export const getTotalStaffsThunk = createAsyncThunk(
+  "users/getTotalStaffs",
+  async (thunkAPI) => {
+    try {
+      const response = await getTotalStaffs();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+export const getTotalVetsThunk = createAsyncThunk(
+  "users/getTotalVets",
+  async (thunkAPI) => {
+    try {
+      const response = await getTotalVets();
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error?.response?.data);
@@ -354,5 +380,32 @@ export const signupThunk = createAsyncThunk(
       console.error('Error in signup thunk:', error.response ? error.response.data : error.message);
       return rejectWithValue(error.response ? error.response.data : error.message);
     }
+  }
+);
+
+export const createStaffAccountThunk = createAsyncThunk(
+  "user/createStaffAccount",
+  async (data, thunkAPI) => {
+      try {
+          const response = await createStaffAccount(data);
+          return response;
+      } catch (error) {
+          return thunkAPI.rejectWithValue(error.response.data);
+          
+      }
+  }
+);
+
+
+export const createVetAccountThunk = createAsyncThunk(
+  "user/createVetAccount",
+  async (data, thunkAPI) => {
+      try {
+          const response = await createVetAccount(data);
+          return response;
+      } catch (error) {
+          return thunkAPI.rejectWithValue(error.response.data);
+          
+      }
   }
 );

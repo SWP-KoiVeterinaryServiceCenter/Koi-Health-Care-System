@@ -22,7 +22,8 @@ import VerifyAccount from "./pages/admin/screens/verifyaccount/verifyaccount";
 import WalletTableAdmin from "./pages/admin/screens/wallet/walletTable";
 import AdminDashboard from "./pages/admin/screens/dashboard/dashboardPage/dashboard";
 import AdminDashboardDetail from "./pages/admin/screens/dashboard/dashboardDetail/dashboardDetail";
-
+import CreateStaffAccount from "./pages/admin/screens/createRoleAccount/createStaffAccount/createStaffAccount";
+import CreateVetAccount from "./pages/admin/screens/createRoleAccount/createVetAccount/createVetAccount";
 //Manager
 import CreateShopManager from "./pages/manager/screens/shop/createShop/createShop";
 import ManagerHome from "./pages/manager/screens/home/managerHome";
@@ -152,7 +153,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <AccountTable />,
+        element: <AccountTable direction="admin" />,
       },
       {
         path: "dashboardDetail",
@@ -160,7 +161,15 @@ const router = createBrowserRouter([
       },
       {
         path: "account",
-        element: <AccountTable />,
+        element: <AccountTable direction="admin" />,
+      },
+      {
+        path: "createStaffAccount",
+        element: <CreateStaffAccount />,
+      },
+      {
+        path: "createVetAccount",
+        element: <CreateVetAccount />,
       },
       {
         path: "verifyAccount",
