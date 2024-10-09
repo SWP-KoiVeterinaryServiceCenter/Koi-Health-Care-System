@@ -20,8 +20,11 @@ export const deleteKoiByAccountId = async (id) => {
   return response.data; 
 };
 
-export const updateKoiByAccountId = async (id) => {
-  const response = await api.put(`/api/v1/Koi/UpdateKoi/${id}`);
+export const updateKoiByAccountId = async (id , data) => {
+  console.log("id:", id );
+  const response = await api.put(`/api/v1/Koi/UpdateKoi/${id}`, data);
   return response.data;
 };
+
+
 

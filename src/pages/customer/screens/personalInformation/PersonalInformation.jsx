@@ -3,6 +3,8 @@ import "./PersonalInformation.css";
 import koifish from "../../../../assets/koi-fish-1.jpg";
 import pen from "../../../../assets/pen.png";
 import trash from "../../../../assets/bin.png";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Divider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,17 +43,6 @@ export default function PersonalInformation(props) {
     fetchUserAndKoiData();
   }, [dispatch]);
 
-  // const handleDeleteKoi = (id) => {
-  //   dispatch(deleteKoiByAccountIdThunk(id))
-  //     .unwrap()
-  //     .then(() => {
-  //       console.log(`Koi with ID ${id} deleted.`);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error deleting koi:", error);
-  //     });
-  // };
-
   const handleDeleteKoi = (id) => {
     console.log(`Deleting koi with ID: ${id}`);
     dispatch(deleteKoiByAccountIdThunk(id))
@@ -60,7 +51,7 @@ export default function PersonalInformation(props) {
         console.log(`Koi with ID ${id} deleted.`);
       })
       .catch((error) => {
-        // console.error("Error deleting koi:", error);
+        console.error("Error deleting koi:", error);
       });
   };
 
@@ -110,7 +101,7 @@ export default function PersonalInformation(props) {
         <div className="Koi-Management-Chart">
           {allKoiByAccountId &&
             allKoiByAccountId.map((koi) => (
-              <div className="KoiName">
+              <div className="KoiName" key={koi.id}>
                 <div className="koi_card">
                   <div className="koi_info">
                     <img src={koifish} alt="Koi Fish" className="koi_image" />
@@ -121,27 +112,21 @@ export default function PersonalInformation(props) {
                       <p>Gender: {koi.gender}</p>
                       <p>Varieties: {koi.varieties}</p>
                       <div className="icon_container">
-                        <img
-                          src={pen}
+                        {/* <img src={pen} /> */}
+                        <EditIcon
                           alt="Edit"
                           className="edit_icon"
-                          onClick={() => {
-                            if (direction) {
-                              window.scrollTo(0, 0); // Scroll to the top of the page
-                              navigate(
-                                `/${direction}/updateKoiFishInformation`
-                              );
-                            } else {
-                              console.error("Direction is undefined.");
-                            }
-                          }}
+                          onClick={() =>
+                            navigate(`/${direction}/updateKoiFishInformation`, {
+                              state: { koiId: koi.id },
+                            })
+                          }
                         />
-                        <img
-                          src={trash}
+                        {/* <img src={trash} /> */}
+                        <DeleteIcon
                           alt="Delete"
                           onClick={() => handleDeleteKoi(koi.id)} // Deleting koi by ID
                           className="delete_icon"
-                          style={{ cursor: "pointer" }}
                         />
                       </div>
                     </div>

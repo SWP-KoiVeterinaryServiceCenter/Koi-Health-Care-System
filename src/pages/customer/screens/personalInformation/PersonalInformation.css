@@ -121,7 +121,7 @@
 }
 
 .koi_image {
-  width: 150px;
+  width: 180px;
   height: auto;
   border-radius: 4px;
 }
@@ -151,6 +151,7 @@
 .delete_icon {
   width: 24px;
   cursor: pointer;
+  font-size: xx-large;
 }
 
 /* Responsive Design for Koi Card */

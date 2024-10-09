@@ -343,7 +343,6 @@ const AddMoreFish = () => {
                 justifyContent: "flex-end",
                 gap: "30px",
                 marginBottom: "10px",
-                marginTop: "10px",
               }}
             >
               <BackButton style={{ fontSize: "14px" }} />
