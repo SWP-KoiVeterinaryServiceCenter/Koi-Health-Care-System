@@ -25,6 +25,8 @@ export default function PersonalInformation(props) {
   const userDetail = useSelector(userDataSelector);
   const allKoiByAccountId = useSelector(allKoiByAccountIdSelector);
 
+  console.log({allKoiByAccountId});
+
   useEffect(() => {
     const fetchUserAndKoiData = async () => {
       const user = await dispatch(getUserDataThunk()).unwrap();
@@ -37,17 +39,30 @@ export default function PersonalInformation(props) {
       }
     };
 
-    fetchUserAndKoiData();
+    fetchUserAndKoiData();    
   }, [dispatch]);
 
-  const handleDeleteKoi = (koiId) => {
-    dispatch(deleteKoiByAccountIdThunk(koiId))
+  // const handleDeleteKoi = (id) => {
+  //   dispatch(deleteKoiByAccountIdThunk(id))
+  //     .unwrap()
+  //     .then(() => {
+  //       console.log(`Koi with ID ${id} deleted.`);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error deleting koi:", error);
+  //     });
+  // };
+
+  
+  const handleDeleteKoi = (id) => {
+    console.log(`Deleting koi with ID: ${id}`);
+    dispatch(deleteKoiByAccountIdThunk(id))
       .unwrap()
       .then(() => {
-        console.log(`Koi with ID ${koiId} deleted.`);
+        console.log(`Koi with ID ${id} deleted.`);
       })
       .catch((error) => {
-        console.error("Error deleting koi:", error);
+        // console.error("Error deleting koi:", error);
       });
   };
 
@@ -92,7 +107,8 @@ export default function PersonalInformation(props) {
         <div className="Koi-Management-Chart">
           {allKoiByAccountId &&
             allKoiByAccountId.map((koi) => (
-              <div className="KoiName" key={koi.id}>
+              <div className="KoiName">
+                
                 <div className="koi_card">
                   <div className="koi_info">
                     <img src={koifish} alt="Koi Fish" className="koi_image" />
@@ -103,7 +119,21 @@ export default function PersonalInformation(props) {
                       <p>Gender: {koi.gender}</p>
                       <p>Varieties: {koi.varieties}</p>
                       <div className="icon_container">
-                        <img src={pen} alt="Edit" className="edit_icon" />
+                        <img
+                          src={pen}
+                          alt="Edit"
+                          className="edit_icon"
+                          onClick={() => {
+                            if (direction) {
+                              window.scrollTo(0, 0); // Scroll to the top of the page
+                              navigate(
+                                `/${direction}/updateKoiFishInformation`
+                              );
+                            } else {
+                              console.error("Direction is undefined.");
+                            }
+                          }}
+                        />
                         <img
                           src={trash}
                           alt="Delete"
