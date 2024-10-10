@@ -148,7 +148,7 @@
 }
 
 .koi_card:hover .koi_info {
-  filter: blur(2px);
+  filter: blur(4px);
 }
 
 .icon_container {
