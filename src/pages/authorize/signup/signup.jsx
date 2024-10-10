@@ -141,6 +141,9 @@ export default function Signup() {
                     color="secondary"
                     sx={{
                       "& .MuiOutlinedInput-root": {
+                        "& .MuiInputBase-input": {
+                          color: "black", // Ghi đè màu chữ thành màu đen
+                        },
                         "& fieldset": {
                           borderColor: " #419781", // Viền đen cho TextField
                           borderWidth: "2px",
@@ -178,6 +181,9 @@ export default function Signup() {
                     color="secondary"
                     sx={{
                       "& .MuiOutlinedInput-root": {
+                        "& .MuiInputBase-input": {
+                          color: "black", // Ghi đè màu chữ thành màu đen
+                        },
                         "& fieldset": {
                           borderColor: " #419781", // Viền đen cho TextField
                           borderWidth: "2px",
@@ -216,6 +222,9 @@ export default function Signup() {
                     color="secondary"
                     sx={{
                       "& .MuiOutlinedInput-root": {
+                        "& .MuiInputBase-input": {
+                          color: "black", // Ghi đè màu chữ thành màu đen
+                        },
                         "& fieldset": {
                           borderColor: " #419781", // Viền đen cho TextField
                           borderWidth: "2px",
@@ -272,6 +281,9 @@ export default function Signup() {
                     color="secondary"
                     sx={{
                       "& .MuiOutlinedInput-root": {
+                        "& .MuiInputBase-input": {
+                          color: "black", // Ghi đè màu chữ thành màu đen
+                        },
                         "& fieldset": {
                           borderColor: " #419781", // Viền đen cho TextField
                           borderWidth: "2px",
@@ -309,6 +321,9 @@ export default function Signup() {
                     color="secondary"
                     sx={{
                       "& .MuiOutlinedInput-root": {
+                        "& .MuiInputBase-input": {
+                          color: "black", // Ghi đè màu chữ thành màu đen
+                        },
                         "& fieldset": {
                           borderColor: " #419781", // Viền đen cho TextField
                           borderWidth: "2px",
@@ -346,6 +361,9 @@ export default function Signup() {
                     color="secondary"
                     sx={{
                       "& .MuiOutlinedInput-root": {
+                        "& .MuiInputBase-input": {
+                          color: "black", // Ghi đè màu chữ thành màu đen
+                        },
                         "& fieldset": {
                           borderColor: " #419781", // Viền đen cho TextField
                           borderWidth: "2px",
@@ -383,6 +401,9 @@ export default function Signup() {
                     color="secondary"
                     sx={{
                       "& .MuiOutlinedInput-root": {
+                        "& .MuiInputBase-input": {
+                          color: "black", // Ghi đè màu chữ thành màu đen
+                        },
                         "& fieldset": {
                           borderColor: " #419781", // Viền đen cho TextField
                           borderWidth: "2px",
