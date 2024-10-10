@@ -4,7 +4,12 @@ import { userDetailSlice } from "./features/user.slice/userDetail.slice";
 import { userDataSlice } from "./features/user.slice/userData.slice";
 import { staffsSlice } from "./features/user.slice/staffs.slice";
 import { allAccountsSlice } from "./features/user.slice/allAccounts.slice";
+import { allTanksSlice } from "./features/tank.slice/allTank.slice";
+import { allServicesTypeSlice } from "./features/serviceKoi.slice/getAllServicesType.slice";
+
+
 import { totalUsersSlice } from "./features/user.slice/totalUsers.slice";
+
 import { totalStaffsSlice } from "./features/user.slice/totalStaffs.slice";
 import { totalVetsSlice } from "./features/user.slice/totalVets.slice";
 
@@ -107,6 +112,8 @@ export const store = configureStore({
     userData: userDataSlice.reducer,
     staffs: staffsSlice.reducer,
     allAccounts: allAccountsSlice.reducer,
+    allTanks: allTanksSlice.reducer,
+    allServicesType: allServicesTypeSlice.reducer,
     totalUsers: totalUsersSlice.reducer,
     totalStaffs: totalStaffsSlice.reducer,
     totalVets: totalVetsSlice.reducer,

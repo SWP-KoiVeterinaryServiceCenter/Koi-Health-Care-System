@@ -523,7 +523,7 @@ const AccountTable = (props) => {
             >
               <Typography
                 variant="h1"
-                color="#00A7CE"
+                color="#F7FBFC"
                 sx={({ breakpoints, typography: { fontSize } }) => ({
                   marginTop: "-48px",
                   marginBottom: "8px",

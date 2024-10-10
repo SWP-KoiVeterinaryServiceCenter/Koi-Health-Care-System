@@ -18,12 +18,15 @@ import ChangePassword from "./pages/authorize/changePassword/changePassword";
 //Admin
 import AdminHome from "./pages/admin/screens/home/adminHome";
 import AccountTable from "./pages/admin/screens/account/accountTable";
+import TankList from "./pages/admin/screens/tank/tank";
+import ServiceTypeList from "./pages/admin/screens/serviceType/serviceType";
 import VerifyAccount from "./pages/admin/screens/verifyaccount/verifyaccount";
 import WalletTableAdmin from "./pages/admin/screens/wallet/walletTable";
 import AdminDashboard from "./pages/admin/screens/dashboard/dashboardPage/dashboard";
 import AdminDashboardDetail from "./pages/admin/screens/dashboard/dashboardDetail/dashboardDetail";
 import CreateStaffAccount from "./pages/admin/screens/createRoleAccount/createStaffAccount/createStaffAccount";
 import CreateVetAccount from "./pages/admin/screens/createRoleAccount/createVetAccount/createVetAccount";
+import CreateTank from "./pages/admin/screens/createTank/createTank";
 //Manager
 import CreateShopManager from "./pages/manager/screens/shop/createShop/createShop";
 import ManagerHome from "./pages/manager/screens/home/managerHome";
@@ -164,8 +167,20 @@ const router = createBrowserRouter([
         element: <AccountTable direction="admin" />,
       },
       {
+        path: "tankList",
+        element: <TankList direction="admin" />,
+      },
+      {
+        path: "serviceType",
+        element: <ServiceTypeList direction="admin" />,
+      },
+      {
         path: "createStaffAccount",
         element: <CreateStaffAccount />,
+      },
+      {
+        path: "createTank",
+        element: <CreateTank />,
       },
       {
         path: "createVetAccount",
@@ -319,20 +334,29 @@ const router = createBrowserRouter([
         path: "",
         element: <HomePage />,
       },
+      // {
+      //   path: "service",
+      //   element: <ServiceHome direction="customer" />,
+      //   children: [
+      //     {
+      //       path: "",
+      //       element: <ServiceKoifish direction="customer" />,
+      //     },
+      //     {
+      //       path: "createKoiFishAppointment",
+      //       element: <CreateKoiFishAppointment />,
+      //     },
+      //   ],
+      // },
       {
         path: "service",
-        element: <ServiceHome direction="customer" />,
-        children: [
-          {
-            path: "",
-            element: <ServiceKoifish direction="customer" />,
-          },
-          {
-            path: "createKoiFishAppointment",
-            element: <CreateKoiFishAppointment />,
-          },
-        ],
+        element: <ServiceKoifish direction="customer" />,
       },
+      {
+        path: "createKoiFishAppointment",
+        element: <CreateKoiFishAppointment direction="customer" />,
+      },
+
       {
         path: "personalInformation",
         element: <PersonalInformation direction="customer" />,
