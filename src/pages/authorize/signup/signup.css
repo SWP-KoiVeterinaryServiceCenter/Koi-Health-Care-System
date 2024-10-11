@@ -174,3 +174,8 @@
 .signup .background_formik_box:hover .background_formik_icon_box {
     opacity: 1;
 }
+
+/* Ghi đè thuộc tính color trong thư viện */
+.MuiInputBase-input-MuiOutlinedInput-input {
+    color: black !important; /* Thay thế currentColor bằng black */
+}

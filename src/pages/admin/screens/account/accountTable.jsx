@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -38,18 +39,25 @@ import IconButton from "@mui/material/IconButton";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import PinterestIcon from "@mui/icons-material/Pinterest";
-import bgImage from "../../../../assets/koibg_account.jpg";
+import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import MedicationIcon from "@mui/icons-material/Medication";
 
-const AccountTable = () => {
+import bgImage from "../../../../assets/koibg_account.jpg";
+import AdminDashboardDetail from "../../../admin/screens/dashboard/dashboardDetail/dashboardDetail";
+
+const AccountTable = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const accounts = useSelector(allAccountsSelector);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
-  const [pageSize, setPageSize] = useState(5); // State for number of rows per page
+  const [pageSize, setPageSize] = useState(10); // State for number of rows per page
   const [pageNumber, setPageNumber] = useState(0); // Current page index
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredRows, setFilteredRows] = useState([]);
+  const direction = props.direction;
   console.log(accounts);
 
   useEffect(() => {
@@ -320,18 +328,53 @@ const AccountTable = () => {
       flex: 1,
       renderCell: ({ row: { location } }) => <div>{location}</div>,
     },
+    // {
+    //   field: "role",
+    //   headerName: "Role",
+    //   headerAlign: "center",
+
+    //   flex: 1,
+    //   renderCell: ({ row: { role } }) => (
+    //     <Box width="100%" display="flex" justifyContent="center" gap="4px">
+    //       {role}
+    //     </Box>
+    //   ),
+    // },
     {
       field: "role",
       headerName: "Role",
-      headerAlign: "center",
-
+      // headerAlign: "center",
       flex: 1,
-      renderCell: ({ row: { role } }) => (
-        <Box width="100%" display="flex" justifyContent="center" gap="4px">
-          {role}
-        </Box>
-      ),
+      renderCell: ({ row: { role } }) => {
+        let roleColor, IconComponent;
+    
+        switch (role) {
+          case "Customer":
+            roleColor = "#53A079"; // Green
+            IconComponent = SentimentSatisfiedAltIcon;
+            break;
+          case "Staff":
+            roleColor = "#C46210"; // Orange
+            IconComponent = AdminPanelSettingsIcon;
+            break;
+          case "Veterinarian":
+            roleColor = "#00CAFF"; // Blue
+            IconComponent = MedicationIcon;
+            break;
+          default:
+            roleColor = "gray"; // Default color for unknown roles
+            IconComponent = null;
+        }
+    
+        return (
+          <Box display="flex" alignItems="center" justifyContent="center" gap={1}>
+            {IconComponent && <IconComponent style={{ color: roleColor }} />}
+            <Typography style={{ color: roleColor }}>{role}</Typography>
+          </Box>
+        );
+      },
     },
+    
 
     {
       field: "action",
@@ -459,7 +502,7 @@ const AccountTable = () => {
     <div>
       <>
         <Box
-          minHeight="45vh"
+          minHeight="40vh"
           width="100%"
           sx={{
             backgroundImage: `url(${bgImage})`,
@@ -480,29 +523,31 @@ const AccountTable = () => {
             >
               <Typography
                 variant="h1"
-                color="#00CAFF"
+                color="#F7FBFC"
                 sx={({ breakpoints, typography: { fontSize } }) => ({
                   marginTop: "-48px",
                   marginBottom: "8px",
-                  [breakpoints.down("md")]: {
-                    fontSize: fontSize["h3"],
-                  },
-                  fontWeight: "700",
+                  fontSize: 45,
+                  fontWeight: "900",
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                   borderRadius: "4px"
+                  borderRadius: "4px",
+                  WebkitTextStroke: "1px black", // Thêm viền quanh chữ
+                  display: "inline-block", // Đảm bảo viền không bị kéo dài
+                  fontFamily: "Helvetica",
                 })}
               >
-                Account Management
+                ACCOUNT MANAGEMENT
               </Typography>
+
               <Typography
                 variant="body1"
                 color="black"
                 textAlign="center"
                 px={{ xs: 6, lg: 12 }}
                 mt={1}
-               
               >
-            Account management system, which allows you to manage your accounts. Create accounts for staff/vet
+                Account management system, which allows admin to manage their
+                accounts.
               </Typography>
             </Grid>
           </Container>
@@ -511,14 +556,17 @@ const AccountTable = () => {
           sx={{
             p: 2,
             mx: { xs: 2, lg: 3 },
-            mt: -8,
+            mt: -9,
             mb: 4,
             backgroundColor: "rgba(255, 255, 255, 0.8)",
             backdropFilter: "saturate(200%) blur(30px)",
             boxShadow: (theme) => theme.shadows[24],
-        
           }}
         >
+       <div style={{  marginLeft:100 }}>
+  <AdminDashboardDetail />
+</div>
+
           {/* //////////////////////////////////////////////////////////////TABLE///////////////////////////////////////////////////////////////////// */}
 
           <Box m="20px" className="Box-Template-Modal">
@@ -567,8 +615,16 @@ const AccountTable = () => {
               </Box>
 
               <div className="custom-buttons">
-                <button>Create Vet Account</button>
-                <button>Create Staff</button>
+                <button
+                  onClick={() => navigate(`/${direction}/createVetAccount`)}
+                >
+                  Create Vet Account
+                </button>
+                <button
+                  onClick={() => navigate(`/${direction}/createStaffAccount`)}
+                >
+                  Create Staff
+                </button>
               </div>
             </Box>
 
@@ -655,13 +711,17 @@ const AccountTable = () => {
             </Container>
           </Box>
         </Card>
-        <Box pt={6} px={1} mt={6} sx={{color:"black",background:"#E5E5E5"}} >
-        <Footer/>
+        <Box
+          pt={6}
+          px={1}
+          mt={6}
+          sx={{ color: "black", background: "#ebe2e1" }}
+        >
+          <Footer />
         </Box>
       </>
 
       {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
-
     </div>
   );
 };

@@ -150,3 +150,34 @@
     border-radius: 40px; /* Thêm bo tròn 15px vào mỗi góc */
   }
   
+  /* Override autofill styles for both email and password fields */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 100px white inset !important; /* Remove the default shadow and apply custom background */
+  -webkit-text-fill-color: black !important; /* Set the desired text color */
+  caret-color: black !important; /* Set the caret color */
+  border-radius: inherit !important; /* Ensure border-radius is inherited */
+  transition: background-color 5000s ease-in-out 0s; /* Fix the autofill background color issue */
+}
+
+/* Specifically target the password field */
+input[type="password"]:-webkit-autofill,
+input[type="password"]:-webkit-autofill:hover,
+input[type="password"]:-webkit-autofill:focus,
+input[type="password"]:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 100px white inset !important; /* Set background to your choice (white here) */
+  -webkit-text-fill-color: black !important; /* Ensure text color remains consistent */
+  caret-color: black !important; /* Set caret color */
+}
+
+/* Specifically target the email field */
+input[type="email"]:-webkit-autofill,
+input[type="email"]:-webkit-autofill:hover,
+input[type="email"]:-webkit-autofill:focus,
+input[type="email"]:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 100px white inset !important; /* Set background to white */
+  -webkit-text-fill-color: black !important; /* Ensure text color remains black */
+  caret-color: black !important; /* Set caret color */
+}
