@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
     // getAllServices,
-    getAllServicesType
+    getAllServicesType,
+    createServicesType
   } from "../../api/serviceKoi";
 
   export const getAllServicesTypeThunk = createAsyncThunk(
@@ -13,5 +14,17 @@ import {
       } catch (error) {
         return thunkAPI.rejectWithValue(error?.response?.data);
       }
+    }
+  );
+  export const createServicesTypeThunk = createAsyncThunk(
+    "services/createServicesType",
+    async (data, thunkAPI) => {
+        try {
+            const response = await createServicesType(data);
+            return response;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+            
+        }
     }
   );

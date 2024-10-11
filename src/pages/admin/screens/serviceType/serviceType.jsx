@@ -11,11 +11,13 @@ import "./serviceType.css"; // Assuming the isolated styles for the card compone
 const ServiceType = (props) => {
   const dispatch = useDispatch();
   const services = useSelector(allServicesTypeSelector);
-  
+  const direction = props.direction;
+  const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(getAllServicesTypeThunk());
   }, [dispatch]);
-console.log(services);
+  console.log(services);
 
   return (
     <div>
@@ -57,7 +59,8 @@ console.log(services);
               px={{ xs: 6, lg: 12 }}
               mt={1}
             >
-              Account management system, which allows admin to manage their accounts.
+              Account management system, which allows admin to manage their
+              accounts.
             </Typography>
           </Grid>
         </Container>
@@ -74,16 +77,40 @@ console.log(services);
           boxShadow: (theme) => theme.shadows[24],
         }}
       >
-        <Grid container spacing={2} justifyContent="center">
+        <div className="createButtonWrapper" style={{float:"right"}}>
+          <button className="createButton" onClick={() => navigate(`/${direction}/createServiceType`)} >
+            <i className="createAnimation"></i>CREATE
+            <i className="createAnimation"></i>
+          </button>
+        </div>
+
+        <Grid container spacing={2} justifyContent="center" marginTop={5}>
           {services.map((service) => (
             <Grid item xs={12} sm={6} md={3} key={service.typeId}>
               <div className="flipCardComponent">
                 <div className="flipCardComponent-inner">
-                  <div className="flipCardComponent-front">
-                    <p >{service.typeName}</p>
+                  <div
+                    className="flipCardComponent-front"
+                    style={{
+                      backgroundImage:
+                        "url('https://i.pinimg.com/enabled_hi/564x/5e/e2/6b/5ee26bb99b59d86e722660d2efc9f401.jpg')",
+                    }}
+                  >
+                    <p style={{ fontSize: 20 }}>{service.typeName}</p>
                   </div>
-                  <div className="flipCardComponent-back">
-                    <p>{service.typeId}</p>
+                  <div
+                    className="flipCardComponent-back"
+                    style={{
+                      backgroundImage:
+                        "url('https://i.pinimg.com/736x/95/6d/f5/956df5e4c3a793e137d2de5939fd5cea.jpg",
+                    }}
+                  >
+                    <div className="customButtonWrapper">
+                      <button className="customButton">
+                        <i className="customAnimation"></i>DELETE
+                        <i className="customAnimation"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

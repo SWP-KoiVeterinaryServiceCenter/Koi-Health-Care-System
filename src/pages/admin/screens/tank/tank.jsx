@@ -129,7 +129,7 @@ const Tank = (props) => {
                         <p className="cardComponent-card-content">
                           {tank.tankStatus}
                         </p>
-                        <span className="cardComponent-see-more">See More</span>
+                        <span className="cardComponent-see-more">DELETE</span>
                       </div>
                       <div className="cardComponent-date-box">
                         <span className="cardComponent-month">Capacity</span>
