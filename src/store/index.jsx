@@ -106,6 +106,8 @@ import { productsFromShopSlice } from "./features/product.slice/productsFromShop
 import { allKoiByAccountIdSlice } from "./features/koi.slice/koiByAccountId.slice";
 import { allKoiByIdSlice } from "./features/koi.slice/koiById.slice";
 
+import { allServicesSlice } from "./features/serviceKoi.slice/getAllServices.slice";
+
 export const store = configureStore({
   reducer: {
     userDetail: userDetailSlice.reducer,
@@ -121,6 +123,8 @@ export const store = configureStore({
 
     allKoiByAccountId : allKoiByAccountIdSlice.reducer,
     allKoiById: allKoiByIdSlice.reducer,
+
+    allServices: allServicesSlice.reducer,
 
     petDetail: petDetailSlice.reducer,
     petsFromShop: petsFromShopSlice.reducer,
