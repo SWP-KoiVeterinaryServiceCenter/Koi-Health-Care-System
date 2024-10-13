@@ -38,7 +38,7 @@ export default function PersonalInformation(props) {
     const fetchUserAndKoiData = async () => {
       const user = await dispatch(getUserDataThunk()).unwrap();
       const accountId = user?.accountId;
-
+      console.log(accountId.id);
       if (accountId) {
         dispatch(getKoiByAccountIdThunk(accountId));
       } else {
