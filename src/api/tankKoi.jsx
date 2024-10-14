@@ -11,3 +11,7 @@ export const getAllTanks = async () => {
       );
     return response.data;
   };
+  export const deleteTank= async (id ) => {
+    const response = await api.delete(`/api/v1/Tank/RemoveTank/${id}`); //ban the user in account
+    return response.data;
+  };

@@ -1,22 +1,57 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Box, Container, Grid, Typography, Card, Button } from "@mui/material";
-import { getAllTanksThunk } from "../../../../store/apiThunk/tankKoiThunk";
+import { Box, Container, Grid, Typography, Card, Modal, Button } from "@mui/material";
+import { getAllTanksThunk, deleteTankThunk } from "../../../../store/apiThunk/tankKoiThunk"; // Import thunk xóa
 import { allTanksSelector } from "../../../../store/sellectors";
 import Footer from "../../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 import bgImage from "../../../../assets/koibg_account.jpg";
 import "./tank.css"; // Assuming the isolated styles for the card component
-
+import Lottie from "lottie-react"; // Import Lottie
+import ConfirmModal from "../../../../assets/videoModal/Confirm.json"; // Import animation JSON
+import WarnModal from "../../../../assets/videoModal/Warn2.json"; // Import animation JSON
 const Tank = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const tanks = useSelector(allTanksSelector);
   const direction = props.direction;
   
+  const [openConfirmModal, setOpenConfirmModal] = useState(false); // State quản lý modal xác nhận
+  const [openLoadingModal, setOpenLoadingModal] = useState(false); // State quản lý modal loading
+  const [selectedTankId, setSelectedTankId] = useState(null); // State quản lý tank được chọn để xóa
+  const [animationComplete, setAnimationComplete] = useState(false); // Quản lý trạng thái hoàn tất animation
+
   useEffect(() => {
-    dispatch(getAllTanksThunk());
+    dispatch(getAllTanksThunk()); // Gọi API lấy tất cả tanks khi component mount
   }, [dispatch]);
+
+  // Mở modal xác nhận xóa
+  const handleOpenConfirmModal = (tankId) => {
+    setSelectedTankId(tankId);
+    setOpenConfirmModal(true);
+  };
+
+  // Đóng modal xác nhận
+  const handleCloseConfirmModal = () => {
+    setOpenConfirmModal(false);
+    setSelectedTankId(null);
+  };
+
+  // Xử lý xác nhận xóa
+  const handleConfirmDelete = () => {
+    setOpenConfirmModal(false); // Đóng modal xác nhận
+    setOpenLoadingModal(true); // Mở modal loading
+    setAnimationComplete(false); // Reset trạng thái animation
+
+    // Dispatch để xóa tank
+    dispatch(deleteTankThunk(selectedTankId)).then(() => {
+      // Sau khi xóa thành công, giữ modal thêm 3 giây để animation chạy hết
+      setTimeout(() => {
+        setOpenLoadingModal(false);
+        dispatch(getAllTanksThunk()); // Tải lại dữ liệu
+      }, 3000); // Giữ modal thêm 3 giây
+    });
+  };
 
   return (
     <div>
@@ -84,8 +119,8 @@ const Tank = (props) => {
             boxShadow: (theme) => theme.shadows[24],
           }}
         >
-          <div className="gooeyButtonComponent" >
-            <button className="c-button c-button--gooey" onClick={() => navigate(`/${direction}/createTank`)} >
+          <div className="gooeyButtonComponent">
+            <button className="c-button c-button--gooey" onClick={() => navigate(`/${direction}/createTank`)}>
               Create Tank
               <div className="c-button__blobs">
                 <div></div>
@@ -129,7 +164,9 @@ const Tank = (props) => {
                         <p className="cardComponent-card-content">
                           {tank.tankStatus}
                         </p>
-                        <span className="cardComponent-see-more">DELETE</span>
+                        <span className="cardComponent-see-more" onClick={() => handleOpenConfirmModal(tank.tankId)}>
+                          DELETE
+                        </span>
                       </div>
                       <div className="cardComponent-date-box">
                         <span className="cardComponent-month">Capacity</span>
@@ -148,6 +185,75 @@ const Tank = (props) => {
             )}
           </Grid>
         </Card>
+
+        {/* Modal xác nhận xóa */}
+        <Modal
+          open={openConfirmModal}
+          onClose={handleCloseConfirmModal}
+          aria-labelledby="confirm-delete-title"
+          aria-describedby="confirm-delete-description"
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 400,
+              bgcolor: "background.paper",
+              border: "2px solid #000",
+              boxShadow: 24,
+              p: 4,
+            }}
+          >
+            <Typography id="confirm-delete-title" variant="h6" component="h2">
+              Confirm Delete
+            </Typography>
+            <Typography id="confirm-delete-description" sx={{ mt: 2 }}>
+              Are you sure you want to delete this tank?
+            </Typography>
+            <Lottie
+              animationData={WarnModal}
+           
+            />
+            <Box mt={2} display="flex" justifyContent="space-between">
+              <Button variant="contained" color="primary" onClick={handleCloseConfirmModal}>
+                Cancel
+              </Button>
+              <Button variant="contained" color="secondary" onClick={handleConfirmDelete}>
+                Confirm
+              </Button>
+            </Box>
+          </Box>
+        </Modal>
+
+        {/* Modal loading với Lottie */}
+        <Modal
+          open={openLoadingModal}
+          aria-labelledby="loading-title"
+          aria-describedby="loading-description"
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: 200,
+              height: 200,
+            }}
+          >
+            {/* Thay CircularProgress bằng Lottie */}
+            <Lottie
+              animationData={ConfirmModal}
+              loop={false}
+              onComplete={() => setAnimationComplete(true)} // Xác định khi animation chạy hết
+            />
+          </Box>
+        </Modal>
 
         <Box
           pt={6}

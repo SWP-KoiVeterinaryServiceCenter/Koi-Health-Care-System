@@ -64,8 +64,8 @@
     font-weight: 900;
     font-size: 9px;
     text-transform: uppercase;
-    color: rgb(7, 185, 255);
-    background: white;
+    color: #41214F;
+    background: #FF7779;
     padding: 0.5rem 0.7rem;
     transition: all 0.5s ease-in-out;
     transform: translate3d(0px, 0px, 20px);

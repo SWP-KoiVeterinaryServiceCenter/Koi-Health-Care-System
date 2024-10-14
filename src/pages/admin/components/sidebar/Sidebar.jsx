@@ -215,8 +215,8 @@ const Sidebar = (props) => {
                     setSelected={setSelected}
                   /> */}
                   <Item
-                    title="Subscription"
-                    to="package"
+                    title="Service Center"
+                    to="createServiceCenter"
                     icon={<SubscriptionsIcon />}
                     selected={selected}
                     setSelected={setSelected}
