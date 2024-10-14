@@ -1,68 +1,29 @@
 import { useState, useEffect, useRef } from "react";
-import { Button, TextField, Grid, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Grid,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useSelector, useDispatch } from "react-redux";
 import { createServiceCenterThunk } from "../../../../store/apiThunk/serviceKoiThunk";
 import { getAllTanksThunk } from "../../../../store/apiThunk/tankKoiThunk";
-import { getAllServicesTypeThunk } from "../../../../store/apiThunk/serviceKoiThunk";
+import {
+  getAllServicesTypeThunk,
+} from "../../../../store/apiThunk/serviceKoiThunk";
 import { allServicesTypeSelector, allTanksSelector } from "../../../../store/sellectors";
 import Swal from "sweetalert2";
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./../../../../theme";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import NoBackground from "../../../../assets/uploadImg.png";
 import LoadingModal from "../../../../components/modal/loadingModal/loadingModal";
-
-// Tạo custom theme với màu chữ đen
-const customTheme = createTheme({
-  components: {
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          color: 'black',
-        },
-      },
-    },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        root: {
-          '& .MuiOutlinedInput-input': {
-            color: 'black',
-          },
-          '& .MuiSelect-select': {
-            color: 'black',
-          },
-          '& fieldset': {
-            borderColor: 'black',
-          },
-        },
-      },
-    },
-    MuiFormLabel: {
-      styleOverrides: {
-        root: {
-          color: 'black',
-        },
-      },
-    },
-    MuiFormControl: {
-      styleOverrides: {
-        root: {
-          color: 'black',
-        },
-      },
-    },
-    MuiMenuItem: {
-      styleOverrides: {
-        root: {
-          color: 'black',
-        },
-      },
-    },
-  },
-});
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -73,10 +34,11 @@ export default function Signup() {
   const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [serviceImage, setServiceImage] = useState({});
   const [formData, setFormData] = useState(new FormData());
+  const mapRef = useRef(null);
 
   useEffect(() => {
     dispatch(getAllServicesTypeThunk());
-    dispatch(getAllTanksThunk());
+    dispatch(getAllTanksThunk()); // Gọi API lấy tất cả tanks khi component mount
   }, [dispatch]);
 
   const formik = useFormik({
@@ -99,41 +61,34 @@ export default function Signup() {
       serviceImage: Yup.mixed().required("Required"),
     }),
     onSubmit: async (values) => {
-      const newFormData = new FormData();  // Tạo FormData mới trong onSubmit
-      newFormData.append("name", values.name);
-      newFormData.append("description", values.description);
-      newFormData.append("price", values.price);
-      newFormData.append("typeId", values.typeId);
-      newFormData.append("tankId", values.tankId);
-      newFormData.append("duration", values.duration);
-      newFormData.append("serviceImage", serviceImage);
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("description", values.description);
+      formData.append("price", values.price);
+      formData.append("typeId", values.typeId);
+      formData.append("tankId", values.tankId);
+      formData.append("duration", values.duration);
+      formData.append("serviceImage", serviceImage);
 
       setShowLoadingModal(true);
-      dispatch(createServiceCenterThunk(newFormData))
+      dispatch(createServiceCenterThunk(formData))
         .unwrap()
         .then((res) => {
           setShowLoadingModal(false);
-          // Hiển thị modal thông báo thành công bằng SweetAlert2
           Swal.fire({
-            title: "Thành Công!",
-            text: "Dịch vụ đã được tạo thành công.",
+            title: "Success",
+            text: "Service Center created successfully!",
             icon: "success",
-            confirmButtonText: "OK",
-            background: "white",
-            confirmButtonColor: "#3085d6",
-          }).then(() => navigate(""));  // Điều hướng về trang khác sau khi đóng modal
+            timer: 1500,
+          }).then(() => navigate(""));
         })
         .catch((error) => {
           setShowLoadingModal(false);
           Swal.fire({
-            title: "Lỗi!",
+            title: "Error",
             text: error.message,
             icon: "error",
-            showConfirmButton: false,
-            background: "white",
             timer: 1500,
-            timerProgressBar: true,
-            scrollbarPadding: false,
           });
         });
     },
@@ -150,7 +105,7 @@ export default function Signup() {
 
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={customTheme}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="signup">
           <Grid container spacing={2}>
@@ -158,7 +113,7 @@ export default function Signup() {
             <Grid item xs={2}></Grid>
             <Grid item xs={6} className="flex-center">
               <div className="signup__form">
-                <h3 variant="h3" className="login__title">Create Service Center</h3>
+                <h3 className="login__title">Create Service Center</h3>
                 <form onSubmit={formik.handleSubmit}>
                   <input
                     id="serviceImage"
@@ -172,7 +127,11 @@ export default function Signup() {
                     <label htmlFor="serviceImage">
                       <div className="background_formik_box">
                         <img
-                          src={formik.values?.serviceImage === "" ? NoBackground : formik.values?.serviceImage}
+                          src={
+                            formik.values?.serviceImage === ""
+                              ? NoBackground
+                              : formik.values?.serviceImage
+                          }
                           alt=""
                           className="background_formik"
                         />
@@ -183,7 +142,9 @@ export default function Signup() {
                     </label>
                   </div>
                   {formik.touched.serviceImage && formik.errors.serviceImage && (
-                    <div className="login__validation__error">{formik.errors.serviceImage}</div>
+                    <div className="login__validation__error">
+                      {formik.errors.serviceImage}
+                    </div>
                   )}
 
                   <TextField
@@ -197,7 +158,9 @@ export default function Signup() {
                     color="secondary"
                   />
                   {formik.touched.name && formik.errors.name && (
-                    <div className="login__validation__error">{formik.errors.name}</div>
+                    <div className="login__validation__error">
+                      {formik.errors.name}
+                    </div>
                   )}
 
                   <TextField
@@ -211,7 +174,9 @@ export default function Signup() {
                     color="secondary"
                   />
                   {formik.touched.description && formik.errors.description && (
-                    <div className="login__validation__error">{formik.errors.description}</div>
+                    <div className="login__validation__error">
+                      {formik.errors.description}
+                    </div>
                   )}
 
                   <TextField
@@ -226,51 +191,53 @@ export default function Signup() {
                     color="secondary"
                   />
                   {formik.touched.price && formik.errors.price && (
-                    <div className="login__validation__error">{formik.errors.price}</div>
+                    <div className="login__validation__error">
+                      {formik.errors.price}
+                    </div>
                   )}
 
-                  {/* Select Tank */}
-                  <FormControl fullWidth margin="dense">
-                    <InputLabel id="tankId-label">Chọn Bể Cá</InputLabel>
+                  {/* Select for Service Type */}
+                  <FormControl fullWidth margin="dense" color="secondary">
+                    <InputLabel>Service Type</InputLabel>
                     <Select
-                      labelId="tankId-label"
-                      id="tankId"
-                      name="tankId"
-                      value={formik.values.tankId}
-                      onChange={formik.handleChange}
-                      label="Chọn Bể Cá"
-                    >
-                      {tanks.map((tank) => (
-                        <MenuItem key={tank.tankId} value={tank.tankId}>
-                          {tank.tankName}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                  {formik.touched.tankId && formik.errors.tankId && (
-                    <div className="login__validation__error">{formik.errors.tankId}</div>
-                  )}
-
-                  {/* Select Service Type */}
-                  <FormControl fullWidth margin="dense">
-                    <InputLabel id="typeId-label">Chọn Loại Dịch Vụ</InputLabel>
-                    <Select
-                      labelId="typeId-label"
                       id="typeId"
                       name="typeId"
                       value={formik.values.typeId}
                       onChange={formik.handleChange}
-                      label="Chọn Loại Dịch Vụ"
                     >
                       {services.map((service) => (
-                        <MenuItem key={service.typeId} value={service.typeId}>
+                        <MenuItem key={service.id} value={service.id}>
                           {service.typeName}
                         </MenuItem>
                       ))}
                     </Select>
                   </FormControl>
                   {formik.touched.typeId && formik.errors.typeId && (
-                    <div className="login__validation__error">{formik.errors.typeId}</div>
+                    <div className="login__validation__error">
+                      {formik.errors.typeId}
+                    </div>
+                  )}
+
+                  {/* Select for Tank */}
+                  <FormControl fullWidth margin="dense" color="secondary">
+                    <InputLabel>Tank</InputLabel>
+                    <Select
+                      id="tankId"
+                      name="tankId"
+                      value={formik.values.tankId}
+                      onChange={formik.handleChange}
+                    >
+                      {tanks.map((tank) => (
+                        <MenuItem key={tank.id} value={tank.id}>
+                          {tank.tankName}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                  {formik.touched.tankId && formik.errors.tankId && (
+                    <div className="login__validation__error">
+                      {formik.errors.tankId}
+                    </div>
                   )}
 
                   <TextField
@@ -285,16 +252,22 @@ export default function Signup() {
                     color="secondary"
                   />
                   {formik.touched.duration && formik.errors.duration && (
-                    <div className="login__validation__error">{formik.errors.duration}</div>
+                    <div className="login__validation__error">
+                      {formik.errors.duration}
+                    </div>
                   )}
 
-                  {!showLoadingModal ? (
-                    <Button className="login__btn" variant="contained" type="submit" fullWidth>
-                      Create Service
-                    </Button>
-                  ) : (
-                    <LoadingModal />
-                  )}
+                  <Button
+                    className="login__btn"
+                    variant="contained"
+                    type="submit"
+                    fullWidth
+                    disabled={showLoadingModal || !formik.isValid}
+                  >
+                    {showLoadingModal ? "Creating..." : "Create Service"}
+                  </Button>
+                  
+                  {showLoadingModal && <LoadingModal />}
                 </form>
               </div>
             </Grid>
