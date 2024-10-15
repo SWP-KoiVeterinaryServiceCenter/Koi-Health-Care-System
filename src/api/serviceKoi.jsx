@@ -25,10 +25,8 @@ export const createServiceCenter = async (data) => {
   return response.data;
 };
 
+
 export const getAllServices = async () => {
   const response = await api.get(`/api/v1/CenterService/GetAllService`);
   return response.data;
 };
-
-
-

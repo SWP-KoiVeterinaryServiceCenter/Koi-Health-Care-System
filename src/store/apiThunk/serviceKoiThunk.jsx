@@ -4,8 +4,12 @@ import {
     getAllServicesType,
     createServicesType,
     deleteServicesType,
+
     createServiceCenter,
     getAllServices
+
+    createServiceCenter
+
     
   } from "../../api/serviceKoi";
 
@@ -55,6 +59,7 @@ import {
       }
     }
   );
+
   
   export const getAllServicesThunk = createAsyncThunk(
     "services/getAllServices",
@@ -67,3 +72,4 @@ import {
       }
     }
   );
+
