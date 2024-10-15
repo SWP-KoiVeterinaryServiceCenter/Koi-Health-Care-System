@@ -42,17 +42,19 @@ const CreateKoiFishAppointment = () => {
   const dispatch = useDispatch();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
 
-  // Find Current Service OnClick
+  // Get serviceId from the location state
   const location = useLocation();
-  const { serviceId } = location.state || {}; // Get serviceId from the location state
+  const { serviceId } = location.state || {};
+
+  // Selectors for fetching data
   const allServices = useSelector(allServicesSelector);
+  const allKoiByAccountId = useSelector(allKoiByAccountIdSelector);
   const selectedService = allServices.find(
     (service) => service.id === serviceId
   );
+  const vetDetail = useSelector(vetDetailSelector);
 
-  // Find All The Koi User Currently Have
-  const allKoiByAccountId = useSelector(allKoiByAccountIdSelector);
-
+  // Fetch user data and Koi fish list
   useEffect(() => {
     const fetchUserAndKoiData = async () => {
       const user = await dispatch(getUserDataThunk()).unwrap();
@@ -67,15 +69,10 @@ const CreateKoiFishAppointment = () => {
     fetchUserAndKoiData();
   }, [dispatch]);
 
-  //
-
-  const vetDetail = useSelector(vetDetailSelector);
-
+  // Fetch all veterinarians
   useEffect(() => {
     dispatch(getAllVetAccountThunk()).then(() => setShowLoadingModal(false));
   }, [dispatch]);
-
-  // const allServices = useSelector(allServicesSelector);
 
   const Header = ({
     title,
@@ -108,7 +105,7 @@ const CreateKoiFishAppointment = () => {
 
   const formik = useFormik({
     initialValues: {
-      centerServiceId: selectedService ? selectedService.name : "",
+      centerServiceId: selectedService ? selectedService.id : "",
       koiId: "",
       veterinarianId: "",
       appointmentDate: "",
@@ -119,12 +116,27 @@ const CreateKoiFishAppointment = () => {
       // centerServiceId: Yup.string().required("Service Name cannot be empty"),
       koiId: Yup.string().required("Koi Name cannot be empty"),
       veterinarianId: Yup.string().required("Doctor Name cannot be empty"),
-      appointmentDate: Yup.string().required("Date cannot be empty"),
-      appointmentTime: Yup.string().required("Time cannot be empty"),
-      description: Yup.string().required("Description cannot be empty"),
+      appointmentTime: Yup.number()
+        .required("Time cannot be empty")
+        .integer("Time must be an integer")
+        .min(7, "Must be at 8 AM or More")
+        .max(17, "Cannot exceed 17 PM"),
+      description: Yup.string()
+        .required("Description cannot be empty")
+        .min(5, "Description must be at least 5 characters")
+        .max(20, "No more than 20 character"),
+      appointmentDate: Yup.date()
+        .required("Date cannot be empty")
+        .min(
+          new Date(new Date().setDate(new Date().getDate() + 2)),
+          "Must be at least 2 days from today"
+        )
+        .nullable(),
     }),
 
     onSubmit: async (values) => {
+      console.log("Form values before submitting:", values); // For debugging
+
       setShowLoadingModal(true);
       dispatch(
         createAppointmentByAccountIdThunk({
@@ -141,29 +153,20 @@ const CreateKoiFishAppointment = () => {
           setShowLoadingModal(false);
           Swal.fire({
             title: SUCCESSTEXT,
-            // text: ADDPACKAGESUCCESS,
             icon: "success",
-            showCancelButton: false,
-            showConfirmButton: false,
-            background: "white",
             timer: 1500,
-            timerProgressBar: true,
-            scrollbarPadding: false,
           }).then(() => {
             navigate(-1);
           });
         })
         .catch((error) => {
           setShowLoadingModal(false);
+          console.error("Error creating appointment:", error);
           Swal.fire({
             title: ERRORTEXT,
-            text: error.message,
+            text: error.response?.data?.message || error.message,
             icon: "error",
-            showConfirmButton: false,
-            background: "white",
             timer: 2000,
-            timerProgressBar: true,
-            scrollbarPadding: false,
           });
         });
     },
@@ -178,7 +181,6 @@ const CreateKoiFishAppointment = () => {
         />
         <form onSubmit={formik.handleSubmit} className="form-container">
           <div className="text-field-grid">
-            
             {/* Center Service */}
             <div className="text-field-container">
               <TextField
@@ -189,7 +191,7 @@ const CreateKoiFishAppointment = () => {
                   </span>
                 }
                 variant="outlined"
-                value={formik.values.centerServiceId}
+                value={selectedService ? selectedService.name : ""} // Display service name instead of ID
                 InputProps={{
                   readOnly: true, // Make the field read-only
                   style: {
@@ -212,7 +214,6 @@ const CreateKoiFishAppointment = () => {
                   labelId="koiId"
                   id="koiId"
                   value={formik.values.koiId}
-                  // onChange={formik.handleChange}
                   label="Koi Name"
                   color="secondary"
                   style={{ backgroundColor: "#f5f5f5", color: "black" }}
@@ -222,7 +223,7 @@ const CreateKoiFishAppointment = () => {
                 >
                   {allKoiByAccountId && allKoiByAccountId.length > 0 ? (
                     allKoiByAccountId.map((koi) => (
-                      <MenuItem key={koi.id} value={koi.koiName}>
+                      <MenuItem key={koi.id} value={koi.id}>
                         {koi.koiName}
                       </MenuItem>
                     ))
@@ -257,7 +258,7 @@ const CreateKoiFishAppointment = () => {
                 >
                   {vetDetail && vetDetail.length > 0 ? (
                     vetDetail.map((vet) => (
-                      <MenuItem key={vet.accountId} value={vet.username}>
+                      <MenuItem key={vet.accountId} value={vet.accountId}>
                         {vet.username}
                       </MenuItem>
                     ))
@@ -266,11 +267,12 @@ const CreateKoiFishAppointment = () => {
                   )}
                 </Select>
               </FormControl>
-              {formik.touched.veterinarianId && formik.errors.veterinarianId && (
-                <div className="login__validation__error">
-                  {formik.errors.veterinarianId}
-                </div>
-              )}
+              {formik.touched.veterinarianId &&
+                formik.errors.veterinarianId && (
+                  <div className="login__validation__error">
+                    {formik.errors.veterinarianId}
+                  </div>
+                )}
             </div>
 
             {/* Description */}
@@ -315,6 +317,11 @@ const CreateKoiFishAppointment = () => {
                     Appointment Date <span style={{ color: "red" }}>*</span>
                   </span>
                 }
+                slotProps={{
+                  inputLabel: {
+                    shrink: true,
+                  },
+                }}
                 variant="outlined"
                 value={formik.values.appointmentDate}
                 onChange={formik.handleChange}
@@ -323,7 +330,7 @@ const CreateKoiFishAppointment = () => {
                 margin="dense"
                 type="date"
                 color="secondary"
-                InputLabelProps={{ style: { color: "black" } }}
+                InputLabelProps={{ style: { color: "black" }, shrink: true }}
                 InputProps={{
                   style: {
                     backgroundColor: "#f5f5f5",

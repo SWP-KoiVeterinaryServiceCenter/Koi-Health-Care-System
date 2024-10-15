@@ -65,8 +65,8 @@ export default function Service(props) {
               <div className="article-wrapper">
                 <figure>
                   <img
-                    src="https://cafishvet.com/wp-content/uploads/2024/09/Water-Treatment-Jessie-Sanders-Fish-Vetranarian-1320x880.jpg"
-                    alt=""
+                    src={service.serviceImage}
+                    alt="service-img"
                   />
                 </figure>
                 <div className="article-body-customer" key={service.id}>
