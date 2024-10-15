@@ -17,7 +17,7 @@ import * as Yup from "yup";
 import Swal from "sweetalert2";
 import { useFormik } from "formik";
 import {
-  UPDATEPACKAGESUCCESS,
+  UPDATEKOIINFORMATIONSUCCESS,
   ERRORTEXT,
   SUCCESSTEXT,
 } from "../../../../components/text/notiText/notiText";
@@ -106,8 +106,9 @@ export default function updateKoiFishInformation() {
       setShowLoadingModal(true);
       dispatch(
         updateKoiByAccountIdThunk({
-          id: koiId, 
-          data: {  // Gói dữ liệu bên trong đối tượng 'data'
+          id: koiId,
+          data: {
+            // Gói dữ liệu bên trong đối tượng 'data'
             koiName: values.koiName,
             weight: values.weight,
             age: values.age, // Lưu ý: Bạn đã sử dụng nhầm values.weight cho age, hãy sửa lại
@@ -121,7 +122,7 @@ export default function updateKoiFishInformation() {
           setShowLoadingModal(false);
           Swal.fire({
             title: SUCCESSTEXT,
-            text: UPDATEPACKAGESUCCESS,
+            text: UPDATEKOIINFORMATIONSUCCESS,
             icon: "success",
             showCancelButton: false,
             showConfirmButton: false,
@@ -160,7 +161,6 @@ export default function updateKoiFishInformation() {
           <form onSubmit={formik.handleSubmit}>
             <div className="text-field-grid">
               <div className="text-field-container">
-                
                 {/* koiName */}
                 <TextField
                   id="koiName"
