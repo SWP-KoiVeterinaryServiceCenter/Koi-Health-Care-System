@@ -27,6 +27,8 @@ import AdminDashboardDetail from "./pages/admin/screens/dashboard/dashboardDetai
 import CreateStaffAccount from "./pages/admin/screens/createRoleAccount/createStaffAccount/createStaffAccount";
 import CreateVetAccount from "./pages/admin/screens/createRoleAccount/createVetAccount/createVetAccount";
 import CreateTank from "./pages/admin/screens/createTank/createTank";
+import CreateServiceType from "./pages/admin/screens/createServiceType/createServiceType";
+import CreateServiceCenter from "./pages/admin/screens/createServiceCenter/createServiceCenter";
 //Manager
 import CreateShopManager from "./pages/manager/screens/shop/createShop/createShop";
 import ManagerHome from "./pages/manager/screens/home/managerHome";
@@ -181,6 +183,14 @@ const router = createBrowserRouter([
       {
         path: "createTank",
         element: <CreateTank />,
+      },
+      {
+        path: "createServiceType",
+        element: <CreateServiceType />,
+      },
+      {
+        path: "createServiceCenter",
+        element: <CreateServiceCenter />,
       },
       {
         path: "createVetAccount",
