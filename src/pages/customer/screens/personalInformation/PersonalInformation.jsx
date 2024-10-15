@@ -130,36 +130,6 @@ export default function PersonalInformation(props) {
           {allKoiByAccountId &&
             allKoiByAccountId.map((koi) => (
               <div className="KoiName" key={koi.id}>
-                {/* <div className="koi_card">
-                  <div className="koi_info">
-                    <img src={koifish} alt="Koi Fish" className="koi_image" />
-                    <div className="koi_details">
-                      <p>Name: {koi.koiName}</p>
-                      <p>Weight: {koi.weight} kg</p>
-                      <p>Age: {koi.age} years</p>
-                      <p>Gender: {koi.gender}</p>
-                      <p>Varieties: {koi.varieties}</p>
-                      <div className="icon_container">
-                        <EditIcon
-                          alt="Edit"
-                          className="edit_icon"
-                          fontSize="large"
-                          sx={{ color: pink[500] }}                          onClick={() =>
-                            navigate(`/${direction}/updateKoiFishInformation`, {
-                              state: { koiId: koi.id },
-                            })
-                          }
-                        />
-                        <DeleteIcon
-                          alt="Delete"
-                          onClick={() => handleDeleteKoi(koi.id)} // Deleting koi by ID
-                          className="delete_icon"
-                          fontSize="large"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
                 <div className="koi_card">
                   <div className="koi_info">
                     <img src={koifish} alt="Koi Fish" className="koi_image" />

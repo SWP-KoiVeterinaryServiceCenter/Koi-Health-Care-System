@@ -29,7 +29,8 @@ import {
   createStaffAccount,
   createVetAccount,
   getTotalVets,
-  getTotalStaffs
+  getTotalStaffs,
+  getAllVetAccount,
 } from "../../api/user";
 
 export const updateStaffPasswordThunk = createAsyncThunk(
@@ -55,7 +56,6 @@ export const getAllAccountsThunk = createAsyncThunk(
     }
   }
 );
-
 
 // TODO: API getAllVerifyUsers Thunk
 export const getAllVerifyUsersThunk = createAsyncThunk(
@@ -369,16 +369,21 @@ export const getUserDetailThunk = createAsyncThunk(
 //   }
 // );
 export const signupThunk = createAsyncThunk(
-  'user/signup',
+  "user/signup",
   async (userData, { rejectWithValue }) => {
-    console.log('Dispatching signup with data:', userData);
+    console.log("Dispatching signup with data:", userData);
     try {
       const result = await signup(userData);
-      console.log('User registered successfully:', result);
+      console.log("User registered successfully:", result);
       return result;
     } catch (error) {
-      console.error('Error in signup thunk:', error.response ? error.response.data : error.message);
-      return rejectWithValue(error.response ? error.response.data : error.message);
+      console.error(
+        "Error in signup thunk:",
+        error.response ? error.response.data : error.message
+      );
+      return rejectWithValue(
+        error.response ? error.response.data : error.message
+      );
     }
   }
 );
@@ -386,26 +391,35 @@ export const signupThunk = createAsyncThunk(
 export const createStaffAccountThunk = createAsyncThunk(
   "user/createStaffAccount",
   async (data, thunkAPI) => {
-      try {
-          const response = await createStaffAccount(data);
-          return response;
-      } catch (error) {
-          return thunkAPI.rejectWithValue(error.response.data);
-          
-      }
+    try {
+      const response = await createStaffAccount(data);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
   }
 );
-
 
 export const createVetAccountThunk = createAsyncThunk(
   "user/createVetAccount",
   async (data, thunkAPI) => {
-      try {
-          const response = await createVetAccount(data);
-          return response;
-      } catch (error) {
-          return thunkAPI.rejectWithValue(error.response.data);
-          
-      }
+    try {
+      const response = await createVetAccount(data);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const getAllVetAccountThunk = createAsyncThunk(
+  "user/getAllVetAccount",
+  async (data, thunkAPI) => {
+    try {
+      const response = await getAllVetAccount(data);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
   }
 );

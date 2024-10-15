@@ -58,7 +58,6 @@ export const updateUserData = async (data) => {
   return response.data;
 };
 
-
 // export const approveUser = async (data) => {
 //   const response = await api.put(`/api/v1/VerifyUses/ApproveUser/`, data, {//approve the user in verification
 //     headers: {
@@ -76,7 +75,7 @@ export const unbanUser = async (accountId) => {
   const response = await api.patch(`/api/v1/Account/UnBanAccount/${accountId}`); //unban the user in account
   return response.data;
 };
-export const banUser = async (accountId ) => {
+export const banUser = async (accountId) => {
   const response = await api.delete(`/api/v1/Account/BanAccount/${accountId}`); //ban the user in account
   return response.data;
 };
@@ -86,7 +85,7 @@ export const changeRoleUser = async (userId) => {
 };
 
 export const denyUser = async (id) => {
-  const response = await api.put(`/api/v1/VerifyUses/DenyUser/${id}`);//deny the user in verification
+  const response = await api.put(`/api/v1/VerifyUses/DenyUser/${id}`); //deny the user in verification
   return response.data;
 };
 
@@ -161,11 +160,11 @@ export const getTotalUsers = async () => {
   return response.data;
 };
 export const getTotalStaffs = async () => {
-  const response = await api.get(`/api/v1/Account/StaffAmount`); 
+  const response = await api.get(`/api/v1/Account/StaffAmount`);
   return response.data;
 };
 export const getTotalVets = async () => {
-  const response = await api.get(`/api/v1/Account/VetAmount`); 
+  const response = await api.get(`/api/v1/Account/VetAmount`);
   return response.data;
 };
 
@@ -182,13 +181,19 @@ export const updateStatusAccount = async (data) => {
 };
 
 export const createStaffAccount = async (data) => {
-  const response = await api.post(`/api/v1/Account/CreateStaffAccount`, data
-    );
+  const response = await api.post(`/api/v1/Account/CreateStaffAccount`, data);
   return response.data;
 };
 
 export const createVetAccount = async (data) => {
-  const response = await api.post(`/api/v1/Account/CreateVetAccount`, data
-    );
+  const response = await api.post(`/api/v1/Account/CreateVetAccount`, data);
   return response.data;
 };
+
+export const getAllVetAccount = async (data) => {
+  const response = await api.get(`/api/v1/Account/Veterinaries`, data);
+  return response.data;
+};
+
+
+

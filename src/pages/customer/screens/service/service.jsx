@@ -53,7 +53,13 @@ export default function Service(props) {
         <section className="articles_customer">
           {allServices.map((service) => (
             <article
-              onClick={() => navigate(`/${direction}/createKoiFishAppointment`)}
+              // onClick={() => navigate(`/${direction}/createKoiFishAppointment`)}
+              // key={service.id}
+              onClick={() =>
+                navigate(`/${direction}/createKoiFishAppointment`, {
+                  state: { serviceId: service.id },
+                })
+              }
               key={service.id}
             >
               <div className="article-wrapper">
@@ -67,7 +73,7 @@ export default function Service(props) {
                   <h2>{service.name} </h2>
                   <p className="price">{service.price} VND</p>
                   <p>{service.description}</p>
-                  <a href="" className="read-more">
+                  <a className="read-more">
                     Tìm hiểu thêm{" "}
                     <span className="sr-only">about this is some title</span>
                     <svg
