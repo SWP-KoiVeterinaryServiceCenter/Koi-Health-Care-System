@@ -16,8 +16,18 @@
     flex-basis: 100%;
     position: relative;
     padding: 24px;
-    background-color:#ACE1F0;
+    background: rgba(173, 216, 230, 0.2); /* Nền xanh trong suốt */
+    backdrop-filter: blur(10px); /* Hiệu ứng kính */
+    border-radius: 12px; /* Tạo góc bo tròn */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
+  
+  .news-box:hover {
+    transform: translateY(-5px); /* Hiệu ứng khi hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Tăng hiệu ứng đổ bóng khi hover */
+  }
+  
   
   .news-box-top {
     display: flex;
@@ -54,22 +64,23 @@
   }
   
   .news-button {
-    display: block;
-    justify-content: center;
-    align-items: center;
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px dashed #20d5c6; /* Đường viền đứt nét */
+    border-radius: 15px; /* Góc bo tròn */
+    background-color: #20d5c6; /* Màu nền */
+    color: white;
     text-align: center;
-    margin-top: auto;
-    padding: 16px;
-    color: #000;
-    background: hsl(240, 80%, 89%); /* Đặt màu nền */
-    box-shadow: 0px 0px 0px 1px black inset;
-    transition: background 0.4s ease;
-    text-decoration: none; /* Loại bỏ gạch chân */
+    text-decoration: none; /* Bỏ gạch chân */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển màu */
   }
   
   .news-button:hover {
-    background: var(--purple); /* Giữ hiệu ứng khi hover */
+    background-color: white; /* Màu nền khi hover */
+    color: #20d5c6; /* Đổi màu chữ khi hover */
+    border: 2px dashed #20d5c6; /* Giữ đường viền đứt nét khi hover */
   }
+  
   
   /* RESPONSIVE QUERIES */
   @media (min-width: 640px) {
