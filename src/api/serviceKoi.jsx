@@ -5,6 +5,7 @@ export const getAllServicesType = async (id) => {
   return response.data;
 };
 
+
 export const createServicesType = async (data) => {
   const response = await api.post(`/api/v1/ServiceType/CreateServiceType`, data);
   return response.data;
@@ -23,3 +24,11 @@ export const createServiceCenter = async (data) => {
   });
   return response.data;
 };
+
+export const getAllServices = async () => {
+  const response = await api.get(`/api/v1/CenterService/GetAllService`);
+  return response.data;
+};
+
+
+

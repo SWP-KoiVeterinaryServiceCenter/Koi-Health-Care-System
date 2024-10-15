@@ -4,7 +4,8 @@ import {
     getAllServicesType,
     createServicesType,
     deleteServicesType,
-    createServiceCenter
+    createServiceCenter,
+    getAllServices
     
   } from "../../api/serviceKoi";
 
@@ -55,3 +56,14 @@ import {
     }
   );
   
+  export const getAllServicesThunk = createAsyncThunk(
+    "services/getAllServices",
+    async (thunkAPI) => {
+      try {
+        const response = await getAllServices();
+        return response;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error?.response?.data);
+      }
+    }
+  );

@@ -49,6 +49,9 @@ const DELETEPROMOTIONSUCCESS = "Promotion Deleted Successfully!!";
 const UPDATEPROMOTIONSUCCESS = "Promotion Updated Successfully!!";
 const ADDSTAFFSUCCESS = "Staff Account Created Successfully!!";
 
+const UPDATEKOIINFORMATIONSUCCESS =  "Koi Has Been Updated Successfully!!";
+const DELETEKOISUCCESS =  "Koi Has Been Deleted Successfully!!";
+
 
 export {
     UPDATECATEGORYSUCCESS,
@@ -100,4 +103,6 @@ export {
     DELETEPACKAGESUCCESS,
     UPDATEPACKAGESUCCESS,
     CONFIRMDELETEEVENT,
+    UPDATEKOIINFORMATIONSUCCESS,
+    DELETEKOISUCCESS,
 };

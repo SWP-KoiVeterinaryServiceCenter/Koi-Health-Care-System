@@ -1,4 +1,3 @@
-/* Container for Profile Information */
 .pi-container-1 {
   display: flex;
   align-items: center;
@@ -20,7 +19,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* User Info Section */
 .user-info {
   display: flex;
   flex-direction: column;
@@ -33,6 +31,7 @@
   line-height: 1.6;
   margin-bottom: 10px;
   color: #333;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .user-info span {
@@ -40,7 +39,6 @@
   color: #555;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .pi-container-1 {
     flex-direction: column;
@@ -58,7 +56,6 @@
   }
 }
 
-/* Chart Title */
 .koi_management_chart_title {
   display: flex;
   align-items: center;
@@ -69,7 +66,6 @@
   margin-bottom: 20px;
 }
 
-/* Koi Management Chart Layout */
 .Koi-Management-Chart {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -77,14 +73,22 @@
   padding: 20px;
   width: 100%;
   margin: 0 auto;
+  background-color: rgba(13, 59, 102, 0.8);
+  background-image: url("../../../../assets/lotusfiled.jpg");
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 0;
 }
 
 .KoiName {
   background-color: rgba(255, 255, 255, 0.95);
-  padding: 20px;
   border-radius: 8px;
   transition: transform 0.3s ease;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .KoiName:hover {
@@ -95,29 +99,6 @@
   font-family: "EB Garamond", serif;
   color: #7d7d7d;
   margin: 2px;
-}
-
-/* Koi Card */
-.koi_card {
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  transition: transform 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.koi_card:hover {
-  transform: translateY(-5px);
-}
-
-/* Koi Image Styling */
-.koi_info {
-  display: flex;
-  align-items: center;
-  gap: 20px;
 }
 
 .koi_image {
@@ -138,23 +119,63 @@
   margin: 5px 0;
   text-align: left;
   width: 100%;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  /* font-weight: 600; */
 }
 
-/* Edit and Delete Icons */
+.koi_card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.koi_card:hover {
+  background-color: #ffffff;
+}
+
+.koi_info {
+  transition: filter 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+
+.koi_card:hover .koi_info {
+  filter: blur(4px);
+}
+
 .icon_container {
   display: flex;
+  justify-content: center;
   gap: 10px;
-  margin-top: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.koi_card:hover .icon_container {
+  opacity: 1;
 }
 
 .edit_icon,
 .delete_icon {
+  display: flex;
   width: 24px;
   cursor: pointer;
-  font-size: xx-large;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
 }
 
-/* Responsive Design for Koi Card */
 @media (max-width: 768px) {
   .koi_card {
     flex-direction: column;
@@ -166,80 +187,18 @@
   }
 }
 
-/* Additional Responsive Design for Koi Names */
-@media (max-width: 768px) {
-  .KoiName {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .KoiName div {
-    margin-top: 10px;
-  }
-
-  .KoiName p {
-    font-size: 16px;
-  }
-
-  .KoiName img {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-/* Giant Card Margin */
 .pi-giant-card {
   margin: 95px 100px 50px 100px;
 }
 
-/* Add Button Styling */
-/* .pi-add-button {
-  width: 200px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin: 50px 0 20px 600px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 5px 10px;
-  border-radius: 60px;
-  cursor: pointer;
-  position: relative;
-}
-
-.pi-add-button img {
-  height: 40px;
-  width: auto;
-}
-
-.pi-add-button p {
-  font-size: x-large;
-  font-weight: 500;
-}
-
-.pi-add-button:hover {
-  background-color: #cce7ff;
-  transform: scale(1.05);
-}
-
-.pi-add-button:hover p {
-  color: #007bff;
-}
-
-.pi-add-button:hover img {
-  filter: brightness(1.2);
-} */
-
-/* From Uiverse.io by Mike11jr */
 .button-container {
   display: flex;
-  justify-content: flex-end; /* Aligns the button to the right */
-  margin: 20px; /* Optional: Add margin if needed */
+  justify-content: flex-end;
+  margin: 20px;
 }
 
 .pi-add-button {
   width: 180px;
-  /* height: 100px; */
   display: flex;
   padding: 1.1em 2em;
   background: none;
@@ -247,14 +206,14 @@
   font-size: 15px;
   color: #131313;
   cursor: pointer;
-  position: relative; /* Change this to relative */
+  position: relative;
   overflow: hidden;
   transition: all 0.3s;
   border-radius: 12px;
   background-color: #ecd448;
   font-weight: bolder;
   box-shadow: 0 2px 0 2px #000;
-  margin-left: auto; /* This will push the button to the right within its container */
+  margin-left: auto;
 }
 
 .pi-add-button:before {
