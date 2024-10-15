@@ -117,8 +117,8 @@ const CreateKoiFishAppointment = () => {
     },
     validationSchema: Yup.object({
       // centerServiceId: Yup.string().required("Service Name cannot be empty"),
-      koiName: Yup.string().required("Koi Name cannot be empty"),
-      doctorName: Yup.string().required("Doctor Name cannot be empty"),
+      koiId: Yup.string().required("Koi Name cannot be empty"),
+      veterinarianId: Yup.string().required("Doctor Name cannot be empty"),
       appointmentDate: Yup.string().required("Date cannot be empty"),
       appointmentTime: Yup.string().required("Time cannot be empty"),
       description: Yup.string().required("Description cannot be empty"),
