@@ -25,13 +25,6 @@ export const createServiceCenter = async (data) => {
   return response.data;
 };
 
-export const createAppointmentByAccountId = async (data) => {
-  const response = await api.post(`/api/v1/Appointment/CreateAppointment`, data);
-  return response.data;
-};
-
-
-
 export const getAllServices = async () => {
   const response = await api.get(`/api/v1/CenterService/GetAllService`);
   return response.data;

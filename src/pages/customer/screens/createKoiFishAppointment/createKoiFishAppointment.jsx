@@ -27,7 +27,7 @@ import Swal from "sweetalert2";
 
 import { useLocation } from "react-router-dom";
 
-import { createAppointmentByAccountIdThunk } from "../../../../store/apiThunk/serviceKoiThunk";
+import { createAppointmentByAccountIdThunk } from "../../../../store/apiThunk/appointment";
 import { allServicesSelector } from "../../../../store/sellectors";
 
 import { getUserDataThunk } from "../../../../store/apiThunk/userThunk";
@@ -108,20 +108,12 @@ const CreateKoiFishAppointment = () => {
 
   const formik = useFormik({
     initialValues: {
-      centerServiceId: selectedService ? selectedService.name : "", // Automatically set centerServiceId
+      centerServiceId: selectedService ? selectedService.name : "",
       koiId: "",
       veterinarianId: "",
       appointmentDate: "",
       appointmentTime: "",
       description: "",
-
-      // description: "string",
-      // centerServiceId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      // koiId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      // veterinarianId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      // appointmentDate: "2024-10-15",
-      // appointmentTime: 0,
-
     },
     validationSchema: Yup.object({
       // centerServiceId: Yup.string().required("Service Name cannot be empty"),
