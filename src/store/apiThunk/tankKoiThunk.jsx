@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
     getAllTanks,
-    createTanks
+    createTanks,
+    deleteTank
   } from "../../api/tankKoi";
 
   export const getAllTanksThunk = createAsyncThunk(
@@ -26,6 +27,17 @@ import {
             return thunkAPI.rejectWithValue(error.response.data);
             
         }
+    }
+  );
+  export const deleteTankThunk = createAsyncThunk(
+    "tanks/deleteTank",
+    async (id, thunkAPI) => {
+      try {
+        const response = await deleteTank(id);
+        return response;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error?.response?.data);
+      }
     }
   );
   

@@ -61,12 +61,12 @@ export default function AdminDashboard() {
                 textAlign: "right", // Căn phải
                 fontWeight: "600",
                 position: "absolute", // Đặt vị trí tuyệt đối
-                right: "70px", // Cách cạnh phải
+                right: "30px", // Cách cạnh phải
                 bottom: "12px", // Cách cạnh dưới
                 padding: "8px", // Khoảng cách bên trong để viền không bị cắt
                 borderRadius: "8px", // Bo tròn các góc
                 border: "2px solid #7CB9E8", // Viền màu xanh xám
-                boxShadow: "0 0 30px 15px rgba(124, 185, 232, 1)", // Phát sáng màu xanh xám nặng hơn
+                boxShadow: "0 0 60px 5px rgba(124, 185, 232, 1)", // Phát sáng màu xanh xám nặng hơn
                 backgroundColor: "rgba(255, 255, 255, 0.8)", // Nền trắng nhạt
               }}
             >
@@ -107,12 +107,12 @@ export default function AdminDashboard() {
                 textAlign: "right", // Căn phải
                 fontWeight: "600",
                 position: "absolute", // Đặt vị trí tuyệt đối
-                right: "70px", // Cách cạnh phải
+                right: "30px", // Cách cạnh phải
                 bottom: "12px", // Cách cạnh dưới
                 padding: "8px", // Khoảng cách bên trong để viền không bị cắt
                 borderRadius: "8px", // Bo tròn các góc
                 border: "2px solid #7CB9E8", // Viền màu xanh xám
-                boxShadow: "0 0 30px 15px rgba(124, 185, 232, 1)", // Phát sáng màu xanh xám nặng hơn
+                boxShadow: "0 0 60px 5px rgba(124, 185, 232, 1)", // Phát sáng màu xanh xám nặng hơn
                 backgroundColor: "rgba(255, 255, 255, 0.8)", // Nền trắng nhạt
               }}
             >
@@ -153,12 +153,12 @@ export default function AdminDashboard() {
                 textAlign: "right", // Căn phải
                 fontWeight: "600",
                 position: "absolute", // Đặt vị trí tuyệt đối
-                right: "70px", // Cách cạnh phải
+                right: "30px", // Cách cạnh phải
                 bottom: "12px", // Cách cạnh dưới
                 padding: "8px", // Khoảng cách bên trong để viền không bị cắt
                 borderRadius: "8px", // Bo tròn các góc
                 border: "2px solid #7CB9E8", // Viền màu xanh xám
-                boxShadow: "0 0 30px 15px rgba(124, 185, 232, 1)", // Phát sáng màu xanh xám nặng hơn
+                boxShadow: "0 0 60px 5px rgba(124, 185, 232, 1)", // Phát sáng màu xanh xám nặng hơn
                 backgroundColor: "rgba(255, 255, 255, 0.8)", // Nền trắng nhạt
               }}
             >
