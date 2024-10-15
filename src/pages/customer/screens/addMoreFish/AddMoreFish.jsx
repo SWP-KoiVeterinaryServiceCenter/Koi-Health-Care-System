@@ -66,6 +66,7 @@ const AddMoreFish = () => {
       age: "",
       gender: "",
       varieties: "",
+      koiImage: "",
     },
     validationSchema: Yup.object({
       koiName: Yup.string().required("Koi Name cannot be empty"),
@@ -81,6 +82,7 @@ const AddMoreFish = () => {
         .max(20, "Age cannot exceed 20 year"),
       gender: Yup.string().required("Gender cannot be empty"),
       varieties: Yup.string().required("Varieties cannot be empty"),
+      koiImage: Yup.string().required("Koi image is required"),
     }),
 
     onSubmit: async (values) => {
@@ -92,6 +94,7 @@ const AddMoreFish = () => {
           age: values.age,
           gender: values.gender,
           varieties: values.varieties,
+          koiImage: values.koiImage,
         })
       )
         .unwrap()
@@ -138,6 +141,39 @@ const AddMoreFish = () => {
         />
         <form onSubmit={formik.handleSubmit} className="form-container">
           <div className="text-field-grid">
+            {/* Koi Image */}
+            <div className="text-field-container">
+              <TextField
+                id="koiImage"
+                label={
+                  <span>
+                    Koi Image: <span style={{ color: "red" }}>*</span>
+                  </span>
+                }
+                variant="outlined"
+                value={formik.values.koiImage}
+                onChange={formik.handleChange}
+                fullWidth
+                autoComplete="koiImage"
+                margin="dense"
+                type="string"
+                color="secondary"
+                InputLabelProps={{ style: { color: "black" } }}
+                InputProps={{
+                  style: {
+                    backgroundColor: "#f5f5f5",
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                    color: "black",
+                  },
+                }}
+              />
+              {formik.touched.koiImage && formik.errors.koiImage && (
+                <div className="login__validation__error">
+                  {formik.errors.koiImage}
+                </div>
+              )}
+            </div>
+
             <div className="text-field-container">
               <TextField
                 id="koiName"
@@ -342,7 +378,7 @@ const AddMoreFish = () => {
                 alignItems: "center",
                 justifyContent: "flex-end",
                 gap: "30px",
-                marginBottom: "10px",
+                margin: "20px 0px",
               }}
             >
               <BackButton style={{ fontSize: "14px" }} />

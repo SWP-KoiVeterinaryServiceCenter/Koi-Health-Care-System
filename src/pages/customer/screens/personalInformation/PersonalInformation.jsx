@@ -132,7 +132,7 @@ export default function PersonalInformation(props) {
               <div className="KoiName" key={koi.id}>
                 <div className="koi_card">
                   <div className="koi_info">
-                    <img src={koifish} alt="Koi Fish" className="koi_image" />
+                    <img src={koi.koiImage} alt="Koi Fish" className="koi_image"/>
                     <div className="koi_details">
                       <p>Name: {koi.koiName}</p>
                       <p>Weight: {koi.weight} kg</p>

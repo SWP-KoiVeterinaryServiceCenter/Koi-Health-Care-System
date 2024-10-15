@@ -108,15 +108,23 @@ const CreateKoiFishAppointment = () => {
 
   const formik = useFormik({
     initialValues: {
-      serviceName: selectedService ? selectedService.name : "", // Automatically set serviceName
-      koiName: "",
-      doctorName: "",
+      centerServiceId: selectedService ? selectedService.name : "", // Automatically set centerServiceId
+      koiId: "",
+      veterinarianId: "",
       appointmentDate: "",
       appointmentTime: "",
       description: "",
+
+      // description: "string",
+      // centerServiceId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      // koiId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      // veterinarianId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      // appointmentDate: "2024-10-15",
+      // appointmentTime: 0,
+
     },
     validationSchema: Yup.object({
-      // serviceName: Yup.string().required("Service Name cannot be empty"),
+      // centerServiceId: Yup.string().required("Service Name cannot be empty"),
       koiName: Yup.string().required("Koi Name cannot be empty"),
       doctorName: Yup.string().required("Doctor Name cannot be empty"),
       appointmentDate: Yup.string().required("Date cannot be empty"),
@@ -128,9 +136,9 @@ const CreateKoiFishAppointment = () => {
       setShowLoadingModal(true);
       dispatch(
         createAppointmentByAccountIdThunk({
-          koiName: values.koiName,
-          serviceName: values.serviceName,
-          doctorName: values.doctorName,
+          koiId: values.koiId,
+          centerServiceId: values.centerServiceId,
+          veterinarianId: values.veterinarianId,
           appointmentDate: values.appointmentDate,
           appointmentTime: values.appointmentTime,
           description: values.description,
@@ -178,17 +186,18 @@ const CreateKoiFishAppointment = () => {
         />
         <form onSubmit={formik.handleSubmit} className="form-container">
           <div className="text-field-grid">
+            
             {/* Center Service */}
             <div className="text-field-container">
               <TextField
-                id="serviceName"
+                id="centerServiceId"
                 label={
                   <span>
                     Center Service <span style={{ color: "red" }}>*</span>
                   </span>
                 }
                 variant="outlined"
-                value={formik.values.serviceName}
+                value={formik.values.centerServiceId}
                 InputProps={{
                   readOnly: true, // Make the field read-only
                   style: {
@@ -204,19 +213,19 @@ const CreateKoiFishAppointment = () => {
             {/* Koi Name */}
             <div className="text-field-container">
               <FormControl fullWidth margin="dense">
-                <InputLabel id="koiName">
+                <InputLabel id="koiId">
                   Koi Name <span style={{ color: "red" }}>*</span>
                 </InputLabel>
                 <Select
-                  labelId="koiName"
-                  id="koiName"
-                  value={formik.values.koiName}
+                  labelId="koiId"
+                  id="koiId"
+                  value={formik.values.koiId}
                   // onChange={formik.handleChange}
                   label="Koi Name"
                   color="secondary"
                   style={{ backgroundColor: "#f5f5f5", color: "black" }}
                   onChange={(event) =>
-                    formik.setFieldValue("koiName", event.target.value)
+                    formik.setFieldValue("koiId", event.target.value)
                   } // Explicitly set the field value
                 >
                   {allKoiByAccountId && allKoiByAccountId.length > 0 ? (
@@ -230,28 +239,28 @@ const CreateKoiFishAppointment = () => {
                   )}
                 </Select>
               </FormControl>
-              {formik.touched.koiName && formik.errors.koiName && (
+              {formik.touched.koiId && formik.errors.koiId && (
                 <div className="login__validation__error">
-                  {formik.errors.koiName}
+                  {formik.errors.koiId}
                 </div>
               )}
             </div>
 
             {/* Doctor Name */}
-            <div className="text-field-container">             
+            <div className="text-field-container">
               <FormControl fullWidth margin="dense">
-                <InputLabel id="doctorName">
+                <InputLabel id="veterinarianId">
                   Veterinarian Name <span style={{ color: "red" }}>*</span>
                 </InputLabel>
                 <Select
-                  labelId="doctorName"
-                  id="doctorName"
-                  value={formik.values.doctorName}
+                  labelId="veterinarianId"
+                  id="veterinarianId"
+                  value={formik.values.veterinarianId}
                   label="Doctor Name"
                   color="secondary"
                   style={{ backgroundColor: "#f5f5f5", color: "black" }}
                   onChange={(event) =>
-                    formik.setFieldValue("doctorName", event.target.value)
+                    formik.setFieldValue("veterinarianId", event.target.value)
                   } // Explicitly set the field value
                 >
                   {vetDetail && vetDetail.length > 0 ? (
@@ -265,9 +274,9 @@ const CreateKoiFishAppointment = () => {
                   )}
                 </Select>
               </FormControl>
-              {formik.touched.doctorName && formik.errors.doctorName && (
+              {formik.touched.veterinarianId && formik.errors.veterinarianId && (
                 <div className="login__validation__error">
-                  {formik.errors.doctorName}
+                  {formik.errors.veterinarianId}
                 </div>
               )}
             </div>

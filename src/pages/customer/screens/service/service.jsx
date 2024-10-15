@@ -27,7 +27,7 @@ export default function Service(props) {
   };
 
   const allServices = useSelector(allServicesSelector);
-  console.log(allServices);
+  // console.log(allServices);
 
   useEffect(() => {
     dispatch(getAllServicesThunk()).then(() => setShowLoadingModal(false));
