@@ -27,6 +27,8 @@ import {
   getKoiByIdThunk,
   updateKoiByAccountIdThunk,
 } from "../../../../store/apiThunk/koiThunk";
+import NoBackground from "../../../../assets/uploadImg.png";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 
 import { allKoiByIdSelector } from "../../../../store/sellectors";
 import { Divider } from "antd";
@@ -43,6 +45,7 @@ export default function updateKoiFishInformation() {
   const allKoiById = useSelector(allKoiByIdSelector);
   const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [showRender, setShowRender] = useState(false);
+
 
   const Header = ({
     title,
@@ -86,6 +89,7 @@ export default function updateKoiFishInformation() {
       age: allKoiById.age || "",
       gender: allKoiById.gender || "",
       varieties: allKoiById.varieties || "",
+      koiImage: allKoiById.koiImage || "",
     },
     validationSchema: Yup.object({
       koiName: Yup.string().required("Koi Name cannot be empty"),
@@ -101,6 +105,7 @@ export default function updateKoiFishInformation() {
         .max(20, "Age cannot exceed 20 year"),
       gender: Yup.string().required("Gender cannot be empty"),
       varieties: Yup.string().required("Varieties cannot be empty"),
+      koiImage: Yup.mixed().required("Koi image is required"),
     }),
     onSubmit: async (values) => {
       setShowLoadingModal(true);
@@ -114,6 +119,7 @@ export default function updateKoiFishInformation() {
             age: values.age, // Lưu ý: Bạn đã sử dụng nhầm values.weight cho age, hãy sửa lại
             gender: values.gender,
             varieties: values.varieties,
+            koiImage: values.koiImage,
           },
         })
       )
@@ -158,8 +164,34 @@ export default function updateKoiFishInformation() {
           subtitle="Provide Koi Information"
         />
         {!showRender ? (
-          <form onSubmit={formik.handleSubmit}>
-            <div className="text-field-grid">
+          <form onSubmit={formik.handleSubmit} className="form-container">
+            <div className="image-field">
+              {formik.values.koiImage && (
+                <img
+                  src={formik.values.koiImage}
+                  alt="Koi"
+                  className="image-preview-img"
+                />
+              )}
+              <input
+                id="koiImage"
+                type="file"
+                onChange={(event) => {
+                  formik.setFieldValue(
+                    "koiImage",
+                    event.currentTarget.files[0]
+                  );
+                }}
+                accept="image/png, image/jpeg, image/jpg"
+              />
+              {formik.touched.koiImage && formik.errors.koiImage && (
+                <div className="login__validation__error">
+                  {formik.errors.koiImage}
+                </div>
+              )}
+            </div>
+
+            <div className="second-column">
               <div className="text-field-container">
                 {/* koiName */}
                 <TextField
@@ -263,7 +295,9 @@ export default function updateKoiFishInformation() {
                   </div>
                 )}
               </div>
+            </div>
 
+            <div className="third-column">
               {/* gender */}
               <div className="text-field-container">
                 <FormControl fullWidth margin="dense">
@@ -329,34 +363,17 @@ export default function updateKoiFishInformation() {
                   </div>
                 )}
               </div>
+              {!showLoadingModal ? (
+                <div className="button-container">
+                  <BackButton style={{ fontSize: "14px" }} />
+                  <Button className="btn" variant="contained" type="submit">
+                    Update
+                  </Button>
+                </div>
+              ) : (
+                <LoadingModal />
+              )}
             </div>
-
-            {!showLoadingModal ? (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "flex-end",
-                  gap: "30px",
-                  marginBottom: "10px",
-                }}
-              >
-                <BackButton type="update" />
-                <Button
-                  className="login__btn"
-                  style={{
-                    backgroundColor: "#70d8bd",
-                    fontSize: "14px",
-                  }}
-                  variant="contained"
-                  type="submit"
-                >
-                  Update
-                </Button>
-              </div>
-            ) : (
-              <LoadingModal />
-            )}
           </form>
         ) : (
           <LoadingModal />

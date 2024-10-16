@@ -17,6 +17,8 @@ export const  allKoiByIdSelector =(state) => state.allKoiById.entities;//allKoiB
 
 export const  allServicesSelector =(state) => state.allServices.entities;
 
+export const  vetDetailSelector =(state) => state.vetDetail.entities;
+
 export const petDetailSelector = (state) => state.petDetail.entities;
 export const petsFromShopSelector = (state) => state.petsFromShop.entities;
 export const petsFromAreaSelector = (state) => state.petsFromArea.entities;

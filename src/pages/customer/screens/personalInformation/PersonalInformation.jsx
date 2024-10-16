@@ -50,37 +50,46 @@ export default function PersonalInformation(props) {
   }, [dispatch]);
 
   const handleDeleteKoi = (id) => {
-    console.log(`Deleting koi with ID: ${id}`);
-    // setShowLoadingModal(true); // Show loading modal while deleting
-    dispatch(deleteKoiByAccountIdThunk(id))
-      .unwrap()
-      .then(() => {
-        Swal.fire({
-          title: SUCCESSTEXT,
-          text: DELETEKOISUCCESS,
-          icon: "success",
-          showCancelButton: false,
-          showConfirmButton: false,
-          background: "white",
-          timer: 1500,
-          timerProgressBar: true,
-          scrollbarPadding: false,
-        }).then(() => {
-          window.location.reload();
-        });
-      })
-      .catch((error) => {
-        Swal.fire({
-          title: ERRORTEXT,
-          text: error.message,
-          icon: "error",
-          showConfirmButton: true,
-          background: "white",
-        });
-      });
-    // .finally(() => {
-    //   setShowLoadingModal(false); // Ensure loading modal is hidden regardless of success or error
-    // });
+    // Show confirmation dialog
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: '#28a745', // Set to green
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(`Deleting koi with ID: ${id}`);
+        dispatch(deleteKoiByAccountIdThunk(id))
+          .unwrap()
+          .then(() => {
+            Swal.fire({
+              title: SUCCESSTEXT,
+              text: DELETEKOISUCCESS,
+              icon: "success",
+              showCancelButton: false,
+              showConfirmButton: false,
+              background: "white",
+              timer: 1500,
+              timerProgressBar: true,
+              scrollbarPadding: false,
+            }).then(() => {
+              window.location.reload();
+            });
+          })
+          .catch((error) => {
+            Swal.fire({
+              title: ERRORTEXT,
+              text: error.message,
+              icon: "error",
+              showConfirmButton: true,
+              background: "white",
+            });
+          });
+      }
+    });
   };
 
   return (
@@ -130,39 +139,13 @@ export default function PersonalInformation(props) {
           {allKoiByAccountId &&
             allKoiByAccountId.map((koi) => (
               <div className="KoiName" key={koi.id}>
-                {/* <div className="koi_card">
-                  <div className="koi_info">
-                    <img src={koifish} alt="Koi Fish" className="koi_image" />
-                    <div className="koi_details">
-                      <p>Name: {koi.koiName}</p>
-                      <p>Weight: {koi.weight} kg</p>
-                      <p>Age: {koi.age} years</p>
-                      <p>Gender: {koi.gender}</p>
-                      <p>Varieties: {koi.varieties}</p>
-                      <div className="icon_container">
-                        <EditIcon
-                          alt="Edit"
-                          className="edit_icon"
-                          fontSize="large"
-                          sx={{ color: pink[500] }}                          onClick={() =>
-                            navigate(`/${direction}/updateKoiFishInformation`, {
-                              state: { koiId: koi.id },
-                            })
-                          }
-                        />
-                        <DeleteIcon
-                          alt="Delete"
-                          onClick={() => handleDeleteKoi(koi.id)} // Deleting koi by ID
-                          className="delete_icon"
-                          fontSize="large"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
                 <div className="koi_card">
                   <div className="koi_info">
-                    <img src={koifish} alt="Koi Fish" className="koi_image" />
+                    <img
+                      src={koi.koiImage}
+                      alt="Koi Fish"
+                      className="koi_image"
+                    />
                     <div className="koi_details">
                       <p>Name: {koi.koiName}</p>
                       <p>Weight: {koi.weight} kg</p>
@@ -175,7 +158,7 @@ export default function PersonalInformation(props) {
                     <CreateOutlinedIcon
                       alt="Edit"
                       className="edit_icon"
-                      sx={{ color: green[300], fontSize: 40 }}
+                      sx={{ color: green[500], fontSize: 40 }}
                       onClick={() =>
                         navigate(`/${direction}/updateKoiFishInformation`, {
                           state: { koiId: koi.id },
