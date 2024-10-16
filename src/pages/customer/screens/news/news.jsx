@@ -4,6 +4,7 @@ import AppAppBar from "../../../authorize/landingPage/LandingPageDetail/AppAppBa
 import { useDispatch, useSelector } from "react-redux";
 import { totalVetsDetailsSelector } from "../../../../store/sellectors";
 import { getTotalVetsDetailThunk } from "../../../../store/apiThunk/userThunk";
+import noImageDoctor from "../../../../assets/ifnoimageDoctor.jpg"; // Import ảnh mặc định
 
 export default function Doctors() {
   const doctors = useSelector(totalVetsDetailsSelector);
@@ -22,11 +23,7 @@ export default function Doctors() {
             <div className="news-box-top">
               <img
                 className="news-box-image"
-                src={
-                  doctor.profileImage
-                    ? doctor.profileImage
-                    : "https://via.placeholder.com/360" // Placeholder nếu không có ảnh
-                }
+                src={doctor.profileImage ? doctor.profileImage : noImageDoctor} // Sử dụng ảnh mặc định nếu không có ảnh
                 alt={doctor.username}
               />
               <div className="news-title-flex">
