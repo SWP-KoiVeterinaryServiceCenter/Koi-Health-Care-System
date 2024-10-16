@@ -174,7 +174,7 @@ const CreateKoiFishAppointment = () => {
 
   return (
     <>
-      <div className="add_more_fish">
+      <div className="create_koi_fish_appointment">
         <Header
           title="Create Koi Fish Appointment"
           // subtitle="Please Provide Appointment Information"

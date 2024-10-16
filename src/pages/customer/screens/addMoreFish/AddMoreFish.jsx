@@ -24,11 +24,16 @@ import { BackButton } from "../../../../components/modal/backModal/backModal";
 import { useNavigate } from "react-router-dom";
 import LoadingModal from "../../../../components/modal/loadingModal/loadingModal";
 import Swal from "sweetalert2";
+import NoBackground from "../../../../assets/uploadImg.png";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 
 const AddMoreFish = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
+
+  const [koiImage, setKoiImage] = useState({});
+  const [formData, setFormData] = useState(new FormData());
 
   const Header = ({
     title,
@@ -82,21 +87,20 @@ const AddMoreFish = () => {
         .max(20, "Age cannot exceed 20 year"),
       gender: Yup.string().required("Gender cannot be empty"),
       varieties: Yup.string().required("Varieties cannot be empty"),
-      koiImage: Yup.string().required("Koi image is required"),
+      koiImage: Yup.mixed().required("Koi image is required"),
     }),
 
     onSubmit: async (values) => {
+      const newFormData = new FormData();
+      newFormData.append("koiName", values.koiName);
+      newFormData.append("weight", values.weight);
+      newFormData.append("age", values.age);
+      newFormData.append("gender", values.gender);
+      newFormData.append("varieties", values.varieties);
+      newFormData.append("koiImage", koiImage);
+
       setShowLoadingModal(true);
-      dispatch(
-        addKoiByAccountIdThunk({
-          koiName: values.koiName,
-          weight: values.weight,
-          age: values.age,
-          gender: values.gender,
-          varieties: values.varieties,
-          koiImage: values.koiImage,
-        })
-      )
+      dispatch(addKoiByAccountIdThunk(newFormData))
         .unwrap()
         .then(() => {
           setShowLoadingModal(false);
@@ -115,6 +119,7 @@ const AddMoreFish = () => {
           });
         })
         .catch((error) => {
+          console.error("Error response:", error);
           setShowLoadingModal(false);
           Swal.fire({
             title: ERRORTEXT,
@@ -130,7 +135,16 @@ const AddMoreFish = () => {
     },
   });
 
-  console.log(formik);
+  const handleKoiImageSelect = (event) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      setKoiImage(file);
+      formik.setFieldValue("koiImage", URL.createObjectURL(file));
+    }
+  };
+
+  // console.log(formik);
 
   return (
     <>
@@ -140,40 +154,40 @@ const AddMoreFish = () => {
           subtitle="Provide Koi Fish Information"
         />
         <form onSubmit={formik.handleSubmit} className="form-container">
-          <div className="text-field-grid">
-            {/* Koi Image */}
-            <div className="text-field-container">
-              <TextField
-                id="koiImage"
-                label={
-                  <span>
-                    Koi Image: <span style={{ color: "red" }}>*</span>
-                  </span>
-                }
-                variant="outlined"
-                value={formik.values.koiImage}
-                onChange={formik.handleChange}
-                fullWidth
-                autoComplete="koiImage"
-                margin="dense"
-                type="string"
-                color="secondary"
-                InputLabelProps={{ style: { color: "black" } }}
-                InputProps={{
-                  style: {
-                    backgroundColor: "#f5f5f5",
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                    color: "black",
-                  },
-                }}
-              />
-              {formik.touched.koiImage && formik.errors.koiImage && (
-                <div className="login__validation__error">
-                  {formik.errors.koiImage}
+          {/* 1st Column: Koi Image */}
+          <div className="image-field">
+            <input
+              id="koiImage"
+              name="koiImage"
+              type="file"
+              accept="image/png, image/jpeg, image/jpg"
+              style={{ display: "none" }}
+              onChange={handleKoiImageSelect}
+            />
+            <label htmlFor="koiImage">
+              <div className="background_formik_box">
+                <img
+                  src={
+                    formik.values?.koiImage === ""
+                      ? NoBackground
+                      : formik.values?.koiImage
+                  }
+                  alt="Koi Image"
+                />
+                <div className="background_formik_icon_box">
+                  <PhotoCameraIcon className="background_formik_icon" />
                 </div>
-              )}
-            </div>
+              </div>
+            </label>
+            {formik.touched.koiImage && formik.errors.koiImage && (
+              <div className="login__validation__error">
+                {formik.errors.koiImage}
+              </div>
+            )}
+          </div>
 
+          {/* 2nd Column: Koi Name, Gender, Age */}
+          <div className="second-column">
             <div className="text-field-container">
               <TextField
                 id="koiName"
@@ -186,9 +200,7 @@ const AddMoreFish = () => {
                 value={formik.values.koiName}
                 onChange={formik.handleChange}
                 fullWidth
-                autoComplete="koiName"
                 margin="dense"
-                type="string"
                 color="secondary"
                 InputLabelProps={{ style: { color: "black" } }}
                 InputProps={{
@@ -207,103 +219,6 @@ const AddMoreFish = () => {
             </div>
 
             <div className="text-field-container">
-              {/* weight */}
-              <TextField
-                id="weight"
-                label={
-                  <span>
-                    Weight (kg) <span style={{ color: "red" }}>*</span>
-                  </span>
-                }
-                variant="outlined"
-                value={formik.values.weight}
-                onChange={formik.handleChange}
-                fullWidth
-                autoComplete="weight"
-                margin="dense"
-                type="number"
-                color="secondary"
-                InputLabelProps={{ style: { color: "black" } }}
-                InputProps={{
-                  style: {
-                    backgroundColor: "#f5f5f5",
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                    color: "black",
-                  },
-                }}
-              />
-              {formik.touched.weight && formik.errors.weight && (
-                <div className="login__validation__error">
-                  {formik.errors.weight}
-                </div>
-              )}
-            </div>
-
-            {/* age */}
-            <div className="text-field-container">
-              <TextField
-                id="age"
-                label={
-                  <span>
-                    Age (years old) <span style={{ color: "red" }}>*</span>
-                  </span>
-                }
-                variant="outlined"
-                value={formik.values.age}
-                onChange={formik.handleChange}
-                fullWidth
-                autoComplete="age"
-                margin="dense"
-                type="number"
-                color="secondary"
-                InputLabelProps={{ style: { color: "black" } }}
-                InputProps={{
-                  style: {
-                    backgroundColor: "#f5f5f5",
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                    color: "black",
-                  },
-                }}
-              />
-              {formik.touched.age && formik.errors.age && (
-                <div className="login__validation__error">
-                  {formik.errors.age}
-                </div>
-              )}
-            </div>
-
-            {/* <TextField
-              id="gender"
-              label={
-                <span>
-                  Gender <span style={{ color: "red" }}>*</span>
-                </span>
-              }
-              variant="outlined"
-              value={formik.values.gender}
-              onChange={formik.handleChange}
-              fullWidth
-              autoComplete="gender"
-              margin="dense"
-              type="string"
-              color="secondary"
-              InputLabelProps={{ style: { color: "black" } }}
-              InputProps={{
-                style: {
-                  backgroundColor: "#f5f5f5",
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                  color: "black",
-                },
-              }}
-            />
-            {formik.touched.gender && formik.errors.gender && (
-              <div className="login__validation__error">
-                <p>{formik.errors.gender}</p>
-              </div>
-            )} */}
-
-            {/* gender */}
-            <div className="text-field-container">
               <FormControl fullWidth margin="dense">
                 <InputLabel id="gender-label">
                   <span>
@@ -313,11 +228,10 @@ const AddMoreFish = () => {
                 <Select
                   labelId="gender-label"
                   id="gender"
-                  name="gender" // Ensure the name matches the formik field name
                   value={formik.values.gender}
                   onChange={(event) =>
                     formik.setFieldValue("gender", event.target.value)
-                  } // Explicitly set the field value
+                  }
                   fullWidth
                   color="secondary"
                   style={{
@@ -337,7 +251,71 @@ const AddMoreFish = () => {
               )}
             </div>
 
-            {/* varieties */}
+            <div className="text-field-container">
+              <TextField
+                id="age"
+                label={
+                  <span>
+                    Age (years) <span style={{ color: "red" }}>*</span>
+                  </span>
+                }
+                variant="outlined"
+                value={formik.values.age}
+                onChange={formik.handleChange}
+                fullWidth
+                margin="dense"
+                type="number"
+                color="secondary"
+                InputLabelProps={{ style: { color: "black" } }}
+                InputProps={{
+                  style: {
+                    backgroundColor: "#f5f5f5",
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                    color: "black",
+                  },
+                }}
+              />
+              {formik.touched.age && formik.errors.age && (
+                <div className="login__validation__error">
+                  {formik.errors.age}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* 3rd Column: Weight, Varieties, and Buttons */}
+          <div className="third-column">
+            <div className="text-field-container">
+              <TextField
+                id="weight"
+                label={
+                  <span>
+                    Weight (kg) <span style={{ color: "red" }}>*</span>
+                  </span>
+                }
+                variant="outlined"
+                value={formik.values.weight}
+                onChange={formik.handleChange}
+                fullWidth
+                margin="dense"
+                type="number"
+                color="secondary"
+                InputLabelProps={{ style: { color: "black" } }}
+                InputProps={{
+                  style: {
+                    backgroundColor: "#f5f5f5",
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                    color: "black",
+                  },
+                }}
+              />
+              {formik.touched.weight && formik.errors.weight && (
+                <div className="login__validation__error">
+                  {formik.errors.weight}
+                </div>
+              )}
+            </div>
+
             <div className="text-field-container">
               <TextField
                 id="varieties"
@@ -350,9 +328,7 @@ const AddMoreFish = () => {
                 value={formik.values.varieties}
                 onChange={formik.handleChange}
                 fullWidth
-                autoComplete="varieties"
                 margin="dense"
-                type="string"
                 color="secondary"
                 InputLabelProps={{ style: { color: "black" } }}
                 InputProps={{
@@ -369,26 +345,19 @@ const AddMoreFish = () => {
                 </div>
               )}
             </div>
-          </div>
 
-          {!showLoadingModal ? (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                gap: "30px",
-                margin: "20px 0px",
-              }}
-            >
-              <BackButton style={{ fontSize: "14px" }} />
-              <Button className="btn" variant="contained" type="submit">
-                Create
-              </Button>
-            </div>
-          ) : (
-            <LoadingModal />
-          )}
+            {/* Button Container */}
+            {!showLoadingModal ? (
+              <div className="button-container">
+                <BackButton style={{ fontSize: "14px" }} />
+                <Button className="btn" variant="contained" type="submit">
+                  Create
+                </Button>
+              </div>
+            ) : (
+              <LoadingModal />
+            )}
+          </div>
         </form>
       </div>
       <Divider />

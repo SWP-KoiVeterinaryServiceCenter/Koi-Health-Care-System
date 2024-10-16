@@ -11,13 +11,13 @@ export const getKoiById = async (id) => {
 };
 
 export const addKoiByAccountId = async (data) => {
-  const response = await api.post(`/api/v1/Koi/AddKoi`, data);
+  const response = await api.post(`/api/v1/Koi/AddKoi`, data );
   return response.data;
 };
 
 export const deleteKoiByAccountId = async (id) => {
   const response = await api.delete(`/api/v1/Koi/DeleteKoi/${id}`);
-  return response.data; 
+  return response.data;
 };
 
 // export const updateKoiByAccountId = async (id , data) => {
@@ -36,6 +36,3 @@ export const updateKoiByAccountId = async (id, data) => {
   });
   return response.data;
 };
-
-
-

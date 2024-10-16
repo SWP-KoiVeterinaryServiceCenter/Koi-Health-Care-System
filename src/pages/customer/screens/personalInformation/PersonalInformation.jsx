@@ -50,37 +50,46 @@ export default function PersonalInformation(props) {
   }, [dispatch]);
 
   const handleDeleteKoi = (id) => {
-    console.log(`Deleting koi with ID: ${id}`);
-    // setShowLoadingModal(true); // Show loading modal while deleting
-    dispatch(deleteKoiByAccountIdThunk(id))
-      .unwrap()
-      .then(() => {
-        Swal.fire({
-          title: SUCCESSTEXT,
-          text: DELETEKOISUCCESS,
-          icon: "success",
-          showCancelButton: false,
-          showConfirmButton: false,
-          background: "white",
-          timer: 1500,
-          timerProgressBar: true,
-          scrollbarPadding: false,
-        }).then(() => {
-          window.location.reload();
-        });
-      })
-      .catch((error) => {
-        Swal.fire({
-          title: ERRORTEXT,
-          text: error.message,
-          icon: "error",
-          showConfirmButton: true,
-          background: "white",
-        });
-      });
-    // .finally(() => {
-    //   setShowLoadingModal(false); // Ensure loading modal is hidden regardless of success or error
-    // });
+    // Show confirmation dialog
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: '#28a745', // Set to green
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(`Deleting koi with ID: ${id}`);
+        dispatch(deleteKoiByAccountIdThunk(id))
+          .unwrap()
+          .then(() => {
+            Swal.fire({
+              title: SUCCESSTEXT,
+              text: DELETEKOISUCCESS,
+              icon: "success",
+              showCancelButton: false,
+              showConfirmButton: false,
+              background: "white",
+              timer: 1500,
+              timerProgressBar: true,
+              scrollbarPadding: false,
+            }).then(() => {
+              window.location.reload();
+            });
+          })
+          .catch((error) => {
+            Swal.fire({
+              title: ERRORTEXT,
+              text: error.message,
+              icon: "error",
+              showConfirmButton: true,
+              background: "white",
+            });
+          });
+      }
+    });
   };
 
   return (
@@ -132,7 +141,11 @@ export default function PersonalInformation(props) {
               <div className="KoiName" key={koi.id}>
                 <div className="koi_card">
                   <div className="koi_info">
-                    <img src={koi.koiImage} alt="Koi Fish" className="koi_image"/>
+                    <img
+                      src={koi.koiImage}
+                      alt="Koi Fish"
+                      className="koi_image"
+                    />
                     <div className="koi_details">
                       <p>Name: {koi.koiName}</p>
                       <p>Weight: {koi.weight} kg</p>

@@ -158,8 +158,10 @@ export default function updateKoiFishInformation() {
           subtitle="Provide Koi Information"
         />
         {!showRender ? (
-          <form onSubmit={formik.handleSubmit}>
-            <div className="text-field-grid">
+          <form onSubmit={formik.handleSubmit} className="form-container">
+            <div className="image-field"></div>
+
+            <div className="second-column">
               <div className="text-field-container">
                 {/* koiName */}
                 <TextField
@@ -263,7 +265,9 @@ export default function updateKoiFishInformation() {
                   </div>
                 )}
               </div>
+            </div>
 
+            <div className="third-column">
               {/* gender */}
               <div className="text-field-container">
                 <FormControl fullWidth margin="dense">
@@ -329,34 +333,21 @@ export default function updateKoiFishInformation() {
                   </div>
                 )}
               </div>
+              {!showLoadingModal ? (
+                <div className="button-container">
+                  <BackButton style={{ fontSize: "14px" }} />
+                  <Button
+                    className="btn"                 
+                    variant="contained"
+                    type="submit"
+                  >
+                    Update
+                  </Button>
+                </div>
+              ) : (
+                <LoadingModal />
+              )}
             </div>
-
-            {!showLoadingModal ? (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "flex-end",
-                  gap: "30px",
-                  marginBottom: "10px",
-                }}
-              >
-                <BackButton type="update" />
-                <Button
-                  className="login__btn"
-                  style={{
-                    backgroundColor: "#70d8bd",
-                    fontSize: "14px",
-                  }}
-                  variant="contained"
-                  type="submit"
-                >
-                  Update
-                </Button>
-              </div>
-            ) : (
-              <LoadingModal />
-            )}
           </form>
         ) : (
           <LoadingModal />

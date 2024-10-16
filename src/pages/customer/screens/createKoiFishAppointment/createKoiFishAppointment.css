@@ -54,7 +54,7 @@
     box-shadow: none;
   } */
 
-  .add_more_fish {
+  .create_koi_fish_appointment {
     background-color: #fff;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -65,22 +65,22 @@
     border: 2px solid black;
   }
   
-  .add_more_fish h1,
-  .add_more_fish h2 {
+  .create_koi_fish_appointment h1,
+  .create_koi_fish_appointment h2 {
     text-align: center;
     font-family: "Bebas Neue", cursive;
     color: #344055;
     margin-bottom: 20px;
   }
   
-  /* .add_more_fish p {
+  /* .create_koi_fish_appointment p {
     font-family: "EB Garamond", serif;
     font-size: 18px;
     color: #7d7d7d;
   } */
   
   /* Text field container */
-  .add_more_fish .MuiTextField-root {
+  .create_koi_fish_appointment .MuiTextField-root {
     margin-bottom: 5px;
   }
   
@@ -122,7 +122,7 @@
   }
   
   /* Form buttons (Back and Submit) */
-  .add_more_fish .btn {
+  .create_koi_fish_appointment .btn {
     background-color: #70d8bd;
     color: white;
     padding: 10px 20px;
@@ -130,11 +130,11 @@
     transition: background-color 0.3s ease;
   }
   
-  .add_more_fish .btn:hover {
+  .create_koi_fish_appointment .btn:hover {
     background-color: #5bb49d;
   }
   
-  .add_more_fish .back-btn {
+  .create_koi_fish_appointment .back-btn {
     background-color: #ddd;
     color: #333;
     padding: 10px 20px;
@@ -142,12 +142,12 @@
     font-family: "Bebas Neue", cursive;
   }
   
-  .add_more_fish .back-btn:hover {
+  .create_koi_fish_appointment .back-btn:hover {
     background-color: #ccc;
   }
   
   /* Loading modal styling */
-  .add_more_fish .LoadingModal {
+  .create_koi_fish_appointment .LoadingModal {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -155,7 +155,7 @@
   }
   
   /* Align buttons in a row */
-  .add_more_fish .button-container {
+  .create_koi_fish_appointment .button-container {
     display: flex;
     align-items: center;
     gap: 30px;
@@ -166,34 +166,34 @@
   
   /* Responsive adjustments */
   @media (max-width: 768px) {
-    .add_more_fish {
+    .create_koi_fish_appointment {
       padding: 20px;
     }
   
-    .add_more_fish .button-container {
+    .create_koi_fish_appointment .button-container {
       flex-direction: column;
     }
   }
   
-  .add_more_fish .form-container {
+  .create_koi_fish_appointment .form-container {
     display: flex;
     flex-direction: column;
   }
   
-  .add_more_fish .text-field-grid {
+  .create_koi_fish_appointment .text-field-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2 columns */
     gap: 20px; /* Space between fields */
   }
   
   /* Ensure that each TextField takes full width in the grid cell */
-  .add_more_fish .text-field-grid .MuiTextField-root {
+  .create_koi_fish_appointment .text-field-grid .MuiTextField-root {
     width: 100%; /* Make sure TextField takes full width */
   }
   
   /* Responsive adjustments for smaller screens */
   @media (max-width: 768px) {
-    .add_more_fish .text-field-grid {
+    .create_koi_fish_appointment .text-field-grid {
       grid-template-columns: 1fr; /* Switch to single column */
     }
   }
