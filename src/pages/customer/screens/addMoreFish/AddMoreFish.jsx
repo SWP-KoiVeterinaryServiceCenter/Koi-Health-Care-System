@@ -144,7 +144,7 @@ const AddMoreFish = () => {
     }
   };
 
-  // console.log(formik);
+  console.log(formik);
 
   return (
     <>

@@ -181,6 +181,7 @@ const CreateKoiFishAppointment = () => {
         />
         <form onSubmit={formik.handleSubmit} className="form-container">
           <div className="text-field-grid">
+
             {/* Center Service */}
             <div className="text-field-container">
               <TextField
@@ -193,7 +194,7 @@ const CreateKoiFishAppointment = () => {
                 variant="outlined"
                 value={selectedService ? selectedService.name : ""} // Display service name instead of ID
                 InputProps={{
-                  readOnly: true, // Make the field read-only
+                  readOnly: true, 
                   style: {
                     backgroundColor: "#f5f5f5",
                     color: "black",
@@ -219,7 +220,7 @@ const CreateKoiFishAppointment = () => {
                   style={{ backgroundColor: "#f5f5f5", color: "black" }}
                   onChange={(event) =>
                     formik.setFieldValue("koiId", event.target.value)
-                  } // Explicitly set the field value
+                  } 
                 >
                   {allKoiByAccountId && allKoiByAccountId.length > 0 ? (
                     allKoiByAccountId.map((koi) => (

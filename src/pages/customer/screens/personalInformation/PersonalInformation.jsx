@@ -158,7 +158,7 @@ export default function PersonalInformation(props) {
                     <CreateOutlinedIcon
                       alt="Edit"
                       className="edit_icon"
-                      sx={{ color: green[300], fontSize: 40 }}
+                      sx={{ color: green[500], fontSize: 40 }}
                       onClick={() =>
                         navigate(`/${direction}/updateKoiFishInformation`, {
                           state: { koiId: koi.id },
