@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
 import "./appointmentList.css";
-import { Divider } from "@mui/material";
+import {
+  Divider,
+  CircularProgress,
+  TablePagination,
+  Table,
+  TableBody,
+  TableContainer,
+  TableHead,
+  Paper,
+  Button,
+  TableRow
+} from "@mui/material";
 
 import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
 
-import LoadingModal from "../../../../components/modal/loadingModal/loadingModal";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-
 import { currentUserAppointmentsSelector } from "../../../../store/sellectors";
 import { getAllCurrentUserAppointmentsThunk } from "../../../../store/apiThunk/appointment";
 
@@ -39,13 +40,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:last-child td, &:last-child th": {
     border: 0,
   },
+  "&:hover": {
+    backgroundColor: theme.palette.action.selected, // Change this to the color you want on hover
+  },
 }));
 
 export default function AppointmentList() {
-  // const navigate = useNavigate();
-  // const direction = props.direction;
   const dispatch = useDispatch();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5); // Change this number to adjust items per page
 
   const appointmentList = useSelector(currentUserAppointmentsSelector);
 
@@ -55,6 +59,20 @@ export default function AppointmentList() {
       setShowLoadingModal(false)
     );
   }, [dispatch]);
+
+  const handleCancel = (appointmentId) => {
+    // Dispatch an action to cancel the appointment
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0); // Reset to first page when changing rows per page
+  };
+
 
   return (
     <>
@@ -72,9 +90,15 @@ export default function AppointmentList() {
                 <StyledTableCell align="center">Action</StyledTableCell>
               </TableRow>
             </TableHead>
-            {!showLoadingModal ? (
-              <TableBody>
-                {appointmentList.map((appointment) => (
+            <TableBody>
+              {showLoadingModal ? (
+                <StyledTableRow>
+                  <StyledTableCell colSpan={6} align="center">
+                    <CircularProgress />
+                  </StyledTableCell>
+                </StyledTableRow>
+              ) : (
+                appointmentList.map((appointment) => (
                   <StyledTableRow key={appointment.id}>
                     <StyledTableCell align="left">
                       {appointment.vetName}
@@ -92,22 +116,28 @@ export default function AppointmentList() {
                       {appointment.status}
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {appointment.status === "Confirmed" ? (
+                      {appointment.status === "Cancelled" ? (
                         <Button variant="contained" color="secondary" disabled>
-                          Cancel Appointment
+                          Cancelled Appointment
+                        </Button>
+                      ) : appointment.status === "Confirmed" ? (
+                        <Button variant="contained" color="success" disabled>
+                          Confirmed Appointment
                         </Button>
                       ) : (
-                        <Button variant="contained" color="primary">
+                        <Button
+                          variant="contained"
+                          color="error"
+                          onClick={() => handleCancel(appointment.id)}
+                        >
                           Cancel Appointment
                         </Button>
                       )}
                     </StyledTableCell>
                   </StyledTableRow>
-                ))}
-              </TableBody>
-            ) : (
-              <LoadingModal />
-            )}
+                ))
+              )}
+            </TableBody>
           </Table>
         </TableContainer>
       </div>
