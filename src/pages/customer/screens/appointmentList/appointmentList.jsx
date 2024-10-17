@@ -10,16 +10,18 @@ import {
   TableHead,
   Paper,
   Button,
-  TableRow
+  TableRow,
 } from "@mui/material";
-
+import Swal from "sweetalert2";
 import { styled } from "@mui/material/styles";
-
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-
 import { useDispatch, useSelector } from "react-redux";
 import { currentUserAppointmentsSelector } from "../../../../store/sellectors";
-import { getAllCurrentUserAppointmentsThunk } from "../../../../store/apiThunk/appointment";
+import {
+  getAllCurrentUserAppointmentsThunk,
+  cancelCurrentUserAppointmentsThunk,
+} from "../../../../store/apiThunk/appointment";
+import { Flex } from "antd";
 
 // Styling for table cells
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -41,7 +43,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
   "&:hover": {
-    backgroundColor: theme.palette.action.selected, // Change this to the color you want on hover
+    backgroundColor: theme.palette.action.selected,
   },
 }));
 
@@ -49,7 +51,7 @@ export default function AppointmentList() {
   const dispatch = useDispatch();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5); // Change this number to adjust items per page
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const appointmentList = useSelector(currentUserAppointmentsSelector);
 
@@ -60,24 +62,58 @@ export default function AppointmentList() {
     );
   }, [dispatch]);
 
-  const handleCancel = (appointmentId) => {
-    // Dispatch an action to cancel the appointment
-  };
-
+  ////////// Table Pagination
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0); // Reset to first page when changing rows per page
+    setPage(0);
   };
+
+  // Slice the appointment list for pagination
+  const paginatedAppointments = appointmentList.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
+
+  ////////////////////// handle cancel
+const handleCancel = async (id) => {
+  const result = await Swal.fire({
+    title: 'Are you sure?',
+    text: 'You will not be able to recover this appointment!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, cancel it!',
+  });
+
+  if (result.isConfirmed) {
+    try {
+      setShowLoadingModal(true); // Show loading while canceling
+      Swal.fire('Cancelled!', 'Your appointment has been cancelled.', 'success');
+      await dispatch(cancelCurrentUserAppointmentsThunk(id));
+
+      // Refetch the appointments
+      await dispatch(getAllCurrentUserAppointmentsThunk());
+    } catch (error) {
+      console.error("Failed to cancel appointment:", error);
+      Swal.fire('Error!', 'There was a problem cancelling your appointment.', 'error');
+    } finally {
+      setShowLoadingModal(false); // Hide loading
+    }
+  }
+};
 
 
   return (
     <>
       <div className="appointment_list_main">
-        <p>Bảng Về Lịch Đặt Dịch Vụ Của Bạn</p>
+        <p className="appointment_list_main_title">
+          Bảng Về Lịch Đặt Dịch Vụ Của Bạn
+        </p>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 500 }} aria-label="customized table">
             <TableHead>
@@ -98,7 +134,7 @@ export default function AppointmentList() {
                   </StyledTableCell>
                 </StyledTableRow>
               ) : (
-                appointmentList.map((appointment) => (
+                paginatedAppointments.map((appointment) => (
                   <StyledTableRow key={appointment.id}>
                     <StyledTableCell align="left">
                       {appointment.vetName}
@@ -139,6 +175,16 @@ export default function AppointmentList() {
               )}
             </TableBody>
           </Table>
+          <TablePagination
+          style={{display:"flex" ,justifyContent:"center"}}
+            rowsPerPageOptions={[5, 10, 15]}
+            component="div"
+            count={appointmentList.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
         </TableContainer>
       </div>
       <Divider />

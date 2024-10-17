@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createAppointmentByAccountId,
   getAllCurrentUserAppointments,
+  cancelCurrentUserAppointments
 } from "../../api/appointmentKoi";
 
 export const createAppointmentByAccountIdThunk = createAsyncThunk(
@@ -27,3 +28,16 @@ export const getAllCurrentUserAppointmentsThunk = createAsyncThunk(
     }
   }
 );
+
+export const cancelCurrentUserAppointmentsThunk = createAsyncThunk(
+  "appointments/cancelCurrentUserAppointments",
+  async (data , thunkAPI) => {
+    try {
+      const response = await cancelCurrentUserAppointments(data);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
