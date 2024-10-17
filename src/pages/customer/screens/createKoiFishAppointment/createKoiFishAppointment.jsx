@@ -45,6 +45,7 @@ const CreateKoiFishAppointment = () => {
   // Get serviceId from the location state
   const location = useLocation();
   const { serviceId } = location.state || {};
+  console.log(serviceId);
 
   // Selectors for fetching data
   const allServices = useSelector(allServicesSelector);
@@ -181,7 +182,6 @@ const CreateKoiFishAppointment = () => {
         />
         <form onSubmit={formik.handleSubmit} className="form-container">
           <div className="text-field-grid">
-
             {/* Center Service */}
             <div className="text-field-container">
               <TextField
@@ -194,7 +194,7 @@ const CreateKoiFishAppointment = () => {
                 variant="outlined"
                 value={selectedService ? selectedService.name : ""} // Display service name instead of ID
                 InputProps={{
-                  readOnly: true, 
+                  readOnly: true,
                   style: {
                     backgroundColor: "#f5f5f5",
                     color: "black",
@@ -220,7 +220,7 @@ const CreateKoiFishAppointment = () => {
                   style={{ backgroundColor: "#f5f5f5", color: "black" }}
                   onChange={(event) =>
                     formik.setFieldValue("koiId", event.target.value)
-                  } 
+                  }
                 >
                   {allKoiByAccountId && allKoiByAccountId.length > 0 ? (
                     allKoiByAccountId.map((koi) => (

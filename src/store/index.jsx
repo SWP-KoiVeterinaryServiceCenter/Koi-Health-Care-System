@@ -5,6 +5,7 @@ import { userDataSlice } from "./features/user.slice/userData.slice";
 import { staffsSlice } from "./features/user.slice/staffs.slice";
 import { allAccountsSlice } from "./features/user.slice/allAccounts.slice";
 import { allTanksSlice } from "./features/tank.slice/allTank.slice";
+import { currentappointmentSlice } from "./features/appointment.slice/currentappointment.slice";
 import { allServicesTypeSlice } from "./features/serviceKoi.slice/getAllServicesType.slice";
 
 
@@ -119,6 +120,7 @@ export const store = configureStore({
     staffs: staffsSlice.reducer,
     allAccounts: allAccountsSlice.reducer,
     allTanks: allTanksSlice.reducer,
+    currentappointment: currentappointmentSlice.reducer,
     allServicesType: allServicesTypeSlice.reducer,
     totalUsers: totalUsersSlice.reducer,
     totalStaffs: totalStaffsSlice.reducer,

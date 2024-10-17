@@ -5,3 +5,8 @@ export const createAppointmentByAccountId = async (data) => {
     return response.data;
   };
   
+  
+export const getCurrentUserAppointments = async () => {
+  const response = await api.get(`/api/v1/Appointment/CurrentUserAppointments`);
+  return response.data;
+};

@@ -64,6 +64,7 @@ import ServiceKoifish from "./pages/customer/screens/service/service";
 import ServiceHome from "./pages/customer/screens/serviceHome/serviceHome";
 import GuestServiceKoifish from "./pages/guest/guestService/guestService";
 import ServiceInformation from "./pages/customer/screens/serviceInformation/ServiceInformation";
+import InputPayment from "./pages/customer/screens/inputPayment/inputPayment";
 import PersonalInformation from "./pages/customer/screens/personalInformation/PersonalInformation";
 import AddMoreFish from "./pages/customer/screens/addMoreFish/AddMoreFish";
 import Booking from "./pages/customer/screens/booking/booking";
@@ -373,7 +374,11 @@ const router = createBrowserRouter([
       },
       {
         path: "serviceInformation",
-        element: <ServiceInformation />,
+        element: <ServiceInformation direction="customer" />,
+      },
+      {
+        path: "serviceInformation/inputPayment",
+        element: <InputPayment />,
       },
       {
         path: "contactUs",
