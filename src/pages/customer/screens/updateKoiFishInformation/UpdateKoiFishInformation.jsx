@@ -27,8 +27,7 @@ import {
   getKoiByIdThunk,
   updateKoiByAccountIdThunk,
 } from "../../../../store/apiThunk/koiThunk";
-import NoBackground from "../../../../assets/uploadImg.png";
-import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
+
 
 import { allKoiByIdSelector } from "../../../../store/sellectors";
 import { Divider } from "antd";
@@ -364,7 +363,7 @@ export default function updateKoiFishInformation() {
                 )}
               </div>
               {!showLoadingModal ? (
-                <div className="button-container">
+                <div className="up-koi-button-container">
                   <BackButton style={{ fontSize: "14px" }} />
                   <Button className="btn" variant="contained" type="submit">
                     Update

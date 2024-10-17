@@ -220,6 +220,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                   <Typography
                     color="black"
                     fontSize="16px"
+                    onClick={() => {
+                      navigate("appointmentList");
+                    }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
                     Lịch Hẹn

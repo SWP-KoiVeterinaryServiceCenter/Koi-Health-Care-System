@@ -82,7 +82,7 @@
   flex-direction: column;
 }
 
-.button-container {
+.up-koi-button-container {
   display: flex;
   justify-content: flex-end;
   gap: 20px;

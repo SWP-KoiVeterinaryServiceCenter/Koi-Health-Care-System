@@ -1,0 +1,12 @@
+.appointment_list_main {
+  margin: 10px 80px 50px 80px;
+  display: grid;
+  place-items: center;
+  margin-top: 100px;
+}
+
+.appointment_list_main p {
+  margin: 11px 0px 30px 0px;
+  font-size: xx-large;
+  font-weight: 600;
+}

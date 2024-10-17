@@ -110,6 +110,7 @@ import { allServicesSlice } from "./features/serviceKoi.slice/getAllServices.sli
 
 import { vetDetailSlice } from "./features/user.slice/vetDetail.slice"; 
 
+import { currentUserAppointmentsSlice } from "./features/appointment.slice/currentUserAppointments.slice";
 
 export const store = configureStore({
   reducer: {
@@ -129,6 +130,8 @@ export const store = configureStore({
 
     allServices: allServicesSlice.reducer,
     vetDetail: vetDetailSlice.reducer,
+
+    currentUserAppointments: currentUserAppointmentsSlice.reducer,
 
     petDetail: petDetailSlice.reducer,
     petsFromShop: petsFromShopSlice.reducer,
