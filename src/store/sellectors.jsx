@@ -11,6 +11,8 @@ export const totalStaffssSelector = (state) => state.totalStaffs.entities; //all
 export const totalVetssSelector = (state) => state.totalVets.entities; //allAccountUsers
 export const totalVetsDetailsSelector = (state) => state.totalVetsDetail.entities; //allAccountUsers
 export const allVerifyUsersSelector = (state) => state.allVerifyUsers.entities; //allVerifyUsers
+export const paymentSelector = (state) => state.payment.entities;
+
 
 
 export const  allKoiByAccountIdSelector =(state) => state.allKoiByAccountId.entities;//allKoiByAccountId

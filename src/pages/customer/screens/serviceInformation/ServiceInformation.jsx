@@ -115,10 +115,22 @@ const ServiceInformation = () => {
                     <div className="checkout-payments">
                       <span>PAYMENT</span>
                       <div className="payment-details">
-                        <span>Chi phí (+ Phí phát sinh):</span>
+                      <span>Giá dịch vụ:</span>
+                        <span style={{ marginRight: 20 }}>
+                          {appointment.serviceFee}đ
+                        </span>
+                        <span>Chi phí di chuyển:</span>
+                        <span style={{ marginRight: 20 }}>
+                          {appointment.travelFee}đ
+                        </span>
+                      </div>
+                      <hr className="custom-divider" />
+                      <div className="payment-details">
+                      <span>Tổng:</span>
                         <span style={{ marginRight: 20 }}>
                           {appointment.price}đ
                         </span>
+                     
                       </div>
                     </div>
                   </div>
