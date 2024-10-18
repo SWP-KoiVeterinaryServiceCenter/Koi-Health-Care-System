@@ -293,7 +293,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     >
                       {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
                     </Box>
-                    <MenuItem onClick={() => scrollToSection("features")}>
+                    <MenuItem onClick={() => navigate("serviceInformation")}>
                       Profile
                     </MenuItem>
                     <MenuItem onClick={() => navigate("personalInformation")}>

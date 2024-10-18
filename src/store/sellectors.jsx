@@ -4,18 +4,23 @@ export const staffsSelector = (state) => state.staffs.entities;
 
 export const allAccountsSelector = (state) => state.allAccounts.entities; //allAccountUsers
 export const allTanksSelector = (state) => state.allTanks.entities; //allAccountUsers
+export const currentappointmentSelector = (state) => state.currentappointment.entities; //allAccountUsers
 export const allServicesTypeSelector = (state) => state.allServicesType.entities; //allAccountUsers
 export const totalUserssSelector = (state) => state.totalUsers.entities; //allAccountUsers
 export const totalStaffssSelector = (state) => state.totalStaffs.entities; //allAccountUsers
 export const totalVetssSelector = (state) => state.totalVets.entities; //allAccountUsers
 export const totalVetsDetailsSelector = (state) => state.totalVetsDetail.entities; //allAccountUsers
 export const allVerifyUsersSelector = (state) => state.allVerifyUsers.entities; //allVerifyUsers
+export const paymentSelector = (state) => state.payment.entities;
+
 
 
 export const  allKoiByAccountIdSelector =(state) => state.allKoiByAccountId.entities;//allKoiByAccountId
 export const  allKoiByIdSelector =(state) => state.allKoiById.entities;//allKoiById
 
 export const  allServicesSelector =(state) => state.allServices.entities;
+
+export const  vetDetailSelector =(state) => state.vetDetail.entities;
 
 export const petDetailSelector = (state) => state.petDetail.entities;
 export const petsFromShopSelector = (state) => state.petsFromShop.entities;

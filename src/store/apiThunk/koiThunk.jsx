@@ -6,7 +6,7 @@ import { updateKoiByAccountId } from "../../api/koi";
 import { getKoiById } from "../../api/koi";
 
 export const getKoiByAccountIdThunk = createAsyncThunk(
-  "kois/getKoiByAccountIdThunk",
+  "kois/getKoiByAccountId",
   async (accountId, thunkAPI) => {
     try {
       const response = await getKoiByAccountId(accountId);
@@ -18,7 +18,7 @@ export const getKoiByAccountIdThunk = createAsyncThunk(
 );
 
 export const getKoiByIdThunk = createAsyncThunk(
-  "kois/getKoiByIdThunk",
+  "kois/getKoiById",
   async (id, thunkAPI) => {
     try {
       const response = await getKoiById(id);
@@ -30,7 +30,7 @@ export const getKoiByIdThunk = createAsyncThunk(
 );
 
 export const addKoiByAccountIdThunk = createAsyncThunk(
-  "kois/addKoiByAccountIdThunk",
+  "kois/addKoiByAccountId",
   async (data, thunkAPI) => {
     try {
       const response = await addKoiByAccountId(data);
@@ -42,7 +42,7 @@ export const addKoiByAccountIdThunk = createAsyncThunk(
 );
 
 export const updateKoiByAccountIdThunk = createAsyncThunk(
-  "kois/updateKoiByAccountIdThunk",
+  "kois/updateKoiByAccountId",
   async ({ id, data }, thunkApi) => {
     try {
       const response = await updateKoiByAccountId(id, data);
@@ -54,7 +54,7 @@ export const updateKoiByAccountIdThunk = createAsyncThunk(
 );
 
 export const deleteKoiByAccountIdThunk = createAsyncThunk(
-  "kois/deleteKoiByAccountIdThunk",
+  "kois/deleteKoiByAccountId",
   async (id, thunkAPI) => {
     try {
       const response = await deleteKoiByAccountId(id);

@@ -47,6 +47,47 @@ article img {
 
 .article-body-customer {
   padding: 24px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 250px;
+}
+
+.article-body-customer h2 {
+  font-size: 1.4rem;
+  white-space: normal; /* Cho phép xuống dòng nếu tiêu đề quá dài */
+  overflow: visible; /* Hiển thị đầy đủ tiêu đề */
+  text-overflow: clip; /* Loại bỏ dấu "..." */
+}
+
+
+.article-body-customer p {
+  font-size: 1.25rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  /* Limits to 3 lines */
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+.article-body-customer .price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 5px;
+}
+
+.article-wrapper figure img {
+  width: 100%;
+  /* Đảm bảo ảnh lấp đầy bề ngang của container */
+  height: 200px;
+  /* Thiết lập chiều cao cố định */
+  object-fit: cover;
+  /* Giữ nguyên tỷ lệ ảnh và bao phủ toàn bộ khung */
 }
 
 article a {
@@ -79,7 +120,6 @@ article:has(:hover, :focus) {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
-
 /************************ 
 Generic layout (demo looks)
 **************************/
@@ -89,8 +129,6 @@ Generic layout (demo looks)
 *::after {
   box-sizing: border-box;
 }
-
-
 
 .articles_customer {
   display: grid;
@@ -145,49 +183,4 @@ Generic layout (demo looks)
   position: fixed;
   white-space: nowrap;
   width: 1px;
-}
-
-.article-body-customer {
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 250px;
-}
-
-.article-body-customer h2 {
-  font-size: 1.4rem;
-  white-space: nowrap;
-  overflow: visible;
-  text-overflow: ellipsis;
-}
-
-.article-body-customer p {
-  font-size: 1.25rem;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  /* Limits to 3 lines */
-  -webkit-box-orient: vertical;
-  white-space: normal;
-}
-
-
-.article-body-customer .price {
-  font-size: 24px;
-  font-weight: bold;
-  color: #2c3e50;
-  border-radius: 5px;
-  display: inline-block;
-  margin: 5px;
-}
-
-.article-wrapper figure img {
-  width: 100%;
-  /* Đảm bảo ảnh lấp đầy bề ngang của container */
-  height: 200px;
-  /* Thiết lập chiều cao cố định */
-  object-fit: cover;
-  /* Giữ nguyên tỷ lệ ảnh và bao phủ toàn bộ khung */
-
 }

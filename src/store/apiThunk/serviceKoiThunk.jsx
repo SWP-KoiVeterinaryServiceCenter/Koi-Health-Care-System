@@ -42,26 +42,28 @@ export const deleteServicesTypeThunk = createAsyncThunk(
   }
 );
 
-export const createServiceCenterThunk = createAsyncThunk(
-  "services/createServiceCenter",
-  async (data, thunkAPI) => {
-    try {
-      const response = await createServiceCenter(data);
-      return response;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error?.response?.data);
+  export const createServiceCenterThunk = createAsyncThunk(
+    "services/createServiceCenter",
+    async (data, thunkAPI) => {
+      try {
+        const response = await createServiceCenter(data);
+        return response;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error?.response?.data);
+      }
     }
-  }
-);
+  );
 
-export const getAllServicesThunk = createAsyncThunk(
-  "services/getAllServices",
-  async (thunkAPI) => {
-    try {
-      const response = await getAllServices();
-      return response;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error?.response?.data);
+  
+  export const getAllServicesThunk = createAsyncThunk(
+    "services/getAllServices",
+    async (thunkAPI) => {
+      try {
+        const response = await getAllServices();
+        return response;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error?.response?.data);
+      }
     }
-  }
-);
+  );
+

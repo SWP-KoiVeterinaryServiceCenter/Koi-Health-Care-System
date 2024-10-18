@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { userDetailSlice } from "./features/user.slice/userDetail.slice";
 import { userDataSlice } from "./features/user.slice/userData.slice";
+
 import { staffsSlice } from "./features/user.slice/staffs.slice";
 import { allAccountsSlice } from "./features/user.slice/allAccounts.slice";
 import { allTanksSlice } from "./features/tank.slice/allTank.slice";
+import { currentappointmentSlice } from "./features/appointment.slice/currentappointment.slice";
 import { allServicesTypeSlice } from "./features/serviceKoi.slice/getAllServicesType.slice";
-
+import { paymentSlice  } from "./features/payment.slice/payment.slice";
 
 import { totalUsersSlice } from "./features/user.slice/totalUsers.slice";
 
@@ -109,6 +111,9 @@ import { allKoiByIdSlice } from "./features/koi.slice/koiById.slice";
 
 import { allServicesSlice } from "./features/serviceKoi.slice/getAllServices.slice";
 
+import { vetDetailSlice } from "./features/user.slice/vetDetail.slice"; 
+
+
 export const store = configureStore({
   reducer: {
     userDetail: userDetailSlice.reducer,
@@ -116,7 +121,9 @@ export const store = configureStore({
     staffs: staffsSlice.reducer,
     allAccounts: allAccountsSlice.reducer,
     allTanks: allTanksSlice.reducer,
+    currentappointment: currentappointmentSlice.reducer,
     allServicesType: allServicesTypeSlice.reducer,
+    payment: paymentSlice .reducer,
     totalUsers: totalUsersSlice.reducer,
     totalStaffs: totalStaffsSlice.reducer,
     totalVets: totalVetsSlice.reducer,
@@ -127,6 +134,7 @@ export const store = configureStore({
     allKoiById: allKoiByIdSlice.reducer,
 
     allServices: allServicesSlice.reducer,
+    vetDetail: vetDetailSlice.reducer,
 
     petDetail: petDetailSlice.reducer,
     petsFromShop: petsFromShopSlice.reducer,

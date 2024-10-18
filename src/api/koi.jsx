@@ -11,13 +11,17 @@ export const getKoiById = async (id) => {
 };
 
 export const addKoiByAccountId = async (data) => {
-  const response = await api.post(`/api/v1/Koi/AddKoi`, data);
+  const response = await api.post(`/api/v1/Koi/AddKoi`, data , {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return response.data;
 };
 
 export const deleteKoiByAccountId = async (id) => {
   const response = await api.delete(`/api/v1/Koi/DeleteKoi/${id}`);
-  return response.data; 
+  return response.data;
 };
 
 // export const updateKoiByAccountId = async (id , data) => {
@@ -31,11 +35,8 @@ export const updateKoiByAccountId = async (id, data) => {
   console.log("data:", data);
   const response = await api.put(`/api/v1/Koi/UpdateKoi/${id}`, data, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "multipart/form-data",
     },
   });
   return response.data;
 };
-
-
-

@@ -1,4 +1,4 @@
-.appointment-form {
+/* .appointment-form {
     display: flex;
     flex-direction: column;
     max-width: 400px;
@@ -52,4 +52,149 @@
   .appointment-form button:active {
     background-color: #003f7f;
     box-shadow: none;
+  } */
+
+  .create_koi_fish_appointment {
+    background-color: #fff;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 0px 40px 0px 40px;
+    max-width: 500px;
+    margin: 100px auto 10px auto;
+    max-height: 600px;
+    border: 2px solid black;
   }
+  
+  .create_koi_fish_appointment h1,
+  .create_koi_fish_appointment h2 {
+    text-align: center;
+    font-family: "Bebas Neue", cursive;
+    color: #344055;
+    margin-bottom: 20px;
+  }
+  
+  /* .create_koi_fish_appointment p {
+    font-family: "EB Garamond", serif;
+    font-size: 18px;
+    color: #7d7d7d;
+  } */
+  
+  /* Text field container */
+  .create_koi_fish_appointment .MuiTextField-root {
+    margin-bottom: 5px;
+  }
+  
+  /* Styling input labels */
+  .MuiInputLabel-outlined {
+    font-family: "EB Garamond", serif;
+    color: #344055 !important;
+  }
+  
+  /* Text field input area */
+  .MuiOutlinedInput-root {
+    background-color: #f5f5f5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: black;
+  }
+  
+  /* .login__validation__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  } */
+  
+  
+  .text-field-container {
+    margin-bottom: 15px; /* Adds some space below each text field */
+    position: relative;
+  }
+  
+  .login__validation__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 0; /* Keep it tight under the field */
+    position: absolute; /* Ensure it's positioned correctly */
+    bottom: -20px; /* Position it directly under the text field */
+    left: 0;
+    right: 0;
+    text-align: left;
+  }
+  
+  /* Form buttons (Back and Submit) */
+  .create_koi_fish_appointment .btn {
+    background-color: #70d8bd;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .create_koi_fish_appointment .btn:hover {
+    background-color: #5bb49d;
+  }
+  
+  .create_koi_fish_appointment .back-btn {
+    background-color: #ddd;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: "Bebas Neue", cursive;
+  }
+  
+  .create_koi_fish_appointment .back-btn:hover {
+    background-color: #ccc;
+  }
+  
+  /* Loading modal styling */
+  .create_koi_fish_appointment .LoadingModal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+  }
+  
+  /* Align buttons in a row */
+  .create_koi_fish_appointment .button-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    justify-content: center;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .create_koi_fish_appointment {
+      padding: 20px;
+    }
+  
+    .create_koi_fish_appointment .button-container {
+      flex-direction: column;
+    }
+  }
+  
+  .create_koi_fish_appointment .form-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .create_koi_fish_appointment .text-field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 20px; /* Space between fields */
+  }
+  
+  /* Ensure that each TextField takes full width in the grid cell */
+  .create_koi_fish_appointment .text-field-grid .MuiTextField-root {
+    width: 100%; /* Make sure TextField takes full width */
+  }
+  
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .create_koi_fish_appointment .text-field-grid {
+      grid-template-columns: 1fr; /* Switch to single column */
+    }
+  }
+  
