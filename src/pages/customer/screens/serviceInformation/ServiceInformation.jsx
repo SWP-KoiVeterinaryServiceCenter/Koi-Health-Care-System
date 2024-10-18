@@ -1,13 +1,19 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getCurrentUserAppointmentsThunk } from "../../../../store/apiThunk/appointment";
-import { getUserDataThunk } from "../../../../store/apiThunk/userThunk";
+import {
+  getUserDataThunk,
+
+} from "../../../../store/apiThunk/userThunk";
+import {
+
+  deleteAppointmentsThunk,
+  cancelAppointmentsThunk,
+} from "../../../../store/apiThunk/appointment";
 import { currentappointmentSelector } from "../../../../store/sellectors";
 import { userDataSelector } from "../../../../store/sellectors";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import SettingsIcon from "@mui/icons-material/Settings";
-import CancelIcon from "@mui/icons-material/Cancel";
-import DeleteIcon from "@mui/icons-material/Delete";
 import "./ServiceInformation.css";
 
 const ServiceInformation = () => {
@@ -40,6 +46,7 @@ const ServiceInformation = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
   const handleCheckout = (appointmentId, price) => {
     navigate(
       `/customer/serviceInformation/inputPayment?appointmentId=${appointmentId}&amount=${price}`
@@ -63,6 +70,32 @@ const ServiceInformation = () => {
 
   const handleSettingsClick = (id) => {
     setActiveMenuCardId((prevId) => (prevId === id ? null : id));
+  };
+
+  const handleCancelAppointment = (appointmentId) => {
+    dispatch(cancelAppointmentsThunk(appointmentId))
+      .unwrap()
+      .then(() => {
+        alert("Cuộc hẹn đã bị hủy.");
+        dispatch(getCurrentUserAppointmentsThunk());
+      })
+      .catch((error) => {
+        console.error("Lỗi hủy cuộc hẹn:", error);
+        alert("Không thể hủy cuộc hẹn. Vui lòng thử lại.");
+      });
+  };
+
+  const handleDeleteAppointment = (appointmentId) => {
+    dispatch(deleteAppointmentsThunk(appointmentId))
+      .unwrap()
+      .then(() => {
+        alert("Cuộc hẹn đã bị xóa.");
+        dispatch(getCurrentUserAppointmentsThunk());
+      })
+      .catch((error) => {
+        console.error("Lỗi xóa cuộc hẹn:", error);
+        alert("Không thể xóa cuộc hẹn. Vui lòng thử lại.");
+      });
   };
 
   return (
@@ -155,8 +188,18 @@ const ServiceInformation = () => {
               {activeMenuCardId === appointment.id && (
                 <div className="menu-overlay" ref={menuRef}>
                   <div className="menu-buttons">
-                    <button className="cancel-button">Reject</button>
-                    <button className="delete-button">Delete</button>
+                    <button
+                      className="cancel-button"
+                      onClick={() => handleCancelAppointment(appointment.id)} // Hủy cuộc hẹn
+                    >
+                      Reject
+                    </button>
+                    <button
+                      className="delete-button"
+                      onClick={() => handleDeleteAppointment(appointment.id)} // Xóa cuộc hẹn
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               )}

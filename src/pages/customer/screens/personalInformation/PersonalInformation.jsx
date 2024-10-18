@@ -114,7 +114,7 @@ export default function PersonalInformation(props) {
         </div>
         <Divider />
 
-        <div className="button-container">
+        <div className="pe-koi-button-container">
           <div
             className="pi-add-button"
             onClick={() => {

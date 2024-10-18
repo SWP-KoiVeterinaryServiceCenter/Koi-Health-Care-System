@@ -20,6 +20,7 @@ import Testimonials from "../landingPage/LandingPageDetail/Testimonials/Testimon
 import FAQ from "../landingPage/LandingPageDetail/FAQ/FAQ";
 import Footer from "../landingPage/LandingPageDetail/Footer/Footer";
 import CarouselProducts from "../landingPage/LandingPageDetail/CarouselProduct/CarouselProduct";
+import LandingHeader from "../landingPage/LandingPageDetail/HeaderPage/LandingHeader/landingHeader";
 import getLPTheme from "./getLPTheme";
 import "./LandingPage.css";
 
@@ -131,7 +132,7 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
-
+<LandingHeader/>
       <div className="card-3">
         <div className="container-2">
           <div className="box">

@@ -20,6 +20,8 @@ export const  allKoiByIdSelector =(state) => state.allKoiById.entities;//allKoiB
 
 export const  allServicesSelector =(state) => state.allServices.entities;
 
+export const currentUserAppointmentsSelector = (state) => state. currentUserAppointments.entities;
+
 export const  vetDetailSelector =(state) => state.vetDetail.entities;
 
 export const petDetailSelector = (state) => state.petDetail.entities;

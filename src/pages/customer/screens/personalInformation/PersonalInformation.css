@@ -102,8 +102,8 @@
 }
 
 .koi_image {
-  width: 180px;
-  height: auto;
+  width: 250px;
+  height: 130px;
   border-radius: 4px;
 }
 
@@ -191,7 +191,7 @@
   margin: 95px 100px 50px 100px;
 }
 
-.button-container {
+.pe-koi-button-container {
   display: flex;
   justify-content: flex-end;
   margin: 20px;

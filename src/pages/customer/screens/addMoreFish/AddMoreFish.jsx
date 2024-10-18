@@ -164,8 +164,9 @@ const AddMoreFish = () => {
               style={{ display: "none" }}
               onChange={handleKoiImageSelect}
             />
+            
             <label htmlFor="koiImage">
-              <div className="background_formik_box">
+              <div className="background_formik_box_1">
                 <img
                   src={
                     formik.values?.koiImage === ""
@@ -173,14 +174,12 @@ const AddMoreFish = () => {
                       : formik.values?.koiImage
                   }
                   alt="Koi Image"
-                />
-                <div className="background_formik_icon_box">
-                  <PhotoCameraIcon className="background_formik_icon" />
-                </div>
+                  
+                />        
               </div>
             </label>
             {formik.touched.koiImage && formik.errors.koiImage && (
-              <div className="login__validation__error">
+              <div className="addmorekoifish__validation__error">
                 {formik.errors.koiImage}
               </div>
             )}
@@ -212,7 +211,7 @@ const AddMoreFish = () => {
                 }}
               />
               {formik.touched.koiName && formik.errors.koiName && (
-                <div className="login__validation__error">
+                <div className="addmorekoifish__validation__error">
                   {formik.errors.koiName}
                 </div>
               )}
@@ -245,7 +244,7 @@ const AddMoreFish = () => {
                 </Select>
               </FormControl>
               {formik.touched.gender && formik.errors.gender && (
-                <div className="login__validation__error">
+                <div className="addmorekoifish__validation__error">
                   {formik.errors.gender}
                 </div>
               )}
@@ -276,7 +275,7 @@ const AddMoreFish = () => {
                 }}
               />
               {formik.touched.age && formik.errors.age && (
-                <div className="login__validation__error">
+                <div className="addmorekoifish__validation__error">
                   {formik.errors.age}
                 </div>
               )}
@@ -310,7 +309,7 @@ const AddMoreFish = () => {
                 }}
               />
               {formik.touched.weight && formik.errors.weight && (
-                <div className="login__validation__error">
+                <div className="addmorekoifish__validation__error">
                   {formik.errors.weight}
                 </div>
               )}
@@ -340,7 +339,7 @@ const AddMoreFish = () => {
                 }}
               />
               {formik.touched.varieties && formik.errors.varieties && (
-                <div className="login__validation__error">
+                <div className="addmorekoifish__validation__error">
                   {formik.errors.varieties}
                 </div>
               )}

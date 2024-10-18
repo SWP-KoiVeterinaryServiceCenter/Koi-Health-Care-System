@@ -27,8 +27,6 @@ import {
   getKoiByIdThunk,
   updateKoiByAccountIdThunk,
 } from "../../../../store/apiThunk/koiThunk";
-import NoBackground from "../../../../assets/uploadImg.png";
-import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 
 import { allKoiByIdSelector } from "../../../../store/sellectors";
 import { Divider } from "antd";
@@ -46,6 +44,7 @@ export default function updateKoiFishInformation() {
   const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [showRender, setShowRender] = useState(false);
 
+  const [imagePreview, setImagePreview] = useState(allKoiById.koiImage); // Initialize with the existing image
 
   const Header = ({
     title,
@@ -165,7 +164,7 @@ export default function updateKoiFishInformation() {
         />
         {!showRender ? (
           <form onSubmit={formik.handleSubmit} className="form-container">
-            <div className="image-field">
+            {/* <div className="image-field">
               {formik.values.koiImage && (
                 <img
                   src={formik.values.koiImage}
@@ -185,13 +184,39 @@ export default function updateKoiFishInformation() {
                 accept="image/png, image/jpeg, image/jpg"
               />
               {formik.touched.koiImage && formik.errors.koiImage && (
-                <div className="login__validation__error">
+                <div className="koi__update__validation__error">
+                  {formik.errors.koiImage}
+                </div>
+              )}
+            </div> */}
+            <div className="update-koi-image-field">
+              {imagePreview && (
+                <img
+                  src={imagePreview}
+                  alt="Koi"
+                  className="image-preview-img"
+                />
+              )}
+              <input
+                id="koiImage"
+                type="file"
+                onChange={(event) => {
+                  const file = event.currentTarget.files[0];
+                  formik.setFieldValue("koiImage", file);
+                  if (file) {
+                    const fileUrl = URL.createObjectURL(file);
+                    setImagePreview(fileUrl);
+                  }
+                }}
+                accept="image/png, image/jpeg, image/jpg"
+              />
+              {formik.touched.koiImage && formik.errors.koiImage && (
+                <div className="koi__update__validation__error">
                   {formik.errors.koiImage}
                 </div>
               )}
             </div>
-
-            <div className="second-column">
+            <div className="update-koi-second-column">
               <div className="text-field-container">
                 {/* koiName */}
                 <TextField
@@ -220,7 +245,7 @@ export default function updateKoiFishInformation() {
                   }}
                 />
                 {formik.touched.koiName && formik.errors.koiName && (
-                  <div className="login__validation__error">
+                  <div className="koi__update__validation__error">
                     {formik.errors.koiName}
                   </div>
                 )}
@@ -255,7 +280,7 @@ export default function updateKoiFishInformation() {
                   }}
                 />
                 {formik.touched.weight && formik.errors.weight && (
-                  <div className="login__validation__error">
+                  <div className="koi__update__validation__error">
                     {formik.errors.weight}
                   </div>
                 )}
@@ -290,14 +315,14 @@ export default function updateKoiFishInformation() {
                   }}
                 />
                 {formik.touched.age && formik.errors.age && (
-                  <div className="login__validation__error">
+                  <div className="koi__update__validation__error">
                     {formik.errors.age}
                   </div>
                 )}
               </div>
             </div>
 
-            <div className="third-column">
+            <div className="update-koi-third-column">
               {/* gender */}
               <div className="text-field-container">
                 <FormControl fullWidth margin="dense">
@@ -327,7 +352,7 @@ export default function updateKoiFishInformation() {
                   </Select>
                 </FormControl>
                 {formik.touched.gender && formik.errors.gender && (
-                  <div className="login__validation__error">
+                  <div className="koi__update__validation__error">
                     {formik.errors.gender}
                   </div>
                 )}
@@ -358,13 +383,13 @@ export default function updateKoiFishInformation() {
                   }}
                 />
                 {formik.touched.varieties && formik.errors.varieties && (
-                  <div className="login__validation__error">
+                  <div className="koi__update__validation__error">
                     {formik.errors.varieties}
                   </div>
                 )}
               </div>
               {!showLoadingModal ? (
-                <div className="button-container">
+                <div className="up-koi-button-container">
                   <BackButton style={{ fontSize: "14px" }} />
                   <Button className="btn" variant="contained" type="submit">
                     Update
