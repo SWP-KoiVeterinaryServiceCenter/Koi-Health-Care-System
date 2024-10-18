@@ -31,6 +31,7 @@ import {
   getTotalVets,
   getTotalStaffs,
   getAllVetAccount,
+  getTotalVetsDetail
 } from "../../api/user";
 
 export const updateStaffPasswordThunk = createAsyncThunk(
@@ -114,6 +115,18 @@ export const getTotalVetsThunk = createAsyncThunk(
     }
   }
 );
+export const getTotalVetsDetailThunk = createAsyncThunk(
+  "users/getTotalVetsDetail",
+  async (thunkAPI) => {
+    try {
+      const response = await getTotalVetsDetail();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
 
 export const updateStatusAccountThunk = createAsyncThunk(
   "users/updateStatusAccount",

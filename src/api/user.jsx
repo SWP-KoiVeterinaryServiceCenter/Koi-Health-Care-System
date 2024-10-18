@@ -167,6 +167,11 @@ export const getTotalVets = async () => {
   const response = await api.get(`/api/v1/Account/VetAmount`);
   return response.data;
 };
+export const getTotalVetsDetail = async () => {
+  const response = await api.get(`/api/v1/Account/Veterinaries`); 
+  return response.data;
+};
+
 
 export const getAllAccounts = async (role, pageNumber, pageSize) => {
   const response = await api.get(

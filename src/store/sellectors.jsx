@@ -8,6 +8,7 @@ export const allServicesTypeSelector = (state) => state.allServicesType.entities
 export const totalUserssSelector = (state) => state.totalUsers.entities; //allAccountUsers
 export const totalStaffssSelector = (state) => state.totalStaffs.entities; //allAccountUsers
 export const totalVetssSelector = (state) => state.totalVets.entities; //allAccountUsers
+export const totalVetsDetailsSelector = (state) => state.totalVetsDetail.entities; //allAccountUsers
 export const allVerifyUsersSelector = (state) => state.allVerifyUsers.entities; //allVerifyUsers
 
 
