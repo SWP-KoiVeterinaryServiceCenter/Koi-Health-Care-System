@@ -77,6 +77,7 @@ import CreateKoiFishAppointment from "./pages/customer/screens/createKoiFishAppo
 import UpdateKoiFishInformation from "./pages/customer/screens/updateKoiFishInformation/UpdateKoiFishInformation";
 import AppointmentList from "./pages/customer/screens/appointmentList/AppointmentList";
 import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
+import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
 
 const router = createBrowserRouter([
   //Guest
@@ -407,6 +408,11 @@ const router = createBrowserRouter([
         path: "updatePersonalInformation",
         element: <UpdatePersonalInformation direction="customer"/>,
       },
+      {
+        path: "uploadPersonalImage",
+        element: <UploadPersonalImage direction="customer"/>,
+      },
+
     ],
   },
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./PersonalInformation.css";
 import koifish from "../../../../assets/koi-fish-1.jpg";
 import { red, green } from "@mui/material/colors";
@@ -15,7 +15,12 @@ import {
 } from "../../../../components/text/notiText/notiText";
 import Swal from "sweetalert2";
 import EditIcon from "@mui/icons-material/Edit";
-import { getUserDataThunk } from "../../../../store/apiThunk/userThunk";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import {
+  getUserDataThunk,
+  uploadProfileImageThunk,
+} from "../../../../store/apiThunk/userThunk";
 import { userDataSelector } from "../../../../store/sellectors";
 
 import { getKoiByAccountIdThunk } from "../../../../store/apiThunk/koiThunk";
@@ -34,13 +39,18 @@ export default function PersonalInformation(props) {
   const userDetail = useSelector(userDataSelector);
   const allKoiByAccountId = useSelector(allKoiByAccountIdSelector);
 
-  console.log({ allKoiByAccountId });
+  // const [imagePreview, setImagePreview] = useState(userDetail.koiImage); // Initialize with the existing image
+
+  // console.log({ allKoiByAccountId });
+
+  console.log(userDetail.accountId);
 
   useEffect(() => {
     const fetchUserAndKoiData = async () => {
       const user = await dispatch(getUserDataThunk()).unwrap();
+      // console.log("Fetched user data:", user); // Debugging line
       const accountId = user?.accountId;
-      console.log(accountId.id);
+      // console.log(accountId.id);
       if (accountId) {
         dispatch(getKoiByAccountIdThunk(accountId));
       } else {
@@ -94,11 +104,110 @@ export default function PersonalInformation(props) {
     });
   };
 
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      koiImage: userDetail.koiImage || "",
+    },
+    validationSchema: Yup.object({
+      koiImage: Yup.mixed().required("Koi image is required"),
+    }),
+    onSubmit: async (values) => {
+      setShowLoadingModal(true);
+      dispatch(
+        updateKoiByAccountIdThunk({
+          id: userDetail.accountId,
+          data: {
+            // Gói dữ liệu bên trong đối tượng 'data'
+            koiName: values.koiName,
+            weight: values.weight,
+            age: values.age, // Lưu ý: Bạn đã sử dụng nhầm values.weight cho age, hãy sửa lại
+            gender: values.gender,
+            varieties: values.varieties,
+            koiImage: values.koiImage,
+          },
+        })
+      )
+        .unwrap()
+        .then(() => {
+          setShowLoadingModal(false);
+          Swal.fire({
+            title: SUCCESSTEXT,
+            text: UPDATEKOIINFORMATIONSUCCESS,
+            icon: "success",
+            showCancelButton: false,
+            showConfirmButton: false,
+            background: "white",
+            timer: 1500,
+            timerProgressBar: true,
+            scrollbarPadding: false,
+          }).then(() => {
+            navigate(-1);
+          });
+        })
+        .catch((error) => {
+          setShowLoadingModal(false);
+          Swal.fire({
+            title: ERRORTEXT,
+            text: error.message,
+            icon: "error",
+            showConfirmButton: false,
+            background: "white",
+            timer: 2000,
+            timerProgressBar: true,
+            scrollbarPadding: false,
+          });
+        });
+    },
+  });
+
   return (
     <div>
       <div className="pi-giant-card">
         <div className="pi-container-1">
-          <img src={koifish} alt="Koi Fish" />
+          {/* <form onSubmit={formik.handleSubmit} className="form-container">
+            <div className="update-koi-image-field">
+              {imagePreview && (
+                <img
+                  src={imagePreview}
+                  alt="Koi"
+                  className="image-preview-img"
+                />
+              )}
+              <input
+                id="koiImage"
+                type="file"
+                onChange={(event) => {
+                  const file = event.currentTarget.files[0];
+                  formik.setFieldValue("koiImage", file);
+                  if (file) {
+                    const fileUrl = URL.createObjectURL(file);
+                    setImagePreview(fileUrl);
+                  }
+                }}
+                accept="image/png, image/jpeg, image/jpg"
+              />
+              {formik.touched.koiImage && formik.errors.koiImage && (
+                <div className="koi__update__validation__error">
+                  {formik.errors.koiImage}
+                </div>
+              )}
+            </div>
+          </form> */}
+          <div>
+            <img
+              src={koifish}
+              alt="Koi Fish"
+              onClick={() => {
+                if (userDetail) {
+                  navigate(`/${direction}/uploadPersonalImage`, {
+                    state: { accountId: userDetail.accountId },
+                  });
+                }
+              }}
+            />
+          </div>
+
           <div className="user-info">
             <p>
               Full Name: <span>{userDetail.fullname}</span>

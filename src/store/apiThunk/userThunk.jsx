@@ -33,6 +33,7 @@ import {
   getAllVetAccount,
   getTotalVetsDetail,
   updatetPersonalInformation,
+  uploadProfileImage,
 } from "../../api/user";
 
 export const updateStaffPasswordThunk = createAsyncThunk(
@@ -442,6 +443,18 @@ export const updatePersonalInformationThunk = createAsyncThunk(
   async (data, thunkApi) => {
     try {
       const response = await updatetPersonalInformation(data);
+      return response;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+export const uploadProfileImageThunk = createAsyncThunk(
+  "user/uploadProfileImage",
+  async ({ accountId, data }, thunkApi) => {
+    try {
+      const response = await uploadProfileImage(accountId, data);
       return response;
     } catch (error) {
       return thunkApi.rejectWithValue(error?.response?.data);

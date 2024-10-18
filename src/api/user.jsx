@@ -203,3 +203,27 @@ export const updatetPersonalInformation = async (data) => {
   const response = await api.patch(`/api/v1/Account/UpdateAccount`, data);
   return response.data;
 };
+
+// export const uploadProfileImage = async (accountId, data) => {
+//   console.log("accountId:", accountId);
+//   console.log("data:", data);
+//   const response = await api.patch(`/api/v1/Account/UploadProfileImage/${accountId}`,data,
+//     {
+//       headers: {
+//         "Content-Type": "multipart/form-data",
+//       },
+//     }
+//   );
+//   return response.data;
+// };
+
+export const uploadProfileImage = async (accountId, data) => {
+  console.log("accountId:", accountId); // Check the value here
+  console.log("data:", data); // Check the value here
+  const response = await api.patch(`/api/v1/Account/UploadProfileImage/${accountId}`, data, {
+      headers: {
+          "Content-Type": "multipart/form-data",
+      },
+  });
+  return response.data;
+};
