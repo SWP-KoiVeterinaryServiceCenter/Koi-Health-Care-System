@@ -8,6 +8,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin: 20px auto;
   max-width: 900px;
+  position: relative;
 }
 
 .pi-container-1 img {
@@ -17,6 +18,13 @@
   object-fit: cover;
   margin: 0 60px 0 90px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-icon-container {
+  position: absolute; /* Position the icon absolutely */
+  top: 20px; /* Adjust top as needed */
+  right: 20px; /* Adjust right as needed */
+  size: 10px;
 }
 
 .user-info {
@@ -241,3 +249,12 @@
 .pi-add-button:active {
   transform: scale(0.9);
 }
+.truncated {
+  display: inline-block;
+  width: 250px; /* Set a max width as needed */
+  white-space: nowrap; /* Prevent line breaks */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Show ellipsis */
+}
+
+

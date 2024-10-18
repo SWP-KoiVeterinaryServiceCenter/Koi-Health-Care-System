@@ -168,10 +168,9 @@ export const getTotalVets = async () => {
   return response.data;
 };
 export const getTotalVetsDetail = async () => {
-  const response = await api.get(`/api/v1/Account/Veterinaries`); 
+  const response = await api.get(`/api/v1/Account/Veterinaries`);
   return response.data;
 };
-
 
 export const getAllAccounts = async (role, pageNumber, pageSize) => {
   const response = await api.get(
@@ -200,5 +199,7 @@ export const getAllVetAccount = async (data) => {
   return response.data;
 };
 
-
-
+export const updatetPersonalInformation = async (data) => {
+  const response = await api.patch(`/api/v1/Account/UpdateAccount`, data);
+  return response.data;
+};

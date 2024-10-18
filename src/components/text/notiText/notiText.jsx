@@ -51,6 +51,8 @@ const ADDSTAFFSUCCESS = "Staff Account Created Successfully!!";
 
 const UPDATEKOIINFORMATIONSUCCESS =  "Koi Has Been Updated Successfully!!";
 const DELETEKOISUCCESS =  "Koi Has Been Deleted Successfully!!";
+const UPDATEPERSONALINFORMATIONSUCCESS =  "Personal Information Has Been Updated Successfully!!";
+
 
 
 export {
@@ -105,4 +107,5 @@ export {
     CONFIRMDELETEEVENT,
     UPDATEKOIINFORMATIONSUCCESS,
     DELETEKOISUCCESS,
+    UPDATEPERSONALINFORMATIONSUCCESS
 };

@@ -14,6 +14,7 @@ import {
   SUCCESSTEXT,
 } from "../../../../components/text/notiText/notiText";
 import Swal from "sweetalert2";
+import EditIcon from "@mui/icons-material/Edit";
 import { getUserDataThunk } from "../../../../store/apiThunk/userThunk";
 import { userDataSelector } from "../../../../store/sellectors";
 
@@ -21,6 +22,7 @@ import { getKoiByAccountIdThunk } from "../../../../store/apiThunk/koiThunk";
 import { allKoiByAccountIdSelector } from "../../../../store/sellectors";
 
 import { deleteKoiByAccountIdThunk } from "../../../../store/apiThunk/koiThunk";
+import { pointer } from "@testing-library/user-event/dist/cjs/pointer/index.js";
 
 export default function PersonalInformation(props) {
   const navigate = useNavigate();
@@ -56,7 +58,7 @@ export default function PersonalInformation(props) {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#28a745', // Set to green
+      confirmButtonColor: "#28a745", // Set to green
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
@@ -99,17 +101,32 @@ export default function PersonalInformation(props) {
           <img src={koifish} alt="Koi Fish" />
           <div className="user-info">
             <p>
-              Name: <span>{userDetail.username}</span>
+              Full Name: <span>{userDetail.fullname}</span>
             </p>
             <p>
-              Email: <span>{userDetail.email}</span>
+              Name: <span>{userDetail.username}</span>
             </p>
+
             <p>
               Location: <span>{userDetail.location}</span>
             </p>
-            <p>
-              Contact-Link: <span>{userDetail.contactLink}</span>
+            <p style={{ display: "flex" }}>
+              Contact-Link:
+              <span className="truncated">{userDetail.contactLink}</span>
             </p>
+            <p>
+              Phone Number: <span>{userDetail.phonenumber}</span>
+            </p>
+          </div>
+          <div className="edit-icon-container">
+            <EditIcon
+              sx={{ fontSize: 40, cursor: "pointer" }}
+              onClick={() =>
+                navigate(`/${direction}/updatePersonalInformation`, {
+                  state: { userDetail: userDetail.accountId },
+                })
+              }
+            />
           </div>
         </div>
         <Divider />

@@ -76,6 +76,7 @@ import ContactUs from "./pages/customer/screens/contactUs/contactUs";
 import CreateKoiFishAppointment from "./pages/customer/screens/createKoiFishAppointment/createKoiFishAppointment";
 import UpdateKoiFishInformation from "./pages/customer/screens/updateKoiFishInformation/UpdateKoiFishInformation";
 import AppointmentList from "./pages/customer/screens/appointmentList/AppointmentList";
+import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
 
 const router = createBrowserRouter([
   //Guest
@@ -401,6 +402,10 @@ const router = createBrowserRouter([
       {
         path: "appointmentList",
         element: <AppointmentList direction="customer"/>,
+      },
+      {
+        path: "updatePersonalInformation",
+        element: <UpdatePersonalInformation direction="customer"/>,
       },
     ],
   },
