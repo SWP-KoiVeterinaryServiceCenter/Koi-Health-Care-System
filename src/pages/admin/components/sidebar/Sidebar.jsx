@@ -35,6 +35,7 @@ import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import LocalPoliceIcon from "@mui/icons-material/LocalPolice";
 import logo from "../../../../assets/koi_loho.png";
 import backgroundGif from "../../../../assets/gif/koi_logo_sidebar.gif";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 const logoStyle = {
   width: "140px",
   height: "auto",
@@ -76,6 +77,8 @@ const Sidebar = (props) => {
   const [openCPM, setOpenCPM] = useState(false);
   const [openTran, setOpenTran] = useState(false);
   const [openPol, setOpenPol] = useState(false);
+  const [openWrk, setOpenWrk] = useState(false);
+
   const handleClick = () => {
     setOpen(!open);
   };
@@ -88,6 +91,10 @@ const Sidebar = (props) => {
   };
   const handleClickPolicy = () => {
     setOpenPol(!openPol);
+  };
+
+  const handleClickWorkingSchedule = () => {
+    setOpenWrk(!openWrk);
   };
 
   const url = new URL(window.location.href);
@@ -407,6 +414,75 @@ const Sidebar = (props) => {
                         selected={selected}
                         setSelected={setSelected}
                       />
+                    </Collapse>
+                  </List>
+
+
+                   {/* //////////////////////////////////handleClickWorkingSchedule/////////////////////////////////// */}
+                   <List>
+                    <ListItemButton onClick={handleClickWorkingSchedule}>
+                      {!isCollapsed && (
+                        <CalendarMonthIcon
+                          style={{
+                            marginLeft: "10px",
+                            marginRight: "19px",
+                            color: "white",
+                          }}
+                        />
+                      )}
+                      {!isCollapsed && (
+                        <ListItemText
+                          primary="Working Schedule"
+                          style={{
+                            color: "white",
+                          }}
+                        />
+                      )}
+                      {openWrk ? (
+                        <ExpandLess
+                          style={{
+                            marginLeft: "10px",
+                            color: "white",
+                          }}
+                        />
+                      ) : (
+                        <ExpandMore
+                          style={{
+                            marginLeft: "10px",
+                            color: "white",
+                          }}
+                        />
+                      )}
+                    </ListItemButton>
+                    <Collapse
+                      in={openWrk}
+                      timeout="auto"
+                      unmountOnExit
+                      style={{
+                        paddingLeft: !isCollapsed ? "20px" : 0,
+                      }}
+                    >
+                      <Item
+                        title="Schedule"
+                        to="workingSchedule"
+                        icon={<EventRepeatIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                      />
+                      {/* <Item
+                        title="Adjust Money"
+                        to="adjustMoney"
+                        icon={<CurrencyExchangeIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                      />
+                      <Item
+                        title="Report"
+                        to="report"
+                        icon={<ReportGmailerrorredIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                      /> */}
                     </Collapse>
                   </List>
                   {/* ///////////////////////////////////////////////////////////////////// */}

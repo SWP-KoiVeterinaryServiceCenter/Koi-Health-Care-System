@@ -29,6 +29,7 @@ import CreateVetAccount from "./pages/admin/screens/createRoleAccount/createVetA
 import CreateTank from "./pages/admin/screens/createTank/createTank";
 import CreateServiceType from "./pages/admin/screens/createServiceType/createServiceType";
 import CreateServiceCenter from "./pages/admin/screens/createServiceCenter/createServiceCenter";
+import WorkingSchedule from "./pages/admin/screens/workingSchedule/workingSchedule";
 //Manager
 import CreateShopManager from "./pages/manager/screens/shop/createShop/createShop";
 import ManagerHome from "./pages/manager/screens/home/managerHome";
@@ -265,6 +266,10 @@ const router = createBrowserRouter([
       {
         path: "adjustMoney",
         element: <AdjustMoney />,
+      },
+      {
+        path: "workingSchedule",
+        element: <WorkingSchedule />,
       },
     ],
   },
