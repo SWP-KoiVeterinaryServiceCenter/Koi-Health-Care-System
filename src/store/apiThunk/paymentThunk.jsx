@@ -13,3 +13,15 @@ export const getPaymentUrlThunk = createAsyncThunk(
     }
   }
 );
+
+// export const getPaymentUrlThunk = createAsyncThunk(
+//   'payment/getPaymentUrl',
+//   async ({ appointmentId, amount }, thunkAPI) => {
+//     try {
+//       const response = await getPaymentUrl({ appointmentId, amount });
+//       return response.data; // Trả về dữ liệu đường dẫn thanh toán
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error?.response?.data); // Xử lý lỗi
+//     }
+//   }
+// );

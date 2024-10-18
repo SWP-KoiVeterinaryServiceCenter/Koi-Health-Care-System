@@ -40,11 +40,12 @@ const ServiceInformation = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  const handleCheckout = (appointmentId) => {
-    navigate(`/customer/serviceInformation/inputPayment?appointmentId=${appointmentId}`); // Direct navigation with query string
+  const handleCheckout = (appointmentId, price) => {
+    navigate(
+      `/customer/serviceInformation/inputPayment?appointmentId=${appointmentId}&amount=${price}`
+    ); // Truyền amount qua URL
   };
-  
+
   const getStatusColor = (status) => {
     switch (status.toUpperCase()) {
       case "PENDING":
@@ -115,7 +116,7 @@ const ServiceInformation = () => {
                     <div className="checkout-payments">
                       <span>PAYMENT</span>
                       <div className="payment-details">
-                      <span>Giá dịch vụ:</span>
+                        <span>Giá dịch vụ:</span>
                         <span style={{ marginRight: 20 }}>
                           {appointment.serviceFee}đ
                         </span>
@@ -126,11 +127,10 @@ const ServiceInformation = () => {
                       </div>
                       <hr className="custom-divider" />
                       <div className="payment-details">
-                      <span>Tổng:</span>
+                        <span>Tổng:</span>
                         <span style={{ marginRight: 20 }}>
                           {appointment.price}đ
                         </span>
-                     
                       </div>
                     </div>
                   </div>
@@ -141,11 +141,13 @@ const ServiceInformation = () => {
                       {appointment.price} vnđ
                     </label>
                     <button
-                    className="checkout-button"
-                    onClick={() => handleCheckout(appointment.id)} // Điều hướng trực tiếp với URL chứa appointmentId
-                  >
-                    Check Out
-                  </button>
+                      className="checkout-button"
+                      onClick={() =>
+                        handleCheckout(appointment.id, appointment.price)
+                      } // Truyền appointmentId và appointment.price
+                    >
+                      Check Out
+                    </button>
                   </div>
                 </div>
               </div>

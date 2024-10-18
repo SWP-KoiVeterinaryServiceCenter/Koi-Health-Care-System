@@ -1,5 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createAppointmentByAccountId, getCurrentUserAppointments } from "../../api/appointmentKoi";
+import {
+  createAppointmentByAccountId,
+  getCurrentUserAppointments,
+  deleteAppointments,
+  cancelAppointments
+} from "../../api/appointmentKoi";
 
 export const createAppointmentByAccountIdThunk = createAsyncThunk(
   "appointments/createAppointmentByAccountId",
@@ -24,3 +29,28 @@ export const getCurrentUserAppointmentsThunk = createAsyncThunk(
     }
   }
 );
+
+// export const deleteAppointmentsThunk = createAsyncThunk(
+//   "appointments/deleteAppointments",
+//   async (id, thunkAPI) => {
+//     try {
+//       const response = await deleteAppointments(id);
+//       return response;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error?.response?.data);
+//     }
+//   }
+// );
+
+
+// export const cancelAppointmentsThunk = createAsyncThunk(
+//   "appointments/cancelAppointments",
+//   async (id, thunkAPI) => {
+//     try {
+//       const response = await cancelAppointments(id);
+//       return response;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error?.response?.data);
+//     }
+//   }
+// );

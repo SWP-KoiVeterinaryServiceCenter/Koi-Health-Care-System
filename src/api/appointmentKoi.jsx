@@ -10,3 +10,4 @@ export const getCurrentUserAppointments = async () => {
   const response = await api.get(`/api/v1/Appointment/CurrentUserAppointments`);
   return response.data;
 };
+
