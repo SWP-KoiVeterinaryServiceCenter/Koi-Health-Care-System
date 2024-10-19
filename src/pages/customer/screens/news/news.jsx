@@ -17,10 +17,12 @@ export default function Doctors() {
 
   return (
     <div>
+      
       <LandingHeader/>
       {/* <AppAppBar /> */}
 
       <div className="news-wrap">
+        
         {doctors?.map((doctor) => (
           <div className="news-box" key={doctor.accountId}>
             <div className="news-box-top">

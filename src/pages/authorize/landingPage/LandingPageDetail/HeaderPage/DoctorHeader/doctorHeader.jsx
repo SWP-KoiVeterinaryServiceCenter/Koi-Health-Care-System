@@ -17,7 +17,7 @@ import SetMealIcon from "@mui/icons-material/SetMeal";
 import MedicationIcon from '@mui/icons-material/Medication';
 import "./doctorHeader.css";
 
-import koi_fish from "../../../../../../assets/koi3.png";
+import koi_fish from "../../../../../../assets/doctor_bg.png";
 import fish_market from "../../../../../../assets/fishmarket.jpg";
 import doctor from "../../../../../../assets/fish-veterinarians-aquarium.jpg";
 import car from "../../../../../../assets/tank_drive.jpg";
@@ -62,7 +62,7 @@ export default function doctorHeader() {
       <div className="card-1-doctor">
         <div className="koi-img-1-doctor">
           <div className="overlay-doctor"></div>
-          <p className="title-doctor">Is Your Fish Sick?</p>
+          <p className="title-doctor">Serve your fish!</p>
           <p className="subtitle-doctor">
             Our Veterinary Facility Is Ready To Help You In Ho Chi Minh City.
           </p>

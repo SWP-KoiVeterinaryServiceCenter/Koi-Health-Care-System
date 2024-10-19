@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import backgroundImg from "../../../../../../assets/bg3_sidebar.png"; // Đường dẫn đến hình ảnh trong assets
+import backgroundImg from "../../../../../../assets/resized_koi_vet_center_image.png"; // Đường dẫn đến hình ảnh trong assets
 
 const HeaderWrapper = styled.header`
   * {
@@ -18,6 +18,7 @@ const HeaderWrapper = styled.header`
   position: relative;
   overflow: hidden;
   border-radius: 0 0 85% 85% / 30%;
+  height: 90vh; /* Hoặc một giá trị cụ thể như 150vh để kéo dài hơn nữa */
 
   .overlay {
     width: 100%;
@@ -29,8 +30,10 @@ const HeaderWrapper = styled.header`
   }
 
   h1 {
-    font-family: "Dancing Script", cursive;
-    font-size: 80px;
+    font-family: 'Playfair Display', 'Lust Display', 'serif';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 100px;
     margin-bottom: 30px;
     margin-top: 20px;
   }
@@ -60,9 +63,14 @@ const Header = () => (
   <HeaderWrapper>
     <div className="overlay">
       <h1>Simply The Best</h1>
-      <h3>Reasons for Choosing US</h3>
-      <p>Enthusiastic, Dedicated, Cheap. Come to us, we will try our best to help you.</p>
-
+      <div style={{marginTop:300}}>
+        {" "}
+        <h3>Reasons for Choosing US</h3>
+        <p>
+          Enthusiastic, Dedicated, Cheap. Come to us, we will try our best to
+          help you.
+        </p>
+      </div>
     </div>
   </HeaderWrapper>
 );

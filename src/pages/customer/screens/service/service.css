@@ -52,18 +52,23 @@ article img {
   flex-direction: column;
   justify-content: space-between;
   height: 250px;
+  
 }
 
 .article-body-customer h2 {
   font-size: 1.4rem;
+  font-family: 'Playfair Display', 'Lust Display', 'serif';
+  font-weight: bold;
+  font-style: normal;
   white-space: normal; /* Cho phép xuống dòng nếu tiêu đề quá dài */
   overflow: visible; /* Hiển thị đầy đủ tiêu đề */
   text-overflow: clip; /* Loại bỏ dấu "..." */
+  
 }
 
 
 .article-body-customer p {
-  font-size: 1.25rem;
+  /* font-size: 1.0rem; */
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -73,7 +78,7 @@ article img {
 }
 
 .article-body-customer .price {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   color: #2c3e50;
   border-radius: 5px;
@@ -183,4 +188,71 @@ Generic layout (demo looks)
   position: fixed;
   white-space: nowrap;
   width: 1px;
+}
+
+/* From Uiverse.io by neerajbaniwal */ 
+.article-body-customer .btn-shine {
+  position: absolute;
+  margin-top: 60px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* padding: 12px 48px; */
+  color: #fff;
+  background: linear-gradient(to right, #9f9f9f 0, #fff 10%, #868686 20%);
+  background-position: 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s infinite linear;
+  animation-fill-mode: forwards;
+  -webkit-text-size-adjust: none;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  white-space: nowrap;
+  font-family: "Poppins", sans-serif;
+  border-radius: 10px;
+}
+@-moz-keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
+}
+@-webkit-keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
+}
+@-o-keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
+}
+@keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
 }
