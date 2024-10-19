@@ -88,6 +88,7 @@ export default function Signup() {
       tankId: "",
       duration: "",
       serviceImage: "",
+      serviceLocation: "",
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Required"),
@@ -97,6 +98,7 @@ export default function Signup() {
       tankId: Yup.string().required("Required"),
       duration: Yup.number().required("Required"),
       serviceImage: Yup.mixed().required("Required"),
+      serviceLocation: Yup.string().required("Required"),
     }),
     onSubmit: async (values) => {
       const newFormData = new FormData();  // Tạo FormData mới trong onSubmit
@@ -107,6 +109,7 @@ export default function Signup() {
       newFormData.append("tankId", values.tankId);
       newFormData.append("duration", values.duration);
       newFormData.append("serviceImage", serviceImage);
+      newFormData.append("serviceLocation", values.serviceLocation);
 
       setShowLoadingModal(true);
       dispatch(createServiceCenterThunk(newFormData))
@@ -231,14 +234,14 @@ export default function Signup() {
 
                   {/* Select Tank */}
                   <FormControl fullWidth margin="dense">
-                    <InputLabel id="tankId-label">Chọn Bể Cá</InputLabel>
+                    <InputLabel id="tankId-label">Choose Aquarium</InputLabel>
                     <Select
                       labelId="tankId-label"
                       id="tankId"
                       name="tankId"
                       value={formik.values.tankId}
                       onChange={formik.handleChange}
-                      label="Chọn Bể Cá"
+                      label="Choose Aquarium"
                     >
                       {tanks.map((tank) => (
                         <MenuItem key={tank.tankId} value={tank.tankId}>
@@ -253,14 +256,14 @@ export default function Signup() {
 
                   {/* Select Service Type */}
                   <FormControl fullWidth margin="dense">
-                    <InputLabel id="typeId-label">Chọn Loại Dịch Vụ</InputLabel>
+                    <InputLabel id="typeId-label">Select Service Type</InputLabel>
                     <Select
                       labelId="typeId-label"
                       id="typeId"
                       name="typeId"
                       value={formik.values.typeId}
                       onChange={formik.handleChange}
-                      label="Chọn Loại Dịch Vụ"
+                      label="Select Service Type"
                     >
                       {services.map((service) => (
                         <MenuItem key={service.typeId} value={service.typeId}>
@@ -284,8 +287,18 @@ export default function Signup() {
                     margin="dense"
                     color="secondary"
                   />
-                  {formik.touched.duration && formik.errors.duration && (
-                    <div className="login__validation__error">{formik.errors.duration}</div>
+               <TextField
+                    id="serviceLocation"
+                    label="Location"
+                    variant="outlined"
+                    value={formik.values.serviceLocation}
+                    onChange={formik.handleChange}
+                    fullWidth
+                    margin="dense"
+                    color="secondary"
+                  />
+                  {formik.touched.serviceLocation && formik.errors.serviceLocation && (
+                    <div className="login__validation__error">{formik.errors.serviceLocation}</div>
                   )}
 
                   {!showLoadingModal ? (

@@ -11,14 +11,13 @@ import MenuItem from "@mui/material/MenuItem";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import Menu from "@mui/material/Menu";
-// import ToggleColorMode from "../ToggleColorMode/ToggleColorMode";
 import logo from "../../../../../assets/koi_loho.png";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MedicalServicesOutlinedIcon from "@mui/icons-material/MedicalServicesOutlined";
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
+import NewspaperOutlinedIcon from "@mui/icons-material/NewspaperOutlined";
 
 import { Link, useNavigate } from "react-router-dom";
 import { colors } from "@mui/material";
@@ -35,11 +34,11 @@ function AppAppBar({ mode, toggleColorMode }) {
   const [anchorElNews, setAnchorElNews] = React.useState(null);
 
   const handleClickMenuNews = (event) => {
-    setAnchorElNews(event.currentTarget); // Khi bấm vào Dịch vụ sẽ hiển thị menu
+    setAnchorElNews(event.currentTarget); // When clicking on News, the menu will appear
   };
 
   const handleCloseNews = () => {
-    setAnchorElNews(null); // Đóng menu khi bấm ra ngoài hoặc chọn mục
+    setAnchorElNews(null); // Close the menu when clicking outside or selecting an item
   };
 
   const openNews = Boolean(anchorElNews);
@@ -52,7 +51,6 @@ function AppAppBar({ mode, toggleColorMode }) {
     navigate("/signup");
   };
 
- 
   const handlePersonalInformationPageClick = () => {
     navigate("/personalInformation");
   };
@@ -73,7 +71,6 @@ function AppAppBar({ mode, toggleColorMode }) {
       setOpen(false);
     }
   };
-  
 
   return (
     <div className="">
@@ -122,7 +119,7 @@ function AppAppBar({ mode, toggleColorMode }) {
               <Box
                 sx={{
                   display: { xs: "none", md: "flex" },
-                  ml: "auto", // Đẩy MenuItem sang phải
+                  ml: "auto", // Push MenuItem to the right
                 }}
               >
                 <MenuItem
@@ -136,54 +133,53 @@ function AppAppBar({ mode, toggleColorMode }) {
                     onClick={() => {
                       navigate("/");
                     }}
-                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                    sx={{ ml: 0.1 }} // Add small space between icon and text
                   >
-                    Trang chủ
+                    Home
                   </Typography>
                 </MenuItem>
 
                 <>
-      {/* Mục Tin tức */}
-      <MenuItem
-        onClick={handleClickMenuNews} // Hiển thị menu khi bấm vào
-        sx={{ display: "flex", alignItems: "center" }}
-      >
-        <NewspaperOutlinedIcon sx={{ color: "black", fontSize: "19px" }} />
-        <Typography color="black" fontSize="16px" sx={{ ml: 0.1 }}>
-          Tin tức
-        </Typography>
-      </MenuItem>
+                  {/* News Section */}
+                  <MenuItem
+                    onClick={handleClickMenuNews} // Show menu when clicking
+                    sx={{ display: "flex", alignItems: "center" }}
+                  >
+                    <NewspaperOutlinedIcon
+                      sx={{ color: "black", fontSize: "19px" }}
+                    />
+                    <Typography color="black" fontSize="16px" sx={{ ml: 0.1 }}>
+                      News
+                    </Typography>
+                  </MenuItem>
 
-      {/* Dropdown Menu */}
-      <Menu
-        anchorEl={anchorElNews}
-        open={openNews}
-        onClose={handleCloseNews}
-      >
-        <MenuItem onClick={() => navigate("/doctors")}>Bác sĩ</MenuItem>
-        <MenuItem onClick={() => navigate("/doctors")}>News</MenuItem>
-        <MenuItem onClick={() => navigate("/fact")}>Facts</MenuItem>
-      </Menu>
-    </>
+                  {/* Dropdown Menu */}
+                  <Menu
+                    anchorEl={anchorElNews}
+                    open={openNews}
+                    onClose={handleCloseNews}
+                  >
+                    <MenuItem onClick={() => navigate("/doctors")}>
+                      Doctors
+                    </MenuItem>
+                    <MenuItem onClick={() => navigate("/news")}>News</MenuItem>
+                    <MenuItem onClick={() => navigate("/fact")}>Facts</MenuItem>
+                  </Menu>
+                </>
 
-                <MenuItem
-                
-                  sx={{ display: "flex", alignItems: "center" }}
-                >
+                <MenuItem sx={{ display: "flex", alignItems: "center" }}>
                   <MedicalServicesOutlinedIcon
                     sx={{ color: "black", fontSize: "19px" }}
                   />
                   <Typography
-                    // variant="body2"
-                    // color="text.primary"
                     color="black"
                     fontSize="16px"
                     onClick={() => {
                       navigate("/guestservice");
                     }}
-                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                    sx={{ ml: 0.1 }} // Add small space between icon and text
                   >
-                    Dịch vụ
+                    Services
                   </Typography>
                 </MenuItem>
 
@@ -191,13 +187,15 @@ function AppAppBar({ mode, toggleColorMode }) {
                   onClick={() => scrollToSection("highlights")}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <EditCalendarIcon sx={{ color: "black", fontSize: "19px" }} />
+                  <EditCalendarIcon
+                    sx={{ color: "black", fontSize: "19px" }}
+                  />
                   <Typography
                     color="black"
                     fontSize="16px"
-                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                    sx={{ ml: 0.1 }} // Add small space between icon and text
                   >
-                    Lịch Hẹn
+                    Appointments
                   </Typography>
                 </MenuItem>
 
@@ -209,14 +207,14 @@ function AppAppBar({ mode, toggleColorMode }) {
                     sx={{ color: "black", fontSize: "19px" }}
                   />
                   <Typography
-                   onClick={() => {
-                    navigate("/guestcontact");
-                  }}
+                    onClick={() => {
+                      navigate("/guestcontact");
+                    }}
                     color="black"
                     fontSize="16px"
-                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                    sx={{ ml: 0.1 }} // Add small space between icon and text
                   >
-                    Phản hồi
+                    Feedback
                   </Typography>
                 </MenuItem>
 
@@ -230,22 +228,11 @@ function AppAppBar({ mode, toggleColorMode }) {
                   <Typography
                     color="black"
                     fontSize="16px"
-                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                    sx={{ ml: 0.1 }} // Add small space between icon and text
                   >
-                    Thông tin
+                    Information
                   </Typography>
                 </MenuItem>
-                {/* <MenuItem
-                  onClick={() => scrollToSection("faq")}
-                  sx={{ py: "6px", px: "12px" }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                    <PersonOutlineOutlinedIcon
-                      sx={{ color: "black", fontSize: "20px" }}
-                      onClick={handlePersonalInformationPageClick}
-                    />
-                  </Typography>
-                </MenuItem> */}
               </Box>
             </Box>
             <Box
@@ -255,28 +242,17 @@ function AppAppBar({ mode, toggleColorMode }) {
                 alignItems: "center",
               }}
             >
-              {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
-              {/* <Button
-                color="primary"
-                variant="text"
-                size="small"
-                component="a"
-                onClick={handleLoginClick}
-                target="_blank"
-              >
-                Log in
-              </Button> */}
               <Button
                 sx={{ background: "#D5762B" }}
                 variant="contained"
                 size="small"
                 component="a"
                 onClick={() => {
-                  navigate("/login");
+                  navigate("/booking");
                 }}
                 target="_blank"
               >
-                Đặt lịch hẹn
+                Book Appointment
               </Button>
               <Button
                 sx={{ background: "#005F5F" }}
@@ -317,9 +293,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                       alignItems: "end",
                       flexGrow: 1,
                     }}
-                  >
-                    {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
-                  </Box>
+                  />
                   <MenuItem onClick={() => scrollToSection("features")}>
                     Features
                   </MenuItem>
@@ -336,18 +310,6 @@ function AppAppBar({ mode, toggleColorMode }) {
                     FAQ
                   </MenuItem>
                   <Divider />
-                  <MenuItem>
-                    {/* <Button
-                      color="primary"
-                      variant="contained"
-                      component="a"
-                      onClick={handleLoginClick}
-                      target="_blank"
-                      sx={{ width: "100%" }}
-                    >
-                      Login
-                    </Button> */}
-                  </MenuItem>
                   <MenuItem>
                     <Button
                       color="primary"

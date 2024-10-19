@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { totalVetsDetailsSelector } from "../../../../store/sellectors";
 import { getTotalVetsDetailThunk } from "../../../../store/apiThunk/userThunk";
 import noImageDoctor from "../../../../assets/ifnoimageDoctor.jpg"; // Import ảnh mặc định
+import LandingHeader from "../../../authorize/landingPage/LandingPageDetail/HeaderPage/LandingHeader/landingHeader";
 
 export default function Doctors() {
   const doctors = useSelector(totalVetsDetailsSelector);
@@ -16,7 +17,9 @@ export default function Doctors() {
 
   return (
     <div>
+      <LandingHeader/>
       {/* <AppAppBar /> */}
+
       <div className="news-wrap">
         {doctors?.map((doctor) => (
           <div className="news-box" key={doctor.accountId}>

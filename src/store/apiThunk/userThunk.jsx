@@ -336,6 +336,17 @@ export const loginGGThunk = createAsyncThunk(
 );
 
 //API login
+// export const loginThunk = createAsyncThunk(
+//   "users/login",
+//   async (data, thunkAPI) => {
+//     try {
+//       const response = await login(data);
+//       return response;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error?.response?.data);
+//     }
+//   }
+// );
 export const loginThunk = createAsyncThunk(
   "users/login",
   async (data, thunkAPI) => {
@@ -343,10 +354,20 @@ export const loginThunk = createAsyncThunk(
       const response = await login(data);
       return response;
     } catch (error) {
+      // Log lỗi chi tiết từ BE và cả đối tượng error
+      console.error("Error from BE (data):", error?.response?.data);
+      console.error("Error from BE (full error object):", error);
+
+      // Kiểm tra xem error.response có tồn tại hay không
+      if (!error?.response) {
+        console.error("No response from server:", error);
+      }
+
       return thunkAPI.rejectWithValue(error?.response?.data);
     }
   }
 );
+
 
 //API CurrentLoginUserInfo
 export const getUserDataThunk = createAsyncThunk(

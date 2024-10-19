@@ -13,6 +13,7 @@ import { useNavigate, Outlet } from "react-router-dom";
 
 import { allServicesSelector } from "../../../../store/sellectors";
 import { getAllServicesThunk } from "../../../../store/apiThunk/serviceKoiThunk";
+import DoctorHeader from "../../../authorize/landingPage/LandingPageDetail/HeaderPage/DoctorHeader/doctorHeader";
 
 // import { getAllServices } from "../../../../api/serviceCenterKoi";
 
@@ -49,8 +50,9 @@ export default function Service(props) {
 
   return (
     <>
+    <DoctorHeader/>
       {!showLoadingModal ? (
-        <section className="articles_customer">
+        <section className="articles_customer" >
           {allServices.map((service) => (
             <article
               // onClick={() => navigate(`/${direction}/createKoiFishAppointment`)}
