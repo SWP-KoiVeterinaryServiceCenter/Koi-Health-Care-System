@@ -75,7 +75,7 @@ export default function Service(props) {
                   </button>
                   <p>{service.description}</p>
                   <a className="read-more">
-                    Tìm hiểu thêm{" "}
+                    SEE MORE{" "}
                     <span className="sr-only">about this is some title</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

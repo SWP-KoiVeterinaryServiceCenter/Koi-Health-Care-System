@@ -157,9 +157,9 @@ export default function Signup() {
         <CssBaseline />
         <div className="signup">
           <Grid container spacing={2}>
-            <Grid item xs={1}></Grid>
             <Grid item xs={2}></Grid>
-            <Grid item xs={6} className="flex-center">
+            
+            <Grid item xs={8} className="flex-center" style={{marginTop:30, padding:10}}>
               <div className="signup__form">
                 <h3 variant="h3" className="login__title">Create Service Center</h3>
                 <form onSubmit={formik.handleSubmit}>
@@ -311,7 +311,9 @@ export default function Signup() {
                 </form>
               </div>
             </Grid>
-            <Grid item xs={1}></Grid>
+            <Grid item xs={2}></Grid>
+       
+            
           </Grid>
         </div>
       </ThemeProvider>

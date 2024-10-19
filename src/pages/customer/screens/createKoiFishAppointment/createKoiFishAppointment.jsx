@@ -125,7 +125,7 @@ const CreateKoiFishAppointment = () => {
       description: Yup.string()
         .required("Description cannot be empty")
         .min(5, "Description must be at least 5 characters")
-        .max(20, "No more than 20 character"),
+        .max(40, "No more than 40 character"),
       appointmentDate: Yup.date()
         .required("Date cannot be empty")
         .min(

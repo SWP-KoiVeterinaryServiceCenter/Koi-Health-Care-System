@@ -135,7 +135,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     }}
                     sx={{ ml: 0.1 }} // Add small space between icon and text
                   >
-                    Home
+                    HOME
                   </Typography>
                 </MenuItem>
 
@@ -149,7 +149,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                       sx={{ color: "black", fontSize: "19px" }}
                     />
                     <Typography color="black" fontSize="16px" sx={{ ml: 0.1 }}>
-                      News
+                      NEWS
                     </Typography>
                   </MenuItem>
 
@@ -159,7 +159,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     open={openNews}
                     onClose={handleCloseNews}
                   >
-                    <MenuItem onClick={() => navigate("/doctors")}>
+                    <MenuItem onClick={() => navigate("/guestdoctors")}>
                       Doctors
                     </MenuItem>
                     <MenuItem onClick={() => navigate("/news")}>News</MenuItem>
@@ -179,11 +179,11 @@ function AppAppBar({ mode, toggleColorMode }) {
                     }}
                     sx={{ ml: 0.1 }} // Add small space between icon and text
                   >
-                    Services
+                    SERVICES
                   </Typography>
                 </MenuItem>
 
-                <MenuItem
+                {/* <MenuItem
                   onClick={() => scrollToSection("highlights")}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
@@ -197,7 +197,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   >
                     Appointments
                   </Typography>
-                </MenuItem>
+                </MenuItem> */}
 
                 <MenuItem
                   onClick={() => scrollToSection("pricing")}
@@ -214,7 +214,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     fontSize="16px"
                     sx={{ ml: 0.1 }} // Add small space between icon and text
                   >
-                    Feedback
+                    CONTACT
                   </Typography>
                 </MenuItem>
 
@@ -230,7 +230,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     fontSize="16px"
                     sx={{ ml: 0.1 }} // Add small space between icon and text
                   >
-                    Information
+                    ABOUT
                   </Typography>
                 </MenuItem>
               </Box>

@@ -33,9 +33,12 @@ export default function Doctors() {
               />
               <div className="news-title-flex">
                 <h3 className="news-box-title">{doctor.username}</h3>
-                <p className="news-user-follow-info">{doctor.location}</p>
+                {/* <p className="news-user-follow-info">{doctor.location}</p> */}
+                <p className="news-description">{doctor.email}</p>
               </div>
-              <p className="news-description">{doctor.email}</p>
+              {/* <p className="news-description">{doctor.email}</p> */}
+                Phòng khám:{" "}
+              <p className="news-user-follow-info">{doctor.location}</p>
             </div>
             <a href="#" className="news-button">
               {doctor.role}

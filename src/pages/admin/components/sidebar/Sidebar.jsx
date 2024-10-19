@@ -221,9 +221,16 @@ const Sidebar = (props) => {
                     selected={selected}
                     setSelected={setSelected}
                   />
+                      <Item
+                    title="Service Center List"
+                    to="listServiceCenter"
+                    icon={<SubscriptionsIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
 
                   {/* ///////////////////////////////////////////////////////////////////// */}
-                  <List>
+                  {/* <List>
                     <ListItemButton onClick={handleClickProductManagement}>
                       {!isCollapsed && (
                         <InventoryIcon
@@ -281,9 +288,9 @@ const Sidebar = (props) => {
                         setSelected={setSelected}
                       />
                     </Collapse>
-                  </List>
+                  </List> */}
                   {/* ////////////////////////////////////////////////////////////////// */}
-                  <List>
+                  {/* <List>
                     <ListItemButton onClick={handleClickTransaction}>
                       {!isCollapsed && (
                         <PaidIcon
@@ -341,9 +348,9 @@ const Sidebar = (props) => {
                         setSelected={setSelected}
                       />
                     </Collapse>
-                  </List>
+                  </List> */}
                   {/* //////////////////////////////////handleClickPolicy/////////////////////////////////// */}
-                  <List>
+                  {/* <List>
                     <ListItemButton onClick={handleClickPolicy}>
                       {!isCollapsed && (
                         <LocalPoliceIcon
@@ -408,7 +415,7 @@ const Sidebar = (props) => {
                         setSelected={setSelected}
                       />
                     </Collapse>
-                  </List>
+                  </List> */}
                   {/* ///////////////////////////////////////////////////////////////////// */}
                 </Collapse>
               </List>
