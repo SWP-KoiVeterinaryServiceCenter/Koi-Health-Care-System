@@ -331,7 +331,7 @@ export default function UpdatePersonalInformation() {
               </div>
 
               {/* Phone Number */}
-              <div className="upi-text-field-container">
+              <div className="text-field-container">
                 <TextField
                   id="phonenumber"
                   label={

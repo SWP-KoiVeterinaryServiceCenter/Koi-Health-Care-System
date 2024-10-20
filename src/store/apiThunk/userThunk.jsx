@@ -452,9 +452,9 @@ export const updatePersonalInformationThunk = createAsyncThunk(
 
 export const uploadProfileImageThunk = createAsyncThunk(
   "user/uploadProfileImage",
-  async ({ accountId, data }, thunkApi) => {
+  async ( data, thunkApi) => {
     try {
-      const response = await uploadProfileImage(accountId, data);
+      const response = await uploadProfileImage(data);
       return response;
     } catch (error) {
       return thunkApi.rejectWithValue(error?.response?.data);

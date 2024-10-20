@@ -217,10 +217,10 @@ export const updatetPersonalInformation = async (data) => {
 //   return response.data;
 // };
 
-export const uploadProfileImage = async (accountId, data) => {
-  console.log("accountId:", accountId); // Check the value here
+export const uploadProfileImage = async (data) => {
+  // console.log("accountId:", accountId); // Check the value here
   console.log("data:", data); // Check the value here
-  const response = await api.patch(`/api/v1/Account/UploadProfileImage/${accountId}`, data, {
+  const response = await api.patch(`/api/v1/Account/UploadProfileImage`, data, {
       headers: {
           "Content-Type": "multipart/form-data",
       },

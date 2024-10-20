@@ -258,3 +258,13 @@
 }
 
 
+.update-personal-image-container {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center align the items */
+}
+
+.update-personal-img-button-container {
+  margin-top: 30px; /* Space between the image and button */
+}
+

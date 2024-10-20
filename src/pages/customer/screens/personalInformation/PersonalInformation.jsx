@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import {
+  UPDATEPERSONALIMAGESUCCESS,
   DELETEKOISUCCESS,
   ERRORTEXT,
   SUCCESSTEXT,
@@ -21,13 +22,14 @@ import {
   getUserDataThunk,
   uploadProfileImageThunk,
 } from "../../../../store/apiThunk/userThunk";
+import { Button } from "@mui/material";
+
 import { userDataSelector } from "../../../../store/sellectors";
 
 import { getKoiByAccountIdThunk } from "../../../../store/apiThunk/koiThunk";
 import { allKoiByAccountIdSelector } from "../../../../store/sellectors";
 
 import { deleteKoiByAccountIdThunk } from "../../../../store/apiThunk/koiThunk";
-import { pointer } from "@testing-library/user-event/dist/cjs/pointer/index.js";
 
 export default function PersonalInformation(props) {
   const navigate = useNavigate();
@@ -39,11 +41,12 @@ export default function PersonalInformation(props) {
   const userDetail = useSelector(userDataSelector);
   const allKoiByAccountId = useSelector(allKoiByAccountIdSelector);
 
-  // const [imagePreview, setImagePreview] = useState(userDetail.koiImage); // Initialize with the existing image
-
   // console.log({ allKoiByAccountId });
 
-  console.log(userDetail.accountId);
+  const [imagePreview, setImagePreview] = useState(userDetail.profileImage);
+  const [imageSelected, setImageSelected] = useState(false);
+
+  // console.log(userDetail.profileImage);
 
   useEffect(() => {
     const fetchUserAndKoiData = async () => {
@@ -107,33 +110,25 @@ export default function PersonalInformation(props) {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      koiImage: userDetail.koiImage || "",
+      formFile: userDetail.profileImage || koifish,
     },
     validationSchema: Yup.object({
-      koiImage: Yup.mixed().required("Koi image is required"),
+      formFile: Yup.mixed(),
     }),
     onSubmit: async (values) => {
-      setShowLoadingModal(true);
+      // setShowLoadingModal(true);
       dispatch(
-        updateKoiByAccountIdThunk({
-          id: userDetail.accountId,
-          data: {
-            // Gói dữ liệu bên trong đối tượng 'data'
-            koiName: values.koiName,
-            weight: values.weight,
-            age: values.age, // Lưu ý: Bạn đã sử dụng nhầm values.weight cho age, hãy sửa lại
-            gender: values.gender,
-            varieties: values.varieties,
-            koiImage: values.koiImage,
-          },
+        uploadProfileImageThunk({
+          // accountId: accountId,
+          formFile: values.formFile,
         })
       )
         .unwrap()
         .then(() => {
-          setShowLoadingModal(false);
+          // setShowLoadingModal(false);
           Swal.fire({
             title: SUCCESSTEXT,
-            text: UPDATEKOIINFORMATIONSUCCESS,
+            text: UPDATEPERSONALIMAGESUCCESS,
             icon: "success",
             showCancelButton: false,
             showConfirmButton: false,
@@ -142,11 +137,11 @@ export default function PersonalInformation(props) {
             timerProgressBar: true,
             scrollbarPadding: false,
           }).then(() => {
-            navigate(-1);
+            window.location.reload(); // Refresh the page
           });
         })
         .catch((error) => {
-          setShowLoadingModal(false);
+          // setShowLoadingModal(false);
           Swal.fire({
             title: ERRORTEXT,
             text: error.message,
@@ -161,52 +156,50 @@ export default function PersonalInformation(props) {
     },
   });
 
+  useEffect(() => {
+    setImagePreview(userDetail.profileImage);
+  }, [userDetail.profileImage]);
+
   return (
     <div>
       <div className="pi-giant-card">
-        <div className="pi-container-1">
-          {/* <form onSubmit={formik.handleSubmit} className="form-container">
-            <div className="update-koi-image-field">
-              {imagePreview && (
+        <div className="pi-container-1">       
+          <form onSubmit={formik.handleSubmit}>
+            <div className="update-personal-image-container">
+              <label htmlFor="formFile">
                 <img
-                  src={imagePreview}
+                  src={imagePreview} // Use imagePreview state here
                   alt="Koi"
                   className="image-preview-img"
+                  style={{ cursor: "pointer" }}
                 />
-              )}
+              </label>
               <input
-                id="koiImage"
+                id="formFile"
                 type="file"
                 onChange={(event) => {
                   const file = event.currentTarget.files[0];
-                  formik.setFieldValue("koiImage", file);
                   if (file) {
                     const fileUrl = URL.createObjectURL(file);
                     setImagePreview(fileUrl);
+                    setImageSelected(true); // Set imageSelected to true
+                    formik.setFieldValue("formFile", file); // Set the file in Formik
+                  } else {
+                    setImageSelected(false); // Reset if no file is selected
                   }
                 }}
                 accept="image/png, image/jpeg, image/jpg"
+                style={{ display: "none" }} // Hide the input
               />
-              {formik.touched.koiImage && formik.errors.koiImage && (
-                <div className="koi__update__validation__error">
-                  {formik.errors.koiImage}
+              {imageSelected && ( // Conditionally render the button
+                <div className="update-personal-img-button-container">
+                  <Button variant="contained" type="submit">
+                    Update
+                  </Button>
                 </div>
               )}
             </div>
-          </form> */}
-          <div>
-            <img
-              src={koifish}
-              alt="Koi Fish"
-              onClick={() => {
-                if (userDetail) {
-                  navigate(`/${direction}/uploadPersonalImage`, {
-                    state: { accountId: userDetail.accountId },
-                  });
-                }
-              }}
-            />
-          </div>
+          </form>
 
           <div className="user-info">
             <p>

@@ -408,11 +408,10 @@ const router = createBrowserRouter([
         path: "updatePersonalInformation",
         element: <UpdatePersonalInformation direction="customer"/>,
       },
-      {
-        path: "uploadPersonalImage",
-        element: <UploadPersonalImage direction="customer"/>,
-      },
-
+      // {
+      //   path: "uploadPersonalImage",
+      //   element: <UploadPersonalImage direction="customer"/>,
+      // },
     ],
   },
 

@@ -121,6 +121,7 @@ export default function UploadPersonalImage() {
         });
     },
   });
+  
   return (
     <>
       <div className="update_koi_fish">
