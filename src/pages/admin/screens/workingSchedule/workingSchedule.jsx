@@ -1,17 +1,16 @@
 import React, { useState } from "react";
+import Footer from "../../../authorize/landingPage/LandingPageDetail/Footer/Footer";
+import { Box } from "@mui/material";
+
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
-import { Divider } from "antd";
-import Footer from "../../../authorize/landingPage/LandingPageDetail/Footer/Footer";
-import { Box } from "@mui/material";
 const localizer = momentLocalizer(moment);
 import "./workingSchedule.css";
 
 const events = [
   {
     title: "Kelsie Meyer",
-    servicename:"1111111111111111",
     start: new Date(2024, 9, 17, 14, 30),
     end: new Date(2024, 9, 17, 15, 30),
   },

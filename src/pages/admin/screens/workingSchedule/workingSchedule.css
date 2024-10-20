@@ -7,5 +7,23 @@
 }
 
 .rbc-button-link {
-    color: black !important;
+    color: black;
+}
+
+.rbc-agenda-time-cell span {
+    color: black;
+}
+
+.rbc-agenda-event-cell {
+    color: black;
+}
+
+.rbc-agenda-date-cell {
+    color: black;
+}
+.rbc-time-slot span{
+    color: black;
+}
+.rbc-header{
+    color: black;
 }

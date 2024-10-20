@@ -78,6 +78,7 @@ import UpdateKoiFishInformation from "./pages/customer/screens/updateKoiFishInfo
 import AppointmentList from "./pages/customer/screens/appointmentList/AppointmentList";
 import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
 import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
+import CreateWorkingSchedule from "./pages/admin/screens/createWorkingSchedule/createWorkingSchedule";
 
 const router = createBrowserRouter([
   //Guest
@@ -273,6 +274,11 @@ const router = createBrowserRouter([
         path: "workingSchedule",
         element: <WorkingSchedule />,
       },
+      {
+        path: "createWorkingSchedule",
+        element: <CreateWorkingSchedule />,
+      },
+
     ],
   },
   //Staff
