@@ -12,6 +12,10 @@ export const getAllCurrentUserAppointments = async () => {
   const response = await api.get(`/api/v1/Appointment/CurrentUserAppointments`);
   return response.data;
 };
+export const getAllUserAppointments = async () => {
+  const response = await api.get(`/api/v1/Appointment/Appointments`);
+  return response.data;
+};
 
 export const cancelCurrentUserAppointments = async (id, data) => {
   const response = await api.put(`/api/v1/Appointment/CancelAppointment/${id}`, data);
@@ -29,5 +33,13 @@ export const deleteAppointments= async (id ) => {
 };
 export const cancelAppointments= async (id ) => {
   const response = await api.put(`/api/v1/Appointment/CancelAppointment/${id}`); //ban the user in account
+  return response.data;
+};
+export const confirmAppointments= async (id ) => {
+  const response = await api.put(`/api/v1/Appointment/FinishAppointment/${id}`); //ban the user in account
+  return response.data;
+};
+export const missAppointments= async (id ) => {
+  const response = await api.put(`/api/v1/Appointment/MissAppointment/${id}`); //ban the user in account
   return response.data;
 };

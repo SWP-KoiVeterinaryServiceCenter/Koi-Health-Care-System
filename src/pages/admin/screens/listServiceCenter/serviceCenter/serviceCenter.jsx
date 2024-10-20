@@ -95,6 +95,7 @@ export default function Service(props) {
       <Divider />
 
       {/* Modal for Confirming Deletion */}
+      <div className="Modal_admin_center">
       <Modal
         open={showDeleteModal}
         onClose={handleCloseDeleteModal}
@@ -121,6 +122,7 @@ export default function Service(props) {
           </div>
         </div>
       </Modal>
+      </div>
     </div>
   );
 }

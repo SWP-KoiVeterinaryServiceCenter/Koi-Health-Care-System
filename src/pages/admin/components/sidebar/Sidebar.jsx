@@ -214,16 +214,23 @@ const Sidebar = (props) => {
                     selected={selected}
                     setSelected={setSelected}
                   /> */}
-                  <Item
+                  {/* <Item
                     title="Service Center"
                     to="createServiceCenter"
                     icon={<SubscriptionsIcon />}
                     selected={selected}
                     setSelected={setSelected}
-                  />
+                  /> */}
                       <Item
                     title="Service Center List"
                     to="listServiceCenter"
+                    icon={<SubscriptionsIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                           <Item
+                    title="Appointment "
+                    to="appointmentManagement"
                     icon={<SubscriptionsIcon />}
                     selected={selected}
                     setSelected={setSelected}

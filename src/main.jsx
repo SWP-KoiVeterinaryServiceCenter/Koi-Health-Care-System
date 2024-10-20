@@ -31,6 +31,7 @@ import CreateServiceType from "./pages/admin/screens/createServiceType/createSer
 import CreateServiceCenter from "./pages/admin/screens/createServiceCenter/createServiceCenter";
 import ListServiceCenter from "./pages/admin/screens/listServiceCenter/listServiceCenter";
 import ServiceCenter from "./pages/admin/screens/listServiceCenter/serviceCenter/serviceCenter";
+import AppointmentManagement from "./pages/admin/screens/appointmentManagement/appointmentManagement";
 //Manager
 import CreateShopManager from "./pages/manager/screens/shop/createShop/createShop";
 import ManagerHome from "./pages/manager/screens/home/managerHome";
@@ -174,6 +175,10 @@ const router = createBrowserRouter([
       {
         path: "account",
         element: <AccountTable direction="admin" />,
+      },
+      {
+        path: "appointmentManagement",
+        element: <AppointmentManagement direction="admin" />,
       },
       {
         path: "tankList",

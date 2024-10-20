@@ -5,7 +5,10 @@ import {
   deleteAppointments,
   cancelAppointments,
   getAllCurrentUserAppointments,
-  cancelCurrentUserAppointments
+  cancelCurrentUserAppointments,
+  getAllUserAppointments,
+  confirmAppointments,
+  missAppointments,
 } from "../../api/appointmentKoi";
 
 export const createAppointmentByAccountIdThunk = createAsyncThunk(
@@ -44,12 +47,33 @@ export const deleteAppointmentsThunk = createAsyncThunk(
   }
 );
 
-
 export const cancelAppointmentsThunk = createAsyncThunk(
   "appointments/cancelAppointments",
   async (id, thunkAPI) => {
     try {
       const response = await cancelAppointments(id);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+export const missAppointmentsThunk = createAsyncThunk(
+  "appointments/missAppointments",
+  async (id, thunkAPI) => {
+    try {
+      const response = await missAppointments(id);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+export const confirmAppointmentsThunk = createAsyncThunk(
+  "appointments/confirmAppointments",
+  async (id, thunkAPI) => {
+    try {
+      const response = await confirmAppointments(id);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error?.response?.data);
@@ -68,10 +92,21 @@ export const getAllCurrentUserAppointmentsThunk = createAsyncThunk(
     }
   }
 );
+export const getAllUserAppointmentsThunk = createAsyncThunk(
+  "appointments/getAllUserAppointments",
+  async (thunkAPI) => {
+    try {
+      const response = await getAllUserAppointments();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
 
 export const cancelCurrentUserAppointmentsThunk = createAsyncThunk(
   "appointments/cancelCurrentUserAppointments",
-  async (data , thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
       const response = await cancelCurrentUserAppointments(data);
       return response;
