@@ -28,7 +28,7 @@ export const sendOTP = async () => {
 };
 
 export const checkEmail = async (email) => {
-  const response = await api.get(`/api/v1/auths/checkemail/${email}`);
+  const response = await api.get(`/api/v1/Account/SendVerifcationCode/${email}`);
   return response.data;
 };
 
