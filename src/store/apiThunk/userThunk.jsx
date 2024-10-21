@@ -30,11 +30,11 @@ import {
   createVetAccount,
   getTotalVets,
   getTotalStaffs,
-
   getTotalVetsDetail,
-
   getAllVetAccount,
-
+  getTotalVetsDetail,
+  updatetPersonalInformation,
+  uploadProfileImage,
 } from "../../api/user";
 
 export const updateStaffPasswordThunk = createAsyncThunk(
@@ -129,7 +129,6 @@ export const getTotalVetsDetailThunk = createAsyncThunk(
     }
   }
 );
-
 
 export const updateStatusAccountThunk = createAsyncThunk(
   "users/updateStatusAccount",
@@ -457,6 +456,30 @@ export const getAllVetAccountThunk = createAsyncThunk(
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const updatePersonalInformationThunk = createAsyncThunk(
+  "user/updatePersonalInformation",
+  async (data, thunkApi) => {
+    try {
+      const response = await updatetPersonalInformation(data);
+      return response;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+export const uploadProfileImageThunk = createAsyncThunk(
+  "user/uploadProfileImage",
+  async ( data, thunkApi) => {
+    try {
+      const response = await uploadProfileImage(data);
+      return response;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error?.response?.data);
     }
   }
 );

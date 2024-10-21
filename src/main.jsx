@@ -29,9 +29,11 @@ import CreateVetAccount from "./pages/admin/screens/createRoleAccount/createVetA
 import CreateTank from "./pages/admin/screens/createTank/createTank";
 import CreateServiceType from "./pages/admin/screens/createServiceType/createServiceType";
 import CreateServiceCenter from "./pages/admin/screens/createServiceCenter/createServiceCenter";
+import WorkingSchedule from "./pages/admin/screens/workingSchedule/workingSchedule";
 import ListServiceCenter from "./pages/admin/screens/listServiceCenter/listServiceCenter";
 import ServiceCenter from "./pages/admin/screens/listServiceCenter/serviceCenter/serviceCenter";
 import AppointmentManagement from "./pages/admin/screens/appointmentManagement/appointmentManagement";
+
 //Manager
 import CreateShopManager from "./pages/manager/screens/shop/createShop/createShop";
 import ManagerHome from "./pages/manager/screens/home/managerHome";
@@ -78,10 +80,16 @@ import ContactUs from "./pages/customer/screens/contactUs/contactUs";
 import CreateKoiFishAppointment from "./pages/customer/screens/createKoiFishAppointment/createKoiFishAppointment";
 import UpdateKoiFishInformation from "./pages/customer/screens/updateKoiFishInformation/UpdateKoiFishInformation";
 import AppointmentList from "./pages/customer/screens/appointmentList/AppointmentList";
+import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
+import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
+import CreateWorkingSchedule from "./pages/admin/screens/createWorkingSchedule/createWorkingSchedule";
+
+
 //Guest
 import GuestHome from "./pages/guest/guestHome/guestHome";
 import GuestContact from "./pages/guest/guestContact/guestContact";
 import GuestDoctorNews from "./pages/guest/guestDoctorNews/guestDoctorNews";
+
 const router = createBrowserRouter([
   //Guest
   {
@@ -284,6 +292,15 @@ const router = createBrowserRouter([
         path: "adjustMoney",
         element: <AdjustMoney />,
       },
+      {
+        path: "workingSchedule",
+        element: <WorkingSchedule />,
+      },
+      {
+        path: "createWorkingSchedule",
+        element: <CreateWorkingSchedule />,
+      },
+
     ],
   },
   //Staff
@@ -419,6 +436,14 @@ const router = createBrowserRouter([
         path: "appointmentList",
         element: <AppointmentList direction="customer"/>,
       },
+      {
+        path: "updatePersonalInformation",
+        element: <UpdatePersonalInformation direction="customer"/>,
+      },
+      // {
+      //   path: "uploadPersonalImage",
+      //   element: <UploadPersonalImage direction="customer"/>,
+      // },
     ],
   },
 
