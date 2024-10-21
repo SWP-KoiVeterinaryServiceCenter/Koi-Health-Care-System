@@ -1,0 +1,109 @@
+.update_personal_information {
+    background-color: #fff;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 15px 40px;
+    max-width: 800px;
+    margin: 100px auto 10px auto;
+    border: 2px solid black;
+}
+
+.update_personal_information h1,
+.update_personal_information h2 {
+    text-align: center;
+    font-family: "Bebas Neue", cursive;
+    color: #344055;
+    margin-bottom: 20px;
+}
+
+.koi__update__validation__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+/* Form buttons (Back and Update) */
+.update_personal_information .btn {
+    background-color: #70d8bd;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.update_personal_information .btn:hover {
+    background-color: #5bb49d;
+}
+
+.update_personal_information .back-btn {
+    background-color: #ddd;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: "Bebas Neue", cursive;
+}
+
+.update_personal_information .back-btn:hover {
+    background-color: #ccc;
+}
+
+/* Loading modal styling */
+.update_personal_information .LoadingModal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+.update_personal_information_form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 3 columns */
+    grid-gap: 20px;
+    /* Adds space between fields */
+}
+
+/* .update-koi-image-field {
+    grid-column: 1 / span 1; 
+  } */
+
+.update-personal-information-second-column {
+    grid-column: 1 / span 1;
+    /* Takes the second column */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: hidden;
+}
+
+.update-personal-information-third-column {
+    grid-column: 2 / span 1;
+    /* Takes the third column */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.up-pi-koi-button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: 90px;
+}
+
+/* Optional - Style the background and input boxes to maintain consistency */
+.upi-text-field-container {
+    margin-bottom: 20px;
+}
+
+/* .background_formik_box img {
+    width: 100%;
+    height: 300px;
+  }
+  
+  .image-preview-img{
+    width: 200px;
+    height: 200px;
+  } */
