@@ -29,6 +29,9 @@ import CreateVetAccount from "./pages/admin/screens/createRoleAccount/createVetA
 import CreateTank from "./pages/admin/screens/createTank/createTank";
 import CreateServiceType from "./pages/admin/screens/createServiceType/createServiceType";
 import CreateServiceCenter from "./pages/admin/screens/createServiceCenter/createServiceCenter";
+import ListServiceCenter from "./pages/admin/screens/listServiceCenter/listServiceCenter";
+import ServiceCenter from "./pages/admin/screens/listServiceCenter/serviceCenter/serviceCenter";
+import AppointmentManagement from "./pages/admin/screens/appointmentManagement/appointmentManagement";
 //Manager
 import CreateShopManager from "./pages/manager/screens/shop/createShop/createShop";
 import ManagerHome from "./pages/manager/screens/home/managerHome";
@@ -69,12 +72,16 @@ import PersonalInformation from "./pages/customer/screens/personalInformation/Pe
 import AddMoreFish from "./pages/customer/screens/addMoreFish/AddMoreFish";
 import Booking from "./pages/customer/screens/booking/booking";
 import CustomerHome from "./pages/customer/components/home/homeCustomer";
-import GuestHome from "./pages/guest/guestHome/guestHome";
-import GuestContact from "./pages/guest/guestContact/guestContact";
+
 import HomePage from "./pages/customer/screens/home/home";
 import ContactUs from "./pages/customer/screens/contactUs/contactUs";
 import CreateKoiFishAppointment from "./pages/customer/screens/createKoiFishAppointment/createKoiFishAppointment";
 import UpdateKoiFishInformation from "./pages/customer/screens/updateKoiFishInformation/UpdateKoiFishInformation";
+import AppointmentList from "./pages/customer/screens/appointmentList/AppointmentList";
+//Guest
+import GuestHome from "./pages/guest/guestHome/guestHome";
+import GuestContact from "./pages/guest/guestContact/guestContact";
+import GuestDoctorNews from "./pages/guest/guestDoctorNews/guestDoctorNews";
 const router = createBrowserRouter([
   //Guest
   {
@@ -88,8 +95,8 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "doctors",
-        element: <DoctorOnNewsPage />,
+        path: "guestdoctors",
+        element: <GuestDoctorNews />,
       },
       {
         path: "guestservice",
@@ -170,6 +177,10 @@ const router = createBrowserRouter([
         element: <AccountTable direction="admin" />,
       },
       {
+        path: "appointmentManagement",
+        element: <AppointmentManagement direction="admin" />,
+      },
+      {
         path: "tankList",
         element: <TankList direction="admin" />,
       },
@@ -192,6 +203,14 @@ const router = createBrowserRouter([
       {
         path: "createServiceCenter",
         element: <CreateServiceCenter />,
+      },
+      {
+        path: "listServiceCenter",
+        element: <ListServiceCenter direction="admin" />,
+      },
+      {
+        path: "serviceCenter",
+        element: <ServiceCenter direction="admin" />,
       },
       {
         path: "createVetAccount",
@@ -395,6 +414,10 @@ const router = createBrowserRouter([
       {
         path: "updateKoiFishInformation",
         element: <UpdateKoiFishInformation />,
+      },
+      {
+        path: "appointmentList",
+        element: <AppointmentList direction="customer"/>,
       },
     ],
   },

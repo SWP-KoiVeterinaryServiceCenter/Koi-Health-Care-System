@@ -1,5 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createAppointmentByAccountId, getCurrentUserAppointments } from "../../api/appointmentKoi";
+import {
+  createAppointmentByAccountId,
+  getCurrentUserAppointments,
+  deleteAppointments,
+  cancelAppointments,
+  getAllCurrentUserAppointments,
+  cancelCurrentUserAppointments,
+  getAllUserAppointments,
+  confirmAppointments,
+  missAppointments,
+} from "../../api/appointmentKoi";
 
 export const createAppointmentByAccountIdThunk = createAsyncThunk(
   "appointments/createAppointmentByAccountId",
@@ -18,6 +28,87 @@ export const getCurrentUserAppointmentsThunk = createAsyncThunk(
   async (thunkAPI) => {
     try {
       const response = await getCurrentUserAppointments();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+export const deleteAppointmentsThunk = createAsyncThunk(
+  "appointments/deleteAppointments",
+  async (id, thunkAPI) => {
+    try {
+      const response = await deleteAppointments(id);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+export const cancelAppointmentsThunk = createAsyncThunk(
+  "appointments/cancelAppointments",
+  async (id, thunkAPI) => {
+    try {
+      const response = await cancelAppointments(id);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+export const missAppointmentsThunk = createAsyncThunk(
+  "appointments/missAppointments",
+  async (id, thunkAPI) => {
+    try {
+      const response = await missAppointments(id);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+export const confirmAppointmentsThunk = createAsyncThunk(
+  "appointments/confirmAppointments",
+  async (id, thunkAPI) => {
+    try {
+      const response = await confirmAppointments(id);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+export const getAllCurrentUserAppointmentsThunk = createAsyncThunk(
+  "appointments/getAllCurrentUserAppointments",
+  async (thunkAPI) => {
+    try {
+      const response = await getAllCurrentUserAppointments();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+export const getAllUserAppointmentsThunk = createAsyncThunk(
+  "appointments/getAllUserAppointments",
+  async (thunkAPI) => {
+    try {
+      const response = await getAllUserAppointments();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+export const cancelCurrentUserAppointmentsThunk = createAsyncThunk(
+  "appointments/cancelCurrentUserAppointments",
+  async (data, thunkAPI) => {
+    try {
+      const response = await cancelCurrentUserAppointments(data);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error?.response?.data);

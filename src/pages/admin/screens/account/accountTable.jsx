@@ -347,7 +347,7 @@ const AccountTable = (props) => {
       flex: 1,
       renderCell: ({ row: { role } }) => {
         let roleColor, IconComponent;
-    
+
         switch (role) {
           case "Customer":
             roleColor = "#53A079"; // Green
@@ -365,16 +365,20 @@ const AccountTable = (props) => {
             roleColor = "gray"; // Default color for unknown roles
             IconComponent = null;
         }
-    
+
         return (
-          <Box display="flex" alignItems="center" justifyContent="center" gap={1}>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            gap={1}
+          >
             {IconComponent && <IconComponent style={{ color: roleColor }} />}
             <Typography style={{ color: roleColor }}>{role}</Typography>
           </Box>
         );
       },
     },
-    
 
     {
       field: "action",
@@ -563,9 +567,9 @@ const AccountTable = (props) => {
             boxShadow: (theme) => theme.shadows[24],
           }}
         >
-       <div style={{  marginLeft:100 }}>
-  <AdminDashboardDetail />
-</div>
+          <div style={{ marginLeft: 100 }}>
+            <AdminDashboardDetail />
+          </div>
 
           {/* //////////////////////////////////////////////////////////////TABLE///////////////////////////////////////////////////////////////////// */}
 
@@ -613,18 +617,45 @@ const AccountTable = (props) => {
                   Search
                 </Button>
               </Box>
-
-              <div className="custom-buttons">
-                <button
-                  onClick={() => navigate(`/${direction}/createVetAccount`)}
-                >
-                  Create Vet Account
-                </button>
-                <button
-                  onClick={() => navigate(`/${direction}/createStaffAccount`)}
-                >
-                  Create Staff
-                </button>
+              <div className="button_css_createAmin">
+                <div className="button-row">
+                  <div
+                    className="custom-button-icon-create-staff"
+                    onClick={() => navigate(`/${direction}/createStaffAccount`)}
+                  >
+                    <div className="custom-icon-create-staff">
+                      <AdminPanelSettingsIcon
+                        style={{ width: 25, height: 25, color: "black" }}
+                      />
+                    </div>
+                    <div className="custom-cube-create-staff">
+                      <span className="custom-side-create-staff custom-front-create-staff">
+                        Tạo tài khoản Staff
+                      </span>
+                      <span className="custom-side-create-staff custom-top-create-staff">
+                        STAFF
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="custom-button-icon-create-service"
+                    onClick={() => navigate(`/${direction}/createVetAccount`)}
+                  >
+                    <div className="custom-icon-create-service">
+                      <MedicationIcon
+                        style={{ width: 25, height: 25, color: "black" }}
+                      />
+                    </div>
+                    <div className="custom-cube-create-service">
+                      <span className="custom-side-create-service custom-front-create-service">
+                        Tạo tài khoản Veterinarian
+                      </span>
+                      <span className="custom-side-create-service custom-top-create-service">
+                        VETERINARIAN
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </Box>
 

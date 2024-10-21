@@ -7,6 +7,7 @@ import { staffsSlice } from "./features/user.slice/staffs.slice";
 import { allAccountsSlice } from "./features/user.slice/allAccounts.slice";
 import { allTanksSlice } from "./features/tank.slice/allTank.slice";
 import { currentappointmentSlice } from "./features/appointment.slice/currentappointment.slice";
+import { allappointmentSlice } from "./features/appointment.slice/allUserAppointments.slice";
 import { allServicesTypeSlice } from "./features/serviceKoi.slice/getAllServicesType.slice";
 import { paymentSlice  } from "./features/payment.slice/payment.slice";
 
@@ -113,6 +114,7 @@ import { allServicesSlice } from "./features/serviceKoi.slice/getAllServices.sli
 
 import { vetDetailSlice } from "./features/user.slice/vetDetail.slice"; 
 
+import { currentUserAppointmentsSlice } from "./features/appointment.slice/currentUserAppointments.slice";
 
 export const store = configureStore({
   reducer: {
@@ -122,6 +124,7 @@ export const store = configureStore({
     allAccounts: allAccountsSlice.reducer,
     allTanks: allTanksSlice.reducer,
     currentappointment: currentappointmentSlice.reducer,
+    allappointment: allappointmentSlice.reducer,
     allServicesType: allServicesTypeSlice.reducer,
     payment: paymentSlice .reducer,
     totalUsers: totalUsersSlice.reducer,
@@ -135,6 +138,8 @@ export const store = configureStore({
 
     allServices: allServicesSlice.reducer,
     vetDetail: vetDetailSlice.reducer,
+
+    currentUserAppointments: currentUserAppointmentsSlice.reducer,
 
     petDetail: petDetailSlice.reducer,
     petsFromShop: petsFromShopSlice.reducer,

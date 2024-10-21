@@ -6,6 +6,8 @@ import {
   deleteServicesType,
   createServiceCenter,
   getAllServices,
+  deleteServiceCenter
+  
 } from "../../api/serviceKoi";
 
 export const getAllServicesTypeThunk = createAsyncThunk(
@@ -66,4 +68,16 @@ export const deleteServicesTypeThunk = createAsyncThunk(
       }
     }
   );
+  export const deleteServiceCenterThunk = createAsyncThunk(
+    "services/deleteServiceCenter",
+    async (id, thunkAPI) => {
+      try {
+        const response = await deleteServiceCenter(id);
+        return response;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error?.response?.data);
+      }
+    }
+  );
+  
 

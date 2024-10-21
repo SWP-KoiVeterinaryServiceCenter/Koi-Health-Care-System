@@ -1,0 +1,106 @@
+/* Image Section for Doctor Header */
+.koi-img-1-doctor {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    margin-top: 90px;
+  }
+  
+  .koi-img-1-doctor img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .koi-img-1-doctor .overlay-doctor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+  }
+  
+  .koi-img-1-doctor .title-doctor,
+  .koi-img-1-doctor .subtitle-doctor,
+  .koi-img-1-doctor .request-doctor {
+    position: absolute;
+    left: 20px;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+    z-index: 2;
+  }
+  
+  .koi-img-1-doctor .title-doctor {
+    font-size: 65px;
+    padding-left: 30px;
+  }
+  
+  .koi-img-1-doctor .subtitle-doctor {
+    top: 40%;
+    font-size: 20px;
+    padding-left: 30px;
+  }
+  
+  .koi-img-1-doctor .request-doctor {
+    top: 60%;
+    font-size: 20px;
+    padding-left: 30px;
+  }
+  
+  .request-doctor {
+    background: linear-gradient(140.14deg, #ec540e 15.05%, #d6361f 114.99%) padding-box,
+      linear-gradient(142.51deg, #ff9465 8.65%, #af1905 88.82%) border-box;
+    border-radius: 7px;
+    border: 2px solid transparent;
+    text-shadow: 1px 1px 1px #00000040;
+    box-shadow: 8px 8px 20px 0px #45090059;
+    margin-left: 20px;
+    padding: 10px 40px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  .request-doctor:hover {
+    box-shadow: none;
+    opacity: 80%;
+  }
+  
+  /* Title Section */
+  .tittle-center-doctor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .tittle-center-doctor .title-doctor {
+    font-size: 38px;
+    font-weight: bold;
+    margin: 20px 0 2px;
+    color: #2d3436;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+  }
+  
+  .tittle-center-doctor .subtitle-doctor {
+    font-size: 18px;
+    line-height: 1.2;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  }
+  
+  /* Card Background */
+  .card-1-doctor {
+    background: url("../../../../assets/bg3_sidebar.jpg") no-repeat center center;
+    background-size: cover; /* Ensures the background image covers the entire container */
+  }
+  
