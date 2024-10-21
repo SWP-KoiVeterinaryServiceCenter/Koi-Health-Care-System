@@ -1,132 +1,240 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getCurrentUserAppointmentsThunk } from "../../../../store/apiThunk/appointment";
+import {
+  getUserDataThunk,
+} from "../../../../store/apiThunk/userThunk";
+import {
+  deleteAppointmentsThunk,
+  cancelAppointmentsThunk,
+} from "../../../../store/apiThunk/appointment";
+import { currentappointmentSelector } from "../../../../store/sellectors";
+import { userDataSelector } from "../../../../store/sellectors";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import SettingsIcon from "@mui/icons-material/Settings";
+import { Modal, CircularProgress } from "@mui/material";
+import LoadingFish from "../../../../assets/videoModal/loading.json";
+import Lottie from "lottie-react";
+
 import "./ServiceInformation.css";
 
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-
-import Button from "@mui/material/Button";
-// import AppAppBar from "../../authorize/landingPage/LandingPageDetail/AppAppBar/AppAppBar";
-// import Footer from "../../authorize/landingPage/LandingPageDetail/Footer/Footer";
-import { Divider } from "@mui/material";
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 16,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
-
-function createData(Name, Description, Price, Duration, Action) {
-  return { Name, Description, Price, Duration, Action };
-}
-
-const rows = [
-  createData(
-    "Frozen yoghurt",
-    159,
-    6.0,
-    24,
-    <Button variant="contained" color="primary">
-      Thêm Vào Cuộc Hẹn
-    </Button>
-  ),
-  createData(
-    "Ice cream sandwich",
-    237,
-    9.0,
-    37,
-    <Button variant="contained" color="primary">
-      Thêm Vào Cuộc Hẹn
-    </Button>
-  ),
-  createData(
-    "Eclair",
-    262,
-    16.0,
-    24,
-    <Button variant="contained" color="primary">
-      Thêm Vào Cuộc Hẹn
-    </Button>
-  ),
-  createData(
-    "Cupcake",
-    305,
-    3.7,
-    67,
-    <Button variant="contained" color="primary">
-      Thêm Vào Cuộc Hẹn
-    </Button>
-  ),
-  createData(
-    "Gingerbread",
-    356,
-    16.0,
-    49,
-    <Button variant="contained" color="primary">
-      Thêm Vào Cuộc Hẹn
-    </Button>
-  ),
-];
-
 const ServiceInformation = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const currentAppointments = useSelector(currentappointmentSelector);
+  const currentAccounts = useSelector(userDataSelector);
+
+  const [activeMenuCardId, setActiveMenuCardId] = useState(null);
+  const [loading, setLoading] = useState(true); // Loading state for page loading
+  const [actionLoading, setActionLoading] = useState(false); // Loading state for Reject and Delete actions
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    setLoading(true); // Set loading to true before fetching data
+    dispatch(getCurrentUserAppointmentsThunk())
+      .then(() => setLoading(false)) // Set loading to false when data is fetched
+      .catch(() => setLoading(false));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getUserDataThunk());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setActiveMenuCardId(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleCheckout = (appointmentId, price) => {
+    navigate(
+      `/customer/serviceInformation/inputPayment?appointmentId=${appointmentId}&amount=${price}`
+    );
+  };
+
+  const getStatusColor = (status) => {
+    switch (status.toUpperCase()) {
+      case "PENDING":
+        return "#EFD033";
+      case "CONFIRMED":
+        return "#4CAF50";
+      case "MISSED":
+        return "#A30B2E";
+      case "CANCELLED":
+        return "#0A3161";
+      default:
+        return "#000000";
+    }
+  };
+
+  const handleSettingsClick = (id) => {
+    setActiveMenuCardId((prevId) => (prevId === id ? null : id));
+  };
+
+  const handleCancelAppointment = (appointmentId) => {
+    setActionLoading(true); // Start loading before the action
+    dispatch(cancelAppointmentsThunk(appointmentId))
+      .unwrap()
+      .then(() => {
+    
+        dispatch(getCurrentUserAppointmentsThunk()).finally(() => {
+          setActionLoading(false); // End loading after the action
+        });
+      })
+      .catch((error) => {
+        console.error("Error cancelling appointment:", error);
+        alert("Could not cancel the appointment. Please try again.");
+        setActionLoading(false); // End loading if there's an error
+      });
+  };
+
+  const handleDeleteAppointment = (appointmentId) => {
+    setActionLoading(true); // Start loading before the action
+    dispatch(deleteAppointmentsThunk(appointmentId))
+      .unwrap()
+      .then(() => {
+
+        dispatch(getCurrentUserAppointmentsThunk()).finally(() => {
+          setActionLoading(false); // End loading after the action
+        });
+      })
+      .catch((error) => {
+        console.error("Error deleting appointment:", error);
+        alert("Could not delete the appointment. Please try again.");
+        setActionLoading(false); // End loading if there's an error
+      });
+  };
+
   return (
-    <>
-      {/* <AppAppBar /> */}
-      <div className="si-main">
-        <p>Bảng Miêu Tả Dịch Vụ</p>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 500 }} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell align="left">Tên Dịch Vụ</StyledTableCell>
-                <StyledTableCell align="left"> Miêu Tả </StyledTableCell>
-                <StyledTableCell align="left">
-                  Giá Tiền &nbsp;($)
-                </StyledTableCell>
-                <StyledTableCell align="left">
-                  Thời Gian &nbsp;(h)
-                </StyledTableCell>
-                <StyledTableCell align="left">Hành Động</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.name}>
-                  <StyledTableCell align="left">{row.Name}</StyledTableCell>
-                  <StyledTableCell align="left">
-                    {row.Description}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">{row.Price}</StyledTableCell>
-                  <StyledTableCell align="left">{row.Duration}</StyledTableCell>
-                  <StyledTableCell align="left">{row.Action}</StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div>
-      <Divider />
-      {/* <Footer /> */}
-    </>
+    <div className="checkout-container">
+      {/* Show loading modal when fetching data or performing actions */}
+      {loading || actionLoading ? (
+        <Modal open={loading || actionLoading} onClose={() => {}}>
+          <div className="modal-loading">
+          <p>It will take a while to load, please wait.</p>
+          <Lottie animationData={LoadingFish} />
+            <p>Loading...</p>
+          </div>
+        </Modal>
+      ) : (
+        <div className="card-grid" style={{ marginTop: 100 }}>
+          {currentAppointments && currentAppointments.length > 0 ? (
+            currentAppointments.map((appointment) => (
+              <div
+                key={appointment.id}
+                className={`checkout-card cart-card ${
+                  activeMenuCardId === appointment.id ? "blur" : ""
+                }`}
+              >
+                <div className="checkout-card-content">
+                  <div className="more-icon-container">
+                    <SettingsIcon
+                      onClick={() => handleSettingsClick(appointment.id)}
+                    />
+                  </div>
+
+                  <div className="header-container">
+                    <label className="checkout-title" style={{ marginTop: 20 }}>
+                      SERVICE INFORMATION
+                    </label>
+                    <span
+                      className="status-label"
+                      style={{
+                        color: getStatusColor(appointment.status),
+                        marginTop: 20,
+                      }}
+                    >
+                      {appointment.status.toUpperCase()}
+                    </span>
+                  </div>
+                  <hr className="custom-divider" />
+                  <div className="checkout-steps">
+                    <div className="checkout-step">
+                      <div>
+                        <span>SERVICE</span>
+                        <p>Service: {appointment.serviceName}</p>
+                        <p>Doctor: {appointment.vetName}</p>
+                      </div>
+                      <hr />
+                      <div>
+                        <span>KOI FISH</span>
+                        <p>{appointment.koiName}</p>
+                        <p>Description: {appointment.description}</p>
+                        <p>Location: {currentAccounts.location}</p>
+                      </div>
+                      <hr className="custom-divider" />
+                      <div className="checkout-payments">
+                        <span>PAYMENT</span>
+                        <div className="payment-details">
+                          <span>Service fee:</span>
+                          <span style={{ marginRight: 20 }}>
+                            {appointment.serviceFee}đ
+                          </span>
+                          <span>Travel fee:</span>
+                          <span style={{ marginRight: 20 }}>
+                            {appointment.travelFee}đ
+                          </span>
+                        </div>
+                        <hr className="custom-divider" />
+                        <div className="payment-details">
+                          <span>Total:</span>
+                          <span style={{ marginRight: 20 }}>
+                            {appointment.price}đ
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="checkout-card checkout-footer">
+                    <div className="footer-details">
+                      <label className="checkout-price">
+                        {appointment.price} vnđ
+                      </label>
+                      <button
+                        className="checkout-button"
+                        onClick={() =>
+                          handleCheckout(appointment.id, appointment.price)
+                        }
+                      >
+                        Check Out
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {activeMenuCardId === appointment.id && (
+                  <div className="menu-overlay" ref={menuRef}>
+                    <div className="menu-buttons">
+                      <button
+                        className="cancel-button"
+                        onClick={() => handleCancelAppointment(appointment.id)}
+                      >
+                        Reject
+                      </button>
+                      <button
+                        className="delete-button"
+                        onClick={() => handleDeleteAppointment(appointment.id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))
+          ) : (
+            <p>No appointments found.</p>
+          )}
+        </div>
+      )}
+    </div>
   );
 };
 

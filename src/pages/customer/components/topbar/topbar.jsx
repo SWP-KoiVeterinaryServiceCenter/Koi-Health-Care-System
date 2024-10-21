@@ -163,7 +163,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    Trang chủ
+                    HOME
                   </Typography>
                 </MenuItem>
 
@@ -175,7 +175,7 @@ function AppAppBar({ mode, toggleColorMode }) {
       >
         <NewspaperOutlinedIcon sx={{ color: "black", fontSize: "19px" }} />
         <Typography color="black" fontSize="16px" sx={{ ml: 0.1 }}>
-          Tin tức
+          NEWS
         </Typography>
       </MenuItem>
 
@@ -185,7 +185,7 @@ function AppAppBar({ mode, toggleColorMode }) {
         open={openNews}
         onClose={handleCloseNews}
       >
-        <MenuItem onClick={() => navigate("doctors")}>Bác sĩ</MenuItem>
+        <MenuItem onClick={() => navigate("doctors")}>Veterinarians</MenuItem>
         <MenuItem onClick={() => navigate("doctors")}>News</MenuItem>
         <MenuItem onClick={() => navigate("/fact")}>Facts</MenuItem>
       </Menu>
@@ -208,7 +208,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    Dịch vụ
+                    SERVICE
                   </Typography>
                 </MenuItem>
 
@@ -225,7 +225,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    Lịch Hẹn
+                    APPOINTMENT
                   </Typography>
                 </MenuItem>
 
@@ -244,7 +244,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     fontSize="16px"
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    Phản hồi
+                    CONTACT
                   </Typography>
                 </MenuItem>
 
@@ -260,7 +260,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     fontSize="16px"
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    Thông tin
+                    ABOUT 
                   </Typography>
                 </MenuItem>
 
@@ -296,7 +296,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     >
                       {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
                     </Box>
-                    <MenuItem onClick={() => scrollToSection("features")}>
+                    <MenuItem onClick={() => navigate("serviceInformation")}>
                       Profile
                     </MenuItem>
                     <MenuItem onClick={() => navigate("personalInformation")}>

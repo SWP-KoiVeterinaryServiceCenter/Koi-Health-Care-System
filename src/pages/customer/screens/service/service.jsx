@@ -13,6 +13,7 @@ import { useNavigate, Outlet } from "react-router-dom";
 
 import { allServicesSelector } from "../../../../store/sellectors";
 import { getAllServicesThunk } from "../../../../store/apiThunk/serviceKoiThunk";
+import DoctorHeader from "../../../authorize/landingPage/LandingPageDetail/HeaderPage/DoctorHeader/doctorHeader";
 
 // import { getAllServices } from "../../../../api/serviceCenterKoi";
 
@@ -49,6 +50,7 @@ export default function Service(props) {
 
   return (
     <>
+      <DoctorHeader />
       {!showLoadingModal ? (
         <section className="articles_customer">
           {allServices.map((service) => (
@@ -64,17 +66,16 @@ export default function Service(props) {
             >
               <div className="article-wrapper">
                 <figure>
-                  <img
-                    src={service.serviceImage}
-                    alt="service-img"
-                  />
+                  <img src={service.serviceImage} alt="service-img" />
                 </figure>
                 <div className="article-body-customer" key={service.id}>
                   <h2>{service.name} </h2>
-                  <p className="price">{service.price} VND</p>
+                  <button class="btn-shine">
+                    <p className="price">{service.price} đ</p>
+                  </button>
                   <p>{service.description}</p>
                   <a className="read-more">
-                    Tìm hiểu thêm{" "}
+                    SEE MORE{" "}
                     <span className="sr-only">about this is some title</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

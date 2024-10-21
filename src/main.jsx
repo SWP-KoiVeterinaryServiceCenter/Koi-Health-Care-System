@@ -30,6 +30,10 @@ import CreateTank from "./pages/admin/screens/createTank/createTank";
 import CreateServiceType from "./pages/admin/screens/createServiceType/createServiceType";
 import CreateServiceCenter from "./pages/admin/screens/createServiceCenter/createServiceCenter";
 import WorkingSchedule from "./pages/admin/screens/workingSchedule/workingSchedule";
+import ListServiceCenter from "./pages/admin/screens/listServiceCenter/listServiceCenter";
+import ServiceCenter from "./pages/admin/screens/listServiceCenter/serviceCenter/serviceCenter";
+import AppointmentManagement from "./pages/admin/screens/appointmentManagement/appointmentManagement";
+
 //Manager
 import CreateShopManager from "./pages/manager/screens/shop/createShop/createShop";
 import ManagerHome from "./pages/manager/screens/home/managerHome";
@@ -65,12 +69,12 @@ import ServiceKoifish from "./pages/customer/screens/service/service";
 import ServiceHome from "./pages/customer/screens/serviceHome/serviceHome";
 import GuestServiceKoifish from "./pages/guest/guestService/guestService";
 import ServiceInformation from "./pages/customer/screens/serviceInformation/ServiceInformation";
+import InputPayment from "./pages/customer/screens/inputPayment/inputPayment";
 import PersonalInformation from "./pages/customer/screens/personalInformation/PersonalInformation";
 import AddMoreFish from "./pages/customer/screens/addMoreFish/AddMoreFish";
 import Booking from "./pages/customer/screens/booking/booking";
 import CustomerHome from "./pages/customer/components/home/homeCustomer";
-import GuestHome from "./pages/guest/guestHome/guestHome";
-import GuestContact from "./pages/guest/guestContact/guestContact";
+
 import HomePage from "./pages/customer/screens/home/home";
 import ContactUs from "./pages/customer/screens/contactUs/contactUs";
 import CreateKoiFishAppointment from "./pages/customer/screens/createKoiFishAppointment/createKoiFishAppointment";
@@ -79,6 +83,12 @@ import AppointmentList from "./pages/customer/screens/appointmentList/Appointmen
 import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
 import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
 import CreateWorkingSchedule from "./pages/admin/screens/createWorkingSchedule/createWorkingSchedule";
+
+
+//Guest
+import GuestHome from "./pages/guest/guestHome/guestHome";
+import GuestContact from "./pages/guest/guestContact/guestContact";
+import GuestDoctorNews from "./pages/guest/guestDoctorNews/guestDoctorNews";
 
 const router = createBrowserRouter([
   //Guest
@@ -93,8 +103,8 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "doctors",
-        element: <DoctorOnNewsPage />,
+        path: "guestdoctors",
+        element: <GuestDoctorNews />,
       },
       {
         path: "guestservice",
@@ -175,6 +185,10 @@ const router = createBrowserRouter([
         element: <AccountTable direction="admin" />,
       },
       {
+        path: "appointmentManagement",
+        element: <AppointmentManagement direction="admin" />,
+      },
+      {
         path: "tankList",
         element: <TankList direction="admin" />,
       },
@@ -197,6 +211,14 @@ const router = createBrowserRouter([
       {
         path: "createServiceCenter",
         element: <CreateServiceCenter />,
+      },
+      {
+        path: "listServiceCenter",
+        element: <ListServiceCenter direction="admin" />,
+      },
+      {
+        path: "serviceCenter",
+        element: <ServiceCenter direction="admin" />,
       },
       {
         path: "createVetAccount",
@@ -388,7 +410,11 @@ const router = createBrowserRouter([
       },
       {
         path: "serviceInformation",
-        element: <ServiceInformation />,
+        element: <ServiceInformation direction="customer" />,
+      },
+      {
+        path: "serviceInformation/inputPayment",
+        element: <InputPayment />,
       },
       {
         path: "contactUs",

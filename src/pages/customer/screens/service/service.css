@@ -47,6 +47,52 @@ article img {
 
 .article-body-customer {
   padding: 24px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 250px;
+  
+}
+
+.article-body-customer h2 {
+  font-size: 1.4rem;
+  font-family: 'Playfair Display', 'Lust Display', 'serif';
+  font-weight: bold;
+  font-style: normal;
+  white-space: normal; /* Cho phép xuống dòng nếu tiêu đề quá dài */
+  overflow: visible; /* Hiển thị đầy đủ tiêu đề */
+  text-overflow: clip; /* Loại bỏ dấu "..." */
+  
+}
+
+
+.article-body-customer p {
+  /* font-size: 1.0rem; */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  /* Limits to 3 lines */
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+.article-body-customer .price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #2c3e50;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 5px;
+}
+
+.article-wrapper figure img {
+  width: 100%;
+  /* Đảm bảo ảnh lấp đầy bề ngang của container */
+  height: 200px;
+  /* Thiết lập chiều cao cố định */
+  object-fit: cover;
+  /* Giữ nguyên tỷ lệ ảnh và bao phủ toàn bộ khung */
 }
 
 article a {
@@ -79,7 +125,6 @@ article:has(:hover, :focus) {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
-
 /************************ 
 Generic layout (demo looks)
 **************************/
@@ -90,8 +135,6 @@ Generic layout (demo looks)
   box-sizing: border-box;
 }
 
-
-
 .articles_customer {
   display: grid;
   max-width: 1200px;
@@ -99,7 +142,7 @@ Generic layout (demo looks)
   padding-inline: 24px;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 60px;
-  padding-top: 120px;
+  padding-top: 10px;
   margin-bottom: 40px;
 }
 
@@ -147,47 +190,69 @@ Generic layout (demo looks)
   width: 1px;
 }
 
-.article-body-customer {
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 250px;
-}
-
-.article-body-customer h2 {
-  font-size: 1.4rem;
+/* From Uiverse.io by neerajbaniwal */ 
+.article-body-customer .btn-shine {
+  position: absolute;
+  margin-top: 60px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* padding: 12px 48px; */
+  color: #fff;
+  background: linear-gradient(to right, #9f9f9f 0, #fff 10%, #868686 20%);
+  background-position: 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s infinite linear;
+  animation-fill-mode: forwards;
+  -webkit-text-size-adjust: none;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
   white-space: nowrap;
-  overflow: visible;
-  text-overflow: ellipsis;
+  font-family: "Poppins", sans-serif;
+  border-radius: 10px;
 }
-
-.article-body-customer p {
-  font-size: 1.25rem;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  /* Limits to 3 lines */
-  -webkit-box-orient: vertical;
-  white-space: normal;
+@-moz-keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
 }
-
-
-.article-body-customer .price {
-  font-size: 24px;
-  font-weight: bold;
-  color: #2c3e50;
-  border-radius: 5px;
-  display: inline-block;
-  margin: 5px;
+@-webkit-keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
 }
-
-.article-wrapper figure img {
-  width: 100%;
-  /* Đảm bảo ảnh lấp đầy bề ngang của container */
-  height: 200px;
-  /* Thiết lập chiều cao cố định */
-  object-fit: cover;
-  /* Giữ nguyên tỷ lệ ảnh và bao phủ toàn bộ khung */
-
+@-o-keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
+}
+@keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
 }

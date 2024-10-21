@@ -1,8 +1,8 @@
 .koi-img-1 {
   position: relative;
   width: 100%;
-  height: 400px;
-  margin-top: 120px;
+  height: 450px;
+  margin-top: 90px;
 }
 
 .koi-img-1 img {
@@ -50,7 +50,8 @@
 }
 
 .request {
-  background: linear-gradient(140.14deg, #ec540e 15.05%, #d6361f 114.99%) padding-box,
+  background: linear-gradient(140.14deg, #ec540e 15.05%, #d6361f 114.99%)
+      padding-box,
     linear-gradient(142.51deg, #ff9465 8.65%, #af1905 88.82%) border-box;
   border-radius: 7px;
   border: 2px solid transparent;
@@ -83,16 +84,17 @@
 }
 
 .tittle-center .title {
-  font-size: 28px;
+  font-size: 38px;
   font-weight: bold;
-  margin-bottom: 15px;
-  font-family: 'Courier New', Courier, monospace;
+  margin: 20px 0 2px;
+  color: #2d3436;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .tittle-center .subtitle {
   font-size: 18px;
-  line-height: 1.6;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  line-height: 1.2;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 .container-1-customer {
@@ -105,14 +107,15 @@
 
 .container-1-customer img {
   border-radius: 100px;
-  height: 80%;
-  width: 60%;
+  height: 100%;
+  width: 70%;
 }
 
 .container-1-customer .title {
   font-size: 35px;
   font-weight: bold;
   margin-top: revert;
+  
 }
 
 .container-1-customer .subtitle {
@@ -125,29 +128,31 @@
   width: 400px;
 }
 
-
 /* //////////////////////////////////////////////////////// */
 
 .container-2-customer {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background: linear-gradient(135deg, #81ecec, #63b1ff);
-  margin-bottom: 30px;
-  border-radius: 20px;
+  background: url("../../../../assets/bg3_sidebar.jpg") no-repeat center center;
+  background-size: cover; /* Adjust the size of the background image to cover the entire area */
+  margin-bottom: 40px;
+  /* border-radius: 20px; */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
+  height: 450px;
+  
 }
 
 .container-2-customer img {
-  border-radius: 20px;
+  border-radius: 4px;
   height: 350px;
-  width: 300px;
+  width: 500px;
   transition: transform 0.3s;
 }
 
 .container-2-customer img:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .container-2-customer .title {
@@ -179,7 +184,7 @@
 
 .container-3 img {
   padding: 30px 30px;
-  border-radius: 100px;
+  border-radius: 35px;
   height: 360px;
   width: 500px;
 }
@@ -198,4 +203,68 @@
 .container-3 .box {
   display: block;
   width: 500px;
+}
+
+.card-1 {
+  background: url("../../../../assets/bg3_sidebar.jpg") no-repeat center center;
+  background-size: cover; /* Ensures the background image covers the entire container */
+}
+
+
+.custom-button-icon {
+  display: flex;
+  border: 3px #fff solid;
+  width: fit-content;
+  /* height: fit-content; */
+  cursor: pointer;
+}
+
+.custom-icon {
+  background-color: #fff;
+  padding: 13px 10px 5px 10px;
+}
+
+/* .custom-icon svg {
+  width: 25px;
+  height: 25px;
+} */
+
+.custom-cube {
+  transition: all 0.4s;
+  transform-style: preserve-3d;
+  width: 200px;
+  height: 20px;
+}
+
+.custom-button-icon:hover {
+  border-color: #00504B;
+}
+
+.custom-button-icon:hover .custom-cube {
+  transform: rotateX(90deg);
+}
+
+.custom-side {
+  position: absolute;
+  height: 47px;
+  width: 200px;
+  display: flex;
+  font-size: 0.8em;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+}
+
+.custom-top {
+  background: #00504B;
+  color: #fff;
+  transform: rotateX(-90deg) translate3d(0, 13.5px, 2em);
+}
+
+.custom-front {
+  background: #222229;
+  color: #fff;
+  transform: translate3d(0, 0, 1em);
 }

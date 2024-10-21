@@ -57,6 +57,7 @@
   
   .news-user-follow-info {
     color: hsl(0, 0%, 60%);
+    margin-top: 1px;
   }
   
   .news-description {
