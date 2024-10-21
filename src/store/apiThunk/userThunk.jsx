@@ -30,11 +30,11 @@ import {
   createVetAccount,
   getTotalVets,
   getTotalStaffs,
+  getTotalVetsDetail,
+  getAllVetAccount,
 
   getTotalVetsDetail,
 
-  getAllVetAccount,
-  
   updatetPersonalInformation,
   uploadProfileImage,
 } from "../../api/user";

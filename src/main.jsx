@@ -80,10 +80,16 @@ import ContactUs from "./pages/customer/screens/contactUs/contactUs";
 import CreateKoiFishAppointment from "./pages/customer/screens/createKoiFishAppointment/createKoiFishAppointment";
 import UpdateKoiFishInformation from "./pages/customer/screens/updateKoiFishInformation/UpdateKoiFishInformation";
 import AppointmentList from "./pages/customer/screens/appointmentList/AppointmentList";
+import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
+import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
+import CreateWorkingSchedule from "./pages/admin/screens/createWorkingSchedule/createWorkingSchedule";
+
+
 //Guest
 import GuestHome from "./pages/guest/guestHome/guestHome";
 import GuestContact from "./pages/guest/guestContact/guestContact";
 import GuestDoctorNews from "./pages/guest/guestDoctorNews/guestDoctorNews";
+
 
 import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
 import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
