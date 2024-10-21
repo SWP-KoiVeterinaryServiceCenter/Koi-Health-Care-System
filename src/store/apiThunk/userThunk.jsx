@@ -32,7 +32,9 @@ import {
   getTotalStaffs,
   getTotalVetsDetail,
   getAllVetAccount,
+
   getTotalVetsDetail,
+
   updatetPersonalInformation,
   uploadProfileImage,
 } from "../../api/user";
