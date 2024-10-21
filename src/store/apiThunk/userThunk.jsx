@@ -30,7 +30,9 @@ import {
   createVetAccount,
   getTotalVets,
   getTotalStaffs,
+
   // getTotalVetsDetail,
+
   getAllVetAccount,
 
   getTotalVetsDetail,
