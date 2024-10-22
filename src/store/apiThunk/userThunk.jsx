@@ -31,7 +31,9 @@ import {
   getTotalVets,
   getTotalStaffs,
   getAllVetAccount,
+
   getTotalVetsDetail,
+
   updatetPersonalInformation,
   uploadProfileImage,
 } from "../../api/user";
