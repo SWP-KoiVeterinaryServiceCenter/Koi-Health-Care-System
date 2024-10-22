@@ -31,6 +31,15 @@ export const checkEmail = async (email) => {
   const response = await api.get(`/api/v1/Account/SendVerifcationCode/${email}`);
   return response.data;
 };
+// API call now includes password and confirmPassword in the request body
+export const changePasswordForForgotPassword = async ({ code, password, confirmPassword }) => {
+  const response = await api.post(`/api/v1/Account/ChangePasswordForForgetPassword/${code}`, {
+    password,
+    confirmPassword,
+  });
+  return response.data;
+};
+
 
 export const sendOTPForgotPassword = async (email) => {
   const response = await api.get(

@@ -148,10 +148,10 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
-  // {
-  //     path: "/verifyAccount",
-  //     element: <VerifyAccount />,
-  // },
+  {
+      path: "/verifyAccount",
+      element: <VerifyAccount />,
+  },
   {
     path: "/error404",
     element: <Error404 />,

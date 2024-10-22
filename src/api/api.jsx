@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const url = "https://ttmq2024-001-site1.gtempurl.com/";
+const url = "https://koiservice-001-site1.atempurl.com/";
 
 
 const api = axios.create({
