@@ -91,9 +91,9 @@ import GuestContact from "./pages/guest/guestContact/guestContact";
 import GuestDoctorNews from "./pages/guest/guestDoctorNews/guestDoctorNews";
 
 
-import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
-import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
-import CreateWorkingSchedule from "./pages/admin/screens/createWorkingSchedule/createWorkingSchedule";
+// import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
+// import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
+// import CreateWorkingSchedule from "./pages/admin/screens/createWorkingSchedule/createWorkingSchedule";
 
 
 const router = createBrowserRouter([

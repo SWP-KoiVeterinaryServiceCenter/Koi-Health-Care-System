@@ -25,6 +25,8 @@ export const currentUserAppointmentsSelector = (state) => state. currentUserAppo
 
 export const  vetDetailSelector =(state) => state.vetDetail.entities;
 
+export const allWorkingScheduleSelector =(state) =>state.allWorkingSchedule.entities;
+
 export const petDetailSelector = (state) => state.petDetail.entities;
 export const petsFromShopSelector = (state) => state.petsFromShop.entities;
 export const petsFromAreaSelector = (state) => state.petsFromArea.entities;
