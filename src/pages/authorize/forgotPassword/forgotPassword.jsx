@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
-import Pet from "../../../assets/cutecatdog.png";
+import FISH from "../../../assets/koilanding_bg.png";
 import { useState } from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./../../../theme";
@@ -76,7 +76,7 @@ export default function ForgotPassword() {
                     <Grid container spacing={2}>
                         <Grid item xs={1}></Grid>
                         <Grid item xs={5} className="flex-center">
-                            <img src={Pet} style={{ width: "100%" }} />
+                            <img src={FISH} style={{ width: "100%" }} />
                         </Grid>
                         <Grid item xs={5} className="flex-center">
                             <div className="signup__form">
@@ -105,7 +105,11 @@ export default function ForgotPassword() {
                                             )}
                                             fullWidth
                                             margin="dense"
-                                            color="secondary"
+                                            InputProps={{
+                                                sx: {
+                                                    color: 'black',  // Set input text color to black
+                                                }
+                                            }}
                                         />
                                         {formik.touched.email &&
                                             formik.errors.email && (

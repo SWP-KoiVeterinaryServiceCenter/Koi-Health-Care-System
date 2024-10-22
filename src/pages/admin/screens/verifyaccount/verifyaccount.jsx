@@ -14,19 +14,19 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
-import Pet from "../../../../assets/cutecatdog.png";
+import FISH from "../../../../assets/koilanding_bg.png";
 import { ColorModeContext, useMode } from "./../../../../theme";
 import LoadingModal from "../../../../components/modal/loadingModal/loadingModal";
 import { useDispatch } from "react-redux";
-import { changePasswordForForgotPasswordThunk } from "../../../../store/apiThunk/userThunk";  // Import the thunk
+import { changePasswordForForgotPasswordThunk } from "../../../../store/apiThunk/userThunk";
 
 export default function VerifyAccount() {
     const navigate = useNavigate();
     const location = useLocation();
     const [theme, colorMode] = useMode();
-    const dispatch = useDispatch();  // To dispatch the thunk
+    const dispatch = useDispatch();
 
-    const email = location?.state?.email;  // Assuming email is passed via state
+    const email = location?.state?.email;
 
     const [showCode, setShowCode] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
@@ -49,18 +49,32 @@ export default function VerifyAccount() {
                 .required("Vui lòng xác nhận mật khẩu"),
         }),
         onSubmit: async (values, { setSubmitting }) => {
+            // Check if password and confirmPassword match before dispatching the API call
+            if (values.password !== values.confirmPassword) {
+                setShowLoadingModal(false);
+                Swal.fire({
+                    title: "Lỗi",
+                    text: "Mật khẩu và xác nhận mật khẩu không khớp!",
+                    icon: "error",
+                    confirmButtonText: "OK",
+                    background: "white",
+                    scrollbarPadding: false,
+                });
+                setSubmitting(false);
+                return;
+            }
+
             setShowLoadingModal(true);
     
             dispatch(
                 changePasswordForForgotPasswordThunk({
-                    code: values.code,  // Verification code
-                    password: values.password,  // New password
-                    confirmPassword: values.confirmPassword,  // Confirm password
+                    code: values.code,
+                    password: values.password,
+                    confirmPassword: values.confirmPassword,
                 })
             )
             .unwrap()
             .then(() => {
-                // Always show success and navigate to login without checking errors
                 setShowLoadingModal(false);
                 Swal.fire({
                     title: "Thành Công",
@@ -73,7 +87,7 @@ export default function VerifyAccount() {
                     timerProgressBar: true,
                     scrollbarPadding: false,
                 }).then(() => {
-                    navigate("/login");  // Navigate to login
+                    navigate("/login");
                 });
             })
             .finally(() => {
@@ -81,6 +95,18 @@ export default function VerifyAccount() {
             });
         },
     });
+
+    // Display validation errors in a modal when validation fails
+    const showValidationErrorModal = (fieldName, errorMessage) => {
+        Swal.fire({
+            title: `Lỗi tại ${fieldName}`,
+            text: errorMessage,
+            icon: "error",
+            confirmButtonText: "OK",
+            background: "white",
+            scrollbarPadding: false,
+        });
+    };
 
     return (
         <ColorModeContext.Provider value={colorMode}>
@@ -90,53 +116,36 @@ export default function VerifyAccount() {
                     <Grid container spacing={2}>
                         <Grid item xs={1}></Grid>
                         <Grid item xs={5} className="flex-center">
-                            <img src={Pet} style={{ width: "100%" }} />
+                            <img src={FISH} style={{ width: "100%" }} />
                         </Grid>
-                        <Grid item xs={5} className="flex-center">
+                        <Grid item xs={5} className="flex-center" style={{paddingTop:40}}>
                             <div className="signup__form">
                                 <h3 variant="h3" className="login__title">
                                     Xác thực tài khoản
                                 </h3>
-                                {/* Ensure form submission works properly */}
-                                <form
-                                    onSubmit={formik.handleSubmit} // Formik will handle the submission
-                                >
-                                    {/* Input for Code */}
+                                <form onSubmit={formik.handleSubmit}>
                                     <div>
                                         <TextField
                                             className="login__input"
                                             id="code"
                                             label="Mã Xác Thực"
                                             variant="outlined"
-                                            type={showCode ? "text" : "password"}
                                             value={formik.values.code}
                                             onChange={formik.handleChange}
                                             fullWidth
                                             margin="dense"
                                             color="secondary"
                                             InputProps={{
-                                                endAdornment: (
-                                                    <InputAdornment position="end">
-                                                        <IconButton
-                                                            onClick={() =>
-                                                                setShowCode(!showCode)
-                                                            }
-                                                        >
-                                                            {showCode ? (
-                                                                <VisibilityOffOutlined className="login__view__password__btn" />
-                                                            ) : (
-                                                                <VisibilityOutlined className="login__view__password__btn" />
-                                                            )}
-                                                        </IconButton>
-                                                    </InputAdornment>
-                                                ),
+                                                sx: {
+                                                    color: 'black',
+                                                }
+                                            }}
+                                            onBlur={() => {
+                                                if (formik.touched.code && formik.errors.code) {
+                                                    showValidationErrorModal('Mã Xác Thực', formik.errors.code);
+                                                }
                                             }}
                                         />
-                                        {formik.touched.code && formik.errors.code ? (
-                                            <div className="login__validation__error">
-                                                {formik.errors.code}
-                                            </div>
-                                        ) : null}
                                     </div>
 
                                     {/* Input for Password */}
@@ -155,7 +164,7 @@ export default function VerifyAccount() {
                                             InputProps={{
                                                 endAdornment: (
                                                     <InputAdornment position="end">
-                                                        <IconButton
+                                                        <IconButton style={{color: "black"}}
                                                             onClick={() =>
                                                                 setShowPassword(!showPassword)
                                                             }
@@ -168,13 +177,16 @@ export default function VerifyAccount() {
                                                         </IconButton>
                                                     </InputAdornment>
                                                 ),
+                                                sx: {
+                                                    color: 'black',
+                                                }
+                                            }}
+                                            onBlur={() => {
+                                                if (formik.touched.password && formik.errors.password) {
+                                                    showValidationErrorModal('Mật khẩu', formik.errors.password);
+                                                }
                                             }}
                                         />
-                                        {formik.touched.password && formik.errors.password ? (
-                                            <div className="login__validation__error">
-                                                {formik.errors.password}
-                                            </div>
-                                        ) : null}
                                     </div>
 
                                     {/* Input for Confirm Password */}
@@ -193,7 +205,7 @@ export default function VerifyAccount() {
                                             InputProps={{
                                                 endAdornment: (
                                                     <InputAdornment position="end">
-                                                        <IconButton
+                                                        <IconButton style={{color: "black"}}
                                                             onClick={() =>
                                                                 setShowConfirmPassword(!showConfirmPassword)
                                                             }
@@ -206,16 +218,18 @@ export default function VerifyAccount() {
                                                         </IconButton>
                                                     </InputAdornment>
                                                 ),
+                                                sx: {
+                                                    color: 'black',
+                                                }
+                                            }}
+                                            onBlur={() => {
+                                                if (formik.touched.confirmPassword && formik.errors.confirmPassword) {
+                                                    showValidationErrorModal('Xác nhận mật khẩu', formik.errors.confirmPassword);
+                                                }
                                             }}
                                         />
-                                        {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-                                            <div className="login__validation__error">
-                                                {formik.errors.confirmPassword}
-                                            </div>
-                                        ) : null}
                                     </div>
 
-                                    {/* Submit button */}
                                     <Button
                                         className="login__btn"
                                         variant="contained"
@@ -225,7 +239,6 @@ export default function VerifyAccount() {
                                         Xác thực và Đổi mật khẩu
                                     </Button>
 
-                                    {/* Display Loading Modal if API call is in progress */}
                                     {showLoadingModal && <LoadingModal />}
                                 </form>
                             </div>
