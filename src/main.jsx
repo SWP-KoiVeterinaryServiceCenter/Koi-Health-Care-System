@@ -46,6 +46,12 @@ import ManagerDashboard from "./pages/manager/screens/dashboard/dashboardPage/da
 import DashboardDetail from "./pages/manager/screens/dashboard/dashboardDetail/dashboardDetail";
 import CancelAmount from "./pages/platformStaff/screens/policy/cancelledAmount/cancelledAmount";
 import AdjustMoney from "./pages/platformStaff/screens/policy/postPrice/postPrice";
+
+//VET
+import VetHome from "./pages/vet/vetHome/vetHome";
+
+
+
 //Staff
 import StaffHome from "./pages/platformStaff/screens/home/staffHome";
 import ShopTableStaff from "./pages/platformStaff/screens/shop/shopTable";
@@ -448,6 +454,59 @@ const router = createBrowserRouter([
       // },
     ],
   },
+    //VET
+    {
+      path: "/vet",
+      element: <VetHome />,
+      errorElement: <Error404 />,
+      children: [
+        {
+          path: "",
+          element: <HomePage />,
+        },
+        // {
+        //   path: "service",
+        //   element: <ServiceHome direction="customer" />,
+        //   children: [
+        //     {
+        //       path: "",
+        //       element: <ServiceKoifish direction="customer" />,
+        //     },
+        //     {
+        //       path: "createKoiFishAppointment",
+        //       element: <CreateKoiFishAppointment />,
+        //     },
+        //   ],
+        // },
+       
+        {
+          path: "personalInformation",
+          element: <PersonalInformation direction="customer" />,
+        },
+     
+        {
+          path: "contactUs",
+          element: <ContactUs />,
+        },
+        {
+          path: "doctors",
+          element: <DoctorOnNewsPage direction="customer" />,
+        },
+       
+        {
+          path: "appointmentList",
+          element: <AppointmentList direction="customer" />,
+        },
+        {
+          path: "updatePersonalInformation",
+          element: <UpdatePersonalInformation direction="customer" />,
+        },
+        // {
+        //   path: "uploadPersonalImage",
+        //   element: <UploadPersonalImage direction="customer"/>,
+        // },
+      ],
+    },
 
   //Manager
   {

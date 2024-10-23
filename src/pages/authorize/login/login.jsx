@@ -145,7 +145,7 @@ export default function Login() {
                     timerProgressBar: true,
                     scrollbarPadding: false,
                   }).then(() => {
-                    navigate("/admin");
+                    navigate("/vet");
                   });
                   break;
                 case "Staff":
