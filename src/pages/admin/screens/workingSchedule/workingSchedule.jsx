@@ -4,64 +4,98 @@ import { Box } from "@mui/material";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
-
-const localizer = momentLocalizer(moment);
+import { Tooltip } from "antd";
 import "./workingSchedule.css";
 
-export default function WorkingSchedule() {
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import { allWorkingScheduleSelector } from "../../../../store/sellectors";
+import { getAllWorkingScheduleThunk } from "../../../../store/apiThunk/workingSchedule";
+
+const localizer = momentLocalizer(moment);
+
+// const transformEvents = (data) => {
+//   return data.map((item) => {
+//     const startDate = new Date(item.workingDay);
+//     const endDate = new Date(item.workingDay);
+//     const [startHours, startMinutes] = item.startTime.split(":").map(Number);
+//     const [endHours, endMinutes] = item.endTime.split(":").map(Number);
+
+//     startDate.setHours(startHours, startMinutes);
+//     endDate.setHours(endHours, endMinutes);
+
+//     const description = `Start: ${startDate.toLocaleTimeString()} - End: ${endDate.toLocaleTimeString()}`;
+
+//     return {
+//       title: `${item.name || item.id}`,
+//       start: startDate,
+//       end: endDate,
+//       description,
+//       // id: item.id, // Include the item's id for navigation
+//     };
+//   });
+// };
+
+
+const transformEvents = (data) => {
+  return data.map((item) => {
+    const startDate = new Date(item.workingDay);
+    const endDate = new Date(item.workingDay);
+
+    // Convert startTime and endTime from minutes to hours and minutes
+    const startHours = Math.floor(item.startTime / 60);
+    const startMinutes = item.startTime % 60;
+    const endHours = Math.floor(item.endTime / 60);
+    const endMinutes = item.endTime % 60;
+
+    // Set the hours and minutes for start and end dates
+    startDate.setHours(startHours, startMinutes);
+    endDate.setHours(endHours, endMinutes);
+
+    const description = `Start: ${startDate.toLocaleTimeString()} - End: ${endDate.toLocaleTimeString()}`;
+
+    return {
+      title: `Veterinarian ID: ${item.veterinarianId}`, // Adjust title based on available data
+      start: startDate,
+      end: endDate,
+      description,
+      id: item.veterinarianId, // Include the veterinarianId for navigation
+    };
+  });
+};
+
+
+export default function WorkingSchedule(props) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [events, setEvents] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const direction = props.direction;
 
-  // Example API data (replace this with your actual API call)
-  const apiData = [
-    {
-      id: "cc650000-3ed6-fa16-076c-08dcef610a9b",
-      startTime: "10:34:00.7090000",
-      endTime: "10:34:00.7090000",
-      workingDay: "2024-10-18T10:34:00.709",
-    },
-    // Add more events as needed
-  ];
+  const allWorkingSchedule = useSelector(allWorkingScheduleSelector);
 
   useEffect(() => {
-    const transformEvents = (data) => {
-      return data.map((item) => {
-        const startDate = new Date(item.workingDay);
-        const endDate = new Date(item.workingDay);
+    dispatch(getAllWorkingScheduleThunk());
+  }, [dispatch]);
 
-        // Extracting hours and minutes from startTime and endTime
-        const [startHours, startMinutes] = item.startTime
-          .split(":")
-          .map(Number);
-        const [endHours, endMinutes] = item.endTime.split(":").map(Number);
-
-        startDate.setHours(startHours);
-        startDate.setMinutes(startMinutes);
-        endDate.setHours(endHours);
-        endDate.setMinutes(endMinutes);
-
-        return {
-          title: `Event ${item.id}`, // Customize title as needed
-          start: startDate,
-          end: endDate,
-        };
-      });
-    };
-
-    // Transform the API data and set events
-    const formattedEvents = transformEvents(apiData);
+  useEffect(() => {
+    const formattedEvents = transformEvents(allWorkingSchedule);
     setEvents(formattedEvents);
-  }, []); // Run only on component mount
+  }, [allWorkingSchedule]);
 
-  // const handleSelectEvent = (event) => {
-  //   alert(event.title);
-  // };
+  const renderEvent = (event) => (
+    <Tooltip title={`${event.title} - ${event.description}`} placement="top">
+      <div>{event.title}</div>
+    </Tooltip>
+  );
 
-  // const handleSelectSlot = (slotInfo) => {
-  //   alert(
-  //     `You selected ${slotInfo.start.toLocaleString()} - ${slotInfo.end.toLocaleString()}`
-  //   );
-  // };
+  // New function to handle event click
+  const handleEventClick = (event) => {
+    navigate(`/${direction}/updateWorkingSchedule`, {
+      // state: { eventId: event.id }, // Pass the event id or any other data needed
+    });
+  };
 
   return (
     <>
@@ -69,10 +103,10 @@ export default function WorkingSchedule() {
         style={{
           justifyContent: "center",
           display: "flex",
-          margin: "20px 20px 0px 20px",
-          background: "white",
+          margin: "20px",
           padding: 20,
           borderRadius: 40,
+          background: "white",
         }}
       >
         <Calendar
@@ -81,11 +115,13 @@ export default function WorkingSchedule() {
           startAccessor="start"
           endAccessor="end"
           style={{ height: 600, width: 1000 }}
-          // onSelectEvent={handleSelectEvent}
-          // onSelectSlot={handleSelectSlot}
           selectable
           date={currentDate}
-          onNavigate={(date) => setCurrentDate(date)}
+          onNavigate={setCurrentDate}
+          components={{
+            event: renderEvent
+          }}
+          onSelectEvent={handleEventClick} // Handle event click here
         />
       </div>
       <Box pt={6} px={1} mt={6} sx={{ color: "black", background: "#ebe2e1" }}>
@@ -94,3 +130,5 @@ export default function WorkingSchedule() {
     </>
   );
 }
+
+

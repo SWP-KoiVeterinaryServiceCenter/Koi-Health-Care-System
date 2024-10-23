@@ -116,6 +116,8 @@ import { vetDetailSlice } from "./features/user.slice/vetDetail.slice";
 
 import { currentUserAppointmentsSlice } from "./features/appointment.slice/currentUserAppointments.slice";
 
+import { allWorkingScheduleSlice } from "./features/schedule.slice/getAllWorkingSchedule.slice";
+
 export const store = configureStore({
   reducer: {
     userDetail: userDetailSlice.reducer,
@@ -140,6 +142,8 @@ export const store = configureStore({
     vetDetail: vetDetailSlice.reducer,
 
     currentUserAppointments: currentUserAppointmentsSlice.reducer,
+
+    allWorkingSchedule : allWorkingScheduleSlice.reducer,
 
     petDetail: petDetailSlice.reducer,
     petsFromShop: petsFromShopSlice.reducer,
