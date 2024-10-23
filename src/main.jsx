@@ -90,6 +90,7 @@ import GuestHome from "./pages/guest/guestHome/guestHome";
 import GuestContact from "./pages/guest/guestContact/guestContact";
 import GuestDoctorNews from "./pages/guest/guestDoctorNews/guestDoctorNews";
 import UpdateWorkingSchedule from "./pages/admin/screens/updateWorkingSchedule/updateWorkingSchedule";
+import Profile from "./pages/customer/screens/profile/profile";
 
 
 // import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
@@ -454,7 +455,11 @@ const router = createBrowserRouter([
       // {
       //   path: "uploadPersonalImage",
       //   element: <UploadPersonalImage direction="customer"/>,
-      // },
+      // },    
+      {
+        path: "profile",
+        element: <Profile direction="customer"/>,
+      },
     ],
   },
 
