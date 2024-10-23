@@ -49,6 +49,7 @@ import AdjustMoney from "./pages/platformStaff/screens/policy/postPrice/postPric
 
 //VET
 import VetHome from "./pages/vet/vetHome/vetHome";
+import AppointmentByCurrentVet from "./pages/vet/screens/appointmentByCurrentVet/appointmentByCurrentVet";
 
 
 
@@ -496,7 +497,7 @@ const router = createBrowserRouter([
        
         {
           path: "personalInformation",
-          element: <PersonalInformation direction="customer" />,
+          element: <PersonalInformation direction="vet" />,
         },
      
         {
@@ -505,16 +506,20 @@ const router = createBrowserRouter([
         },
         {
           path: "doctors",
-          element: <DoctorOnNewsPage direction="customer" />,
+          element: <DoctorOnNewsPage direction="vet" />,
         },
        
         {
           path: "appointmentList",
-          element: <AppointmentList direction="customer" />,
+          element: <AppointmentList direction="vet" />,
         },
         {
           path: "updatePersonalInformation",
-          element: <UpdatePersonalInformation direction="customer" />,
+          element: <UpdatePersonalInformation direction="vet" />,
+        },
+        {
+          path: "appointmentByCurrentVet",
+          element: <AppointmentByCurrentVet direction="vet" />,
         },
         // {
         //   path: "uploadPersonalImage",
@@ -565,6 +570,7 @@ const router = createBrowserRouter([
         path: "changePassword",
         element: <ChangePassword />,
       },
+      
     ],
   },
 ]);

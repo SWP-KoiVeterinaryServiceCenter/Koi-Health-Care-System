@@ -9,6 +9,7 @@ import {
   getAllUserAppointments,
   confirmAppointments,
   missAppointments,
+  getAppointmentByCurrentVet
 } from "../../api/appointmentKoi";
 
 export const createAppointmentByAccountIdThunk = createAsyncThunk(
@@ -97,6 +98,17 @@ export const getAllUserAppointmentsThunk = createAsyncThunk(
   async (thunkAPI) => {
     try {
       const response = await getAllUserAppointments();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+export const getAppointmentByCurrentVetThunk = createAsyncThunk(
+  "appointments/getAppointmentByCurrentVet",
+  async (thunkAPI) => {
+    try {
+      const response = await getAppointmentByCurrentVet();
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error?.response?.data);

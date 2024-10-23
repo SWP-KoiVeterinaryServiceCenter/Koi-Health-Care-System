@@ -1,0 +1,136 @@
+/* styles.css */
+.status-not-ban {
+    background-color: rgba(0, 167, 111, 0.16);
+    color: #007867; /* Màu chữ trắng */
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-align: center;
+    width: 60px;
+  }
+  
+  .status-ban {
+    background-color: rgba(255, 86, 48, 0.16);
+    color: #b71d18; /* Màu chữ trắng */
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-align: center;
+   width: 60px;
+  }
+  
+  .searchbar_accounts_button{
+    color: black;
+  }
+  
+  .button_css_createAmin {
+    .button-row {
+      display: flex;
+      gap: 20px; /* Khoảng cách giữa hai nút */
+    }
+  
+    /* Styles for the first button */
+    .custom-button-icon-create-staff {
+      display: flex;
+      border: 3px #fff solid;
+      width: fit-content;
+      cursor: pointer;
+    }
+  
+    .custom-icon-create-staff {
+      background-color: #fff;
+      padding: 13px 10px 5px 10px;
+    }
+  
+    .custom-cube-create-staff {
+      transition: all 0.4s;
+      transform-style: preserve-3d;
+      width: 200px;
+      height: 20px;
+    }
+  
+    .custom-button-icon-create-staff:hover {
+      border-color: #00504B;
+    }
+  
+    .custom-button-icon-create-staff:hover .custom-cube-create-staff {
+      transform: rotateX(90deg);
+    }
+  
+    .custom-side-create-staff {
+      position: absolute;
+      height: 50px;
+      width: 200px;
+      display: flex;
+      font-size: 0.8em;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: bold;
+    }
+  
+    .custom-top-create-staff {
+      background: #b71d18;
+      color: #fff;
+      transform: rotateX(-90deg) translate3d(0, 13.5px, 2em);
+    }
+  
+    .custom-front-create-staff {
+      background:#00504B;
+      color: #fff;
+      transform: translate3d(0, 0, 1em);
+    }
+  
+    /* Styles for the second button */
+    .custom-button-icon-create-service {
+      display: flex;
+      border: 3px #fff solid;
+      width: fit-content;
+      cursor: pointer;
+    }
+  
+    .custom-icon-create-service {
+      background-color: #fff;
+      padding: 13px 10px 5px 10px;
+    }
+  
+    .custom-cube-create-service {
+      transition: all 0.4s;
+      transform-style: preserve-3d;
+      width: 200px;
+      height: 20px;
+    }
+  
+    .custom-button-icon-create-service:hover {
+      border-color: #0077B5;
+    }
+  
+    .custom-button-icon-create-service:hover .custom-cube-create-service {
+      transform: rotateX(90deg);
+    }
+  
+    .custom-side-create-service {
+      position: absolute;
+      height: 50px;
+      width: 200px;
+      display: flex;
+      font-size: 0.8em;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: bold;
+    }
+  
+    .custom-top-create-service {
+      background: #00CAFF;
+      color: #fff;
+      transform: rotateX(-90deg) translate3d(0, 13.5px, 2em);
+    }
+  
+    .custom-front-create-service {
+      background: #333;
+      color: #fff;
+      transform: translate3d(0, 0, 1em);
+    }
+  }
+  

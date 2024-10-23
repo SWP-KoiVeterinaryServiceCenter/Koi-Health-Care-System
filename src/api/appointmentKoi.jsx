@@ -17,6 +17,10 @@ export const getAllUserAppointments = async () => {
   return response.data;
 };
 
+export const getAppointmentByCurrentVet = async () => {
+  const response = await api.get(`/api/v1/Appointment/AppointmentByCurrentVet`);
+  return response.data;
+};
 export const cancelCurrentUserAppointments = async (id, data) => {
   const response = await api.put(`/api/v1/Appointment/CancelAppointment/${id}`, data);
   return response.data;
