@@ -163,7 +163,7 @@ export default function PersonalInformation(props) {
   return (
     <div>
       <div className="pi-giant-card">
-        <div className="pi-container-1">       
+        <div className="pi-container-1">
           <form onSubmit={formik.handleSubmit}>
             <div className="update-personal-image-container">
               <label htmlFor="formFile">
@@ -252,10 +252,10 @@ export default function PersonalInformation(props) {
           </div>
         </div>
 
-        {/* <p className="koi_management_chart_title">Koi Management</p> */}
+        <p className="koi_management_chart_title">Koi Management</p>
 
         <div className="Koi-Management-Chart">
-          {allKoiByAccountId &&
+          {allKoiByAccountId && allKoiByAccountId.length > 0 ? (
             allKoiByAccountId.map((koi) => (
               <div className="KoiName" key={koi.id}>
                 <div className="koi_card">
@@ -293,7 +293,12 @@ export default function PersonalInformation(props) {
                   </div>
                 </div>
               </div>
-            ))}
+            ))
+          ) : (
+            <div className="no-koi-message">
+              <p>No Koi Fish Available</p>
+            </div>
+          )}
         </div>
       </div>
       <Divider />
