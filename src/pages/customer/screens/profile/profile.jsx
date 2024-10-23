@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { userDataSelector } from "../../../../store/sellectors";
-import { Divider, Button } from "@mui/material";
+import { Divider, Button, TextField } from "@mui/material";
 
 import {
   UPDATEPERSONALIMAGESUCCESS,
@@ -21,6 +21,7 @@ import {
 import {
   getUserDataThunk,
   uploadProfileImageThunk,
+  resetPasswordThunk,
 } from "../../../../store/apiThunk/userThunk";
 
 export default function Profile(props) {
@@ -32,6 +33,7 @@ export default function Profile(props) {
 
   const [imagePreview, setImagePreview] = useState(userDetail.profileImage);
   const [imageSelected, setImageSelected] = useState(false);
+  const [showPasswordForm, setShowPasswordForm] = useState(false); // State for toggling password form visibility
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -80,18 +82,50 @@ export default function Profile(props) {
     },
   });
 
+  const passwordFormik = useFormik({
+    initialValues: {
+      oldPassword: "",
+      newPassword: "",
+    },
+    validationSchema: Yup.object({
+      oldPassword: Yup.string().required("Old password is required"),
+      newPassword: Yup.string()
+        .required("New password is required")
+        .min(4, "New password must be at least 4 characters long"),
+    }),
+    validateOnBlur: true, // Enable validation on blur
+    validateOnChange: true, // Enable validation on change
+    onSubmit: async (values) => {
+      try {
+        await dispatch(resetPasswordThunk(values)).unwrap();
+        Swal.fire({
+          title: "Success!",
+          text: "Your password has been reset successfully.",
+          icon: "success",
+        });
+        setShowPasswordForm(false); // Hide form after successful submission
+      } catch (error) {
+        Swal.fire({
+          title: "Error!",
+          text: error.message,
+          icon: "error",
+        });
+      }
+    },
+  });
+
   useEffect(() => {
     setImagePreview(userDetail.profileImage);
   }, [userDetail.profileImage]);
 
   useEffect(() => {
-    dispatch(getUserDataThunk()).then(() => setShowLoadingModal(false));
+    dispatch(getUserDataThunk());
   }, [dispatch]);
 
   return (
     <>
       <div className="profile-container-1">
-        <form onSubmit={formik.handleSubmit}>        
+        <form onSubmit={formik.handleSubmit}>
           <div className="update-profile-image-container">
             <label htmlFor="formFile" className="image-label">
               <img
@@ -161,7 +195,61 @@ export default function Profile(props) {
             />
           </div>
         </div>
+
+        {/* Button to toggle Password Reset Form */}
+        <Button
+          variant="outlined"
+          onClick={() => setShowPasswordForm((prev) => !prev)}
+          style={{ marginTop: "20px" }}
+        >
+          {showPasswordForm ? "Hide Reset Password" : "Reset Password"}
+        </Button>
+
+        {/* Password Reset Form */}
+        {showPasswordForm && (
+          <form
+            onSubmit={passwordFormik.handleSubmit}
+            style={{ marginTop: "20px" }}
+          >
+            <TextField
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              label="Old Password"
+              type="password"
+              {...passwordFormik.getFieldProps("oldPassword")}
+              error={
+                passwordFormik.touched.oldPassword &&
+                Boolean(passwordFormik.errors.oldPassword)
+              }
+              helperText={
+                passwordFormik.touched.oldPassword &&
+                passwordFormik.errors.oldPassword
+              }
+            />
+            <TextField
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              label="New Password"
+              type="password"
+              {...passwordFormik.getFieldProps("newPassword")}
+              error={
+                passwordFormik.touched.newPassword &&
+                Boolean(passwordFormik.errors.newPassword)
+              }
+              helperText={
+                passwordFormik.touched.newPassword &&
+                passwordFormik.errors.newPassword
+              }
+            />
+            <Button type="submit" variant="contained" color="primary">
+              Reset Password
+            </Button>
+          </form>
+        )}
       </div>
+
       <Divider />
     </>
   );
