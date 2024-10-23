@@ -30,6 +30,12 @@ import {
   createVetAccount,
   getTotalVets,
   getTotalStaffs,
+
+  changePasswordForForgotPassword,
+
+  // getTotalVetsDetail,
+
+
   getAllVetAccount,
 
   getTotalVetsDetail,
@@ -275,17 +281,42 @@ export const newPasswordThunk = createAsyncThunk(
   }
 );
 
+// export const checkEmailThunk = createAsyncThunk(
+//   "users/checkEmail",
+//   async (data, thunkAPI) => {
+//     try {
+//       const response = await checkEmail(data);
+//       return response;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error?.response?.data);
+//     }
+//   }
+// );
 export const checkEmailThunk = createAsyncThunk(
   "users/checkEmail",
-  async (data, thunkAPI) => {
+  async (email, thunkAPI) => {
     try {
-      const response = await checkEmail(data);
-      return response;
+      const response = await checkEmail(email);
+      return response; // Assuming true means the email exists
     } catch (error) {
-      return thunkAPI.rejectWithValue(error?.response?.data);
+      return thunkAPI.rejectWithValue(error?.response?.data || "Something went wrong");
     }
   }
 );
+export const changePasswordForForgotPasswordThunk = createAsyncThunk(
+  "users/changePasswordForForgotPassword",
+  async ({ code, password, confirmPassword }, thunkAPI) => {
+      try {
+          const response = await changePasswordForForgotPassword({ code, password, confirmPassword });
+          return response; 
+      } catch (error) {
+          return thunkAPI.rejectWithValue(error?.response?.data || "Something went wrong");
+      }
+  }
+);
+
+
+
 
 export const verifyForgotThunk = createAsyncThunk(
   "users/verifyForgot",

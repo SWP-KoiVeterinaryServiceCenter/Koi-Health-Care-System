@@ -3,27 +3,20 @@ import { Button, TextField, Grid } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import {
-    checkEmailThunk,
-    sendOTPForgotPasswordThunk,
-} from "../../../store/apiThunk/userThunk";
 import Swal from "sweetalert2";
-import Pet from "../../../assets/cutecatdog.png";
+import FISH from "../../../assets/koilanding_bg.png";
 import { useState } from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./../../../theme";
 import LoadingModal from "../../../components/modal/loadingModal/loadingModal";
-import {
-    ERRORTEXT,
-    NOTREGISTERED,
-} from "../../../components/text/notiText/notiText";
+import { useDispatch } from "react-redux";  // Import useDispatch to dispatch thunks
+import { checkEmailThunk } from "../../../store/apiThunk/userThunk";  // Import the thunk
 
 export default function ForgotPassword() {
     const [theme, colorMode] = useMode();
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const [showLoadingModal, setShowLoadingModal] = useState(false);
+    const dispatch = useDispatch();  // Create dispatch instance to dispatch thunk
 
     const formik = useFormik({
         initialValues: {
@@ -36,45 +29,39 @@ export default function ForgotPassword() {
         }),
         onSubmit: async (values) => {
             setShowLoadingModal(true);
+
+            // Dispatch the thunk to send verification email
             dispatch(checkEmailThunk(values.email))
-                .unwrap()
+                .unwrap()  // Unwrap to handle fulfilled and rejected states
                 .then((response) => {
-                    if (response === true) {
-                        dispatch(sendOTPForgotPasswordThunk(values.email)).then(
-                            () => {
-                                setShowLoadingModal(false);
-                                navigate(`/verifyAccount`, {
-                                    state: {
-                                        email: values.email,
-                                        direction: "forgotPassword",
-                                    },
-                                });
-                            }
-                        );
-                    } else {
-                        setShowLoadingModal(false);
-                        Swal.fire({
-                            title: ERRORTEXT,
-                            text: NOTREGISTERED,
-                            icon: "error",
-                            showConfirmButton: false,
-                            background: "white",
-                            timer: 1500,
-                            timerProgressBar: true,
-                            scrollbarPadding: false,
-                        });
-                    }
-                })
-                .catch((error) => {
+                    // Handle success
                     setShowLoadingModal(false);
                     Swal.fire({
-                        title: ERRORTEXT,
-                        text: error.message,
-                        icon: "error",
-                        showConfirmButton: false,
+                        title: "Success",
+                        text: "Verification code has been sent to your email!",
+                        icon: "success",
+                        confirmButtonText: "OK",
                         background: "white",
-                        timer: 1500,
-                        timerProgressBar: true,
+                        scrollbarPadding: false,
+                    }).then(() => {
+                        // Navigate to the verifyAccount page
+                        navigate(`/verifyAccount`, {
+                            state: {
+                                email: values.email,
+                                direction: "forgotPassword",
+                            },
+                        });
+                    });
+                })
+                .catch((error) => {
+                    // Handle error if email is not registered or other issues
+                    setShowLoadingModal(false);
+                    Swal.fire({
+                        title: "Error",
+                        text: error.message || "Failed to send verification code.",
+                        icon: "error",
+                        confirmButtonText: "OK",
+                        background: "white",
                         scrollbarPadding: false,
                     });
                 });
@@ -89,7 +76,7 @@ export default function ForgotPassword() {
                     <Grid container spacing={2}>
                         <Grid item xs={1}></Grid>
                         <Grid item xs={5} className="flex-center">
-                            <img src={Pet} style={{ width: "100%" }} />
+                            <img src={FISH} style={{ width: "100%" }} />
                         </Grid>
                         <Grid item xs={5} className="flex-center">
                             <div className="signup__form">
@@ -118,7 +105,11 @@ export default function ForgotPassword() {
                                             )}
                                             fullWidth
                                             margin="dense"
-                                            color="secondary"
+                                            InputProps={{
+                                                sx: {
+                                                    color: 'black',  // Set input text color to black
+                                                }
+                                            }}
                                         />
                                         {formik.touched.email &&
                                             formik.errors.email && (

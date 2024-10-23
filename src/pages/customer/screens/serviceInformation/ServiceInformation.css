@@ -185,6 +185,27 @@
   padding: 10px 10px 10px 20px;
   background-color: #ecc2c0;
 }
+/* CSS cho các trạng thái khác nhau của .footer-details */
+.checkout-footer .footer-details.CONFIRMED {
+  background-color: #56BD00;
+}
+
+.checkout-footer .footer-details.MISSED {
+  background-color: #C20E35;
+}
+
+.checkout-footer .footer-details.CANCELLED {
+  background-color: #284F8F;
+  color: white;
+}
+
+.checkout-footer .footer-details.FINISHED {
+  background-color: #A908B5;
+}
+
+/* Các phần còn lại của CSS vẫn giữ nguyên */
+
+
 
 .checkout-price {
   position: relative;

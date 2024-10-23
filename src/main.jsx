@@ -46,6 +46,12 @@ import ManagerDashboard from "./pages/manager/screens/dashboard/dashboardPage/da
 import DashboardDetail from "./pages/manager/screens/dashboard/dashboardDetail/dashboardDetail";
 import CancelAmount from "./pages/platformStaff/screens/policy/cancelledAmount/cancelledAmount";
 import AdjustMoney from "./pages/platformStaff/screens/policy/postPrice/postPrice";
+
+//VET
+import VetHome from "./pages/vet/vetHome/vetHome";
+
+
+
 //Staff
 import StaffHome from "./pages/platformStaff/screens/home/staffHome";
 import ShopTableStaff from "./pages/platformStaff/screens/shop/shopTable";
@@ -81,15 +87,19 @@ import CreateKoiFishAppointment from "./pages/customer/screens/createKoiFishAppo
 import UpdateKoiFishInformation from "./pages/customer/screens/updateKoiFishInformation/UpdateKoiFishInformation";
 import AppointmentList from "./pages/customer/screens/appointmentList/AppointmentList";
 import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
-import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
+// import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
 import CreateWorkingSchedule from "./pages/admin/screens/createWorkingSchedule/createWorkingSchedule";
-
 
 //Guest
 import GuestHome from "./pages/guest/guestHome/guestHome";
 import GuestContact from "./pages/guest/guestContact/guestContact";
 import GuestDoctorNews from "./pages/guest/guestDoctorNews/guestDoctorNews";
 import UpdateWorkingSchedule from "./pages/admin/screens/updateWorkingSchedule/updateWorkingSchedule";
+
+
+// import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
+import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
+// import CreateWorkingSchedule from "./pages/admin/screens/createWorkingSchedule/createWorkingSchedule";
 
 
 // import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
@@ -152,10 +162,10 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
-  // {
-  //     path: "/verifyAccount",
-  //     element: <VerifyAccount />,
-  // },
+  {
+      path: "/verifyAccount",
+      element: <VerifyAccount />,
+  },
   {
     path: "/error404",
     element: <Error404 />,
@@ -307,10 +317,12 @@ const router = createBrowserRouter([
         path: "createWorkingSchedule",
         element: <CreateWorkingSchedule />,
       },
+
       {
         path: "updateWorkingSchedule",
         element: <UpdateWorkingSchedule direction="admin" />,
       },
+
 
     ],
   },
@@ -445,11 +457,11 @@ const router = createBrowserRouter([
       },
       {
         path: "appointmentList",
-        element: <AppointmentList direction="customer"/>,
+        element: <AppointmentList direction="customer" />,
       },
       {
         path: "updatePersonalInformation",
-        element: <UpdatePersonalInformation direction="customer"/>,
+        element: <UpdatePersonalInformation direction="customer" />,
       },
       // {
       //   path: "uploadPersonalImage",
@@ -457,6 +469,59 @@ const router = createBrowserRouter([
       // },
     ],
   },
+    //VET
+    {
+      path: "/vet",
+      element: <VetHome />,
+      errorElement: <Error404 />,
+      children: [
+        {
+          path: "",
+          element: <HomePage />,
+        },
+        // {
+        //   path: "service",
+        //   element: <ServiceHome direction="customer" />,
+        //   children: [
+        //     {
+        //       path: "",
+        //       element: <ServiceKoifish direction="customer" />,
+        //     },
+        //     {
+        //       path: "createKoiFishAppointment",
+        //       element: <CreateKoiFishAppointment />,
+        //     },
+        //   ],
+        // },
+       
+        {
+          path: "personalInformation",
+          element: <PersonalInformation direction="customer" />,
+        },
+     
+        {
+          path: "contactUs",
+          element: <ContactUs />,
+        },
+        {
+          path: "doctors",
+          element: <DoctorOnNewsPage direction="customer" />,
+        },
+       
+        {
+          path: "appointmentList",
+          element: <AppointmentList direction="customer" />,
+        },
+        {
+          path: "updatePersonalInformation",
+          element: <UpdatePersonalInformation direction="customer" />,
+        },
+        // {
+        //   path: "uploadPersonalImage",
+        //   element: <UploadPersonalImage direction="customer"/>,
+        // },
+      ],
+    },
 
   //Manager
   {
