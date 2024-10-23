@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
-import { Tooltip } from "antd"; // Import Tooltip from Ant Design
+import { Tooltip } from "antd";
 import "./workingSchedule.css";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -15,27 +15,56 @@ import { getAllWorkingScheduleThunk } from "../../../../store/apiThunk/workingSc
 
 const localizer = momentLocalizer(moment);
 
+// const transformEvents = (data) => {
+//   return data.map((item) => {
+//     const startDate = new Date(item.workingDay);
+//     const endDate = new Date(item.workingDay);
+//     const [startHours, startMinutes] = item.startTime.split(":").map(Number);
+//     const [endHours, endMinutes] = item.endTime.split(":").map(Number);
+
+//     startDate.setHours(startHours, startMinutes);
+//     endDate.setHours(endHours, endMinutes);
+
+//     const description = `Start: ${startDate.toLocaleTimeString()} - End: ${endDate.toLocaleTimeString()}`;
+
+//     return {
+//       title: `${item.name || item.id}`,
+//       start: startDate,
+//       end: endDate,
+//       description,
+//       // id: item.id, // Include the item's id for navigation
+//     };
+//   });
+// };
+
+
 const transformEvents = (data) => {
   return data.map((item) => {
     const startDate = new Date(item.workingDay);
     const endDate = new Date(item.workingDay);
-    const [startHours, startMinutes] = item.startTime.split(":").map(Number);
-    const [endHours, endMinutes] = item.endTime.split(":").map(Number);
-    
+
+    // Convert startTime and endTime from minutes to hours and minutes
+    const startHours = Math.floor(item.startTime / 60);
+    const startMinutes = item.startTime % 60;
+    const endHours = Math.floor(item.endTime / 60);
+    const endMinutes = item.endTime % 60;
+
+    // Set the hours and minutes for start and end dates
     startDate.setHours(startHours, startMinutes);
     endDate.setHours(endHours, endMinutes);
-    
+
     const description = `Start: ${startDate.toLocaleTimeString()} - End: ${endDate.toLocaleTimeString()}`;
 
     return {
-      title: `${item.name || item.id}`,
+      title: `Veterinarian ID: ${item.veterinarianId}`, // Adjust title based on available data
       start: startDate,
       end: endDate,
       description,
-      // id: item.id, // Include the item's id for navigation
+      id: item.veterinarianId, // Include the veterinarianId for navigation
     };
   });
 };
+
 
 export default function WorkingSchedule(props) {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -90,7 +119,7 @@ export default function WorkingSchedule(props) {
           date={currentDate}
           onNavigate={setCurrentDate}
           components={{
-            event: renderEvent 
+            event: renderEvent
           }}
           onSelectEvent={handleEventClick} // Handle event click here
         />
@@ -101,3 +130,5 @@ export default function WorkingSchedule(props) {
     </>
   );
 }
+
+
