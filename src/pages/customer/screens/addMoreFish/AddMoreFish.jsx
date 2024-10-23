@@ -153,7 +153,10 @@ const AddMoreFish = () => {
           title="Add More Fish "
           subtitle="Provide Koi Fish Information"
         />
-        <form onSubmit={formik.handleSubmit} className="form-container">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="add-more-fish-form-container"
+        >
           {/* 1st Column: Koi Image */}
           <div className="image-field">
             <input
@@ -164,7 +167,7 @@ const AddMoreFish = () => {
               style={{ display: "none" }}
               onChange={handleKoiImageSelect}
             />
-            
+
             <label htmlFor="koiImage">
               <div className="background_formik_box_1">
                 <img
@@ -174,8 +177,7 @@ const AddMoreFish = () => {
                       : formik.values?.koiImage
                   }
                   alt="Koi Image"
-                  
-                />        
+                />
               </div>
             </label>
             {formik.touched.koiImage && formik.errors.koiImage && (
@@ -315,7 +317,7 @@ const AddMoreFish = () => {
               )}
             </div>
 
-            <div className="text-field-container">
+            {/* <div className="text-field-container">
               <TextField
                 id="varieties"
                 label={
@@ -338,6 +340,40 @@ const AddMoreFish = () => {
                   },
                 }}
               />
+              {formik.touched.varieties && formik.errors.varieties && (
+                <div className="addmorekoifish__validation__error">
+                  {formik.errors.varieties}
+                </div>
+              )}
+            </div> */}
+
+            <div className="text-field-container">
+              <FormControl fullWidth margin="dense">
+                <InputLabel id="varieties-label">
+                  <span>
+                    Varieties <span style={{ color: "red" }}>*</span>
+                  </span>
+                </InputLabel>
+                <Select
+                  labelId="varieties-label"
+                  id="varieties"
+                  value={formik.values.varieties}
+                  onChange={(event) =>
+                    formik.setFieldValue("varieties", event.target.value)
+                  }
+                  fullWidth
+                  color="secondary"
+                  style={{
+                    backgroundColor: "#f5f5f5",
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                    color: "black",
+                  }}
+                >
+                  <MenuItem value="Green">Green</MenuItem>
+                  <MenuItem value="Red">Red</MenuItem>
+                  <MenuItem value="Yellow">Yellow</MenuItem>
+                </Select>
+              </FormControl>
               {formik.touched.varieties && formik.errors.varieties && (
                 <div className="addmorekoifish__validation__error">
                   {formik.errors.varieties}

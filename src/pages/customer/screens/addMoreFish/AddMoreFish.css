@@ -2,7 +2,7 @@
   background-color: #fff;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  padding: 0px 40px 0px 40px;
+  padding: 20px 40px 20px 40px;
   max-width: 900px;
   margin: 100px auto 10px auto;
   max-height: 700px;
@@ -65,46 +65,7 @@
   min-height: 200px;
 }
 
-
-/* .form-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.text-field-container,
-.image-field {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.background_formik_box {
-  width: 100%;
-  height: auto;
-}
-
-.background_formik_box img {
-  max-width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-.background_formik_icon_box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0.8;
-}
-
-.background_formik_icon {
-  font-size: 40px;
-  color: white;
-} */
-
-.form-container {
+.add-more-fish-form-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   /* 3 columns */

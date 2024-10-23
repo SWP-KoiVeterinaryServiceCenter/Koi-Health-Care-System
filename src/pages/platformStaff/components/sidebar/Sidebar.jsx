@@ -24,6 +24,9 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import PersonalVideoIcon from "@mui/icons-material/PersonalVideo";
 import WalletOutlinedIcon from "@mui/icons-material/WalletOutlined";
 import AccountCircleOutlined from "@mui/icons-material/AccountCircleOutlined";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import AddIcon from '@mui/icons-material/Add';
+import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -51,6 +54,8 @@ const Sidebar = (props) => {
   let setIsCollapsed = props.setIsCollapsed;
   const [selected, setSelected] = useState("Cửa Hàng");
   const [open, setOpen] = useState(true);
+  const [openWrk, setOpenWrk] = useState(false);
+
 
   const handleClick = () => {
     setOpen(!open);
@@ -72,6 +77,10 @@ const Sidebar = (props) => {
       setSelected("Báo Cáo");
     }
   }, [locationValue]);
+
+  const handleClickWorkingSchedule = () => {
+    setOpenWrk(!openWrk);
+  };
 
   return (
     <div className="staffSidebar">
@@ -119,7 +128,7 @@ const Sidebar = (props) => {
               >
                 Management
               </Typography>
-              <List>
+              {/* <List>
                 <ListItemButton onClick={handleClick}>
                   {!isCollapsed && (
                     <PersonalVideoIcon
@@ -176,13 +185,13 @@ const Sidebar = (props) => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                  {/* <Item
+                  <Item
                     title="Wallet Transaction"
                     to="wallet"
                     icon={<WalletOutlinedIcon />}
                     selected={selected}
                     setSelected={setSelected}
-                  /> */}
+                  />
 
                   <Item
                     title="Report"
@@ -192,7 +201,77 @@ const Sidebar = (props) => {
                     setSelected={setSelected}
                   />
                 </Collapse>
-              </List>
+              </List> */}
+
+
+              
+              <List>
+                    <ListItemButton onClick={handleClickWorkingSchedule}>
+                      {!isCollapsed && (
+                        <CalendarMonthIcon
+                          style={{
+                            marginLeft: "10px",
+                            marginRight: "19px",
+                            color: "white",
+                          }}
+                        />
+                      )}
+                      {!isCollapsed && (
+                        <ListItemText
+                          primary="Working Schedule"
+                          style={{
+                            color: "white",
+                          }}
+                        />
+                      )}
+                      {openWrk ? (
+                        <ExpandLess
+                          style={{
+                            marginLeft: "10px",
+                            color: "white",
+                          }}
+                        />
+                      ) : (
+                        <ExpandMore
+                          style={{
+                            marginLeft: "10px",
+                            color: "white",
+                          }}
+                        />
+                      )}
+                    </ListItemButton>
+                    <Collapse
+                      in={openWrk}
+                      timeout="auto"
+                      unmountOnExit
+                      style={{
+                        paddingLeft: !isCollapsed ? "20px" : 0,
+                      }}
+                    >
+                      <Item
+                        title="Schedule"
+                        to="workingSchedule"
+                        icon={<EventRepeatIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                      />
+                      <Item
+                        title="Create Working Schedule"
+                        to="createWorkingSchedule"
+                        icon={<AddIcon/>}
+                        selected={selected}
+                        setSelected={setSelected}
+                      />
+                      {/* <Item
+                        title="Report"
+                        to="report"
+                        icon={<ReportGmailerrorredIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                      /> */}
+                    </Collapse>
+                  </List>
+
               <Divider />
             </Box>
           </Menu>

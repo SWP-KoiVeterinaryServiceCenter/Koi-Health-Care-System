@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { userDataSelector } from "../../../../store/sellectors";
-import { Divider, Button } from "@mui/material";
+import { Divider, Button, TextField } from "@mui/material";
 
 import {
   UPDATEPERSONALIMAGESUCCESS,
@@ -18,7 +18,11 @@ import {
   SUCCESSTEXT,
 } from "../../../../components/text/notiText/notiText";
 
-import {getUserDataThunk ,uploadProfileImageThunk } from "../../../../store/apiThunk/userThunk";
+import {
+  getUserDataThunk,
+  uploadProfileImageThunk,
+  resetPasswordThunk,
+} from "../../../../store/apiThunk/userThunk";
 
 export default function Profile(props) {
   const navigate = useNavigate();
@@ -29,6 +33,7 @@ export default function Profile(props) {
 
   const [imagePreview, setImagePreview] = useState(userDetail.profileImage);
   const [imageSelected, setImageSelected] = useState(false);
+  const [showPasswordForm, setShowPasswordForm] = useState(false); // State for toggling password form visibility
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -77,27 +82,65 @@ export default function Profile(props) {
     },
   });
 
+  const passwordFormik = useFormik({
+    initialValues: {
+      oldPassword: "",
+      newPassword: "",
+    },
+    validationSchema: Yup.object({
+      oldPassword: Yup.string().required("Old password is required"),
+      newPassword: Yup.string()
+        .required("New password is required")
+        .min(4, "New password must be at least 4 characters long"),
+    }),
+    validateOnBlur: true, // Enable validation on blur
+    validateOnChange: true, // Enable validation on change
+    onSubmit: async (values) => {
+      try {
+        await dispatch(resetPasswordThunk(values)).unwrap();
+        Swal.fire({
+          title: "Success!",
+          text: "Your password has been reset successfully.",
+          icon: "success",
+        });
+        setShowPasswordForm(false); // Hide form after successful submission
+      } catch (error) {
+        Swal.fire({
+          title: "Error!",
+          text: error.message,
+          icon: "error",
+        });
+      }
+    },
+  });
+
   useEffect(() => {
     setImagePreview(userDetail.profileImage);
   }, [userDetail.profileImage]);
 
-  
   useEffect(() => {
-    dispatch(getUserDataThunk()).then(() => setShowLoadingModal(false));
+    dispatch(getUserDataThunk());
   }, [dispatch]);
 
   return (
     <>
       <div className="profile-container-1">
         <form onSubmit={formik.handleSubmit}>
-          <div className="update-personal-image-container">
-            <label htmlFor="formFile">
+          <div className="update-profile-image-container">
+            <label htmlFor="formFile" className="image-label">
               <img
-                src={imagePreview} // Use imagePreview state here
+                src={imagePreview}
                 alt="Koi"
                 className="image-preview-img"
                 style={{ cursor: "pointer" }}
               />
+              {imageSelected && ( // Conditionally render the button inside the label
+                <div className="update-profile-img-button-container">
+                  <Button variant="contained" type="submit">
+                    Update
+                  </Button>
+                </div>
+              )}
             </label>
             <input
               id="formFile"
@@ -107,55 +150,106 @@ export default function Profile(props) {
                 if (file) {
                   const fileUrl = URL.createObjectURL(file);
                   setImagePreview(fileUrl);
-                  setImageSelected(true); // Set imageSelected to true
-                  formik.setFieldValue("formFile", file); // Set the file in Formik
+                  setImageSelected(true);
+                  formik.setFieldValue("formFile", file);
                 } else {
-                  setImageSelected(false); // Reset if no file is selected
+                  setImageSelected(false);
                 }
               }}
               accept="image/png, image/jpeg, image/jpg"
-              style={{ display: "none" }} // Hide the input
+              style={{ display: "none" }}
             />
-            {imageSelected && ( // Conditionally render the button
-              <div className="update-personal-img-button-container">
-                <Button variant="contained" type="submit">
-                  Update
-                </Button>
-              </div>
-            )}
           </div>
         </form>
 
-        <div className="user-info">
-          <p>
-            Full Name: <span>{userDetail.fullname}</span>
-          </p>
-          <p>
-            Name: <span>{userDetail.username}</span>
-          </p>
+        <div className="profile-user-info">
+          <div className="user-info-content">
+            <p>
+              Full Name: <span>{userDetail.fullname}</span>
+            </p>
+            <p>
+              Name: <span>{userDetail.username}</span>
+            </p>
+            <p style={{ display: "flex" }}>
+              Location:{" "}
+              <span className="profile-truncated">{userDetail.location}</span>
+            </p>
+            <p style={{ display: "flex" }}>
+              Contact-Link:{" "}
+              <span className="profile-truncated">
+                {userDetail.contactLink}
+              </span>
+            </p>
+            <p>
+              Phone Number: <span>{userDetail.phonenumber}</span>
+            </p>
+          </div>
+          <div className="edit-profile-icon-container">
+            <EditIcon
+              sx={{ fontSize: 40, cursor: "pointer" }}
+              onClick={() =>
+                navigate(`/${direction}/updatePersonalInformation`, {
+                  state: { userDetail: userDetail.accountId },
+                })
+              }
+            />
+          </div>
+        </div>
 
-          <p>
-            Location: <span>{userDetail.location}</span>
-          </p>
-          <p style={{ display: "flex" }}>
-            Contact-Link:
-            <span className="truncated">{userDetail.contactLink}</span>
-          </p>
-          <p>
-            Phone Number: <span>{userDetail.phonenumber}</span>
-          </p>
-        </div>
-        <div className="edit-icon-container">
-          <EditIcon
-            sx={{ fontSize: 40, cursor: "pointer" }}
-            onClick={() =>
-              navigate(`/${direction}/updatePersonalInformation`, {
-                state: { userDetail: userDetail.accountId },
-              })
-            }
-          />
-        </div>
+        {/* Button to toggle Password Reset Form */}
+        <Button
+          variant="outlined"
+          onClick={() => setShowPasswordForm((prev) => !prev)}
+          style={{ marginTop: "20px" }}
+        >
+          {showPasswordForm ? "Hide Reset Password" : "Reset Password"}
+        </Button>
+
+        {/* Password Reset Form */}
+        {showPasswordForm && (
+          <form
+            onSubmit={passwordFormik.handleSubmit}
+            style={{ marginTop: "20px" }}
+          >
+            <TextField
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              label="Old Password"
+              type="password"
+              {...passwordFormik.getFieldProps("oldPassword")}
+              error={
+                passwordFormik.touched.oldPassword &&
+                Boolean(passwordFormik.errors.oldPassword)
+              }
+              helperText={
+                passwordFormik.touched.oldPassword &&
+                passwordFormik.errors.oldPassword
+              }
+            />
+            <TextField
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              label="New Password"
+              type="password"
+              {...passwordFormik.getFieldProps("newPassword")}
+              error={
+                passwordFormik.touched.newPassword &&
+                Boolean(passwordFormik.errors.newPassword)
+              }
+              helperText={
+                passwordFormik.touched.newPassword &&
+                passwordFormik.errors.newPassword
+              }
+            />
+            <Button type="submit" variant="contained" color="primary">
+              Reset Password
+            </Button>
+          </form>
+        )}
       </div>
+
       <Divider />
     </>
   );

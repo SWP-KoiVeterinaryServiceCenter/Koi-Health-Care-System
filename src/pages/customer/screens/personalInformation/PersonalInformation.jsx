@@ -44,7 +44,7 @@ export default function PersonalInformation(props) {
   // console.log({ allKoiByAccountId });
 
   const [imagePreview, setImagePreview] = useState(userDetail.profileImage);
-  const [imageSelected, setImageSelected] = useState(false);
+  // const [imageSelected, setImageSelected] = useState(false);
 
   // console.log(userDetail.profileImage);
 
@@ -163,7 +163,7 @@ export default function PersonalInformation(props) {
   return (
     <div>
       <div className="pi-giant-card">
-        <div className="pi-container-1">       
+        <div className="pi-container-1">
           <form onSubmit={formik.handleSubmit}>
             <div className="update-personal-image-container">
               <label htmlFor="formFile">
@@ -171,10 +171,10 @@ export default function PersonalInformation(props) {
                   src={imagePreview} // Use imagePreview state here
                   alt="Koi"
                   className="image-preview-img"
-                  style={{ cursor: "pointer" }}
+                  // style={{ cursor: "pointer" }}
                 />
               </label>
-              <input
+              {/* <input
                 id="formFile"
                 type="file"
                 onChange={(event) => {
@@ -197,7 +197,7 @@ export default function PersonalInformation(props) {
                     Update
                   </Button>
                 </div>
-              )}
+              )} */}
             </div>
           </form>
 
@@ -209,8 +209,8 @@ export default function PersonalInformation(props) {
               Name: <span>{userDetail.username}</span>
             </p>
 
-            <p>
-              Location: <span>{userDetail.location}</span>
+            <p style={{ display: "flex" }}>
+              Location: <span className="truncated">{userDetail.location}</span>
             </p>
             <p style={{ display: "flex" }}>
               Contact-Link:
@@ -220,7 +220,7 @@ export default function PersonalInformation(props) {
               Phone Number: <span>{userDetail.phonenumber}</span>
             </p>
           </div>
-          <div className="edit-icon-container">
+          {/* <div className="edit-icon-container">
             <EditIcon
               sx={{ fontSize: 40, cursor: "pointer" }}
               onClick={() =>
@@ -229,7 +229,7 @@ export default function PersonalInformation(props) {
                 })
               }
             />
-          </div>
+          </div> */}
         </div>
         <Divider />
 
@@ -252,10 +252,10 @@ export default function PersonalInformation(props) {
           </div>
         </div>
 
-        {/* <p className="koi_management_chart_title">Koi Management</p> */}
+        <p className="koi_management_chart_title">Koi Management</p>
 
         <div className="Koi-Management-Chart">
-          {allKoiByAccountId &&
+          {allKoiByAccountId && allKoiByAccountId.length > 0 ? (
             allKoiByAccountId.map((koi) => (
               <div className="KoiName" key={koi.id}>
                 <div className="koi_card">
@@ -293,7 +293,12 @@ export default function PersonalInformation(props) {
                   </div>
                 </div>
               </div>
-            ))}
+            ))
+          ) : (
+            <div className="no-koi-message">
+              <p>No Koi Fish Available</p>
+            </div>
+          )}
         </div>
       </div>
       <Divider />
