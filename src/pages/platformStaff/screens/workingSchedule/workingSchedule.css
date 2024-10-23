@@ -21,15 +21,23 @@
 .rbc-agenda-date-cell {
     color: black;
 }
-.rbc-time-slot span{
+
+.rbc-time-slot span {
     color: black;
 }
-.rbc-header{
+
+.rbc-header {
     color: black;
 }
-.rbc-event{
-background-color: #55efc4;
+
+.rbc-event {
+    background-color: #55efc4;
 }
-.rbc-event-content{
+
+.rbc-event-content {
+    color: black;
+}
+
+.rbc-event-label {
     color: black;
 }

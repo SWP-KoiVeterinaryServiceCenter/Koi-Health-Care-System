@@ -29,7 +29,6 @@ import CreateVetAccount from "./pages/admin/screens/createRoleAccount/createVetA
 import CreateTank from "./pages/admin/screens/createTank/createTank";
 import CreateServiceType from "./pages/admin/screens/createServiceType/createServiceType";
 import CreateServiceCenter from "./pages/admin/screens/createServiceCenter/createServiceCenter";
-import WorkingSchedule from "./pages/admin/screens/workingSchedule/workingSchedule";
 import ListServiceCenter from "./pages/admin/screens/listServiceCenter/listServiceCenter";
 import ServiceCenter from "./pages/admin/screens/listServiceCenter/serviceCenter/serviceCenter";
 import AppointmentManagement from "./pages/admin/screens/appointmentManagement/appointmentManagement";
@@ -68,7 +67,9 @@ import CategoryList from "./pages/platformStaff/screens/categoryList/categorydet
 import CreateCategoryList from "./pages/platformStaff/screens/categoryList/createCategory/createCategory";
 import UpdateCategoryList from "./pages/platformStaff/screens/categoryList/updateCategory/updateCategory";
 import OrdertrackTable from "./pages/admin/screens/order/ordertrack";
-
+import WorkingSchedule from "./pages/platformStaff/screens/workingSchedule/workingSchedule";
+import CreateWorkingSchedule from "./pages/platformStaff/screens/createWorkingSchedule/createWorkingSchedule";
+import UpdateWorkingSchedule from "./pages/platformStaff/screens/updateWorkingSchedule/updateWorkingSchedule";
 //Customer
 // import CreateKoifish from "./pages/createKoifish/createfish";
 import DoctorOnNewsPage from "./pages/customer/screens/news/news";
@@ -89,13 +90,12 @@ import UpdateKoiFishInformation from "./pages/customer/screens/updateKoiFishInfo
 import AppointmentList from "./pages/customer/screens/appointmentList/AppointmentList";
 import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
 // import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
-import CreateWorkingSchedule from "./pages/admin/screens/createWorkingSchedule/createWorkingSchedule";
 
 //Guest
 import GuestHome from "./pages/guest/guestHome/guestHome";
 import GuestContact from "./pages/guest/guestContact/guestContact";
 import GuestDoctorNews from "./pages/guest/guestDoctorNews/guestDoctorNews";
-import UpdateWorkingSchedule from "./pages/admin/screens/updateWorkingSchedule/updateWorkingSchedule";
+import Profile from "./pages/customer/screens/profile/profile";
 
 
 // import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
@@ -310,21 +310,6 @@ const router = createBrowserRouter([
         path: "adjustMoney",
         element: <AdjustMoney />,
       },
-      {
-        path: "workingSchedule",
-        element: <WorkingSchedule direction="admin" />,
-      },
-      {
-        path: "createWorkingSchedule",
-        element: <CreateWorkingSchedule />,
-      },
-
-      {
-        path: "updateWorkingSchedule",
-        element: <UpdateWorkingSchedule direction="admin" />,
-      },
-
-
     ],
   },
   //Staff
@@ -392,6 +377,18 @@ const router = createBrowserRouter([
       {
         path: "ordertable",
         element: <OrdertrackTable />,
+      },
+      {
+        path: "workingSchedule",
+        element: <WorkingSchedule direction="staff" />,
+      },
+      {
+        path: "createWorkingSchedule",
+        element: <CreateWorkingSchedule />,
+      },
+      {
+        path: "updateWorkingSchedule",
+        element: <UpdateWorkingSchedule direction="staff" />,
       },
     ],
   },
@@ -467,7 +464,11 @@ const router = createBrowserRouter([
       // {
       //   path: "uploadPersonalImage",
       //   element: <UploadPersonalImage direction="customer"/>,
-      // },
+      // },    
+      {
+        path: "profile",
+        element: <Profile direction="customer"/>,
+      },
     ],
   },
     //VET

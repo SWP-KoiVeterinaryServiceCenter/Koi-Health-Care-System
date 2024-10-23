@@ -18,9 +18,9 @@ export const getAllWorkingScheduleThunk = createAsyncThunk(
 
 export const createWorkingScheduleThunk = createAsyncThunk(
   "schedule/createAllWorkingSchedule",
-  async (thunkAPI) => {
+  async (data , thunkAPI) => {
     try {
-      const response = await createWorkingSchedule();
+      const response = await createWorkingSchedule(data);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error?.response?.data);

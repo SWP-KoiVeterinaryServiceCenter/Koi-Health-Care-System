@@ -42,6 +42,7 @@ import {
 
   updatetPersonalInformation,
   uploadProfileImage,
+  resetPassword,
 } from "../../api/user";
 
 export const updateStaffPasswordThunk = createAsyncThunk(
@@ -509,6 +510,18 @@ export const uploadProfileImageThunk = createAsyncThunk(
   async ( data, thunkApi) => {
     try {
       const response = await uploadProfileImage(data);
+      return response;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+export const resetPasswordThunk = createAsyncThunk(
+  "user/resetPassword",
+  async ( data, thunkApi) => {
+    try {
+      const response = await resetPassword(data);
       return response;
     } catch (error) {
       return thunkApi.rejectWithValue(error?.response?.data);

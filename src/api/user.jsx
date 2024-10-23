@@ -236,3 +236,9 @@ export const uploadProfileImage = async (data) => {
   });
   return response.data;
 };
+
+export const resetPassword = async (data) => {
+  const response = await api.patch(`/api/v1/Account/ResetPassword`, data);
+  return response.data;
+};
+
