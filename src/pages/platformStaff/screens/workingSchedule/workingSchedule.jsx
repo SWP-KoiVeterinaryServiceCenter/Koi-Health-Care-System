@@ -15,52 +15,23 @@ import { getAllWorkingScheduleThunk } from "../../../../store/apiThunk/workingSc
 
 const localizer = momentLocalizer(moment);
 
-// const transformEvents = (data) => {
-//   return data.map((item) => {
-//     const startDate = new Date(item.workingDay);
-//     const endDate = new Date(item.workingDay);
-//     const [startHours, startMinutes] = item.startTime.split(":").map(Number);
-//     const [endHours, endMinutes] = item.endTime.split(":").map(Number);
-
-//     startDate.setHours(startHours, startMinutes);
-//     endDate.setHours(endHours, endMinutes);
-
-//     const description = `Start: ${startDate.toLocaleTimeString()} - End: ${endDate.toLocaleTimeString()}`;
-
-//     return {
-//       title: `${item.name || item.id}`,
-//       start: startDate,
-//       end: endDate,
-//       description,
-//       // id: item.id, // Include the item's id for navigation
-//     };
-//   });
-// };
-
-
 const transformEvents = (data) => {
   return data.map((item) => {
     const startDate = new Date(item.workingDay);
     const endDate = new Date(item.workingDay);
 
-    // Convert startTime and endTime from minutes to hours and minutes
-    const startHours = Math.floor(item.startTime / 60);
-    const startMinutes = item.startTime % 60;
-    const endHours = Math.floor(item.endTime / 60);
-    const endMinutes = item.endTime % 60;
+    // Parse startTime and endTime from "HH:mm:ss" format
+    const [startHours, startMinutes] = item.startTime.split(':').map(Number);
+    const [endHours, endMinutes] = item.endTime.split(':').map(Number);
 
     // Set the hours and minutes for start and end dates
     startDate.setHours(startHours, startMinutes);
     endDate.setHours(endHours, endMinutes);
 
-    const description = `Start: ${startDate.toLocaleTimeString()} - End: ${endDate.toLocaleTimeString()}`;
-
     return {
-      title: `Veterinarian ID: ${item.veterinarianId}`, // Adjust title based on available data
+      title: `Veterinarian ID: ${item.veterinarianId}`,
       start: startDate,
       end: endDate,
-      description,
-      id: item.veterinarianId, // Include the veterinarianId for navigation
     };
   });
 };
@@ -75,6 +46,8 @@ export default function WorkingSchedule(props) {
 
   const allWorkingSchedule = useSelector(allWorkingScheduleSelector);
 
+  console.log(allWorkingSchedule);
+
   useEffect(() => {
     dispatch(getAllWorkingScheduleThunk());
   }, [dispatch]);
@@ -85,7 +58,7 @@ export default function WorkingSchedule(props) {
   }, [allWorkingSchedule]);
 
   const renderEvent = (event) => (
-    <Tooltip title={`${event.title} - ${event.description}`} placement="top">
+    <Tooltip title={`${event.title}`} placement="top">
       <div>{event.title}</div>
     </Tooltip>
   );
@@ -93,7 +66,6 @@ export default function WorkingSchedule(props) {
   // New function to handle event click
   const handleEventClick = (event) => {
     navigate(`/${direction}/updateWorkingSchedule`, {
-      // state: { eventId: event.id }, // Pass the event id or any other data needed
     });
   };
 
@@ -119,7 +91,7 @@ export default function WorkingSchedule(props) {
           date={currentDate}
           onNavigate={setCurrentDate}
           components={{
-            event: renderEvent
+            event: renderEvent,
           }}
           onSelectEvent={handleEventClick} // Handle event click here
         />
@@ -130,5 +102,3 @@ export default function WorkingSchedule(props) {
     </>
   );
 }
-
-

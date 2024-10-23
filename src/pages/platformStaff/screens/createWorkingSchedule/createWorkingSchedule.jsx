@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 import {
   TextField,
@@ -13,7 +13,7 @@ import {
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { addKoiByAccountIdThunk } from "../../../../store/apiThunk/koiThunk";
+import { createWorkingScheduleThunk } from "../../../../store/apiThunk/workingSchedule";
 import {
   ADDPACKAGESUCCESS,
   ERRORTEXT,
@@ -25,10 +25,15 @@ import LoadingModal from "../../../../components/modal/loadingModal/loadingModal
 import Swal from "sweetalert2";
 import "./createWorkingSchedule.css";
 
+import { vetDetailSelector } from "../../../../store/sellectors";
+import { getAllVetAccountThunk } from "../../../../store/apiThunk/userThunk";
+
 export default function CreateWorkingSchedule() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
+
+  const vetDetail = useSelector(vetDetailSelector);
 
   const Header = ({
     title,
@@ -61,37 +66,27 @@ export default function CreateWorkingSchedule() {
 
   const formik = useFormik({
     initialValues: {
-      koiName: "",
-      weight: "",
+      veterinarianId: "",
+      workingDay: "",
       age: "",
-      gender: "",
-      varieties: "",
+      startTime: "",
+      endTime: "",
     },
     validationSchema: Yup.object({
-      koiName: Yup.string().required("Vet Name cannot be empty"),
-      weight: Yup.number()
-        .required("Date cannot be empty")
-        .min(0, "Date cannot be negative")
-        .integer("Date must be an integer")
-        .max(50, "Date cannot exceed 50kg"),
-      age: Yup.number()
-        .required("Age cannot be empty")
-        .min(0, "Age cannot be negative")
-        .integer("Age must be an integer")
-        .max(20, "Age cannot exceed 20 year"),
-      gender: Yup.string().required("Start time cannot be empty"),
-      varieties: Yup.string().required("End Time cannot be empty"),
+      veterinarianId: Yup.string().required("Vet Name cannot be empty"),
+      workingDay: Yup.number().required("Date cannot be empty"),
+      startTime: Yup.string().required("Start time cannot be empty"),
+      endTime: Yup.string().required("End Time cannot be empty"),
     }),
 
     onSubmit: async (values) => {
       setShowLoadingModal(true);
       dispatch(
-        addKoiByAccountIdThunk({
-          koiName: values.koiName,
-          weight: values.weight,
-          age: values.age,
-          gender: values.gender,
-          varieties: values.varieties,
+        createWorkingScheduleThunk({
+          veterinarianId: values.veterinarianId,
+          workingDay: values.workingDay.toString(), 
+          startTime: values.startTime,
+          endTime: values.endTime,
         })
       )
         .unwrap()
@@ -128,6 +123,10 @@ export default function CreateWorkingSchedule() {
     },
   });
 
+  useEffect(() => {
+    dispatch(getAllVetAccountThunk()).then(() => setShowLoadingModal(false));
+  }, [dispatch]);
+
   return (
     <>
       <div className="working-schedule">
@@ -142,45 +141,50 @@ export default function CreateWorkingSchedule() {
           {/* 1st Column: */}
           <div className="create-schedule-form-first-column">
             <div className="working-schedule-text-field-container">
-              <TextField
-                id="koiName"
-                label={
-                  <span>
-                    Vet Name <span style={{ color: "red" }}>*</span>
-                  </span>
-                }
-                variant="outlined"
-                value={formik.values.koiName}
-                onChange={formik.handleChange}
-                fullWidth
-                margin="dense"
-                color="secondary"
-                InputLabelProps={{ style: { color: "black" } }}
-                InputProps={{
-                  style: {
-                    backgroundColor: "#f5f5f5",
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                    color: "black",
-                  },
-                }}
-              />
-              {formik.touched.koiName && formik.errors.koiName && (
-                <div className="working__schedule__validation__error">
-                  {formik.errors.koiName}
-                </div>
-              )}
+              <FormControl fullWidth margin="dense">
+                <InputLabel id="veterinarianId">
+                  Veterinarian Name <span style={{ color: "red" }}>*</span>
+                </InputLabel>
+                <Select
+                  labelId="veterinarianId"
+                  id="veterinarianId"
+                  value={formik.values.veterinarianId}
+                  label="Doctor Name"
+                  color="secondary"
+                  style={{ backgroundColor: "#f5f5f5", color: "black" }}
+                  onChange={(event) =>
+                    formik.setFieldValue("veterinarianId", event.target.value)
+                  } // Explicitly set the field value
+                >
+                  {vetDetail && vetDetail.length > 0 ? (
+                    vetDetail.map((vet) => (
+                      <MenuItem key={vet.accountId} value={vet.accountId}>
+                        {vet.username}
+                      </MenuItem>
+                    ))
+                  ) : (
+                    <MenuItem disabled>No Veterinarian available</MenuItem>
+                  )}
+                </Select>
+              </FormControl>
+              {formik.touched.veterinarianId &&
+                formik.errors.veterinarianId && (
+                  <div className="login__validation__error">
+                    {formik.errors.veterinarianId}
+                  </div>
+                )}
             </div>
 
             <div className="working-schedule-text-field-container">
-            <TextField
-                id="gender"
+              <TextField
+                id="startTime"
                 label={
                   <span>
                     Start Time<span style={{ color: "red" }}>*</span>
                   </span>
                 }
                 variant="outlined"
-                value={formik.values.gender}
+                value={formik.values.startTime}
                 onChange={formik.handleChange}
                 fullWidth
                 margin="dense"
@@ -194,9 +198,9 @@ export default function CreateWorkingSchedule() {
                   },
                 }}
               />
-              {formik.touched.gender && formik.errors.gender && (
+              {formik.touched.startTime && formik.errors.startTime && (
                 <div className="working__schedule__validation__error">
-                  {formik.errors.gender}
+                  {formik.errors.startTime}
                 </div>
               )}
             </div>
@@ -206,20 +210,26 @@ export default function CreateWorkingSchedule() {
           <div className="create-schedule-form-second-column">
             <div className="working-schedule-text-field-container">
               <TextField
-                id="weight"
+                id="workingDay"
                 label={
                   <span>
-                    Date <span style={{ color: "red" }}>*</span>
+                    Appointment Date <span style={{ color: "red" }}>*</span>
                   </span>
                 }
+                slotProps={{
+                  inputLabel: {
+                    shrink: true,
+                  },
+                }}
                 variant="outlined"
-                value={formik.values.weight}
+                value={formik.values.workingDay}
                 onChange={formik.handleChange}
                 fullWidth
+                autoComplete="workingDay"
                 margin="dense"
                 type="number"
                 color="secondary"
-                InputLabelProps={{ style: { color: "black" } }}
+                InputLabelProps={{ style: { color: "black" }, shrink: true }}
                 InputProps={{
                   style: {
                     backgroundColor: "#f5f5f5",
@@ -228,23 +238,23 @@ export default function CreateWorkingSchedule() {
                   },
                 }}
               />
-              {formik.touched.weight && formik.errors.weight && (
-                <div className="working__schedule__validation__error">
-                  {formik.errors.weight}
+              {formik.touched.workingDay && formik.errors.workingDay && (
+                <div className="login__validation__error">
+                  {formik.errors.workingDay}
                 </div>
               )}
             </div>
 
             <div className="working-schedule-text-field-container">
               <TextField
-                id="varieties"
+                id="endTime"
                 label={
                   <span>
                     End Time<span style={{ color: "red" }}>*</span>
                   </span>
                 }
                 variant="outlined"
-                value={formik.values.varieties}
+                value={formik.values.endTime}
                 onChange={formik.handleChange}
                 fullWidth
                 margin="dense"
@@ -258,9 +268,9 @@ export default function CreateWorkingSchedule() {
                   },
                 }}
               />
-              {formik.touched.varieties && formik.errors.varieties && (
+              {formik.touched.endTime && formik.errors.endTime && (
                 <div className="working__schedule__validation__error">
-                  {formik.errors.varieties}
+                  {formik.errors.endTime}
                 </div>
               )}
             </div>
@@ -276,72 +286,6 @@ export default function CreateWorkingSchedule() {
               <LoadingModal />
             )}
           </div>
-
-          {/* 3rd Column */}
-          {/* <div className="create-schedule-form-third-column">
-              <div className="working-schedule-text-field-container">
-                <TextField
-                  id="weight"
-                  label={
-                    <span>
-                      Weight (kg) <span style={{ color: "red" }}>*</span>
-                    </span>
-                  }
-                  variant="outlined"
-                  value={formik.values.weight}
-                  onChange={formik.handleChange}
-                  fullWidth
-                  margin="dense"
-                  type="number"
-                  color="secondary"
-                  InputLabelProps={{ style: { color: "black" } }}
-                  InputProps={{
-                    style: {
-                      backgroundColor: "#f5f5f5",
-                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                      color: "black",
-                    },
-                  }}
-                />
-                {formik.touched.weight && formik.errors.weight && (
-                  <div className="working__schedule__validation__error">
-                    {formik.errors.weight}
-                  </div>
-                )}
-              </div>
-
-              <div className="working-schedule-text-field-container">
-                <TextField
-                  id="varieties"
-                  label={
-                    <span>
-                      Varieties <span style={{ color: "red" }}>*</span>
-                    </span>
-                  }
-                  variant="outlined"
-                  value={formik.values.varieties}
-                  onChange={formik.handleChange}
-                  fullWidth
-                  margin="dense"
-                  color="secondary"
-                  InputLabelProps={{ style: { color: "black" } }}
-                  InputProps={{
-                    style: {
-                      backgroundColor: "#f5f5f5",
-                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                      color: "black",
-                    },
-                  }}
-                />
-                {formik.touched.varieties && formik.errors.varieties && (
-                  <div className="working__schedule__validation__error">
-                    {formik.errors.varieties}
-                  </div>
-                )}
-              </div>
-
-            
-            </div> */}
         </form>
       </div>
       <Box pt={6} px={1} mt={6} sx={{ color: "black", background: "#ebe2e1" }}>

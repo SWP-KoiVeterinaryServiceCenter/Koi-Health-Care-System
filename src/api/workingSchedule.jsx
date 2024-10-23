@@ -6,9 +6,9 @@ export const getAllWorkingSchedule = async () => {
 };
 
 
-export const createWorkingSchedule = async () => {
-  const response = await api.post(`/api/v1/WorkingSchedule/Create`);
-  return response.data;
+export const createWorkingSchedule = async (data) => {
+  const response = await api.post(`/api/v1/WorkingSchedule/Create`, data);
+  return response.data; 
 };
 
 
