@@ -68,31 +68,32 @@ export default function CreateWorkingSchedule() {
       varieties: "",
     },
     validationSchema: Yup.object({
-      koiName: Yup.string().required("Koi Name cannot be empty"),
+      koiName: Yup.string().required("Vet Name cannot be empty"),
       weight: Yup.number()
-        .required("Weight cannot be empty")
-        .min(0, "Weight cannot be negative")
-        .integer("Weight must be an integer")
-        .max(50, "Weight cannot exceed 50kg"),
+        .required("Date cannot be empty")
+        .min(0, "Date cannot be negative")
+        .integer("Date must be an integer")
+        .max(50, "Date cannot exceed 50kg"),
       age: Yup.number()
         .required("Age cannot be empty")
         .min(0, "Age cannot be negative")
         .integer("Age must be an integer")
         .max(20, "Age cannot exceed 20 year"),
-      gender: Yup.string().required("Gender cannot be empty"),
-      varieties: Yup.string().required("Varieties cannot be empty"),
+      gender: Yup.string().required("Start time cannot be empty"),
+      varieties: Yup.string().required("End Time cannot be empty"),
     }),
 
     onSubmit: async (values) => {
-      const newFormData = new FormData();
-      newFormData.append("koiName", values.koiName);
-      newFormData.append("weight", values.weight);
-      newFormData.append("age", values.age);
-      newFormData.append("gender", values.gender);
-      newFormData.append("varieties", values.varieties);
-
       setShowLoadingModal(true);
-      dispatch(addKoiByAccountIdThunk(newFormData))
+      dispatch(
+        addKoiByAccountIdThunk({
+          koiName: values.koiName,
+          weight: values.weight,
+          age: values.age,
+          gender: values.gender,
+          varieties: values.varieties,
+        })
+      )
         .unwrap()
         .then(() => {
           setShowLoadingModal(false);
@@ -145,7 +146,7 @@ export default function CreateWorkingSchedule() {
                 id="koiName"
                 label={
                   <span>
-                    Koi Name: <span style={{ color: "red" }}>*</span>
+                    Vet Name <span style={{ color: "red" }}>*</span>
                   </span>
                 }
                 variant="outlined"
@@ -171,37 +172,34 @@ export default function CreateWorkingSchedule() {
             </div>
 
             <div className="working-schedule-text-field-container">
-              <FormControl fullWidth margin="dense">
-                <InputLabel id="gender-label">
+            <TextField
+                id="gender"
+                label={
                   <span>
-                    Gender <span style={{ color: "red" }}>*</span>
+                    Start Time<span style={{ color: "red" }}>*</span>
                   </span>
-                </InputLabel>
-                <Select
-                  labelId="gender-label"
-                  id="gender"
-                  value={formik.values.gender}
-                  onChange={(event) =>
-                    formik.setFieldValue("gender", event.target.value)
-                  }
-                  fullWidth
-                  color="secondary"
-                  style={{
+                }
+                variant="outlined"
+                value={formik.values.gender}
+                onChange={formik.handleChange}
+                fullWidth
+                margin="dense"
+                color="secondary"
+                InputLabelProps={{ style: { color: "black" } }}
+                InputProps={{
+                  style: {
                     backgroundColor: "#f5f5f5",
                     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                     color: "black",
-                  }}
-                >
-                  <MenuItem value="Male">Male</MenuItem>
-                  <MenuItem value="Female">Female</MenuItem>
-                </Select>
-              </FormControl>
+                  },
+                }}
+              />
               {formik.touched.gender && formik.errors.gender && (
                 <div className="working__schedule__validation__error">
                   {formik.errors.gender}
                 </div>
               )}
-            </div>           
+            </div>
           </div>
 
           {/* 2nd Column */}
@@ -211,7 +209,7 @@ export default function CreateWorkingSchedule() {
                 id="weight"
                 label={
                   <span>
-                    Weight (kg) <span style={{ color: "red" }}>*</span>
+                    Date <span style={{ color: "red" }}>*</span>
                   </span>
                 }
                 variant="outlined"
@@ -242,7 +240,7 @@ export default function CreateWorkingSchedule() {
                 id="varieties"
                 label={
                   <span>
-                    Varieties <span style={{ color: "red" }}>*</span>
+                    End Time<span style={{ color: "red" }}>*</span>
                   </span>
                 }
                 variant="outlined"
@@ -266,71 +264,6 @@ export default function CreateWorkingSchedule() {
                 </div>
               )}
             </div>
-          </div>
-
-          {/* 3rd Column */}                    
-          <div className="create-schedule-form-third-column">
-            <div className="working-schedule-text-field-container">
-              <TextField
-                id="weight"
-                label={
-                  <span>
-                    Weight (kg) <span style={{ color: "red" }}>*</span>
-                  </span>
-                }
-                variant="outlined"
-                value={formik.values.weight}
-                onChange={formik.handleChange}
-                fullWidth
-                margin="dense"
-                type="number"
-                color="secondary"
-                InputLabelProps={{ style: { color: "black" } }}
-                InputProps={{
-                  style: {
-                    backgroundColor: "#f5f5f5",
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                    color: "black",
-                  },
-                }}
-              />
-              {formik.touched.weight && formik.errors.weight && (
-                <div className="working__schedule__validation__error">
-                  {formik.errors.weight}
-                </div>
-              )}
-            </div>
-
-            <div className="working-schedule-text-field-container">
-              <TextField
-                id="varieties"
-                label={
-                  <span>
-                    Varieties <span style={{ color: "red" }}>*</span>
-                  </span>
-                }
-                variant="outlined"
-                value={formik.values.varieties}
-                onChange={formik.handleChange}
-                fullWidth
-                margin="dense"
-                color="secondary"
-                InputLabelProps={{ style: { color: "black" } }}
-                InputProps={{
-                  style: {
-                    backgroundColor: "#f5f5f5",
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                    color: "black",
-                  },
-                }}
-              />
-              {formik.touched.varieties && formik.errors.varieties && (
-                <div className="working__schedule__validation__error">
-                  {formik.errors.varieties}
-                </div>
-              )}
-            </div>
-
             {/* Button Container */}
             {!showLoadingModal ? (
               <div className="working-schedule-button-container">
@@ -343,6 +276,72 @@ export default function CreateWorkingSchedule() {
               <LoadingModal />
             )}
           </div>
+
+          {/* 3rd Column */}
+          {/* <div className="create-schedule-form-third-column">
+              <div className="working-schedule-text-field-container">
+                <TextField
+                  id="weight"
+                  label={
+                    <span>
+                      Weight (kg) <span style={{ color: "red" }}>*</span>
+                    </span>
+                  }
+                  variant="outlined"
+                  value={formik.values.weight}
+                  onChange={formik.handleChange}
+                  fullWidth
+                  margin="dense"
+                  type="number"
+                  color="secondary"
+                  InputLabelProps={{ style: { color: "black" } }}
+                  InputProps={{
+                    style: {
+                      backgroundColor: "#f5f5f5",
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                      color: "black",
+                    },
+                  }}
+                />
+                {formik.touched.weight && formik.errors.weight && (
+                  <div className="working__schedule__validation__error">
+                    {formik.errors.weight}
+                  </div>
+                )}
+              </div>
+
+              <div className="working-schedule-text-field-container">
+                <TextField
+                  id="varieties"
+                  label={
+                    <span>
+                      Varieties <span style={{ color: "red" }}>*</span>
+                    </span>
+                  }
+                  variant="outlined"
+                  value={formik.values.varieties}
+                  onChange={formik.handleChange}
+                  fullWidth
+                  margin="dense"
+                  color="secondary"
+                  InputLabelProps={{ style: { color: "black" } }}
+                  InputProps={{
+                    style: {
+                      backgroundColor: "#f5f5f5",
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                      color: "black",
+                    },
+                  }}
+                />
+                {formik.touched.varieties && formik.errors.varieties && (
+                  <div className="working__schedule__validation__error">
+                    {formik.errors.varieties}
+                  </div>
+                )}
+              </div>
+
+            
+            </div> */}
         </form>
       </div>
       <Box pt={6} px={1} mt={6} sx={{ color: "black", background: "#ebe2e1" }}>

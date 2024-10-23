@@ -1,118 +1,101 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 import { Box } from "@mui/material";
-
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
-const localizer = momentLocalizer(moment);
+import { Tooltip } from "antd";
 import "./workingSchedule.css";
 
-const events = [
-  {
-    title: "Kelsie Meyer",
-    start: new Date(2024, 9, 17, 14, 30),
-    end: new Date(2024, 9, 17, 15, 30),
-  },
-  {
-    title: "Mark Carusso",
-    start: new Date(2024, 9, 17, 10, 0),
-    end: new Date(2024, 9, 17, 11, 0),
-  },
-  {
-    title: "Taylor Greeno",
-    start: new Date(2024, 9, 18, 9, 0),
-    end: new Date(2024, 9, 18, 10, 0),
-  },
-  {
-    title: "Isaiah Jian",
-    start: new Date(2024, 9, 18, 11, 0),
-    end: new Date(2024, 9, 18, 12, 0),
-  },
-  {
-    title: "Nazarick",
-    start: new Date(2024, 9, 18, 13, 30),
-    end: new Date(2024, 9, 18, 14, 30),
-  },
-  {
-    title: "B2487327",
-    start: new Date(2024, 9, 19, 15, 0),
-    end: new Date(2024, 9, 19, 16, 0),
-  },
-  {
-    title: "Kelsie Meyer",
-    start: new Date(2024, 9, 20, 10, 0),
-    end: new Date(2024, 9, 20, 11, 0),
-  },
-  {
-    title: "Mark Carusso",
-    start: new Date(2024, 9, 20, 12, 0),
-    end: new Date(2024, 9, 20, 13, 0),
-  },
-  {
-    title: "Taylor Greeno",
-    start: new Date(2024, 9, 21, 9, 0),
-    end: new Date(2024, 9, 21, 10, 0),
-  },
-  {
-    title: "Isaiah Jian",
-    start: new Date(2024, 9, 22, 14, 0),
-    end: new Date(2024, 9, 22, 15, 0),
-  },
-  {
-    title: "Nazarick",
-    start: new Date(2024, 9, 23, 11, 0),
-    end: new Date(2024, 9, 23, 12, 0),
-  },
-  {
-    title: "B2487327",
-    start: new Date(2024, 9, 24, 13, 0),
-    end: new Date(2024, 9, 24, 14, 0),
-  },
-  {
-    title: "Kelsie Meyer",
-    start: new Date(2024, 9, 25, 15, 0),
-    end: new Date(2024, 9, 25, 16, 0),
-  },
-  {
-    title: "Mark Carusso",
-    start: new Date(2024, 9, 26, 10, 0),
-    end: new Date(2024, 9, 26, 11, 0),
-  },
-  {
-    title: "Taylor Greeno",
-    start: new Date(2024, 9, 27, 12, 0),
-    end: new Date(2024, 9, 27, 13, 0),
-  },
-  {
-    title: "Isaiah Jian",
-    start: new Date(2024, 9, 28, 14, 0),
-    end: new Date(2024, 9, 28, 15, 0),
-  },
-  {
-    title: "Nazarick",
-    start: new Date(2024, 9, 29, 9, 0),
-    end: new Date(2024, 9, 29, 10, 0),
-  },
-  {
-    title: "B2487327",
-    start: new Date(2024, 9, 30, 11, 0),
-    end: new Date(2024, 9, 30, 12, 0),
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-export default function WorkingSchedule() {
+import { allWorkingScheduleSelector } from "../../../../store/sellectors";
+import { getAllWorkingScheduleThunk } from "../../../../store/apiThunk/workingSchedule";
+
+const localizer = momentLocalizer(moment);
+
+// const transformEvents = (data) => {
+//   return data.map((item) => {
+//     const startDate = new Date(item.workingDay);
+//     const endDate = new Date(item.workingDay);
+//     const [startHours, startMinutes] = item.startTime.split(":").map(Number);
+//     const [endHours, endMinutes] = item.endTime.split(":").map(Number);
+
+//     startDate.setHours(startHours, startMinutes);
+//     endDate.setHours(endHours, endMinutes);
+
+//     const description = `Start: ${startDate.toLocaleTimeString()} - End: ${endDate.toLocaleTimeString()}`;
+
+//     return {
+//       title: `${item.name || item.id}`,
+//       start: startDate,
+//       end: endDate,
+//       description,
+//       // id: item.id, // Include the item's id for navigation
+//     };
+//   });
+// };
+
+
+const transformEvents = (data) => {
+  return data.map((item) => {
+    const startDate = new Date(item.workingDay);
+    const endDate = new Date(item.workingDay);
+
+    // Convert startTime and endTime from minutes to hours and minutes
+    const startHours = Math.floor(item.startTime / 60);
+    const startMinutes = item.startTime % 60;
+    const endHours = Math.floor(item.endTime / 60);
+    const endMinutes = item.endTime % 60;
+
+    // Set the hours and minutes for start and end dates
+    startDate.setHours(startHours, startMinutes);
+    endDate.setHours(endHours, endMinutes);
+
+    const description = `Start: ${startDate.toLocaleTimeString()} - End: ${endDate.toLocaleTimeString()}`;
+
+    return {
+      title: `Veterinarian ID: ${item.veterinarianId}`, // Adjust title based on available data
+      start: startDate,
+      end: endDate,
+      description,
+      id: item.veterinarianId, // Include the veterinarianId for navigation
+    };
+  });
+};
+
+
+export default function WorkingSchedule(props) {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [events, setEvents] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const direction = props.direction;
 
-  //   const handleSelectEvent = (event) => {
-  //     alert(event.title);
-  //   };
+  const allWorkingSchedule = useSelector(allWorkingScheduleSelector);
 
-  //   const handleSelectSlot = (slotInfo) => {
-  //     alert(
-  //       `You selected ${slotInfo.start.toLocaleString()} - ${slotInfo.end.toLocaleString()}`
-  //     );
-  //   };
+  useEffect(() => {
+    dispatch(getAllWorkingScheduleThunk());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const formattedEvents = transformEvents(allWorkingSchedule);
+    setEvents(formattedEvents);
+  }, [allWorkingSchedule]);
+
+  const renderEvent = (event) => (
+    <Tooltip title={`${event.title} - ${event.description}`} placement="top">
+      <div>{event.title}</div>
+    </Tooltip>
+  );
+
+  // New function to handle event click
+  const handleEventClick = (event) => {
+    navigate(`/${direction}/updateWorkingSchedule`, {
+      // state: { eventId: event.id }, // Pass the event id or any other data needed
+    });
+  };
 
   return (
     <>
@@ -120,10 +103,10 @@ export default function WorkingSchedule() {
         style={{
           justifyContent: "center",
           display: "flex",
-          margin: "20px 20px 0px 20px",
-          background: "white",
+          margin: "20px",
           padding: 20,
           borderRadius: 40,
+          background: "white",
         }}
       >
         <Calendar
@@ -132,11 +115,13 @@ export default function WorkingSchedule() {
           startAccessor="start"
           endAccessor="end"
           style={{ height: 600, width: 1000 }}
-          //   onSelectEvent={handleSelectEvent}
-          //   onSelectSlot={handleSelectSlot}
           selectable
           date={currentDate}
-          onNavigate={(date) => setCurrentDate(date)}
+          onNavigate={setCurrentDate}
+          components={{
+            event: renderEvent
+          }}
+          onSelectEvent={handleEventClick} // Handle event click here
         />
       </div>
       <Box pt={6} px={1} mt={6} sx={{ color: "black", background: "#ebe2e1" }}>
@@ -145,3 +130,5 @@ export default function WorkingSchedule() {
     </>
   );
 }
+
+
