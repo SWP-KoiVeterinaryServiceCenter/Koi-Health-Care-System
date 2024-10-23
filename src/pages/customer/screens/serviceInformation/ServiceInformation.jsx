@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getCurrentUserAppointmentsThunk } from "../../../../store/apiThunk/appointment";
-import {
-  getUserDataThunk,
-} from "../../../../store/apiThunk/userThunk";
+import { getUserDataThunk } from "../../../../store/apiThunk/userThunk";
 import {
   deleteAppointmentsThunk,
   cancelAppointmentsThunk,
@@ -62,13 +60,15 @@ const ServiceInformation = () => {
   const getStatusColor = (status) => {
     switch (status.toUpperCase()) {
       case "PENDING":
-        return "#EFD033";
+        return "#FFE41E";
       case "CONFIRMED":
         return "#4CAF50";
       case "MISSED":
         return "#A30B2E";
       case "CANCELLED":
         return "#0A3161";
+      case "FINISHED":
+        return "#A908B5";
       default:
         return "#000000";
     }
@@ -83,7 +83,6 @@ const ServiceInformation = () => {
     dispatch(cancelAppointmentsThunk(appointmentId))
       .unwrap()
       .then(() => {
-    
         dispatch(getCurrentUserAppointmentsThunk()).finally(() => {
           setActionLoading(false); // End loading after the action
         });
@@ -100,7 +99,6 @@ const ServiceInformation = () => {
     dispatch(deleteAppointmentsThunk(appointmentId))
       .unwrap()
       .then(() => {
-
         dispatch(getCurrentUserAppointmentsThunk()).finally(() => {
           setActionLoading(false); // End loading after the action
         });
@@ -118,8 +116,8 @@ const ServiceInformation = () => {
       {loading || actionLoading ? (
         <Modal open={loading || actionLoading} onClose={() => {}}>
           <div className="modal-loading">
-          <p>It will take a while to load, please wait.</p>
-          <Lottie animationData={LoadingFish} />
+            <p>It will take a while to load, please wait.</p>
+            <Lottie animationData={LoadingFish} />
             <p>Loading...</p>
           </div>
         </Modal>
@@ -192,35 +190,73 @@ const ServiceInformation = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="checkout-card checkout-footer">
+                  {/* <div className="checkout-card checkout-footer">
                     <div className="footer-details">
                       <label className="checkout-price">
                         {appointment.price} vnđ
                       </label>
-                      <button
-                        className="checkout-button"
-                        onClick={() =>
-                          handleCheckout(appointment.id, appointment.price)
-                        }
-                      >
-                        Check Out
-                      </button>
+
+                    
+                      {!(["CANCELLED", "MISSED", "FINISHED", "CONFIRMED"].includes(appointment.status.toUpperCase())) && (
+                        <button
+                          className="checkout-button"
+                          onClick={() =>
+                            handleCheckout(appointment.id, appointment.price)
+                          }
+                        >
+                          Check Out
+                        </button>
+                      )}
+                    </div>
+                  </div> */}
+                  
+                  <div className="checkout-card checkout-footer">
+                    <div
+                      className={`footer-details ${appointment.status.toUpperCase()}`}
+                    >
+                      <label className="checkout-price">
+                        {appointment.price} vnđ
+                      </label>
+
+                      {![
+                        "CANCELLED",
+                        "MISSED",
+                        "FINISHED",
+                        "CONFIRMED",
+                      ].includes(appointment.status.toUpperCase()) && (
+                        <button
+                          className="checkout-button"
+                          onClick={() =>
+                            handleCheckout(appointment.id, appointment.price)
+                          }
+                        >
+                          Check Out
+                        </button>
+                      )}
                     </div>
                   </div>
+
                 </div>
 
                 {activeMenuCardId === appointment.id && (
                   <div className="menu-overlay" ref={menuRef}>
                     <div className="menu-buttons">
-                      <button
-                        className="cancel-button"
-                        onClick={() => handleCancelAppointment(appointment.id)}
-                      >
-                        Reject
-                      </button>
+                      {/* Conditionally render Reject button */}
+                      {!(["CONFIRMED", "MISSED", "CANCELLED", "FINISHED"].includes(appointment.status.toUpperCase())) && (
+                        <button
+                          className="cancel-button"
+                          onClick={() =>
+                            handleCancelAppointment(appointment.id)
+                          }
+                        >
+                          Reject
+                        </button>
+                      )}
                       <button
                         className="delete-button"
-                        onClick={() => handleDeleteAppointment(appointment.id)}
+                        onClick={() =>
+                          handleDeleteAppointment(appointment.id)
+                        }
                       >
                         Delete
                       </button>

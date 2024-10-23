@@ -94,7 +94,7 @@ export default function Login() {
                     timer: 1500,
                     timerProgressBar: true,
                     scrollbarPadding: false,
-                    heightAuto: false, 
+                    heightAuto: false,
                   }).then(() => {
                     navigate("/customer");
                   });
@@ -145,26 +145,25 @@ export default function Login() {
                     timerProgressBar: true,
                     scrollbarPadding: false,
                   }).then(() => {
-                    navigate("/admin");
+                    navigate("/vet");
                   });
                   break;
-                  case "Staff":
-                    setShowLoadingModal(false);
-                    Swal.fire({
-                      title: SUCCESSTEXT,
-                      text: LOGINSUCCESS,
-                      icon: "success",
-                      showCancelButton: false,
-                      showConfirmButton: false,
-                      background: "white",
-                      timer: 1500,
-                      timerProgressBar: true,
-                      scrollbarPadding: false,
-                    }).then(() => {
-                      navigate("/staff");  // Điều hướng tới trang dành cho Staff
-                    });
-                    break;
-                  
+                case "Staff":
+                  setShowLoadingModal(false);
+                  Swal.fire({
+                    title: SUCCESSTEXT,
+                    text: LOGINSUCCESS,
+                    icon: "success",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    background: "white",
+                    timer: 1500,
+                    timerProgressBar: true,
+                    scrollbarPadding: false,
+                  }).then(() => {
+                    navigate("/staff"); // Điều hướng tới trang dành cho Staff
+                  });
+                  break;
               }
             });
         })
@@ -183,7 +182,7 @@ export default function Login() {
         });
     },
   });
-  
+
   const SignInUsingGoogle = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -324,7 +323,7 @@ export default function Login() {
                     color="secondary"
                     margin="dense"
                     InputLabelProps={{
-                      style: { color: "black" }, 
+                      style: { color: "black" },
                     }}
                     InputProps={{
                       style: { color: "black" },
@@ -332,7 +331,7 @@ export default function Login() {
                     sx={{
                       "& .MuiOutlinedInput-root": {
                         "& fieldset": {
-                          borderColor: " #419781", 
+                          borderColor: " #419781",
                           borderWidth: "2px",
                         },
                         "&:hover fieldset": {
@@ -389,15 +388,15 @@ export default function Login() {
                     sx={{
                       "& .MuiOutlinedInput-root": {
                         "& fieldset": {
-                          borderColor: " #419781", 
+                          borderColor: " #419781",
                           borderWidth: "2px",
                         },
                         "&:hover fieldset": {
-                          borderColor: " #419781", 
+                          borderColor: " #419781",
                           borderWidth: "2px",
                         },
                         "&.Mui-focused fieldset": {
-                          borderColor: " #419781", 
+                          borderColor: " #419781",
                           borderWidth: "2px",
                         },
                       },
@@ -409,7 +408,11 @@ export default function Login() {
                     </div>
                   ) : null}
                   <p style={{ textAlign: "right" }}>
-                    <Link to="/" variant="body2" className="login__forgot">
+                    <Link
+                      to="/forgotPassword"
+                      variant="body2"
+                      className="login__forgot"
+                    >
                       Forgot password?
                     </Link>
                   </p>
@@ -428,11 +431,12 @@ export default function Login() {
 
                   <p className="login__link">
                     Don't have an account?
-                    <Link to="/signup" variant="body2" className="login__link__btn">
-                      <span style={{ color: "#70d8bd" }}>
-                        {" "}
-                        Sign up now!
-                      </span>
+                    <Link
+                      to="/signup"
+                      variant="body2"
+                      className="login__link__btn"
+                    >
+                      <span style={{ color: "#70d8bd" }}> Sign up now!</span>
                     </Link>
                   </p>
                 </form>
