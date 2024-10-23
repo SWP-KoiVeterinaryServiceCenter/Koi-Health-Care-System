@@ -209,8 +209,8 @@ export default function PersonalInformation(props) {
               Name: <span>{userDetail.username}</span>
             </p>
 
-            <p>
-              Location: <span>{userDetail.location}</span>
+            <p style={{ display: "flex" }}>
+              Location: <span className="truncated">{userDetail.location}</span>
             </p>
             <p style={{ display: "flex" }}>
               Contact-Link:
