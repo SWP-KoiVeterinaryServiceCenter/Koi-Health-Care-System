@@ -44,7 +44,7 @@ export default function PersonalInformation(props) {
   // console.log({ allKoiByAccountId });
 
   const [imagePreview, setImagePreview] = useState(userDetail.profileImage);
-  const [imageSelected, setImageSelected] = useState(false);
+  // const [imageSelected, setImageSelected] = useState(false);
 
   // console.log(userDetail.profileImage);
 
@@ -171,10 +171,10 @@ export default function PersonalInformation(props) {
                   src={imagePreview} // Use imagePreview state here
                   alt="Koi"
                   className="image-preview-img"
-                  style={{ cursor: "pointer" }}
+                  // style={{ cursor: "pointer" }}
                 />
               </label>
-              <input
+              {/* <input
                 id="formFile"
                 type="file"
                 onChange={(event) => {
@@ -197,7 +197,7 @@ export default function PersonalInformation(props) {
                     Update
                   </Button>
                 </div>
-              )}
+              )} */}
             </div>
           </form>
 
@@ -220,7 +220,7 @@ export default function PersonalInformation(props) {
               Phone Number: <span>{userDetail.phonenumber}</span>
             </p>
           </div>
-          <div className="edit-icon-container">
+          {/* <div className="edit-icon-container">
             <EditIcon
               sx={{ fontSize: 40, cursor: "pointer" }}
               onClick={() =>
@@ -229,7 +229,7 @@ export default function PersonalInformation(props) {
                 })
               }
             />
-          </div>
+          </div> */}
         </div>
         <Divider />
 
