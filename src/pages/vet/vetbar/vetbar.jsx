@@ -191,7 +191,7 @@ function AppAppBar({ mode, toggleColorMode }) {
       </Menu>
     </>
 
-                {/* <MenuItem
+                <MenuItem
                   onClick={() => scrollToSection("testimonials")}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
@@ -204,13 +204,13 @@ function AppAppBar({ mode, toggleColorMode }) {
                     color="black"
                     fontSize="16px"
                     onClick={() => {
-                      navigate("service");
+                      navigate("appointmentByCurrentVet");
                     }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    SERVICE
+                    APPOINTMENTS
                   </Typography>
-                </MenuItem> */}
+                </MenuItem>
 
                 <MenuItem
                   onClick={() => scrollToSection("highlights")}
