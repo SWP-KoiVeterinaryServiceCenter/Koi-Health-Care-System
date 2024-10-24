@@ -108,10 +108,11 @@ export default function VetWorkingSchedule() {
         style={{
           justifyContent: "center",
           display: "flex",
-          margin: "70px 20px",
-          padding: 20,
+          margin: "90px 100px",
+          padding:"10px 20px 10px 20px",
           borderRadius: 40,
           background: "white",
+          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
         }}
       >
         <Calendar

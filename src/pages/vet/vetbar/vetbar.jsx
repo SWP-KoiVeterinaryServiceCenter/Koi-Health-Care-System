@@ -226,7 +226,8 @@ function AppAppBar({ mode, toggleColorMode }) {
                     color="black"
                     fontSize="16px"
                     onClick={() => {
-                      navigate("appointmentList");
+                      navigate("vetWorkingSchedule");
+                      window.scrollTo(0, 0);
                     }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
@@ -301,13 +302,18 @@ function AppAppBar({ mode, toggleColorMode }) {
                     >
                       {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
                     </Box>
-                    <MenuItem onClick={() => navigate("personalInformation")}>
+                    <MenuItem
+                      onClick={() => {
+                        navigate("profile");
+                        window.scrollTo(0, 0);
+                      }}
+                    >
                       Update Profile
                     </MenuItem>
                     <MenuItem
                       onClick={() => {
                         navigate("vetWorkingSchedule");
-                        window.scrollTo(0, 0); 
+                        window.scrollTo(0, 0);
                       }}
                     >
                       Schedule information
