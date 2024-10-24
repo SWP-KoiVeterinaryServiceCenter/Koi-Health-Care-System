@@ -30,8 +30,14 @@ export const getAllWorkingScheduleById = async (id) => {
 };
 
 
-
 export const getWorkingScheduleByVetId = async (accountId) => {
   const response = await api.get(`/api/v1/WorkingSchedule/GetAllByAccountId/${accountId}`);
   return response.data;
 };
+
+
+export const getVetWorkingScheduleById = async (veterinarianId) => {
+  const response = await api.get(`/api/v1/AccountSchedule/GetSchedulesByAccountId/${veterinarianId}`);
+  return response.data;
+};
+
