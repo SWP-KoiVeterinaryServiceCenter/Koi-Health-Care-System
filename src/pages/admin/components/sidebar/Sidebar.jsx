@@ -215,20 +215,7 @@ const Sidebar = (props) => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                  {/* <Item
-                    title="Verify Account"
-                    to="verifyAccount"
-                    icon={<HowToRegIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  /> */}
-                  {/* <Item
-                    title="Service Center"
-                    to="createServiceCenter"
-                    icon={<SubscriptionsIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  /> */}
+              
                       <Item
                     title="Service Center List"
                     to="listServiceCenter"
@@ -243,197 +230,15 @@ const Sidebar = (props) => {
                     selected={selected}
                     setSelected={setSelected}
                   />
+                           <Item
+                    title="TravelExpense "
+                    to="travelExpenseList"
+                    icon={<SubscriptionsIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />  
 
-                  {/* ///////////////////////////////////////////////////////////////////// */}
-                  {/* <List>
-                    <ListItemButton onClick={handleClickProductManagement}>
-                      {!isCollapsed && (
-                        <InventoryIcon
-                          style={{
-                            marginLeft: "10px",
-                            marginRight: "19px",
-                            color: "white",
-                          }}
-                        />
-                      )}
-                      {!isCollapsed && (
-                        <ListItemText
-                          primary="Product "
-                          style={{
-                            color: "white",
-                          }}
-                        />
-                      )}
-                      {openCPM ? (
-                        <ExpandLess
-                          style={{
-                            marginLeft: "10px",
-                            color: "white",
-                          }}
-                        />
-                      ) : (
-                        <ExpandMore
-                          style={{
-                            marginLeft: "10px",
-                            color: "white",
-                          }}
-                        />
-                      )}
-                    </ListItemButton>
-                    <Collapse
-                      in={openCPM}
-                      timeout="auto"
-                      unmountOnExit
-                      style={{
-                        paddingLeft: !isCollapsed ? "20px" : 0,
-                      }}
-                    >
-                      <Item
-                        title="Post Management"
-                        to="shop"
-                        icon={<ClassIcon />}
-                        selected={selected}
-                        setSelected={setSelected}
-                      />
-                      <Item
-                        title="Category Management"
-                        to="category"
-                        icon={<CategoryIcon />}
-                        selected={selected}
-                        setSelected={setSelected}
-                      />
-                    </Collapse>
-                  </List> */}
-                  {/* ////////////////////////////////////////////////////////////////// */}
-                  {/* <List>
-                    <ListItemButton onClick={handleClickTransaction}>
-                      {!isCollapsed && (
-                        <PaidIcon
-                          style={{
-                            marginLeft: "10px",
-                            marginRight: "19px",
-                            color: "white",
-                          }}
-                        />
-                      )}
-                      {!isCollapsed && (
-                        <ListItemText
-                          primary="Transaction"
-                          style={{
-                            color: "white",
-                          }}
-                        />
-                      )}
-                      {openTran ? (
-                        <ExpandLess
-                          style={{
-                            marginLeft: "10px",
-                            color: "white",
-                          }}
-                        />
-                      ) : (
-                        <ExpandMore
-                          style={{
-                            marginLeft: "10px",
-                            color: "white",
-                          }}
-                        />
-                      )}
-                    </ListItemButton>
-                    <Collapse
-                      in={openTran}
-                      timeout="auto"
-                      unmountOnExit
-                      style={{
-                        paddingLeft: !isCollapsed ? "20px" : 0,
-                      }}
-                    >
-                      <Item
-                        title="Wallet Transaction"
-                        to="wallet"
-                        icon={<WalletOutlinedIcon />}
-                        selected={selected}
-                        setSelected={setSelected}
-                      />
-                      <Item
-                        title="Order Tracking"
-                        to="ordertable"
-                        icon={<ManageHistoryIcon />}
-                        selected={selected}
-                        setSelected={setSelected}
-                      />
-                    </Collapse>
-                  </List> */}
-                  {/* //////////////////////////////////handleClickPolicy/////////////////////////////////// */}
-                  {/* <List>
-                    <ListItemButton onClick={handleClickPolicy}>
-                      {!isCollapsed && (
-                        <LocalPoliceIcon
-                          style={{
-                            marginLeft: "10px",
-                            marginRight: "19px",
-                            color: "white",
-                          }}
-                        />
-                      )}
-                      {!isCollapsed && (
-                        <ListItemText
-                          primary="Policy"
-                          style={{
-                            color: "white",
-                          }}
-                        />
-                      )}
-                      {openPol ? (
-                        <ExpandLess
-                          style={{
-                            marginLeft: "10px",
-                            color: "white",
-                          }}
-                        />
-                      ) : (
-                        <ExpandMore
-                          style={{
-                            marginLeft: "10px",
-                            color: "white",
-                          }}
-                        />
-                      )}
-                    </ListItemButton>
-                    <Collapse
-                      in={openPol}
-                      timeout="auto"
-                      unmountOnExit
-                      style={{
-                        paddingLeft: !isCollapsed ? "20px" : 0,
-                      }}
-                    >
-                      <Item
-                        title="Daily cancellation limit"
-                        to="cancelAmount"
-                        icon={<EventRepeatIcon />}
-                        selected={selected}
-                        setSelected={setSelected}
-                      />
-                      <Item
-                        title="Adjust Money"
-                        to="adjustMoney"
-                        icon={<CurrencyExchangeIcon />}
-                        selected={selected}
-                        setSelected={setSelected}
-                      />
-                      <Item
-                        title="Report"
-                        to="report"
-                        icon={<ReportGmailerrorredIcon />}
-                        selected={selected}
-                        setSelected={setSelected}
-                      />
-                    </Collapse>
-                  </List>
-
-                 {/* //////////////////////////////////handleClickWorkingSchedule/////////////////////////////////// */}
-
+                
 
 
                    <List>

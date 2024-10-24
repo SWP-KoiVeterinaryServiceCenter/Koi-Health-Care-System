@@ -18,19 +18,18 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { tokens } from "../../../../theme";
-import { appointmentByCurrentVetSelector,allappointmentSelector } from "../../../../store/sellectors";
+import { appointmentByCurrentVetSelector } from "../../../../store/sellectors";
 import {
   getAppointmentByCurrentVetThunk,
   confirmAppointmentsThunk,
   missAppointmentsThunk,
-  getAllUserAppointmentsThunk
 } from "../../../../store/apiThunk/appointment";
 import {
   StyledBox,
   CustomNoRowsOverlay,
   GridLoadingOverlay,
 } from "../../../../components/styledTable/styledTable";
-import "./appointmentManagement.css";
+import "./appointmentByCurrentVet.css";
 import Footer from "../../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 import AddIcon from "@mui/icons-material/Add";
 import IconButton from "@mui/material/IconButton";
@@ -39,10 +38,10 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import bgImage from "../../../../assets/koibg_account.jpg";
 
-const AppointmentManagement = (props) => {
+const AppointmentByCurrentVet = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const accounts = useSelector(allappointmentSelector);
+  const accounts = useSelector(appointmentByCurrentVetSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
@@ -52,7 +51,7 @@ const AppointmentManagement = (props) => {
   const [filteredRows, setFilteredRows] = useState([]);
 
   useEffect(() => {
-    dispatch(getAllUserAppointmentsThunk());
+    dispatch(getAppointmentByCurrentVetThunk());
   }, [dispatch]);
 
   useEffect(() => {
@@ -92,7 +91,7 @@ const AppointmentManagement = (props) => {
           Swal.fire("Error", response.error.message, "error");
         } else {
           Swal.fire("Success", "Appointment confirmed successfully!", "success").then(() => {
-            dispatch(getAllUserAppointmentsThunk()); // Reload data after success
+            dispatch(getAppointmentByCurrentVetThunk()); // Reload data after success
           });
         }
       })
@@ -110,7 +109,7 @@ const AppointmentManagement = (props) => {
           Swal.fire("Error", response.error.message, "error");
         } else {
           Swal.fire("Success", "Appointment marked as missed!", "success").then(() => {
-            dispatch(getAllUserAppointmentsThunk()); // Reload data after success
+            dispatch(getAppointmentByCurrentVetThunk()); // Reload data after success
           });
         }
       })
@@ -188,51 +187,51 @@ const AppointmentManagement = (props) => {
       flex: 1,
       renderCell: ({ row: { koiName } }) => <div>{koiName}</div>,
     },
-    {
-      field: "vetName",
-      headerName: "Vet Name",
-      flex: 1,
-      renderCell: ({ row: { vetName } }) => <div>{vetName}</div>,
-    },
+    // {
+    //   field: "vetName",
+    //   headerName: "Vet Name",
+    //   flex: 1,
+    //   renderCell: ({ row: { vetName } }) => <div>{vetName}</div>,
+    // },
     {
       field: "description",
       headerName: "Description",
       flex: 1,
       renderCell: ({ row: { description } }) => <div>{description}</div>,
     },
-    // {
-    //   field: "actions",
-    //   headerName: "Actions",
-    //   headerAlign: "center",
-    //   flex: 1,
-    //   renderCell: ({ row }) => {
-    //     // Check if the status is one of Finished, Missed, Pending, Cancelled
-    //     const showActions = !["Finished", "Missed", "Pending", "Cancelled"].includes(row.status);
+    {
+      field: "actions",
+      headerName: "Actions",
+      headerAlign: "center",
+      flex: 1,
+      renderCell: ({ row }) => {
+        // Check if the status is one of Finished, Missed, Pending, Cancelled
+        const showActions = !["Finished", "Missed", "Pending", "Cancelled"].includes(row.status);
   
-    //     return (
-    //       <Box width="100%" display="flex" justifyContent="center" gap="8px">
-    //         {showActions && (
-    //           <>
-    //             <Button
-    //               variant="contained"
-    //               sx={{ backgroundColor: "green", color: "white" }}
-    //               onClick={() => handleConfirm(row)} // Confirm action
-    //             >
-    //               Confirm
-    //             </Button>
-    //             <Button
-    //               variant="contained"
-    //               sx={{ backgroundColor: "red", color: "white" }}
-    //               onClick={() => handleMiss(row)} // Miss action
-    //             >
-    //               Missed
-    //             </Button>
-    //           </>
-    //         )}
-    //       </Box>
-    //     );
-    //   },
-    // },
+        return (
+          <Box width="100%" display="flex" justifyContent="center" gap="8px">
+            {showActions && (
+              <>
+                <Button
+                  variant="contained"
+                  sx={{ backgroundColor: "green", color: "white" }}
+                  onClick={() => handleConfirm(row)} // Confirm action
+                >
+                  Confirm
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{ backgroundColor: "red", color: "white" }}
+                  onClick={() => handleMiss(row)} // Miss action
+                >
+                  Missed
+                </Button>
+              </>
+            )}
+          </Box>
+        );
+      },
+    },
   ];
 
   const rows =
@@ -454,4 +453,4 @@ const AppointmentManagement = (props) => {
   );
 };
 
-export default AppointmentManagement;
+export default AppointmentByCurrentVet;

@@ -6,17 +6,17 @@
 
 .staffSidebar .box {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 20px;
-    padding: 10px;
+    gap: 10px;
+    padding: 30px;
     padding-block: 5px;
     border-radius: 10px;
     margin-left: 10px;
 }
 .staffSidebar .box:hover {
-    background-color: #aaaaaa47;
-    cursor: pointer;
+    color: rgb(51, 102, 255);
+  background-color: rgb(9, 148, 248);
+  cursor: pointer;
 }
 .staffSidebar .selected_box {
     background-color: #aaaaaa47;
@@ -34,3 +34,8 @@
     flex-direction: column;
     align-items: center;
 }
+.typography-logo {
+    /* background-color: white; */
+    padding: 10px;
+  }
+  

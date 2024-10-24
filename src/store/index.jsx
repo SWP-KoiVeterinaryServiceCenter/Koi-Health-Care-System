@@ -6,8 +6,10 @@ import { userDataSlice } from "./features/user.slice/userData.slice";
 import { staffsSlice } from "./features/user.slice/staffs.slice";
 import { allAccountsSlice } from "./features/user.slice/allAccounts.slice";
 import { allTanksSlice } from "./features/tank.slice/allTank.slice";
+import { getAllTravelExpenseSlice } from "./features/travelExpense.slice/travelExpense.slice";
 import { currentappointmentSlice } from "./features/appointment.slice/currentappointment.slice";
 import { allappointmentSlice } from "./features/appointment.slice/allUserAppointments.slice";
+import { appointmentByCurrentVetSlice } from "./features/appointment.slice/appointmentByCurrentVet.slice";
 import { allServicesTypeSlice } from "./features/serviceKoi.slice/getAllServicesType.slice";
 import { paymentSlice  } from "./features/payment.slice/payment.slice";
 
@@ -127,8 +129,10 @@ export const store = configureStore({
     staffs: staffsSlice.reducer,
     allAccounts: allAccountsSlice.reducer,
     allTanks: allTanksSlice.reducer,
+    getAllTravelExpense: getAllTravelExpenseSlice.reducer,
     currentappointment: currentappointmentSlice.reducer,
     allappointment: allappointmentSlice.reducer,
+    appointmentByCurrentVet: appointmentByCurrentVetSlice.reducer,
     allServicesType: allServicesTypeSlice.reducer,
     payment: paymentSlice .reducer,
     totalUsers: totalUsersSlice.reducer,

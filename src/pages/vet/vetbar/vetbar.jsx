@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
@@ -11,13 +11,22 @@ import MenuItem from "@mui/material/MenuItem";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import Menu from "@mui/material/Menu";
-import logo from "../../../../../assets/koi_loho.png";
+// import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import { ClickAwayListener } from "@mui/base/ClickAwayListener";
+// import { IconButton } from "@mui/material";
+// import ToggleColorMode from "../../ToggleColorMode/ToggleColorMode";
+// import { LogoutButton } from "../../../../components/function/logout/logout";
+import logo from "../../../assets/koi_loho.png";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MedicalServicesOutlinedIcon from "@mui/icons-material/MedicalServicesOutlined";
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import NewspaperOutlinedIcon from "@mui/icons-material/NewspaperOutlined";
+import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
+import { Button } from "antd";
+import IconButton from "@mui/material/IconButton";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 import { Link, useNavigate } from "react-router-dom";
 import { colors } from "@mui/material";
@@ -31,17 +40,32 @@ const logoStyle = {
 function AppAppBar({ mode, toggleColorMode }) {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [anchorElNews, setAnchorElNews] = React.useState(null);
 
   const handleClickMenuNews = (event) => {
-    setAnchorElNews(event.currentTarget); // When clicking on News, the menu will appear
+    setAnchorElNews(event.currentTarget); // Khi bấm vào Dịch vụ sẽ hiển thị menu
   };
 
   const handleCloseNews = () => {
-    setAnchorElNews(null); // Close the menu when clicking outside or selecting an item
+    setAnchorElNews(null); // Đóng menu khi bấm ra ngoài hoặc chọn mục
   };
 
   const openNews = Boolean(anchorElNews);
+
+  const handleCloseDrawer = () => {
+    setIsDrawerVisible(false);
+  };
+
+  const handleLogout = () => {
+    try {
+      localStorage.clear();
+      sessionStorage.clear();
+      navigate("/");
+    } catch (error) {
+      console.log({ error });
+    }
+  };
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -51,12 +75,16 @@ function AppAppBar({ mode, toggleColorMode }) {
     navigate("/signup");
   };
 
+  const handleLandingPageClick = () => {
+    navigate("");
+  };
   const handlePersonalInformationPageClick = () => {
-    navigate("/personalInformation");
+    navigate("personalInformation");
   };
   const handleBookingPageClick = () => {
     navigate("/booking");
   };
+
 
   const scrollToSection = (sectionId) => {
     const sectionElement = document.getElementById(sectionId);
@@ -119,10 +147,10 @@ function AppAppBar({ mode, toggleColorMode }) {
               <Box
                 sx={{
                   display: { xs: "none", md: "flex" },
-                  ml: "auto", // Push MenuItem to the right
+                  ml: "auto", // Đẩy MenuItem sang phải
                 }}
               >
-                <MenuItem
+                   <MenuItem
                   onClick={() => scrollToSection("features")}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
@@ -131,73 +159,75 @@ function AppAppBar({ mode, toggleColorMode }) {
                     color="black"
                     fontSize="16px"
                     onClick={() => {
-                      navigate("/");
+                      navigate("");
                     }}
-                    sx={{ ml: 0.1 }} // Add small space between icon and text
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
                     HOME
                   </Typography>
                 </MenuItem>
 
                 <>
-                  {/* News Section */}
-                  <MenuItem
-                    onClick={handleClickMenuNews} // Show menu when clicking
-                    sx={{ display: "flex", alignItems: "center" }}
-                  >
-                    <NewspaperOutlinedIcon
-                      sx={{ color: "black", fontSize: "19px" }}
-                    />
-                    <Typography color="black" fontSize="16px" sx={{ ml: 0.1 }}>
-                      NEWS
-                    </Typography>
-                  </MenuItem>
+      {/* Mục Tin tức */}
+      <MenuItem
+        onClick={handleClickMenuNews} // Hiển thị menu khi bấm vào
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <NewspaperOutlinedIcon sx={{ color: "black", fontSize: "19px" }} />
+        <Typography color="black" fontSize="16px" sx={{ ml: 0.1 }}>
+          NEWS
+        </Typography>
+      </MenuItem>
 
-                  {/* Dropdown Menu */}
-                  <Menu
-                    anchorEl={anchorElNews}
-                    open={openNews}
-                    onClose={handleCloseNews}
-                  >
-                    <MenuItem onClick={() => navigate("/guestdoctors")}>
-                      Doctors
-                    </MenuItem>
-                    <MenuItem onClick={() => navigate("/news")}>News</MenuItem>
-                    <MenuItem onClick={() => navigate("/fact")}>Facts</MenuItem>
-                  </Menu>
-                </>
+      {/* Dropdown Menu */}
+      <Menu
+        anchorEl={anchorElNews}
+        open={openNews}
+        onClose={handleCloseNews}
+      >
+        <MenuItem onClick={() => navigate("doctors")}>Veterinarians</MenuItem>
+        <MenuItem onClick={() => navigate("doctors")}>News</MenuItem>
+        <MenuItem onClick={() => navigate("/fact")}>Facts</MenuItem>
+      </Menu>
+    </>
 
-                <MenuItem sx={{ display: "flex", alignItems: "center" }}>
+                <MenuItem
+                  onClick={() => scrollToSection("testimonials")}
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
                   <MedicalServicesOutlinedIcon
                     sx={{ color: "black", fontSize: "19px" }}
                   />
                   <Typography
+                    // variant="body2"
+                    // color="text.primary"
                     color="black"
                     fontSize="16px"
                     onClick={() => {
-                      navigate("/guestservice");
+                      navigate("appointmentByCurrentVet");
                     }}
-                    sx={{ ml: 0.1 }} // Add small space between icon and text
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    SERVICES
+                    APPOINTMENTS
                   </Typography>
                 </MenuItem>
 
-                {/* <MenuItem
+                <MenuItem
                   onClick={() => scrollToSection("highlights")}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <EditCalendarIcon
-                    sx={{ color: "black", fontSize: "19px" }}
-                  />
+                  <EditCalendarIcon sx={{ color: "black", fontSize: "19px" }} />
                   <Typography
                     color="black"
                     fontSize="16px"
-                    sx={{ ml: 0.1 }} // Add small space between icon and text
+                    onClick={() => {
+                      navigate("appointmentList");
+                    }}
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    Appointments
+                    SCHEDULE
                   </Typography>
-                </MenuItem> */}
+                </MenuItem>
 
                 <MenuItem
                   onClick={() => scrollToSection("pricing")}
@@ -207,18 +237,18 @@ function AppAppBar({ mode, toggleColorMode }) {
                     sx={{ color: "black", fontSize: "19px" }}
                   />
                   <Typography
-                    onClick={() => {
-                      navigate("/guestcontact");
-                    }}
+                   onClick={() => {
+                    navigate("contactUs");
+                  }}
                     color="black"
                     fontSize="16px"
-                    sx={{ ml: 0.1 }} // Add small space between icon and text
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
                     CONTACT
                   </Typography>
                 </MenuItem>
 
-                <MenuItem
+                {/* <MenuItem
                   onClick={() => scrollToSection("faq")}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
@@ -228,11 +258,81 @@ function AppAppBar({ mode, toggleColorMode }) {
                   <Typography
                     color="black"
                     fontSize="16px"
-                    sx={{ ml: 0.1 }} // Add small space between icon and text
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    ABOUT
+                    ABOUT 
                   </Typography>
-                </MenuItem>
+                </MenuItem> */}
+
+                {/* IconButton to trigger Drawer */}
+                <IconButton onClick={() => setIsDrawerVisible(true)}>
+                  <PersonOutlinedIcon
+                    fontSize="large"
+                    sx={{ color: "black" }}
+                  />
+                </IconButton>
+
+                {/* Material UI Drawer */}
+                <Drawer
+                  anchor="right"
+                  open={isDrawerVisible}
+                  onClose={handleCloseDrawer}
+                >
+                  <Box
+                    sx={{
+                      width: 300,
+                      p: 2,
+                      backgroundColor: "background.paper",
+                      flexGrow: 1,
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "end",
+                        flexGrow: 1,
+                      }}
+                    >
+                      {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
+                    </Box>
+                    <MenuItem onClick={() => navigate("personalInformation")}>
+                      Update Profile
+                    </MenuItem>
+                    <MenuItem onClick={() => navigate("")}>
+                      Schedule information
+                    </MenuItem>
+                    <MenuItem onClick={() => navigate("")}>
+                      Service information
+                    </MenuItem>
+
+                    <Divider />
+                    <MenuItem>
+                      {/* <Button
+                      color="primary"
+                      variant="contained"
+                      component="a"
+                      onClick={handleLoginClick}
+                      target="_blank"
+                      sx={{ width: "100%" }}
+                    >
+                      Login
+                    </Button> */}
+                    </MenuItem>
+                    <MenuItem>
+                      <Button
+                        color="primary"
+                        variant="outlined"
+                        component="a"
+                        onClick={handleLogout}
+                        target="_blank"
+                        sx={{ width: "100%" }}
+                      >
+                        Logout
+                      </Button>
+                    </MenuItem>
+                  </Box>
+                </Drawer>
               </Box>
             </Box>
             <Box
@@ -241,32 +341,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 gap: 0.5,
                 alignItems: "center",
               }}
-            >
-              <Button
-                sx={{ background: "#D5762B" }}
-                variant="contained"
-                size="small"
-                component="a"
-                onClick={() => {
-                  navigate("/login");
-                }}
-                target="_blank"
-              >
-                Book Appointment
-              </Button>
-              <Button
-                sx={{ background: "#005F5F" }}
-                variant="contained"
-                size="small"
-                component="a"
-                onClick={() => {
-                  navigate("/login");
-                }}
-                target="_blank"
-              >
-                Login
-              </Button>
-            </Box>
+            ></Box>
             <Box sx={{ display: { sm: "", md: "none" } }}>
               <Button
                 variant="text"
@@ -293,7 +368,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                       alignItems: "end",
                       flexGrow: 1,
                     }}
-                  />
+                  >
+                    {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
+                  </Box>
                   <MenuItem onClick={() => scrollToSection("features")}>
                     Features
                   </MenuItem>
@@ -310,6 +387,18 @@ function AppAppBar({ mode, toggleColorMode }) {
                     FAQ
                   </MenuItem>
                   <Divider />
+                  <MenuItem>
+                    {/* <Button
+                      color="primary"
+                      variant="contained"
+                      component="a"
+                      onClick={handleLoginClick}
+                      target="_blank"
+                      sx={{ width: "100%" }}
+                    >
+                      Login
+                    </Button> */}
+                  </MenuItem>
                   <MenuItem>
                     <Button
                       color="primary"
@@ -333,10 +422,5 @@ function AppAppBar({ mode, toggleColorMode }) {
     </div>
   );
 }
-
-AppAppBar.propTypes = {
-  mode: PropTypes.oneOf(["dark", "light"]).isRequired,
-  toggleColorMode: PropTypes.func.isRequired,
-};
 
 export default AppAppBar;
