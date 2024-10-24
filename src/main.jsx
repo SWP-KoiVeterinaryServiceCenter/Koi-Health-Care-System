@@ -102,6 +102,7 @@ import Profile from "./pages/customer/screens/profile/profile";
 
 // import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
 import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
+import VetWorkingSchedule from "./pages/vet/screens/vetWorkingSchedule/vetWorkingSchedule";
 // import CreateWorkingSchedule from "./pages/admin/screens/createWorkingSchedule/createWorkingSchedule";
 
 
@@ -572,6 +573,11 @@ const router = createBrowserRouter([
           path: "appointmentByCurrentVet",
           element: <AppointmentByCurrentVet direction="vet" />,
         },
+        {
+          path: "vetWorkingSchedule",
+          element: <VetWorkingSchedule direction="vet" />,
+        },
+        
         // {
         //   path: "uploadPersonalImage",
         //   element: <UploadPersonalImage direction="customer"/>,

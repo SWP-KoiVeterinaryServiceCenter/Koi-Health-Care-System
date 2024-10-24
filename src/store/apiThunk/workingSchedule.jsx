@@ -4,7 +4,8 @@ import {
   getAllWorkingSchedule,
   updateWorkingSchedule,
   deleteWorkingSchedule,
-  getAllWorkingScheduleById
+  getAllWorkingScheduleById,
+  getVetWorkingScheduleById
 } from "../../api/workingSchedule";
 
 export const getAllWorkingScheduleThunk = createAsyncThunk(
@@ -60,6 +61,19 @@ export const deleteWorkingScheduleThunk = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const response = await deleteWorkingSchedule(id);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+
+export const getVetWorkingScheduleByIdThunk = createAsyncThunk(
+  "schedule/getVetWorkingScheduleById",
+  async (veterinarianId , thunkAPI) => {
+    try {
+      const response = await getVetWorkingScheduleById(veterinarianId);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error?.response?.data);

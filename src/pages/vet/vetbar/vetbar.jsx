@@ -22,7 +22,7 @@ import MedicalServicesOutlinedIcon from "@mui/icons-material/MedicalServicesOutl
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
+import NewspaperOutlinedIcon from "@mui/icons-material/NewspaperOutlined";
 import { Button } from "antd";
 import IconButton from "@mui/material/IconButton";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
@@ -84,7 +84,6 @@ function AppAppBar({ mode, toggleColorMode }) {
   const handleBookingPageClick = () => {
     navigate("/booking");
   };
-
 
   const scrollToSection = (sectionId) => {
     const sectionElement = document.getElementById(sectionId);
@@ -150,7 +149,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   ml: "auto", // Đẩy MenuItem sang phải
                 }}
               >
-                   <MenuItem
+                <MenuItem
                   onClick={() => scrollToSection("features")}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
@@ -168,28 +167,34 @@ function AppAppBar({ mode, toggleColorMode }) {
                 </MenuItem>
 
                 <>
-      {/* Mục Tin tức */}
-      <MenuItem
-        onClick={handleClickMenuNews} // Hiển thị menu khi bấm vào
-        sx={{ display: "flex", alignItems: "center" }}
-      >
-        <NewspaperOutlinedIcon sx={{ color: "black", fontSize: "19px" }} />
-        <Typography color="black" fontSize="16px" sx={{ ml: 0.1 }}>
-          NEWS
-        </Typography>
-      </MenuItem>
+                  {/* Mục Tin tức */}
+                  <MenuItem
+                    onClick={handleClickMenuNews} // Hiển thị menu khi bấm vào
+                    sx={{ display: "flex", alignItems: "center" }}
+                  >
+                    <NewspaperOutlinedIcon
+                      sx={{ color: "black", fontSize: "19px" }}
+                    />
+                    <Typography color="black" fontSize="16px" sx={{ ml: 0.1 }}>
+                      NEWS
+                    </Typography>
+                  </MenuItem>
 
-      {/* Dropdown Menu */}
-      <Menu
-        anchorEl={anchorElNews}
-        open={openNews}
-        onClose={handleCloseNews}
-      >
-        <MenuItem onClick={() => navigate("doctors")}>Veterinarians</MenuItem>
-        <MenuItem onClick={() => navigate("doctors")}>News</MenuItem>
-        <MenuItem onClick={() => navigate("/fact")}>Facts</MenuItem>
-      </Menu>
-    </>
+                  {/* Dropdown Menu */}
+                  <Menu
+                    anchorEl={anchorElNews}
+                    open={openNews}
+                    onClose={handleCloseNews}
+                  >
+                    <MenuItem onClick={() => navigate("doctors")}>
+                      Veterinarians
+                    </MenuItem>
+                    <MenuItem onClick={() => navigate("doctors")}>
+                      News
+                    </MenuItem>
+                    <MenuItem onClick={() => navigate("/fact")}>Facts</MenuItem>
+                  </Menu>
+                </>
 
                 <MenuItem
                   onClick={() => scrollToSection("testimonials")}
@@ -237,9 +242,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                     sx={{ color: "black", fontSize: "19px" }}
                   />
                   <Typography
-                   onClick={() => {
-                    navigate("contactUs");
-                  }}
+                    onClick={() => {
+                      navigate("contactUs");
+                    }}
                     color="black"
                     fontSize="16px"
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
@@ -299,7 +304,12 @@ function AppAppBar({ mode, toggleColorMode }) {
                     <MenuItem onClick={() => navigate("personalInformation")}>
                       Update Profile
                     </MenuItem>
-                    <MenuItem onClick={() => navigate("")}>
+                    <MenuItem
+                      onClick={() => {
+                        navigate("vetWorkingSchedule");
+                        window.scrollTo(0, 0); 
+                      }}
+                    >
                       Schedule information
                     </MenuItem>
                     <MenuItem onClick={() => navigate("")}>
