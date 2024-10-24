@@ -236,12 +236,8 @@ const Sidebar = (props) => {
                     icon={<SubscriptionsIcon />}
                     selected={selected}
                     setSelected={setSelected}
-                  />  
-
-                
-
-
-                   <List>
+                  />              
+                   {/* <List>
                     <ListItemButton onClick={handleClickWorkingSchedule}>
                       {!isCollapsed && (
                         <CalendarMonthIcon
@@ -297,16 +293,9 @@ const Sidebar = (props) => {
                         icon={<AddIcon/>}
                         selected={selected}
                         setSelected={setSelected}
-                      />
-                      {/* <Item
-                        title="Report"
-                        to="report"
-                        icon={<ReportGmailerrorredIcon />}
-                        selected={selected}
-                        setSelected={setSelected}
-                      /> */}
+                      />                
                     </Collapse>
-                  </List>
+                  </List> */}
                   {/* ///////////////////////////////////////////////////////////////////// */}
                 </Collapse>
               </List>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./sidebar.css";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme, Divider } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../../../theme";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
@@ -37,6 +37,8 @@ import logo from "../../../../assets/koi_loho.png";
 import backgroundGif from "../../../../assets/gif/koi_logo_sidebar.gif";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AddIcon from '@mui/icons-material/Add';
+
+
 const logoStyle = {
   width: "140px",
   height: "auto",
@@ -102,6 +104,12 @@ const Sidebar = (props) => {
   const pathName = url.pathname;
   const parts = pathName?.split("/");
   const locationValue = parts[parts.length - 1];
+
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  }, [location]);
 
   return (
     <div className="staffSidebar">
