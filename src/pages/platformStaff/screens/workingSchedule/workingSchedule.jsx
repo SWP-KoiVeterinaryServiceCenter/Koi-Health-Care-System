@@ -10,34 +10,14 @@ import "./workingSchedule.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import { vetDetailSelector } from "../../../../store/sellectors";
+import { getAllVetAccountThunk } from "../../../../store/apiThunk/userThunk";
 import { allWorkingScheduleSelector } from "../../../../store/sellectors";
 import { getAllWorkingScheduleThunk } from "../../../../store/apiThunk/workingSchedule";
 
 const localizer = momentLocalizer(moment);
 
-const transformEvents = (data) => {
-  return data.map((item) => {
-    const startDate = new Date(item.workingDay);
-    const endDate = new Date(item.workingDay);
-
-    // Parse startTime and endTime from "HH:mm:ss" format
-    const [startHours, startMinutes] = item.startTime.split(':').map(Number);
-    const [endHours, endMinutes] = item.endTime.split(':').map(Number);
-
-    // Set the hours and minutes for start and end dates
-    startDate.setHours(startHours, startMinutes);
-    endDate.setHours(endHours, endMinutes);
-
-    return {
-      title: `Veterinarian ID: ${item.veterinarianId}`,
-      start: startDate,
-      end: endDate,
-    };
-  });
-};
-
-
-export default function WorkingSchedule(props) {
+const WorkingSchedule = (props) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [events, setEvents] = useState([]);
   const dispatch = useDispatch();
@@ -45,17 +25,50 @@ export default function WorkingSchedule(props) {
   const direction = props.direction;
 
   const allWorkingSchedule = useSelector(allWorkingScheduleSelector);
-
-  console.log(allWorkingSchedule);
+  const vetDetail = useSelector(vetDetailSelector);
 
   useEffect(() => {
-    dispatch(getAllWorkingScheduleThunk());
+    const fetchData = async () => {
+      await dispatch(getAllWorkingScheduleThunk());
+      await dispatch(getAllVetAccountThunk());
+    };
+    fetchData();
   }, [dispatch]);
 
   useEffect(() => {
-    const formattedEvents = transformEvents(allWorkingSchedule);
-    setEvents(formattedEvents);
-  }, [allWorkingSchedule]);
+    if (vetDetail.length > 0) {
+      // Create a lookup for veterinarian IDs and usernames
+      const vetLookup = {};
+      vetDetail.forEach((vet) => {
+        vetLookup[vet.accountId] = vet.username; 
+      });
+
+      const formattedEvents = transformEvents(allWorkingSchedule, vetLookup);
+      setEvents(formattedEvents);
+    }
+  }, [allWorkingSchedule, vetDetail]); // Add vetDetail to dependencies
+
+  const transformEvents = (data, vetLookup) => {
+    return data.map((item) => {
+      const startDate = new Date(item.workingDay);
+      const endDate = new Date(item.workingDay);
+      const [startHours, startMinutes] = item.startTime.split(':').map(Number);
+      const [endHours, endMinutes] = item.endTime.split(':').map(Number);
+
+      startDate.setHours(startHours, startMinutes);
+      endDate.setHours(endHours, endMinutes);
+
+      // Use the vetLookup to get the veterinarian's username
+      const vetName = vetLookup[item.veterinarianId] || "Unknown Vet";
+
+      return {
+        id: item.id,
+        title: `${vetName}`, 
+        start: startDate,
+        end: endDate,
+      };
+    });
+  };
 
   const renderEvent = (event) => (
     <Tooltip title={`${event.title}`} placement="top">
@@ -63,9 +76,10 @@ export default function WorkingSchedule(props) {
     </Tooltip>
   );
 
-  // New function to handle event click
+  // Handle event click
   const handleEventClick = (event) => {
     navigate(`/${direction}/updateWorkingSchedule`, {
+      state: { allWorkingSchedule: event.id },
     });
   };
 
@@ -75,7 +89,7 @@ export default function WorkingSchedule(props) {
         style={{
           justifyContent: "center",
           display: "flex",
-          margin: "20px",
+          margin: "0px 20px 20px 20px",
           padding: 20,
           borderRadius: 40,
           background: "white",
@@ -93,7 +107,7 @@ export default function WorkingSchedule(props) {
           components={{
             event: renderEvent,
           }}
-          onSelectEvent={handleEventClick} // Handle event click here
+          onSelectEvent={handleEventClick}
         />
       </div>
       <Box pt={6} px={1} mt={6} sx={{ color: "black", background: "#ebe2e1" }}>
@@ -101,4 +115,6 @@ export default function WorkingSchedule(props) {
       </Box>
     </>
   );
-}
+};
+
+export default WorkingSchedule;
