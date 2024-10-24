@@ -23,7 +23,7 @@ const ADDITEMSUCCESS = "Gift Created Successfully!!";
 const CONFIRMDELETEITEM = "Delete Gift?";
 const DELETEITEMSUCCESS = "Gift Deleted Successfully!!";
 const UPDATEITEMSUCCESS = "Gift Updated Successfully!!";
-const ADDPACKAGESUCCESS = "Subscription Package Created Successfully!!";
+const ADDPACKAGESUCCESS = "Account Created Successfully!!";
 const ADDCATEGORYSUCCESS = "Category Created Successfully!!";
 const CONFIRMDELETEPACKAGE = "Delete Subscription Package?";
 
@@ -48,6 +48,12 @@ const CONFIRMDELETEPROMOTION = "Delete Promotion?";
 const DELETEPROMOTIONSUCCESS = "Promotion Deleted Successfully!!";
 const UPDATEPROMOTIONSUCCESS = "Promotion Updated Successfully!!";
 const ADDSTAFFSUCCESS = "Staff Account Created Successfully!!";
+
+const UPDATEKOIINFORMATIONSUCCESS =  "Koi Has Been Updated Successfully!!";
+const DELETEKOISUCCESS =  "Koi Has Been Deleted Successfully!!";
+const UPDATEPERSONALINFORMATIONSUCCESS =  "Personal Information Has Been Updated Successfully!!";
+
+const UPDATEPERSONALIMAGESUCCESS =  "Personal Image Has Been Updated Successfully!!";
 
 
 export {
@@ -100,4 +106,8 @@ export {
     DELETEPACKAGESUCCESS,
     UPDATEPACKAGESUCCESS,
     CONFIRMDELETEEVENT,
+    UPDATEKOIINFORMATIONSUCCESS,
+    DELETEKOISUCCESS,
+    UPDATEPERSONALINFORMATIONSUCCESS,
+    UPDATEPERSONALIMAGESUCCESS
 };

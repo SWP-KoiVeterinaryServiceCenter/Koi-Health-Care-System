@@ -3,7 +3,10 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "../../../../theme";
 import Sidebar from "../../components/sidebar/Sidebar";
+import Footer from "../../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 import Topbar from "../../components/topbar/Topbar";
+
+// import Topbar from "../../../customer/components/topbar/topbar";
 import { useDispatch } from "react-redux";
 import { getUserDataThunk } from "../../../../store/apiThunk/userThunk";
 import {
@@ -46,25 +49,27 @@ export default function AdminHome() {
 
   return (
     <div style={{ display: "flex" }}>
+      
       <ColorModeContext.Provider value={colorMode}>
         {!check && (
           <ThemeProvider theme={theme}>
             <CssBaseline />
+            
             <Sidebar
               isCollapsed={isCollapsed}
               setIsCollapsed={setIsCollapsed}
             />
             <div
               style={{
-                width: isCollapsed === true ? "100%" : "82.3%",
-
-                // backgroundColor: "#F9FAFB",
-                backgroundColor: "#F2F3F4",
+                width: isCollapsed === true ? "94.75%" : "82.3%",               
+                backgroundColor: "#739BBF",
               }}
             >
-              <Topbar />
+              {/* <Topbar /> */}
               <Outlet />
+          
             </div>
+        
           </ThemeProvider>
         )}
       </ColorModeContext.Provider>

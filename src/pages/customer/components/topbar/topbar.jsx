@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
+import Menu from "@mui/material/Menu";
 // import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 // import { IconButton } from "@mui/material";
@@ -21,7 +22,7 @@ import MedicalServicesOutlinedIcon from "@mui/icons-material/MedicalServicesOutl
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
+import NewspaperOutlinedIcon from "@mui/icons-material/NewspaperOutlined";
 import { Button } from "antd";
 import IconButton from "@mui/material/IconButton";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
@@ -40,6 +41,17 @@ function AppAppBar({ mode, toggleColorMode }) {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+  const [anchorElNews, setAnchorElNews] = React.useState(null);
+
+  const handleClickMenuNews = (event) => {
+    setAnchorElNews(event.currentTarget); // Khi bấm vào Dịch vụ sẽ hiển thị menu
+  };
+
+  const handleCloseNews = () => {
+    setAnchorElNews(null); // Đóng menu khi bấm ra ngoài hoặc chọn mục
+  };
+
+  const openNews = Boolean(anchorElNews);
 
   const handleCloseDrawer = () => {
     setIsDrawerVisible(false);
@@ -58,15 +70,11 @@ function AppAppBar({ mode, toggleColorMode }) {
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
-  const handleLoginClick = () => {
-    navigate("/login");
-  };
+
   const handleSignUPClick = () => {
     navigate("/signup");
   };
-  const handleServiceClick = () => {
-    navigate("service");
-  };
+
   const handleLandingPageClick = () => {
     navigate("");
   };
@@ -75,14 +83,6 @@ function AppAppBar({ mode, toggleColorMode }) {
   };
   const handleBookingPageClick = () => {
     navigate("/booking");
-  };
-
-  const handleClick = () => {
-    setOpen((prev) => !prev);
-  };
-
-  const handleClickAway = () => {
-    setOpen(false);
   };
 
   const scrollToSection = (sectionId) => {
@@ -149,7 +149,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   ml: "auto", // Đẩy MenuItem sang phải
                 }}
               >
-                   <MenuItem
+                <MenuItem
                   onClick={() => scrollToSection("features")}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
@@ -157,27 +157,44 @@ function AppAppBar({ mode, toggleColorMode }) {
                   <Typography
                     color="black"
                     fontSize="16px"
-                    onClick={handleLandingPageClick}
+                    onClick={() => {
+                      navigate("");
+                    }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    Trang chủ
+                    HOME
                   </Typography>
                 </MenuItem>
 
-                <MenuItem
-                  onClick={() => scrollToSection("features")}
-                  sx={{ display: "flex", alignItems: "center" }}
-                >
-                  <NewspaperOutlinedIcon sx={{ color: "black", fontSize: "19px" }} />
-                  <Typography
-                    color="black"
-                    fontSize="16px"
-                    onClick={handleLandingPageClick}
-                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                <>
+                  {/* Mục Tin tức */}
+                  <MenuItem
+                    onClick={handleClickMenuNews} // Hiển thị menu khi bấm vào
+                    sx={{ display: "flex", alignItems: "center" }}
                   >
-                    Tin tức
-                  </Typography>
-                </MenuItem>
+                    <NewspaperOutlinedIcon
+                      sx={{ color: "black", fontSize: "19px" }}
+                    />
+                    <Typography color="black" fontSize="16px" sx={{ ml: 0.1 }}>
+                      NEWS
+                    </Typography>
+                  </MenuItem>
+
+                  {/* Dropdown Menu */}
+                  <Menu
+                    anchorEl={anchorElNews}
+                    open={openNews}
+                    onClose={handleCloseNews}
+                  >
+                    <MenuItem onClick={() => navigate("doctors")}>
+                      Veterinarians
+                    </MenuItem>
+                    <MenuItem onClick={() => navigate("doctors")}>
+                      News
+                    </MenuItem>
+                    <MenuItem onClick={() => navigate("/fact")}>Facts</MenuItem>
+                  </Menu>
+                </>
 
                 <MenuItem
                   onClick={() => scrollToSection("testimonials")}
@@ -191,10 +208,12 @@ function AppAppBar({ mode, toggleColorMode }) {
                     // color="text.primary"
                     color="black"
                     fontSize="16px"
-                    onClick={handleServiceClick}
+                    onClick={() => {
+                      navigate("service");
+                    }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    Dịch vụ
+                    SERVICE
                   </Typography>
                 </MenuItem>
 
@@ -206,9 +225,12 @@ function AppAppBar({ mode, toggleColorMode }) {
                   <Typography
                     color="black"
                     fontSize="16px"
+                    onClick={() => {
+                      navigate("appointmentList");
+                    }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    Lịch Hẹn
+                    APPOINTMENT
                   </Typography>
                 </MenuItem>
 
@@ -220,11 +242,14 @@ function AppAppBar({ mode, toggleColorMode }) {
                     sx={{ color: "black", fontSize: "19px" }}
                   />
                   <Typography
+                    onClick={() => {
+                      navigate("contactUs");
+                    }}
                     color="black"
                     fontSize="16px"
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    Phản hồi
+                    CONTACT
                   </Typography>
                 </MenuItem>
 
@@ -240,7 +265,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     fontSize="16px"
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    Thông tin
+                    ABOUT
                   </Typography>
                 </MenuItem>
 
@@ -276,14 +301,29 @@ function AppAppBar({ mode, toggleColorMode }) {
                     >
                       {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
                     </Box>
-                    <MenuItem onClick={() => scrollToSection("features")}>
+                    <MenuItem
+                      onClick={() => {
+                        navigate("profile");
+                        window.scrollTo(0, 0);
+                      }}
+                    >
                       Profile
                     </MenuItem>
-                    <MenuItem onClick={() => navigate("personalInformation")}>
-                      Fish information
+                    <MenuItem
+                      onClick={() => {
+                        navigate("personalInformation");
+                        window.scrollTo(0, 0);
+                      }}
+                    >
+                      Koi Fish Management
                     </MenuItem>
-                    <MenuItem onClick={() => navigate("serviceInformation")}>
-                      Service information
+                    <MenuItem
+                      onClick={() => {
+                        navigate("serviceInformation");
+                        window.scrollTo(0, 0);
+                      }}
+                    >
+                      Service Information
                     </MenuItem>
 
                     <Divider />
@@ -384,7 +424,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                       color="primary"
                       variant="outlined"
                       component="a"
-                      onClick={handleLoginClick}
+                      onClick={() => {
+                        navigate("/login");
+                      }}
                       target="_blank"
                       sx={{ width: "100%" }}
                     >

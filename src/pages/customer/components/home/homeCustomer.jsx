@@ -4,6 +4,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "../../../../theme";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/topbar";
+import Footer from "../../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 import { useDispatch } from "react-redux";
 import { getUserDataThunk } from "../../../../store/apiThunk/userThunk";
 import {
@@ -48,6 +49,7 @@ export default function CustomerHome() {
     <div>
       <Topbar />
       <Outlet />
+      <Footer />
     </div>
   );
 }

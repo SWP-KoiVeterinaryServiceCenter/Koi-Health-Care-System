@@ -2,9 +2,22 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { userDetailSlice } from "./features/user.slice/userDetail.slice";
 import { userDataSlice } from "./features/user.slice/userData.slice";
+
 import { staffsSlice } from "./features/user.slice/staffs.slice";
 import { allAccountsSlice } from "./features/user.slice/allAccounts.slice";
+import { allTanksSlice } from "./features/tank.slice/allTank.slice";
+import { getAllTravelExpenseSlice } from "./features/travelExpense.slice/travelExpense.slice";
+import { currentappointmentSlice } from "./features/appointment.slice/currentappointment.slice";
+import { allappointmentSlice } from "./features/appointment.slice/allUserAppointments.slice";
+import { appointmentByCurrentVetSlice } from "./features/appointment.slice/appointmentByCurrentVet.slice";
+import { allServicesTypeSlice } from "./features/serviceKoi.slice/getAllServicesType.slice";
+import { paymentSlice  } from "./features/payment.slice/payment.slice";
+
 import { totalUsersSlice } from "./features/user.slice/totalUsers.slice";
+
+import { totalStaffsSlice } from "./features/user.slice/totalStaffs.slice";
+import { totalVetsSlice } from "./features/user.slice/totalVets.slice";
+import { totalVetsDetailSlice } from "./features/user.slice/totalVetsDetail.slice";
 
 import { allVerifyUsersSlice } from "./features/user.slice/allVerifyUsers.slice"; //allVerifyUsers
 
@@ -96,14 +109,45 @@ import { promotionsFromShopSlice } from "./features/promotion.slice/promotionsFr
 import { productDetailSlice } from "./features/product.slice/productDetail.slice";
 import { productsFromShopSlice } from "./features/product.slice/productsFromShop.slice";
 
+import { allKoiByAccountIdSlice } from "./features/koi.slice/koiByAccountId.slice";
+import { allKoiByIdSlice } from "./features/koi.slice/koiById.slice";
+
+import { allServicesSlice } from "./features/serviceKoi.slice/getAllServices.slice";
+
+import { vetDetailSlice } from "./features/user.slice/vetDetail.slice"; 
+
+import { currentUserAppointmentsSlice } from "./features/appointment.slice/currentUserAppointments.slice";
+
+import { allWorkingScheduleSlice } from "./features/schedule.slice/getAllWorkingSchedule.slice";
+
 export const store = configureStore({
   reducer: {
     userDetail: userDetailSlice.reducer,
     userData: userDataSlice.reducer,
     staffs: staffsSlice.reducer,
     allAccounts: allAccountsSlice.reducer,
+    allTanks: allTanksSlice.reducer,
+    getAllTravelExpense: getAllTravelExpenseSlice.reducer,
+    currentappointment: currentappointmentSlice.reducer,
+    allappointment: allappointmentSlice.reducer,
+    appointmentByCurrentVet: appointmentByCurrentVetSlice.reducer,
+    allServicesType: allServicesTypeSlice.reducer,
+    payment: paymentSlice .reducer,
     totalUsers: totalUsersSlice.reducer,
+    totalStaffs: totalStaffsSlice.reducer,
+    totalVets: totalVetsSlice.reducer,
+    totalVetsDetail: totalVetsDetailSlice.reducer,
     allVerifyUsers: allVerifyUsersSlice.reducer,
+
+    allKoiByAccountId : allKoiByAccountIdSlice.reducer,
+    allKoiById: allKoiByIdSlice.reducer,
+
+    allServices: allServicesSlice.reducer,
+    vetDetail: vetDetailSlice.reducer,
+
+    currentUserAppointments: currentUserAppointmentsSlice.reducer,
+
+    allWorkingSchedule : allWorkingScheduleSlice.reducer,
 
     petDetail: petDetailSlice.reducer,
     petsFromShop: petsFromShopSlice.reducer,

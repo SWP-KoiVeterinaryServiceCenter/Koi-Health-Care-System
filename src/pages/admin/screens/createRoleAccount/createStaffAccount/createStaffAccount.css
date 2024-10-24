@@ -1,0 +1,7 @@
+/* Ghi đè cho ô nhập username */
+.custom-input:-webkit-autofill {
+    -webkit-box-shadow: none !important; /* Tắt hiệu ứng box-shadow */
+    -webkit-text-fill-color: black !important; /* Đặt màu văn bản */
+    caret-color: black; /* Đặt màu con trỏ */
+    background-color: #f5f5f5 !important; /* Đặt màu nền */
+}

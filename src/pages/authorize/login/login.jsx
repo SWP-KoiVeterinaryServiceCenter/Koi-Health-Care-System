@@ -18,13 +18,11 @@ import {
   loginThunk,
 } from "../../../store/apiThunk/userThunk";
 import Swal from "sweetalert2";
-// import { auth } from "../../../../firebaseConfig";
 import Google from "../../../assets/google.png";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import Pet from "../../../assets/koi_bg.webp";
 import backgroundVideo from "../../../assets/video/bg3.mp4";
 import backgroundGif from "../../../assets/video/giphy.webp";
-import { getPackagesThunk } from "../../../store/apiThunk/packageThunk";
 import {
   getManagerIncomeThunk,
   getManagerOutcomeThunk,
@@ -60,11 +58,11 @@ export default function Login() {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .required("Email không thể trống")
-        .email("Email sai định dạng"),
+        .required("Email cannot be empty")
+        .email("Invalid email format"),
       password: Yup.string()
-        .required("Mật khẩu không thể trống")
-        .min(8, "Mật khẩu phải có ít nhất 8 chữ số"),
+        .required("Password cannot be empty")
+        .min(8, "Password must be at least 8 characters"),
     }),
     onSubmit: async (values) => {
       setShowLoadingModal(true);
@@ -85,8 +83,6 @@ export default function Login() {
             .then((res) => {
               switch (res.role) {
                 case "Customer":
-                  // dispatch(getAllNotificationsThunk());
-                  // dispatch(getUnreadNotificationsThunk()).then(() => {
                   setShowLoadingModal(false);
                   Swal.fire({
                     title: SUCCESSTEXT,
@@ -98,12 +94,10 @@ export default function Login() {
                     timer: 1500,
                     timerProgressBar: true,
                     scrollbarPadding: false,
-                    heightAuto: false, // Thêm thuộc tính này
-                    
+                    heightAuto: false,
                   }).then(() => {
                     navigate("/customer");
                   });
-                  // });
                   break;
                 case "Manager":
                   setShowLoadingModal(false);
@@ -123,9 +117,6 @@ export default function Login() {
 
                   break;
                 case "Admin":
-                  //   dispatch(getAllNotificationsThunk());
-                  //   dispatch(getUnreadNotificationsThunk());
-                  //   dispatch(getPlatformIncomeThunk()).then(() => {
                   setShowLoadingModal(false);
                   Swal.fire({
                     title: SUCCESSTEXT,
@@ -140,11 +131,8 @@ export default function Login() {
                   }).then(() => {
                     navigate("/admin");
                   });
-                  //   });
                   break;
-                case "PlatformStaff":
-                  //   dispatch(getAllNotificationsThunk());
-                  //   dispatch(getUnreadNotificationsThunk()).then(() => {
+                case "Veterinarian":
                   setShowLoadingModal(false);
                   Swal.fire({
                     title: SUCCESSTEXT,
@@ -157,25 +145,24 @@ export default function Login() {
                     timerProgressBar: true,
                     scrollbarPadding: false,
                   }).then(() => {
-                    navigate("/staff");
+                    navigate("/vet");
                   });
-                  //   });
                   break;
                 case "Staff":
-                  localStorage.clear();
                   setShowLoadingModal(false);
                   Swal.fire({
-                    title: ERRORTEXT,
-                    text: NOTALLOW,
-                    icon: "error",
+                    title: SUCCESSTEXT,
+                    text: LOGINSUCCESS,
+                    icon: "success",
+                    showCancelButton: false,
                     showConfirmButton: false,
                     background: "white",
                     timer: 1500,
                     timerProgressBar: true,
                     scrollbarPadding: false,
+                  }).then(() => {
+                    navigate("/staff"); // Điều hướng tới trang dành cho Staff
                   });
-                  break;
-                default:
                   break;
               }
             });
@@ -195,7 +182,7 @@ export default function Login() {
         });
     },
   });
-  //////////////////////////////////////////////////////////////////////////
+
   const SignInUsingGoogle = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -211,11 +198,6 @@ export default function Login() {
             .then((res) => {
               switch (res.role) {
                 case "Manager":
-                  //   dispatch(getPackagesThunk());
-                  //   dispatch(getManagerOutcomeThunk());
-                  //   dispatch(getAllNotificationsThunk());
-                  //   dispatch(getUnreadNotificationsThunk());
-                  //   dispatch(getManagerIncomeThunk()).then(() => {
                   setShowLoadingGGModal(false);
                   Swal.fire({
                     title: SUCCESSTEXT,
@@ -230,12 +212,8 @@ export default function Login() {
                   }).then(() => {
                     navigate("/manager");
                   });
-                  //   });
                   break;
                 case "Admin":
-                  //   dispatch(getAllNotificationsThunk());
-                  //   dispatch(getUnreadNotificationsThunk());
-                  //   dispatch(getPlatformIncomeThunk()).then(() => {
                   setShowLoadingGGModal(false);
                   Swal.fire({
                     title: SUCCESSTEXT,
@@ -250,11 +228,8 @@ export default function Login() {
                   }).then(() => {
                     navigate("/admin");
                   });
-                  //   });
                   break;
                 case "PlatformStaff":
-                  //   dispatch(getAllNotificationsThunk());
-                  //   dispatch(getUnreadNotificationsThunk()).then(() => {
                   setShowLoadingGGModal(false);
                   Swal.fire({
                     title: SUCCESSTEXT,
@@ -269,7 +244,6 @@ export default function Login() {
                   }).then(() => {
                     navigate("/staff");
                   });
-                  //   });
                   break;
                 case "Staff":
                   localStorage.clear();
@@ -321,21 +295,16 @@ export default function Login() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="login">
-          {/* Thêm video background */}
+          {/* Add video background */}
           <video autoPlay loop muted className="login__video_background">
             <source src={backgroundVideo} type="video/mp4" />
           </video>
-          {/* <img
-          src={backgroundGif}
-          alt="background gif"
-          className="login__video_background"
-        /> */}
           <Grid container spacing={2}>
             <Grid item xs={2}></Grid>
             <Grid item xs={2} className="flex-center"></Grid>
             <Grid item xs={4} className="flex-center">
               <div className="login__form">
-                <h3 className="login__title">Đăng nhập</h3>
+                <h3 className="login__title">Login</h3>
                 <form onSubmit={formik.handleSubmit}>
                   <TextField
                     id="email"
@@ -354,24 +323,24 @@ export default function Login() {
                     color="secondary"
                     margin="dense"
                     InputLabelProps={{
-                      style: { color: "black" }, // Màu đen cho label
+                      style: { color: "black" },
                     }}
                     InputProps={{
-                      style: { color: "black" }, // Màu đen cho chữ trong input
+                      style: { color: "black" },
                     }}
                     sx={{
                       "& .MuiOutlinedInput-root": {
                         "& fieldset": {
-                          borderColor: " #419781", // Viền đen cho TextField
-                          borderWidth :"2px"
+                          borderColor: " #419781",
+                          borderWidth: "2px",
                         },
                         "&:hover fieldset": {
-                          borderColor: " #419781", // Viền đen cho TextField
-                          borderWidth :"2px"
+                          borderColor: " #419781",
+                          borderWidth: "2px",
                         },
                         "&.Mui-focused fieldset": {
-                          borderColor: " #419781", // Viền đen cho TextField
-                          borderWidth :"2px"
+                          borderColor: " #419781",
+                          borderWidth: "2px",
                         },
                       },
                     }}
@@ -385,7 +354,7 @@ export default function Login() {
                     id="password"
                     label={
                       <span style={{ color: "black" }}>
-                        Mật Khẩu <span style={{ color: "red" }}>*</span>
+                        Password <span style={{ color: "red" }}>*</span>
                       </span>
                     }
                     variant="outlined"
@@ -398,9 +367,8 @@ export default function Login() {
                     margin="dense"
                     color="secondary"
                     InputLabelProps={{
-                      style: { color: "black" }, // Màu đen cho label
+                      style: { color: "black" },
                     }}
-              
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -415,21 +383,21 @@ export default function Login() {
                           </IconButton>
                         </InputAdornment>
                       ),
-                      style: { color: "black" }, // Màu đen cho chữ trong input
+                      style: { color: "black" },
                     }}
                     sx={{
                       "& .MuiOutlinedInput-root": {
                         "& fieldset": {
-                          borderColor: " #419781", // Viền đen cho TextField
-                          borderWidth :"2px"
+                          borderColor: " #419781",
+                          borderWidth: "2px",
                         },
                         "&:hover fieldset": {
-                          borderColor: " #419781", // Viền đen cho TextField
-                          borderWidth :"2px"
+                          borderColor: " #419781",
+                          borderWidth: "2px",
                         },
                         "&.Mui-focused fieldset": {
-                          borderColor: " #419781", // Viền đen cho TextField
-                          borderWidth :"2px"
+                          borderColor: " #419781",
+                          borderWidth: "2px",
                         },
                       },
                     }}
@@ -441,11 +409,11 @@ export default function Login() {
                   ) : null}
                   <p style={{ textAlign: "right" }}>
                     <Link
-                      to="/"
+                      to="/forgotPassword"
                       variant="body2"
                       className="login__forgot"
                     >
-                      Quên mật khẩu?
+                      Forgot password?
                     </Link>
                   </p>
                   {!showLoadingModal ? (
@@ -455,34 +423,27 @@ export default function Login() {
                       type="submit"
                       fullWidth
                     >
-                      Đăng nhập
+                      Login
                     </Button>
                   ) : (
                     <LoadingModal />
                   )}
 
                   <p className="login__link">
-                    Không có tài khoản?
+                    Don't have an account?
                     <Link
                       to="/signup"
                       variant="body2"
                       className="login__link__btn"
                     >
-                      <span
-                        style={{
-                          color: "#70d8bd",
-                        }}
-                      >
-                        {" "}
-                        Đăng ký ngay!
-                      </span>
+                      <span style={{ color: "#70d8bd" }}> Sign up now!</span>
                     </Link>
                   </p>
                 </form>
                 <div className="login__google">
                   <div className="login__flex">
                     <div className="login__divide"></div>
-                    <span style={{ color: "#8b8b8b" }}>hoặc đăng nhập với</span>
+                    <span style={{ color: "#8b8b8b" }}>or sign in with</span>
                     <div className="login__divide"></div>
                   </div>
                   {!showLoadingGGModal ? (

@@ -20,7 +20,7 @@ const logoStyle = {
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="text.secondary" mt={1}>
+    <Typography variant="body2" color="#0F0002" mt={1}>
       {'Copyright © '}
       <Link href="https://mui.com/">Sitemark&nbsp;</Link>
       {new Date().getFullYear()}
@@ -69,7 +69,7 @@ export default function Footer() {
             <Typography variant="body2" fontWeight={600} gutterBottom>
               Newsletter
             </Typography>
-            <Typography variant="body2" color="text.secondary" mb={2}>
+            <Typography variant="body2" color="black" mb={2}>
               Subscribe to our newsletter for weekly updates and promotions.
             </Typography>
             <Stack direction="row" spacing={1} useFlexGap>
@@ -97,24 +97,25 @@ export default function Footer() {
             display: { xs: 'none', sm: 'flex' },
             flexDirection: 'column',
             gap: 1,
+            
           }}
         >
-          <Typography variant="body2" fontWeight={600}>
+          <Typography variant="body2" fontWeight={600} >
             Product
           </Typography>
-          <Link color="text.secondary" href="#">
+          <Link color="#0F0002" href="#">
             Features
           </Link>
-          <Link color="text.secondary" href="#">
+          <Link color="#0F0002" href="#">
             Testimonials
           </Link>
-          <Link color="text.secondary" href="#">
+          <Link color="#0F0002" href="#">
             Highlights
           </Link>
-          <Link color="text.secondary" href="#">
+          <Link color="#0F0002" href="#">
             Pricing
           </Link>
-          <Link color="text.secondary" href="#">
+          <Link color="#0F0002" href="#">
             FAQs
           </Link>
         </Box>
@@ -128,13 +129,13 @@ export default function Footer() {
           <Typography variant="body2" fontWeight={600}>
             Company
           </Typography>
-          <Link color="text.secondary" href="#">
+          <Link color="#0F0002" href="#">
             About us
           </Link>
-          <Link color="text.secondary" href="#">
+          <Link color="#0F0002" href="#">
             Careers
           </Link>
-          <Link color="text.secondary" href="#">
+          <Link color="#0F0002" href="#">
             Press
           </Link>
         </Box>
@@ -148,13 +149,13 @@ export default function Footer() {
           <Typography variant="body2" fontWeight={600}>
             Legal
           </Typography>
-          <Link color="text.secondary" href="#">
+          <Link color="#0F0002" href="#">
             Terms
           </Link>
-          <Link color="text.secondary" href="#">
+          <Link color="#0F0002" href="#">
             Privacy
           </Link>
-          <Link color="text.secondary" href="#">
+          <Link color="#0F0002" href="#">
             Contact
           </Link>
         </Box>
@@ -170,13 +171,13 @@ export default function Footer() {
         }}
       >
         <div>
-          <Link color="text.secondary" href="#">
+          <Link color="#0F0002" href="#">
             Privacy Policy
           </Link>
           <Typography display="inline" sx={{ mx: 0.5, opacity: 0.5 }}>
             &nbsp;•&nbsp;
           </Typography>
-          <Link color="text.secondary" href="#">
+          <Link color="#0F0002" href="#">
             Terms of Service
           </Link>
           <Copyright />

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -8,7 +9,10 @@ import {
   Select,
   MenuItem,
   Typography,
-  TextField 
+  TextField,
+  Container,
+  Grid,
+  Card,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,26 +24,41 @@ import {
   getAllUsersThunk,
   banUserThunk,
   unbanUserThunk,
-  changeRoleUserThunk
+  changeRoleUserThunk,
 } from "../../../../store/apiThunk/userThunk";
 import {
   StyledBox,
   CustomNoRowsOverlay,
   GridLoadingOverlay,
 } from "../../../../components/styledTable/styledTable";
-import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import "./accountTable.css";
+import Footer from "../../../authorize/landingPage/LandingPageDetail/Footer/Footer";
+import AddIcon from "@mui/icons-material/Add";
+import IconButton from "@mui/material/IconButton";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import PinterestIcon from "@mui/icons-material/Pinterest";
+import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import MedicationIcon from "@mui/icons-material/Medication";
 
-const AccountTable = () => {
+import bgImage from "../../../../assets/koibg_account.jpg";
+import AdminDashboardDetail from "../../../admin/screens/dashboard/dashboardDetail/dashboardDetail";
+
+const AccountTable = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const accounts = useSelector(allAccountsSelector);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
-  const [pageSize, setPageSize] = useState(5); // State for number of rows per page
+  const [pageSize, setPageSize] = useState(10); // State for number of rows per page
   const [pageNumber, setPageNumber] = useState(0); // Current page index
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredRows, setFilteredRows] = useState([]);
+  const direction = props.direction;
+  console.log(accounts);
 
   useEffect(() => {
     dispatch(getAllUsersThunk());
@@ -49,11 +68,28 @@ const AccountTable = () => {
     setFilteredRows(
       accounts?.map((account, index) => ({
         ...account,
+        id: account.accountId, // Sử dụng `accountId` làm id
         order: index + 1,
       })) || []
     );
   }, [accounts]);
 
+  // const handleSearch = () => {
+  //   const lowercasedQuery = searchQuery.toLowerCase();
+  //   const filteredData = accounts.filter((account) =>
+  //     Object.values(account).some((value) =>
+  //       value.toString().toLowerCase().includes(lowercasedQuery)
+  //     )
+  //   );
+
+  //   setFilteredRows(
+  //     filteredData.map((account, index) => ({
+  //       ...account,
+  //       order: index + 1,
+  //     }))
+  //   );
+  //   setPageNumber(0); // Reset page number after search
+  // };
   const handleSearch = () => {
     const lowercasedQuery = searchQuery.toLowerCase();
     const filteredData = accounts.filter((account) =>
@@ -65,23 +101,48 @@ const AccountTable = () => {
     setFilteredRows(
       filteredData.map((account, index) => ({
         ...account,
+        id: account.accountId, // Đảm bảo rằng mỗi hàng có id duy nhất
         order: index + 1,
       }))
     );
     setPageNumber(0); // Reset page number after search
   };
 
-  const handleAccept = (id) => {
+  // const handleAccept = (accountId) => {
+  //   setShowLoadingModal(true);
+  //   dispatch(banUserThunk(accountId))
+  //     .then(() => {
+  //       dispatch(getAllUsersThunk()).then(() => {
+  //         setShowLoadingModal(false);
+  //         Swal.fire({
+  //           title: "Success!",
+  //           text: "User has been banned.",
+  //           icon: "success",
+  //         });
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       setShowLoadingModal(false);
+  //       Swal.fire({
+  //         title: "Error!",
+  //         text: "There was an issue banning the user.",
+  //         icon: "error",
+  //       });
+  //     });
+  // };
+  const handleAccept = (accountId) => {
+    console.log("Banning user with id:", accountId); // Thêm log để kiểm tra
     setShowLoadingModal(true);
-    dispatch(banUserThunk(id))
+    dispatch(banUserThunk(accountId))
       .then(() => {
-        dispatch(getAllUsersThunk()).then(() => {
-          setShowLoadingModal(false);
-          Swal.fire({
-            title: "Success!",
-            text: "User has been banned.",
-            icon: "success",
-          });
+        return dispatch(getAllUsersThunk());
+      })
+      .then(() => {
+        setShowLoadingModal(false);
+        Swal.fire({
+          title: "Success!",
+          text: "User has been banned.",
+          icon: "success",
         });
       })
       .catch((error) => {
@@ -117,7 +178,7 @@ const AccountTable = () => {
       });
   };
 
-  const handleDeny = (id) => {
+  const handleDeny = (accountId) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You will update the status of this account!",
@@ -129,7 +190,7 @@ const AccountTable = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         setShowLoadingModal(true);
-        dispatch(unbanUserThunk(id)).then(() => {
+        dispatch(unbanUserThunk(accountId)).then(() => {
           dispatch(getAllUsersThunk()).then(() => {
             Swal.fire({
               title: "Deleted!",
@@ -160,7 +221,7 @@ const AccountTable = () => {
             fontWeight: "700",
             textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
             padding: "4px",
-            borderRadius: "4px"
+            borderRadius: "4px",
           }}
         >
           {title}
@@ -200,6 +261,7 @@ const AccountTable = () => {
     {
       field: "email",
       headerName: "Email",
+
       flex: 1,
       cellClassName: "name-column--cell",
       renderCell: ({ row: { id, email } }) => {
@@ -223,88 +285,101 @@ const AccountTable = () => {
       flex: 1,
       renderCell: ({ row: { username } }) => <div>{username}</div>,
     },
-    {
-      field: "fullName",
-      headerName: "Full Name",
-      flex: 1,
-      renderCell: ({ row: { fullname } }) => <div>{fullname}</div>,
-    },
-    {
-      field: "changeRole",
-      headerName: "Change Role",
-      headerAlign: "center",
-      flex: 1,
-      renderCell: ({ row: { id, role } }) => {
-        if (role === "Moderator") return null;
-
-        return (
-          <Box width="100%" display="flex" justifyContent="center" alignItems="center">
-            <Button>
-              <SwapHorizIcon
-                color="primary"
-                style={{ cursor: "pointer", fontSize: 30 }}
-                onClick={() => {
-                  Swal.fire({
-                    title: "Confirm Role Change",
-                    text: "This account will be given the Moderator role, you cannot change the role from here!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, change role!",
-                    cancelButtonText: "No, cancel!",
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                      handleChangeRole(id);
-                    }
-                  });
-                }}
-              />
-            </Button>
-          </Box>
-        );
-      },
-    },
-    {
-      field: "role",
-      headerName: "Role",
-      flex: 1,
-      renderCell: ({ row: { role } }) => <div>{role}</div>,
-    },
     // {
-    //   field: "action",
-    //   headerName: "Action",
+    //   field: "changeRole",
+    //   headerName: "Change Role",
     //   headerAlign: "center",
     //   flex: 1,
-    //   renderCell: ({ row: { id } }) => {
+    //   renderCell: ({ row: { id, role } }) => {
+    //     if (role === "Moderator") return null;
+
     //     return (
-    //       <Box width="100%" display="flex" justifyContent="center" gap="4px">
-    //         <Button
-    //           variant="contained"
-    //           style={{
-    //             backgroundColor: "#55ab95",
-    //             minWidth: "50px",
-    //             textTransform: "capitalize",
-    //           }}
-    //           onClick={() => handleAccept(id)}
-    //         >
-    //           Ban
-    //         </Button>
-    //         <Button
-    //           variant="contained"
-    //           style={{
-    //             backgroundColor: colors.redAccent[600],
-    //             minWidth: "50px",
-    //             textTransform: "capitalize",
-    //           }}
-    //           onClick={() => handleDeny(id)}
-    //         >
-    //           Unban
+    //       <Box width="100%" display="flex" justifyContent="center" alignItems="center">
+    //         <Button>
+    //           <SwapHorizIcon
+    //             color="primary"
+    //             style={{ cursor: "pointer", fontSize: 30 }}
+    //             onClick={() => {
+    //               Swal.fire({
+    //                 title: "Confirm Role Change",
+    //                 text: "This account will be given the Moderator role, you cannot change the role from here!",
+    //                 icon: "warning",
+    //                 showCancelButton: true,
+    //                 confirmButtonColor: "#3085d6",
+    //                 cancelButtonColor: "#d33",
+    //                 confirmButtonText: "Yes, change role!",
+    //                 cancelButtonText: "No, cancel!",
+    //               }).then((result) => {
+    //                 if (result.isConfirmed) {
+    //                   handleChangeRole(id);
+    //                 }
+    //               });
+    //             }}
+    //           />
     //         </Button>
     //       </Box>
     //     );
     //   },
     // },
+    {
+      field: "location",
+      headerName: "Location",
+
+      flex: 1,
+      renderCell: ({ row: { location } }) => <div>{location}</div>,
+    },
+    // {
+    //   field: "role",
+    //   headerName: "Role",
+    //   headerAlign: "center",
+
+    //   flex: 1,
+    //   renderCell: ({ row: { role } }) => (
+    //     <Box width="100%" display="flex" justifyContent="center" gap="4px">
+    //       {role}
+    //     </Box>
+    //   ),
+    // },
+    {
+      field: "role",
+      headerName: "Role",
+      // headerAlign: "center",
+      flex: 1,
+      renderCell: ({ row: { role } }) => {
+        let roleColor, IconComponent;
+
+        switch (role) {
+          case "Customer":
+            roleColor = "#53A079"; // Green
+            IconComponent = SentimentSatisfiedAltIcon;
+            break;
+          case "Staff":
+            roleColor = "#C46210"; // Orange
+            IconComponent = AdminPanelSettingsIcon;
+            break;
+          case "Veterinarian":
+            roleColor = "#00CAFF"; // Blue
+            IconComponent = MedicationIcon;
+            break;
+          default:
+            roleColor = "gray"; // Default color for unknown roles
+            IconComponent = null;
+        }
+
+        return (
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            gap={1}
+          >
+            {IconComponent && <IconComponent style={{ color: roleColor }} />}
+            <Typography style={{ color: roleColor }}>{role}</Typography>
+          </Box>
+        );
+      },
+    },
+
     {
       field: "action",
       headerName: "Action",
@@ -348,6 +423,7 @@ const AccountTable = () => {
   const rows =
     accounts?.map((account, index) => ({
       ...account,
+      id: account.accountId, // Sử dụng `accountId` làm id
       order: index + 1,
     })) || [];
 
@@ -359,7 +435,10 @@ const AccountTable = () => {
     setPageSize(Number(event.target.value));
   };
 
-  const paginatedRows = filteredRows.slice(pageNumber * pageSize, pageNumber * pageSize + pageSize);
+  const paginatedRows = filteredRows.slice(
+    pageNumber * pageSize,
+    pageNumber * pageSize + pageSize
+  );
 
   const CustomFooter = () => (
     <Box
@@ -424,60 +503,257 @@ const AccountTable = () => {
   );
 
   return (
-    <Box m="20px">
-      <Header
-        title="ACCOUNT"
-        subtitle="System Account Management"
-      />
-      <Box display="flex" alignItems="center">
-        <TextField
-          label="Search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              handleSearch();
-            }
-          }}
-          placeholder="Search Information"
-          InputProps={{
-            style: { color: 'black' }, // Text color
-          }}
+    <div>
+      <>
+        <Box
+          minHeight="40vh"
+          width="100%"
           sx={{
-            mb: 2,
-            width: "200px",
-            "& .MuiInputBase-input": { color: "black" },
-            "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
-            "& .MuiInputLabel-root": { color: "black" } // Label color
+            backgroundImage: `url(${bgImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "top",
+            display: "grid",
+            placeItems: "center",
           }}
-        />
-        <Button
-          variant="contained"
-          onClick={handleSearch}
-          sx={{ mb: 2, ml: 1, height: "50px",backgroundColor: "#7CB9E8"}}
         >
-          Search
-        </Button>
-      </Box>
-      <Box sx={StyledBox} height="100%">
-        <DataGrid
-          disableRowSelectionOnClick
-          loading={showLoadingModal}
-          rows={paginatedRows}
-          columns={columns}
-          pagination
-          paginationMode="client"
-          pageSize={pageSize}
-          page={pageNumber}
-          onPageChange={handlePageChange}
-          rowCount={filteredRows.length}
-          rowsPerPageOptions={[]}
-          components={{
-            Pagination: CustomFooter,
+          <Container>
+            <Grid
+              container
+              item
+              xs={12}
+              lg={7}
+              justifyContent="center"
+              mx="auto"
+            >
+              <Typography
+                variant="h1"
+                color="#F7FBFC"
+                sx={({ breakpoints, typography: { fontSize } }) => ({
+                  marginTop: "-48px",
+                  marginBottom: "8px",
+                  fontSize: 45,
+                  fontWeight: "900",
+                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+                  borderRadius: "4px",
+                  WebkitTextStroke: "1px black", // Thêm viền quanh chữ
+                  display: "inline-block", // Đảm bảo viền không bị kéo dài
+                  fontFamily: "Helvetica",
+                })}
+              >
+                ACCOUNT MANAGEMENT
+              </Typography>
+
+              <Typography
+                variant="body1"
+                color="black"
+                textAlign="center"
+                px={{ xs: 6, lg: 12 }}
+                mt={1}
+              >
+                Account management system, which allows admin to manage their
+                accounts.
+              </Typography>
+            </Grid>
+          </Container>
+        </Box>
+        <Card
+          sx={{
+            p: 2,
+            mx: { xs: 2, lg: 3 },
+            mt: -9,
+            mb: 4,
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            backdropFilter: "saturate(200%) blur(30px)",
+            boxShadow: (theme) => theme.shadows[24],
           }}
-        />
-      </Box>
-    </Box>
+        >
+          <div style={{ marginLeft: 100 }}>
+            <AdminDashboardDetail />
+          </div>
+
+          {/* //////////////////////////////////////////////////////////////TABLE///////////////////////////////////////////////////////////////////// */}
+
+          <Box m="20px" className="Box-Template-Modal">
+            {/* <Header title="ACCOUNT" subtitle="System Account Management" /> */}
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <Box display="flex" alignItems="center">
+                <TextField
+                  label="Search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      handleSearch();
+                    }
+                  }}
+                  placeholder="Search Information"
+                  InputProps={{
+                    style: { color: "black" }, // Text color
+                  }}
+                  sx={{
+                    mb: 2,
+                    width: "200px",
+                    "& .MuiInputBase-input": { color: "black" },
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "black",
+                    },
+                    "& .MuiInputLabel-root": { color: "black" }, // Label color
+                  }}
+                />
+                <Button
+                  variant="contained"
+                  onClick={handleSearch}
+                  sx={{
+                    mb: 2,
+                    ml: 1,
+                    height: "50px",
+                    backgroundColor: "#7CB9E8",
+                  }}
+                >
+                  Search
+                </Button>
+              </Box>
+              <div className="button_css_createAmin">
+                <div className="button-row">
+                  <div
+                    className="custom-button-icon-create-staff"
+                    onClick={() => navigate(`/${direction}/createStaffAccount`)}
+                  >
+                    <div className="custom-icon-create-staff">
+                      <AdminPanelSettingsIcon
+                        style={{ width: 25, height: 25, color: "black" }}
+                      />
+                    </div>
+                    <div className="custom-cube-create-staff">
+                      <span className="custom-side-create-staff custom-front-create-staff">
+                        Tạo tài khoản Staff
+                      </span>
+                      <span className="custom-side-create-staff custom-top-create-staff">
+                        STAFF
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="custom-button-icon-create-service"
+                    onClick={() => navigate(`/${direction}/createVetAccount`)}
+                  >
+                    <div className="custom-icon-create-service">
+                      <MedicationIcon
+                        style={{ width: 25, height: 25, color: "black" }}
+                      />
+                    </div>
+                    <div className="custom-cube-create-service">
+                      <span className="custom-side-create-service custom-front-create-service">
+                        Tạo tài khoản Veterinarian
+                      </span>
+                      <span className="custom-side-create-service custom-top-create-service">
+                        VETERINARIAN
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Box>
+
+            <Box sx={StyledBox} height="100%">
+              <DataGrid
+                disableRowSelectionOnClick
+                loading={showLoadingModal}
+                rows={paginatedRows}
+                columns={columns}
+                pagination
+                paginationMode="client"
+                pageSize={pageSize}
+                page={pageNumber}
+                onPageChange={handlePageChange}
+                rowCount={filteredRows.length}
+                rowsPerPageOptions={[]}
+                components={{
+                  Pagination: CustomFooter,
+                }}
+              />
+            </Box>
+          </Box>
+
+          {/* //////////////////////////////////////////////////////////////END///////////////////////////////////////////////////////////////////// */}
+
+          <Box pt={18} pb={6}>
+            <Container>
+              <Grid container spacing={3}>
+                <Grid
+                  item
+                  xs={12}
+                  lg={5}
+                  ml="auto"
+                  sx={{ textAlign: { xs: "center", lg: "left" } }}
+                >
+                  <Typography
+                    variant="h4"
+                    fontWeight="bold"
+                    mb={0.5}
+                    color="black"
+                  >
+                    Thank you for your support!
+                  </Typography>
+                  <Typography variant="body1" color="black">
+                    We deliver the best web products
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  lg={5}
+                  my={{ xs: 5, lg: "auto" }}
+                  mr={{ xs: 0, lg: "auto" }}
+                  sx={{ textAlign: { xs: "center", lg: "right" } }}
+                >
+                  <IconButton
+                    component="a"
+                    href="https://twitter.com/intent/tweet?text=Check%20Material%20Design%20System%20made%20by%20%40CreativeTim%20%23webdesign%20%23designsystem%20%23mui5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fmaterial-kit-react"
+                    target="_blank"
+                    color="primary"
+                    sx={{ mr: 1 }}
+                  >
+                    <TwitterIcon />
+                  </IconButton>
+                  <IconButton
+                    component="a"
+                    href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-kit-react"
+                    target="_blank"
+                    color="primary"
+                    sx={{ mr: 1 }}
+                  >
+                    <FacebookIcon />
+                  </IconButton>
+                  <IconButton
+                    component="a"
+                    href="https://www.pinterest.com/pin/create/button/?url=https://www.creative-tim.com/product/material-kit-react"
+                    target="_blank"
+                    color="primary"
+                  >
+                    <PinterestIcon />
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </Container>
+          </Box>
+        </Card>
+        <Box
+          pt={6}
+          px={1}
+          mt={6}
+          sx={{ color: "black", background: "#ebe2e1" }}
+        >
+          <Footer />
+        </Box>
+      </>
+
+      {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+    </div>
   );
 };
 

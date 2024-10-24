@@ -1,254 +1,172 @@
-import { Box, Button, Divider } from "@mui/material";
-import Header from "../../../components/header/Header";
-import { useLocation, useNavigate } from "react-router-dom";
-import "./dashboardDetail.css";
-import { BarChart, PieChart, pieArcLabelClasses } from "@mui/x-charts";
-import Coin from "../../../../../assets/coin.png";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { Box, Divider, Typography, Card, CardContent } from "@mui/material";
+
 import { useDispatch, useSelector } from "react-redux";
-import { platformMonthIncomeSelector } from "../../../../../store/sellectors";
-import { getPlatformMonthIncomeThunk } from "../../../../../store/apiThunk/walletThunk";
-import Lottie from "lottie-react";
-import LoadingModal from "../../../../../assets/loading.json";
-import {
-    ConvertDashboardArray,
-    GeneratePastSixMonths,
-    HandleMonthChange,
-    ValueFormatter,
-} from "../../../../../components/graph/graph";
-import { FilterGraphComponent } from "../../../../../components/graph/filterGraph";
 
-export default function AdminDashboardDetail() {
-    const location = useLocation();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const incomeSeries = location.state?.incomeSeries;
-    const [month, setMonth] = useState("");
-    const [data, setData] = useState([]);
-    const [dateRange, setDateRange] = useState({ from: "", to: "" });
-    const [xLabels, setXLabels] = useState([]);
-    const platformMonthIncome = useSelector(platformMonthIncomeSelector);
-    const [showLoadingModal, setShowLoadingModal] = useState(false);
-    const [checkHaveTrans, setCheckHaveTrans] = useState(false);
-    const [checkIsUp, setCheckIsUp] = useState(false);
+import { getTotalUsersThunk } from "../../../../../store/apiThunk/userThunk"; // Import thunk
+import { totalUserssSelector } from "../../../../../store/sellectors"; // Import selector
 
-    useEffect(() => {
-        const months = GeneratePastSixMonths();
-        const lastMonth = months[months.length - 1];
-        setMonth(lastMonth);
-        const [month, year] = lastMonth.split("/");
-        const startDate = `${month}/01/${year}`;
-        const endDate = `${month}/${new Date(
-            year,
-            month,
-            0
-        ).getDate()}/${year}`;
+import { getTotalStaffsThunk } from "../../../../../store/apiThunk/userThunk"; // Import thunk
+import { totalStaffssSelector } from "../../../../../store/sellectors"; // Import selector
 
-        setDateRange({ from: startDate, to: endDate });
-        setXLabels(months);
-    }, []);
+import { getTotalVetsThunk } from "../../../../../store/apiThunk/userThunk"; // Import thunk
+import { totalVetssSelector } from "../../../../../store/sellectors"; // Import selector
 
-    useEffect(() => {
-        setShowLoadingModal(true);
-        if (dateRange.from && dateRange.to) {
-            dispatch(getPlatformMonthIncomeThunk(dateRange))
-                .unwrap()
-                .then((res) => {
-                    setData(ConvertDashboardArray(res?.transactions || []));
-                    setCheckHaveTrans(res.transactions !== null);
-                    setCheckIsUp(res.isUp === true);
-                    setShowLoadingModal(false);
-                });
-        }
-    }, [dateRange, dispatch]);
+export default function AdminDashboard() {
+  const dispatch = useDispatch();
+  const totalUserAmount = useSelector(totalUserssSelector); // Sử dụng selector để lấy dữ liệu
+  const totalStaffAmount = useSelector(totalStaffssSelector); // Sử dụng selector để lấy dữ liệu
+  const totalVetAmount = useSelector(totalVetssSelector); // Sử dụng selector để lấy dữ liệu
 
-    const incomeSeriesData = incomeSeries?.map((series) => ({
-        ...series,
-        valueFormatter: ValueFormatter,
-        stack: "total",
-    }));
+  // Gọi thunk để lấy dữ liệu từ API khi component được mount
+  useEffect(() => {
+    dispatch(getTotalUsersThunk());
+    dispatch(getTotalStaffsThunk());
+    dispatch(getTotalVetsThunk());
+  }, [dispatch]);
 
-    const incomeArr = platformMonthIncome?.transactions;
+  return (
+    <div className="dashboard">
+      {/* Bắt đầu phần các thẻ (card) */}
+      <Box display="flex" gap={2} p={2}>
+        {/* Card cho User */}
+        <Card
+          style={{
+            width: "30%",
+            background: "#f5f5f5",
+            backgroundImage:
+              "url('https://i.pinimg.com/564x/ab/dc/7c/abdc7c2e51ba059be8b51bffc159f5b5.jpg')", // URL hình nền
+            //   "url('https://png.pngtree.com/thumb_back/fh260/background/20210115/pngtree-blue-gradient-web-ui-background-image_518658.jpg')", // URL hình nền
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            color: "black", // Đổi màu chữ để dễ nhìn trên nền
+            position: "relative", // Thêm position relative để căn chỉnh tuyệt đối bên trong
+            // boxShadow: "0 0 10px 2px rgba(124, 185, 232, 1)", // Phát sáng màu xanh xám nặng hơn
+            backgroundColor: "rgba(255, 255, 255, 0.8)", // Nền trắng nhạt
+          }}
+        >
+          <CardContent>
+            <Typography variant="h6" style={{ fontWeight: "600" }}>
+              Customer
+            </Typography>
+            <Typography variant="body2" style={{ fontSize: "12px" }}>
+              Total number of Customer:
+            </Typography>
 
-    return (
-        <div className="adminDashboardDetail">
-            <Box m="20px">
-                <Header
-                    title={"thu nhập"}
-                    subtitle={"tổng thu nhập"}
-                    direction="dashboardDetail"
-                />
-                {!showLoadingModal ? (
-                    <>
-                        <Box display="flex" alignItems="center" gap="3em">
-                            <FilterGraphComponent
-                                label="Thời Gian"
-                                name="month"
-                                month={month}
-                                handleMonthChange={(e) =>
-                                    HandleMonthChange(e, setDateRange, setMonth)
-                                }
-                                xLabels={xLabels}
-                            />
-                            <Box
-                                display="flex"
-                                alignItems="center"
-                                width="100%"
-                                gap=".5em"
-                            >
-                                <Box
-                                    display="flex"
-                                    alignItems="center"
-                                    gap="5px"
-                                    fontWeight="600"
-                                    fontSize="25px"
-                                >
-                                    {Math.floor(
-                                        platformMonthIncome?.balance
-                                    )?.toLocaleString()}
-                                    <img
-                                        src={Coin}
-                                        alt=""
-                                        style={{ width: "30px" }}
-                                    />
-                                </Box>
-                                <Box
-                                    display="flex"
-                                    alignItems="center"
-                                    gap="5px"
-                                    fontWeight="600"
-                                    fontSize="25px"
-                                >
-                                    {"( "}
-                                    {checkIsUp ? (
-                                        <ArrowUpwardIcon
-                                            color="secondary"
-                                            fontSize="large"
-                                        />
-                                    ) : (
-                                        <ArrowDownwardIcon
-                                            color="error"
-                                            fontSize="large"
-                                        />
-                                    )}
-                                    <div>
-                                        {platformMonthIncome?.percent?.toFixed(2)}
-                                        {"% "}
-                                        <span className="span">
-                                            So với tháng trước{" "}
-                                        </span>
-                                    </div>
-                                    {" )"}
-                                </Box>
-                            </Box>
-                        </Box>
-                        {checkHaveTrans ? (
-                            <Box
-                                display="flex"
-                                alignItems="center"
-                                justifyContent="center"
-                                width="100%"
-                            >
-                                <PieChart
-                                    colors={[
-                                        "lime",
-                                        "aqua",
-                                        "yellow",
-                                        "crimson",
-                                        "turquoise",
-                                        "teal",
-                                        "golden",
-                                    ]}
-                                    series={[
-                                        {
-                                            arcLabel: (item) =>
-                                                `${item.value}%`,
-                                            arcLabelMinAngle: 45,
-                                            data,
-                                            innerRadius: 30,
-                                            outerRadius: 100,
-                                            paddingAngle: 3,
-                                            cornerRadius: 10,
-                                        },
-                                    ]}
-                                    sx={{
-                                        [`& .${pieArcLabelClasses.root}`]: {
-                                            fill: "white",
-                                            fontWeight: "bold",
-                                        },
-                                    }}
-                                    height={300}
-                                />
-                                <Box
-                                    display="flex"
-                                    flexDirection="column"
-                                    gap="7px"
-                                    width="100%"
-                                >
-                                    {incomeArr.map((income, index) => (
-                                        <Box
-                                            display="flex"
-                                            alignItems="center"
-                                            gap="3px"
-                                            key={index}
-                                        >
-                                            {income?.amount?.toLocaleString()}
-                                            <img
-                                                src={Coin}
-                                                alt=""
-                                                style={{ width: "25px" }}
-                                            />
-                                            <div>
-                                                ( {income?.totalTransaction}{" "}
-                                                Giao dịch )
-                                            </div>
-                                        </Box>
-                                    ))}
-                                </Box>
-                            </Box>
-                        ) : (
-                            <div className="noTrans">Chưa có giao dịch..</div>
-                        )}
-                    </>
-                ) : (
-                    <Lottie
-                        animationData={LoadingModal}
-                        loop={true}
-                        style={{ width: 100, height: 100 }}
-                    />
-                )}
-                <Divider />
-                <Box height="72vh" paddingBlock="30px">
-                    <BarChart
-                        series={[...incomeSeriesData]}
-                        xAxis={[
-                            {
-                                data: xLabels,
-                                scaleType: "band",
-                                categoryGapRatio: 0.4,
-                            },
-                        ]}
-                        colors={[
-                            "lime",
-                            "aqua",
-                            "yellow",
-                            "crimson",
-                            "turquoise",
-                            "teal",
-                            "golden",
-                        ]}
-                    />
-                </Box>
-                <Button
-                    className="back_btn"
-                    variant="contained"
-                    onClick={() => navigate(-1)}
-                >
-                    Back
-                </Button>
-            </Box>
-        </div>
-    );
+            {/* Tổng số người dùng */}
+            <Typography
+              style={{
+                fontSize: "43px", // Kích cỡ lớn hơn
+                color: "black", // Màu chữ
+                textAlign: "right", // Căn phải
+                fontWeight: "600",
+                position: "absolute", // Đặt vị trí tuyệt đối
+                right: "30px", // Cách cạnh phải
+                bottom: "12px", // Cách cạnh dưới
+                padding: "8px", // Khoảng cách bên trong để viền không bị cắt
+                borderRadius: "8px", // Bo tròn các góc
+                border: "2px solid #7CB9E8", // Viền màu xanh xám
+                boxShadow: "0 0 60px 5px rgba(124, 185, 232, 1)", // Phát sáng màu xanh xám nặng hơn
+                backgroundColor: "rgba(255, 255, 255, 0.8)", // Nền trắng nhạt
+              }}
+            >
+              {totalUserAmount?.amount || 0}
+            </Typography>
+          </CardContent>
+        </Card>
+
+        {/* Card cho Transaction */}
+        <Card
+          style={{
+            width: "30%",
+            background: "#f5f5f5",
+            backgroundImage:
+              "url('https://i.pinimg.com/564x/ab/dc/7c/abdc7c2e51ba059be8b51bffc159f5b5.jpg')", // URL hình nền
+            //   "url('https://png.pngtree.com/thumb_back/fh260/background/20210115/pngtree-blue-gradient-web-ui-background-image_518658.jpg')", // URL hình nền
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            color: "black", // Đổi màu chữ để dễ nhìn trên nền
+            position: "relative", // Thêm position relative để căn chỉnh tuyệt đối bên trong
+            // boxShadow: "0 0 10px 2px rgba(124, 185, 232, 1)", // Phát sáng màu xanh xám nặng hơn
+            backgroundColor: "rgba(255, 255, 255, 0.8)", // Nền trắng nhạt
+          }}
+        >
+          <CardContent>
+            <Typography variant="h6" style={{ fontWeight: "600" }}>
+              Staff
+            </Typography>
+            <Typography variant="body2" style={{ fontSize: "12px" }}>
+              Total number of Staff:
+            </Typography>
+
+            {/* Tổng số người dùng */}
+            <Typography
+              style={{
+                fontSize: "43px", // Kích cỡ lớn hơn
+                color: "black", // Màu chữ
+                textAlign: "right", // Căn phải
+                fontWeight: "600",
+                position: "absolute", // Đặt vị trí tuyệt đối
+                right: "30px", // Cách cạnh phải
+                bottom: "12px", // Cách cạnh dưới
+                padding: "8px", // Khoảng cách bên trong để viền không bị cắt
+                borderRadius: "8px", // Bo tròn các góc
+                border: "2px solid #7CB9E8", // Viền màu xanh xám
+                boxShadow: "0 0 60px 5px rgba(124, 185, 232, 1)", // Phát sáng màu xanh xám nặng hơn
+                backgroundColor: "rgba(255, 255, 255, 0.8)", // Nền trắng nhạt
+              }}
+            >
+              {totalStaffAmount?.amount || 0}
+            </Typography>
+          </CardContent>
+        </Card>
+
+        {/* Card cho Post */}
+        <Card
+          style={{
+            width: "30%",
+            background: "#f5f5f5",
+            backgroundImage:
+              "url('https://i.pinimg.com/564x/ab/dc/7c/abdc7c2e51ba059be8b51bffc159f5b5.jpg')", // URL hình nền
+            //   "url('https://png.pngtree.com/thumb_back/fh260/background/20210115/pngtree-blue-gradient-web-ui-background-image_518658.jpg')", // URL hình nền
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            color: "black", // Đổi màu chữ để dễ nhìn trên nền
+            position: "relative", // Thêm position relative để căn chỉnh tuyệt đối bên trong
+            // boxShadow: "0 0 10px 2px rgba(124, 185, 232, 1)", // Phát sáng màu xanh xám nặng hơn
+            backgroundColor: "rgba(255, 255, 255, 0.8)", // Nền trắng nhạt
+          }}
+        >
+          <CardContent>
+            <Typography variant="h6" style={{ fontWeight: "600" }}>
+              Veterinarian
+            </Typography>
+            <Typography variant="body2" style={{ fontSize: "12px" }}>
+              Total number of Veterinarian:
+            </Typography>
+
+            {/* Tổng số người dùng */}
+            <Typography
+              style={{
+                fontSize: "43px", // Kích cỡ lớn hơn
+                color: "black", // Màu chữ
+                textAlign: "right", // Căn phải
+                fontWeight: "600",
+                position: "absolute", // Đặt vị trí tuyệt đối
+                right: "30px", // Cách cạnh phải
+                bottom: "12px", // Cách cạnh dưới
+                padding: "8px", // Khoảng cách bên trong để viền không bị cắt
+                borderRadius: "8px", // Bo tròn các góc
+                border: "2px solid #7CB9E8", // Viền màu xanh xám
+                boxShadow: "0 0 60px 5px rgba(124, 185, 232, 1)", // Phát sáng màu xanh xám nặng hơn
+                backgroundColor: "rgba(255, 255, 255, 0.8)", // Nền trắng nhạt
+              }}
+            >
+              {totalVetAmount?.amount || 0}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Box>
+    </div>
+  );
 }

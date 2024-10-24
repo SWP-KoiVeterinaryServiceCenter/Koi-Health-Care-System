@@ -1,0 +1,305 @@
+/* From Uiverse.io by Smit-Prajapati */ 
+.cardComponent-parent {
+    width: 300px;
+    padding: 20px;
+    perspective: 1000px;
+  }
+  
+  .cardComponent-card {
+    padding-top: 50px;
+    border: 3px solid rgb(255, 255, 255);
+    transform-style: preserve-3d;
+    background: linear-gradient(135deg,#0000 18.75%,#f3f3f3 0 31.25%,#0000 0),
+        repeating-linear-gradient(45deg,#f3f3f3 -6.25% 6.25%,#ffffff 0 18.75%);
+    background-size: 60px 60px;
+    background-position: 0 0, 0 0;
+    background-color: #f0f0f0;
+    width: 100%;
+    box-shadow: rgba(142, 142, 142, 0.3) 0px 30px 30px -10px;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .cardComponent-card:hover {
+    background-position: -100px 100px, -100px 100px;
+    transform: rotate3d(0.5, 1, 0, 30deg);
+  }
+  
+  .cardComponent-content-box {
+    background: rgba(4, 193, 250, 0.732);
+    transition: all 0.5s ease-in-out;
+    padding: 60px 25px 25px 25px;
+    transform-style: preserve-3d;
+  }
+  
+  .cardComponent-card-title {
+    display: inline-block;
+    color: white;
+    font-size: 25px;
+    font-weight: 900;
+    transition: all 0.5s ease-in-out;
+    transform: translate3d(0px, 0px, 50px);
+  }
+  
+  .cardComponent-card-title:hover {
+    transform: translate3d(0px, 0px, 60px);
+  }
+  
+  .cardComponent-card-content {
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #f2f2f2;
+    transition: all 0.5s ease-in-out;
+    transform: translate3d(0px, 0px, 30px);
+  }
+  
+  .cardComponent-card-content:hover {
+    transform: translate3d(0px, 0px, 60px);
+  }
+  
+  .cardComponent-see-more {
+    cursor: pointer;
+    margin-top: 1rem;
+    display: inline-block;
+    font-weight: 900;
+    font-size: 9px;
+    text-transform: uppercase;
+    color: #41214F;
+    background: #FF7779;
+    padding: 0.5rem 0.7rem;
+    transition: all 0.5s ease-in-out;
+    transform: translate3d(0px, 0px, 20px);
+  }
+  
+  .cardComponent-see-more:hover {
+    transform: translate3d(0px, 0px, 60px);
+  }
+  
+  .cardComponent-date-box {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    height: 60px;
+    width: 60px;
+    background: white;
+    border: 1px solid rgb(7, 185, 255);
+    padding: 10px;
+    transform: translate3d(0px, 0px, 80px);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 17px 10px -10px;
+  }
+  
+  .cardComponent-date-box span {
+    display: block;
+    text-align: center;
+  }
+  
+  .cardComponent-month {
+    color: rgb(4, 193, 250);
+    font-size: 9px;
+    font-weight: 700;
+  }
+  
+  .cardComponent-date {
+    font-size: 20px;
+    font-weight: 900;
+    color: rgb(4, 193, 250);
+  }
+  
+
+  /* ///////////////////////////////////////////////////////////////Button////////////////////////////////////////// */
+  .gooeyButtonComponent {
+    position: relative; /* Đảm bảo rằng thành phần container có vị trí tương đối */
+  }
+  
+  .gooeyButtonComponent .c-button {
+    color: #000;
+    font-weight: 700;
+    font-size: 12px; /* Làm nút nhỏ hơn */
+    text-decoration: none;
+    padding: 1em 3em; /* Giảm padding để nút nhỏ hơn */
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute; /* Đặt vị trí tuyệt đối */
+    right: 0; /* Đưa nút ra ngoài cùng bên phải */
+    z-index: 1;
+  }
+  
+  .gooeyButtonComponent .c-button--gooey {
+    color: #06c8d9;
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Giảm khoảng cách chữ */
+    border: 2px solid #06c8d9; /* Giảm kích thước viền */
+    border-radius: 0;
+    transition: all 700ms ease;
+  }
+  
+  .gooeyButtonComponent .c-button--gooey .c-button__blobs {
+    height: 100%;
+    filter: url(#goo);
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: -3px;
+    right: -1px;
+    z-index: -1;
+  }
+  
+  .gooeyButtonComponent .c-button--gooey .c-button__blobs div {
+    background-color: rgb(4, 193, 250);
+    width: 34%;
+    height: 100%;
+    border-radius: 100%;
+    position: absolute;
+    transform: scale(1.4) translateY(125%) translateZ(0);
+    transition: all 700ms ease;
+  }
+  
+  .gooeyButtonComponent .c-button--gooey .c-button__blobs div:nth-child(1) {
+    left: -5%;
+  }
+  
+  .gooeyButtonComponent .c-button--gooey .c-button__blobs div:nth-child(2) {
+    left: 30%;
+    transition-delay: 60ms;
+  }
+  
+  .gooeyButtonComponent .c-button--gooey .c-button__blobs div:nth-child(3) {
+    left: 66%;
+    transition-delay: 25ms;
+  }
+  
+  .gooeyButtonComponent .c-button--gooey:hover {
+    color: #fff;
+  }
+  
+  .gooeyButtonComponent .c-button--gooey:hover .c-button__blobs div {
+    transform: scale(1.4) translateY(0) translateZ(0);
+  }
+  
+
+   
+  /* Button styling with unique class names */
+  .serviceCenter_admin {
+    position: relative;
+  }
+  
+.serviceCenter_admin .serviceCenter_admin-btn {
+    left: 1030px; /* Move the button to the far right */
+    top: 0;   /* Adjust top position if needed */
+    position: relative;
+    padding: 12px 35px;
+    background: #20e26d;
+    font-size: 17px;
+    font-weight: 500;
+    color: #181818;
+    border: 3px solid #f1efee;
+    border-radius: 8px;
+    box-shadow: 0 0 0 #fec1958c;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .serviceCenter_admin .serviceCenter_admin-star-1,
+  .serviceCenter_admin .serviceCenter_admin-star-2,
+  .serviceCenter_admin .serviceCenter_admin-star-3,
+  .serviceCenter_admin .serviceCenter_admin-star-4,
+  .serviceCenter_admin .serviceCenter_admin-star-5,
+  .serviceCenter_admin .serviceCenter_admin-star-6 {
+    position: absolute;
+    width: 25px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 1s cubic-bezier(0.05, 0.83, 0.43, 0.96);
+  }
+  
+  .serviceCenter_admin .serviceCenter_admin-star-1 {
+    top: 20%;
+    left: 20%;
+  }
+  
+  .serviceCenter_admin .serviceCenter_admin-star-2 {
+    top: 45%;
+    left: 45%;
+    width: 15px;
+  }
+  
+  .serviceCenter_admin .serviceCenter_admin-star-3 {
+    top: 40%;
+    left: 40%;
+    width: 5px;
+  }
+  
+  .serviceCenter_admin .serviceCenter_admin-star-4 {
+    top: 20%;
+    left: 40%;
+    width: 8px;
+  }
+  
+  .serviceCenter_admin .serviceCenter_admin-star-5 {
+    top: 25%;
+    left: 45%;
+    width: 15px;
+  }
+  
+  .serviceCenter_admin .serviceCenter_admin-star-6 {
+    top: 5%;
+    left: 50%;
+    width: 5px;
+  }
+  
+  .serviceCenter_admin .serviceCenter_admin-btn:hover {
+    background: transparent;
+    color: #fec195;
+    box-shadow: 0 0 25px #fec1958c;
+  }
+  
+  .serviceCenter_admin .serviceCenter_admin-btn:hover .serviceCenter_admin-star-1 {
+    top: -80%;
+    left: -30%;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  .serviceCenter_admin .serviceCenter_admin-btn:hover .serviceCenter_admin-star-2 {
+    top: -25%;
+    left: 10%;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  .serviceCenter_admin .serviceCenter_admin-btn:hover .serviceCenter_admin-star-3 {
+    top: 55%;
+    left: 25%;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  .serviceCenter_admin .serviceCenter_admin-btn:hover .serviceCenter_admin-star-4 {
+    top: 30%;
+    left: 80%;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  .serviceCenter_admin .serviceCenter_admin-btn:hover .serviceCenter_admin-star-5 {
+    top: 25%;
+    left: 115%;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  .serviceCenter_admin .serviceCenter_admin-btn:hover .serviceCenter_admin-star-6 {
+    top: 5%;
+    left: 60%;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  .serviceCenter_admin .fil0 {
+    fill: #fffdef;
+  }
+  

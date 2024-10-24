@@ -32,10 +32,26 @@ import PaidIcon from "@mui/icons-material/Paid";
 import ManageHistoryIcon from "@mui/icons-material/ManageHistory";
 import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
-import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
+import LocalPoliceIcon from "@mui/icons-material/LocalPolice";
+import logo from "../../../../assets/koi_loho.png";
+import backgroundGif from "../../../../assets/gif/koi_logo_sidebar.gif";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import AddIcon from '@mui/icons-material/Add';
+const logoStyle = {
+  width: "140px",
+  height: "auto",
+  cursor: "pointer",
+};
+const backgroundStyle = {
+  background: `url(${backgroundGif}) no-repeat center center`, // Sử dụng ảnh GIF làm background
+  backgroundSize: "270px 150px", // Điều chỉnh kích thước của ảnh GIF, ví dụ 150x150px
+
+  padding: "10px", // Thêm khoảng cách cho logo nếu cần
+};
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
   return (
     <MenuItem
       active={selected === title}
@@ -57,11 +73,13 @@ const Sidebar = (props) => {
   const colors = tokens(theme.palette.mode);
   let isCollapsed = props.isCollapsed;
   let setIsCollapsed = props.setIsCollapsed;
-  const [selected, setSelected] = useState("Thu Nhập");
+  const [selected, setSelected] = useState();
   const [open, setOpen] = useState(true);
   const [openCPM, setOpenCPM] = useState(false);
   const [openTran, setOpenTran] = useState(false);
   const [openPol, setOpenPol] = useState(false);
+  const [openWrk, setOpenWrk] = useState(false);
+
   const handleClick = () => {
     setOpen(!open);
   };
@@ -76,31 +94,14 @@ const Sidebar = (props) => {
     setOpenPol(!openPol);
   };
 
+  const handleClickWorkingSchedule = () => {
+    setOpenWrk(!openWrk);
+  };
+
   const url = new URL(window.location.href);
   const pathName = url.pathname;
   const parts = pathName?.split("/");
   const locationValue = parts[parts.length - 1];
-
-  useEffect(() => {
-    if (locationValue === "item") {
-      setSelected("Quà Tặng");
-    } else if (locationValue === "package") {
-      setSelected("Gói Đăng Ký");
-    } else if (
-      locationValue === "admin" ||
-      locationValue === "dashboardDetail"
-    ) {
-      setSelected("Thu Nhập");
-    } else if (locationValue === "shop") {
-      setSelected("Cửa Hàng");
-    } else if (locationValue === "account") {
-      setSelected("Tài Khoản");
-    } else if (locationValue === "wallet") {
-      setSelected("Ví Và Giao Dịch");
-    } else if (locationValue === "report") {
-      setSelected("Báo Cáo");
-    }
-  }, [locationValue]);
 
   return (
     <div className="adminSidebar">
@@ -119,26 +120,16 @@ const Sidebar = (props) => {
                   <MenuOutlinedIcon fontSize="large" className="icon-box" />
                 </IconButton>
               }
-            ></MenuItem>
-            {!isCollapsed && (
-              <div className="box">
-                <img
-                  alt="profile-user"
-                  width="50px"
-                  height="50px"
-                  src={Admin}
-                  style={{
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                  }}
-                />
-                <Typography variant="h5" color={"white"} fontWeight="bold">
-                  {userData.role}
-                </Typography>
-              </div>
-            )}
+            >
+              <Typography variant="h5" color={"white"} fontWeight="bold">
+                {userData.role}
+              </Typography>
+            </MenuItem>
+            <Typography className="typography-logo" style={backgroundStyle}>
+              <img src={logo} style={logoStyle} alt="logo of sitemark" />
+            </Typography>
             <Box>
-              <Typography
+              {/* <Typography
                 variant="h6"
                 color={colors.grey[300]}
                 sx={{ m: "15px 0 5px 20px" }}
@@ -151,7 +142,7 @@ const Sidebar = (props) => {
                 icon={<BarChartIcon />}
                 selected={selected}
                 setSelected={setSelected}
-              />
+              /> */}
               <Divider />
               <Typography
                 variant="h6"
@@ -211,25 +202,49 @@ const Sidebar = (props) => {
                     setSelected={setSelected}
                   />
                   <Item
-                    title="Verify Account"
-                    to="verifyAccount"
-                    icon={<HowToRegIcon />}
+                    title="Tank"
+                    to="tankList"
+                    icon={<AccountCircleOutlined />}
                     selected={selected}
                     setSelected={setSelected}
                   />
                   <Item
-                    title="Subscription"
-                    to="package"
+                    title="Service Type"
+                    to="serviceType"
+                    icon={<AccountCircleOutlined />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+              
+                      <Item
+                    title="Service Center List"
+                    to="listServiceCenter"
                     icon={<SubscriptionsIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
+                           <Item
+                    title="Appointment "
+                    to="appointmentManagement"
+                    icon={<SubscriptionsIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                           <Item
+                    title="TravelExpense "
+                    to="travelExpenseList"
+                    icon={<SubscriptionsIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />  
 
-                  {/* ///////////////////////////////////////////////////////////////////// */}
-                  <List>
-                    <ListItemButton onClick={handleClickProductManagement}>
+                
+
+
+                   <List>
+                    <ListItemButton onClick={handleClickWorkingSchedule}>
                       {!isCollapsed && (
-                        <InventoryIcon
+                        <CalendarMonthIcon
                           style={{
                             marginLeft: "10px",
                             marginRight: "19px",
@@ -239,13 +254,13 @@ const Sidebar = (props) => {
                       )}
                       {!isCollapsed && (
                         <ListItemText
-                          primary="Product "
+                          primary="Working Schedule"
                           style={{
                             color: "white",
                           }}
                         />
                       )}
-                      {openCPM ? (
+                      {openWrk ? (
                         <ExpandLess
                           style={{
                             marginLeft: "10px",
@@ -262,7 +277,7 @@ const Sidebar = (props) => {
                       )}
                     </ListItemButton>
                     <Collapse
-                      in={openCPM}
+                      in={openWrk}
                       timeout="auto"
                       unmountOnExit
                       style={{
@@ -270,151 +285,29 @@ const Sidebar = (props) => {
                       }}
                     >
                       <Item
-                        title="Post Management"
-                        to="shop"
-                        icon={<ClassIcon />}
+                        title="Schedule"
+                        to="workingSchedule"
+                        icon={<EventRepeatIcon />}
                         selected={selected}
                         setSelected={setSelected}
                       />
                       <Item
-                        title="Category Management"
-                        to="category"
-                        icon={<CategoryIcon />}
+                        title="Create Working Schedule"
+                        to="createWorkingSchedule"
+                        icon={<AddIcon/>}
                         selected={selected}
                         setSelected={setSelected}
                       />
-                    </Collapse>
-                  </List>
-                  {/* ////////////////////////////////////////////////////////////////// */}
-                  <List>
-                    <ListItemButton onClick={handleClickTransaction}>
-                      {!isCollapsed && (
-                        <PaidIcon
-                          style={{
-                            marginLeft: "10px",
-                            marginRight: "19px",
-                            color: "white",
-                          }}
-                        />
-                      )}
-                      {!isCollapsed && (
-                        <ListItemText
-                          primary="Transaction"
-                          style={{
-                            color: "white",
-                          }}
-                        />
-                      )}
-                      {openTran ? (
-                        <ExpandLess
-                          style={{
-                            marginLeft: "10px",
-                            color: "white",
-                          }}
-                        />
-                      ) : (
-                        <ExpandMore
-                          style={{
-                            marginLeft: "10px",
-                            color: "white",
-                          }}
-                        />
-                      )}
-                    </ListItemButton>
-                    <Collapse
-                      in={openTran}
-                      timeout="auto"
-                      unmountOnExit
-                      style={{
-                        paddingLeft: !isCollapsed ? "20px" : 0,
-                      }}
-                    >
-                      <Item
-                        title="Wallet Transaction"
-                        to="wallet"
-                        icon={<WalletOutlinedIcon />}
+                      {/* <Item
+                        title="Report"
+                        to="report"
+                        icon={<ReportGmailerrorredIcon />}
                         selected={selected}
                         setSelected={setSelected}
-                      />
-                      <Item
-                        title="Order Tracking"
-                        to="ordertable"
-                        icon={<ManageHistoryIcon />}
-                        selected={selected}
-                        setSelected={setSelected}
-                      />
-                    </Collapse>
-                  </List>
-                  {/* //////////////////////////////////handleClickPolicy/////////////////////////////////// */}
-                  <List>
-                    <ListItemButton onClick={handleClickPolicy}>
-                      {!isCollapsed && (
-                        <LocalPoliceIcon
-                          style={{
-                            marginLeft: "10px",
-                            marginRight: "19px",
-                            color: "white",
-                          }}
-                        />
-                      )}
-                      {!isCollapsed && (
-                        <ListItemText
-                          primary="Policy"
-                          style={{
-                            color: "white",
-                          }}
-                        />
-                      )}
-                      {openPol ? (
-                        <ExpandLess
-                          style={{
-                            marginLeft: "10px",
-                            color: "white",
-                          }}
-                        />
-                      ) : (
-                        <ExpandMore
-                          style={{
-                            marginLeft: "10px",
-                            color: "white",
-                          }}
-                        />
-                      )}
-                    </ListItemButton>
-                    <Collapse
-                      in={openPol}
-                      timeout="auto"
-                      unmountOnExit
-                      style={{
-                        paddingLeft: !isCollapsed ? "20px" : 0,
-                      }}
-                    >
-                       <Item
-                    title="Daily cancellation limit"
-                    to="cancelAmount"
-                    icon={<EventRepeatIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  <Item
-                    title="Adjust Money"
-                    to="adjustMoney"
-                    icon={<CurrencyExchangeIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  <Item
-                    title="Report"
-                    to="report"
-                    icon={<ReportGmailerrorredIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
+                      /> */}
                     </Collapse>
                   </List>
                   {/* ///////////////////////////////////////////////////////////////////// */}
-
-                 
                 </Collapse>
               </List>
             </Box>

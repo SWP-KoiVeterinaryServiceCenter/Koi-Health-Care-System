@@ -18,10 +18,22 @@ import ChangePassword from "./pages/authorize/changePassword/changePassword";
 //Admin
 import AdminHome from "./pages/admin/screens/home/adminHome";
 import AccountTable from "./pages/admin/screens/account/accountTable";
+import TankList from "./pages/admin/screens/tank/tank";
+import ServiceTypeList from "./pages/admin/screens/serviceType/serviceType";
 import VerifyAccount from "./pages/admin/screens/verifyaccount/verifyaccount";
 import WalletTableAdmin from "./pages/admin/screens/wallet/walletTable";
 import AdminDashboard from "./pages/admin/screens/dashboard/dashboardPage/dashboard";
 import AdminDashboardDetail from "./pages/admin/screens/dashboard/dashboardDetail/dashboardDetail";
+import CreateStaffAccount from "./pages/admin/screens/createRoleAccount/createStaffAccount/createStaffAccount";
+import CreateVetAccount from "./pages/admin/screens/createRoleAccount/createVetAccount/createVetAccount";
+import CreateTank from "./pages/admin/screens/createTank/createTank";
+import CreateServiceType from "./pages/admin/screens/createServiceType/createServiceType";
+import CreateServiceCenter from "./pages/admin/screens/createServiceCenter/createServiceCenter";
+import ListServiceCenter from "./pages/admin/screens/listServiceCenter/listServiceCenter";
+import ServiceCenter from "./pages/admin/screens/listServiceCenter/serviceCenter/serviceCenter";
+import AppointmentManagement from "./pages/admin/screens/appointmentManagement/appointmentManagement";
+import CreateTravelExpense from "./pages/admin/screens/createTravelExpense/createTravelExpense";
+import TravelExpenseList from "./pages/admin/screens/travelExpenseList/travelExpenseList"
 
 //Manager
 import CreateShopManager from "./pages/manager/screens/shop/createShop/createShop";
@@ -35,6 +47,13 @@ import ManagerDashboard from "./pages/manager/screens/dashboard/dashboardPage/da
 import DashboardDetail from "./pages/manager/screens/dashboard/dashboardDetail/dashboardDetail";
 import CancelAmount from "./pages/platformStaff/screens/policy/cancelledAmount/cancelledAmount";
 import AdjustMoney from "./pages/platformStaff/screens/policy/postPrice/postPrice";
+
+//VET
+import VetHome from "./pages/vet/vetHome/vetHome";
+import AppointmentByCurrentVet from "./pages/vet/screens/appointmentByCurrentVet/appointmentByCurrentVet";
+
+
+
 //Staff
 import StaffHome from "./pages/platformStaff/screens/home/staffHome";
 import ShopTableStaff from "./pages/platformStaff/screens/shop/shopTable";
@@ -50,21 +69,82 @@ import CategoryList from "./pages/platformStaff/screens/categoryList/categorydet
 import CreateCategoryList from "./pages/platformStaff/screens/categoryList/createCategory/createCategory";
 import UpdateCategoryList from "./pages/platformStaff/screens/categoryList/updateCategory/updateCategory";
 import OrdertrackTable from "./pages/admin/screens/order/ordertrack";
-
+import WorkingSchedule from "./pages/platformStaff/screens/workingSchedule/workingSchedule";
+import CreateWorkingSchedule from "./pages/platformStaff/screens/createWorkingSchedule/createWorkingSchedule";
+import UpdateWorkingSchedule from "./pages/platformStaff/screens/updateWorkingSchedule/updateWorkingSchedule";
 //Customer
-import CreateKoifish from "./pages/createKoifish/createfish";
-import Service from "./pages/customer/screens/service/service";
+// import CreateKoifish from "./pages/createKoifish/createfish";
+import DoctorOnNewsPage from "./pages/customer/screens/news/news";
+import ServiceKoifish from "./pages/customer/screens/service/service";
+import ServiceHome from "./pages/customer/screens/serviceHome/serviceHome";
+import GuestServiceKoifish from "./pages/guest/guestService/guestService";
 import ServiceInformation from "./pages/customer/screens/serviceInformation/ServiceInformation";
+import InputPayment from "./pages/customer/screens/inputPayment/inputPayment";
 import PersonalInformation from "./pages/customer/screens/personalInformation/PersonalInformation";
 import AddMoreFish from "./pages/customer/screens/addMoreFish/AddMoreFish";
 import Booking from "./pages/customer/screens/booking/booking";
 import CustomerHome from "./pages/customer/components/home/homeCustomer";
+
 import HomePage from "./pages/customer/screens/home/home";
+import ContactUs from "./pages/customer/screens/contactUs/contactUs";
+import CreateKoiFishAppointment from "./pages/customer/screens/createKoiFishAppointment/createKoiFishAppointment";
+import UpdateKoiFishInformation from "./pages/customer/screens/updateKoiFishInformation/UpdateKoiFishInformation";
+import AppointmentList from "./pages/customer/screens/appointmentList/AppointmentList";
+import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
+// import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
+
+//Guest
+import GuestHome from "./pages/guest/guestHome/guestHome";
+import GuestContact from "./pages/guest/guestContact/guestContact";
+import GuestDoctorNews from "./pages/guest/guestDoctorNews/guestDoctorNews";
+import Profile from "./pages/customer/screens/profile/profile";
+
+
+// import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
+import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
+// import CreateWorkingSchedule from "./pages/admin/screens/createWorkingSchedule/createWorkingSchedule";
+
+
+// import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
+// import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
+// import CreateWorkingSchedule from "./pages/admin/screens/createWorkingSchedule/createWorkingSchedule";
+
+
 const router = createBrowserRouter([
+  //Guest
   {
-    path: "",
-    element: <LandingPage />,
+    path: "/",
+    element: <GuestHome />,
+    errorElement: <Error404 />,
+    children: [
+      {
+        path: "",
+        element: <LandingPage />,
+      },
+
+      {
+        path: "guestdoctors",
+        element: <GuestDoctorNews />,
+      },
+      {
+        path: "guestservice",
+        element: <GuestServiceKoifish />,
+      },
+      {
+        path: "guestcontact",
+        element: <GuestContact />,
+      },
+    ],
   },
+
+  {
+    path: "/serviceInformation",
+    element: <ServiceInformation />,
+  },
+  // {
+  //   path: "",
+  //   element: <LandingPage />,
+  // },
   {
     path: "/login",
     element: <Login />,
@@ -85,10 +165,10 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
-  // {
-  //     path: "/verifyAccount",
-  //     element: <VerifyAccount />,
-  // },
+  {
+      path: "/verifyAccount",
+      element: <VerifyAccount />,
+  },
   {
     path: "/error404",
     element: <Error404 />,
@@ -100,20 +180,6 @@ const router = createBrowserRouter([
   {
     path: "/transferStatus",
     element: <TransferStatus />,
-  },
-
-  {
-    path: "/serviceInformation",
-    element: <ServiceInformation />,
-  },
-  {
-    path: "/service",
-    element: <Service />,
-  },
- 
-  {
-    path: "/addMoreFish",
-    element: <AddMoreFish />,
   },
   {
     path: "/booking",
@@ -128,7 +194,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <AdminDashboard />,
+        element: <AccountTable direction="admin" />,
       },
       {
         path: "dashboardDetail",
@@ -136,7 +202,55 @@ const router = createBrowserRouter([
       },
       {
         path: "account",
-        element: <AccountTable />,
+        element: <AccountTable direction="admin" />,
+      },
+      {
+        path: "appointmentManagement",
+        element: <AppointmentManagement direction="admin" />,
+      },
+      {
+        path: "tankList",
+        element: <TankList direction="admin" />,
+      },
+      {
+        path: "serviceType",
+        element: <ServiceTypeList direction="admin" />,
+      },
+      {
+        path: "createStaffAccount",
+        element: <CreateStaffAccount />,
+      },
+      {
+        path: "createTank",
+        element: <CreateTank />,
+      },
+      {
+        path: "createTravelExpense",
+        element: <CreateTravelExpense />,
+      },
+      {
+        path: "travelExpenseList",
+        element: <TravelExpenseList direction="admin" />,
+      },
+      {
+        path: "createServiceType",
+        element: <CreateServiceType />,
+      },
+      {
+        path: "createServiceCenter",
+        element: <CreateServiceCenter />,
+      },
+      {
+        path: "listServiceCenter",
+        element: <ListServiceCenter direction="admin" />,
+      },
+      {
+        path: "serviceCenter",
+        element: <ServiceCenter direction="admin" />,
+      },
+      {
+        path: "createVetAccount",
+        element: <CreateVetAccount />,
       },
       {
         path: "verifyAccount",
@@ -274,6 +388,58 @@ const router = createBrowserRouter([
         path: "ordertable",
         element: <OrdertrackTable />,
       },
+      {
+        path: "workingSchedule",
+        element: <WorkingSchedule direction="staff" />,
+      },
+      {
+        path: "createWorkingSchedule",
+        element: <CreateWorkingSchedule />,
+      },
+      {
+        path: "updateWorkingSchedule",
+        element: <UpdateWorkingSchedule direction="staff" />,
+      },
+      {
+        path: "tankList",
+        element: <TankList direction="staff" />,
+      },
+      {
+        path: "serviceType",
+        element: <ServiceTypeList direction="staff" />,
+      },
+      {
+        path: "createTank",
+        element: <CreateTank />,
+      },
+      {
+        path: "createTravelExpense",
+        element: <CreateTravelExpense />,
+      },
+      {
+        path: "travelExpenseList",
+        element: <TravelExpenseList direction="staff" />,
+      },
+      {
+        path: "createServiceType",
+        element: <CreateServiceType />,
+      },
+      {
+        path: "createServiceCenter",
+        element: <CreateServiceCenter />,
+      },
+      {
+        path: "listServiceCenter",
+        element: <ListServiceCenter direction="staff" />,
+      },
+      {
+        path: "serviceCenter",
+        element: <ServiceCenter direction="staff" />,
+      },
+      {
+        path: "appointmentManagement",
+        element: <AppointmentManagement direction="staff" />,
+      },
     ],
   },
   //Customer
@@ -286,24 +452,133 @@ const router = createBrowserRouter([
         path: "",
         element: <HomePage />,
       },
+      // {
+      //   path: "service",
+      //   element: <ServiceHome direction="customer" />,
+      //   children: [
+      //     {
+      //       path: "",
+      //       element: <ServiceKoifish direction="customer" />,
+      //     },
+      //     {
+      //       path: "createKoiFishAppointment",
+      //       element: <CreateKoiFishAppointment />,
+      //     },
+      //   ],
+      // },
       {
         path: "service",
-        element: <Service direction="customer" />,
+        element: <ServiceKoifish direction="customer" />,
       },
       {
+        path: "createKoiFishAppointment",
+        element: <CreateKoiFishAppointment direction="customer" />,
+      },
+
+      {
         path: "personalInformation",
-        element: <PersonalInformation />,
+        element: <PersonalInformation direction="customer" />,
       },
       {
         path: "serviceInformation",
-        element: <ServiceInformation />,
+        element: <ServiceInformation direction="customer" />,
       },
       {
-        path: "personalInformation",
-        element: <PersonalInformation />,
+        path: "serviceInformation/inputPayment",
+        element: <InputPayment />,
+      },
+      {
+        path: "contactUs",
+        element: <ContactUs />,
+      },
+      {
+        path: "doctors",
+        element: <DoctorOnNewsPage direction="customer" />,
+      },
+      {
+        path: "addMoreFish",
+        element: <AddMoreFish />,
+      },
+      {
+        path: "updateKoiFishInformation",
+        element: <UpdateKoiFishInformation />,
+      },
+      {
+        path: "appointmentList",
+        element: <AppointmentList direction="customer" />,
+      },
+      {
+        path: "updatePersonalInformation",
+        element: <UpdatePersonalInformation direction="customer" />,
+      },
+      // {
+      //   path: "uploadPersonalImage",
+      //   element: <UploadPersonalImage direction="customer"/>,
+      // },    
+      {
+        path: "profile",
+        element: <Profile direction="customer"/>,
       },
     ],
   },
+    //VET
+    {
+      path: "/vet",
+      element: <VetHome />,
+      errorElement: <Error404 />,
+      children: [
+        {
+          path: "",
+          element: <HomePage />,
+        },
+        // {
+        //   path: "service",
+        //   element: <ServiceHome direction="customer" />,
+        //   children: [
+        //     {
+        //       path: "",
+        //       element: <ServiceKoifish direction="customer" />,
+        //     },
+        //     {
+        //       path: "createKoiFishAppointment",
+        //       element: <CreateKoiFishAppointment />,
+        //     },
+        //   ],
+        // },
+       
+        {
+          path: "personalInformation",
+          element: <PersonalInformation direction="vet" />,
+        },
+     
+        {
+          path: "contactUs",
+          element: <ContactUs />,
+        },
+        {
+          path: "doctors",
+          element: <DoctorOnNewsPage direction="vet" />,
+        },
+       
+        {
+          path: "appointmentList",
+          element: <AppointmentList direction="vet" />,
+        },
+        {
+          path: "updatePersonalInformation",
+          element: <UpdatePersonalInformation direction="vet" />,
+        },
+        {
+          path: "appointmentByCurrentVet",
+          element: <AppointmentByCurrentVet direction="vet" />,
+        },
+        // {
+        //   path: "uploadPersonalImage",
+        //   element: <UploadPersonalImage direction="customer"/>,
+        // },
+      ],
+    },
+
   //Manager
   {
     path: "/manager",
@@ -346,6 +621,7 @@ const router = createBrowserRouter([
         path: "changePassword",
         element: <ChangePassword />,
       },
+      
     ],
   },
 ]);

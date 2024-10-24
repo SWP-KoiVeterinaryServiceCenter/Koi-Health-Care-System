@@ -28,9 +28,18 @@ export const sendOTP = async () => {
 };
 
 export const checkEmail = async (email) => {
-  const response = await api.get(`/api/v1/auths/checkemail/${email}`);
+  const response = await api.get(`/api/v1/Account/SendVerifcationCode/${email}`);
   return response.data;
 };
+// API call now includes password and confirmPassword in the request body
+export const changePasswordForForgotPassword = async ({ code, password, confirmPassword }) => {
+  const response = await api.post(`/api/v1/Account/ChangePasswordForForgetPassword/${code}`, {
+    password,
+    confirmPassword,
+  });
+  return response.data;
+};
+
 
 export const sendOTPForgotPassword = async (email) => {
   const response = await api.get(
@@ -58,7 +67,6 @@ export const updateUserData = async (data) => {
   return response.data;
 };
 
-
 // export const approveUser = async (data) => {
 //   const response = await api.put(`/api/v1/VerifyUses/ApproveUser/`, data, {//approve the user in verification
 //     headers: {
@@ -72,12 +80,12 @@ export const approveUser = async (id) => {
   const response = await api.put(`/api/v1/VerifyUses/ApproveUser/${id}`); //approve the user in verification
   return response.data;
 };
-export const unbanUser = async (userId) => {
-  const response = await api.put(`/api/v1/User/UnbanUser/${userId}`); //unban the user in account
+export const unbanUser = async (accountId) => {
+  const response = await api.patch(`/api/v1/Account/UnBanAccount/${accountId}`); //unban the user in account
   return response.data;
 };
-export const banUser = async (userId) => {
-  const response = await api.delete(`/api/v1/User/BanUser/${userId}`); //ban the user in account
+export const banUser = async (accountId) => {
+  const response = await api.delete(`/api/v1/Account/BanAccount/${accountId}`); //ban the user in account
   return response.data;
 };
 export const changeRoleUser = async (userId) => {
@@ -86,12 +94,12 @@ export const changeRoleUser = async (userId) => {
 };
 
 export const denyUser = async (id) => {
-  const response = await api.put(`/api/v1/VerifyUses/DenyUser/${id}`);//deny the user in verification
+  const response = await api.put(`/api/v1/VerifyUses/DenyUser/${id}`); //deny the user in verification
   return response.data;
 };
 
 export const getUserDetail = async (id) => {
-  const response = await api.get(`/api/v1/VerifyUses/detail/${id}`);
+  const response = await api.get(`/api/v1/Account/Accounts/${id}`);
   return response.data;
 };
 
@@ -152,12 +160,24 @@ export const getAllVerifyUsers = async () => {
 };
 
 export const getAllUsers = async () => {
-  const response = await api.get(`/api/v1/User/GetAllUsers`); //La get API All users
+  const response = await api.get(`/api/v1/Account/Accounts`); //La get API All users
   return response.data;
 };
 
 export const getTotalUsers = async () => {
-  const response = await api.get(`/api/v1/User/GetTotalUser`); //La get API All users
+  const response = await api.get(`/api/v1/Account/CustomerAmount`); //La get API All users
+  return response.data;
+};
+export const getTotalStaffs = async () => {
+  const response = await api.get(`/api/v1/Account/StaffAmount`);
+  return response.data;
+};
+export const getTotalVets = async () => {
+  const response = await api.get(`/api/v1/Account/VetAmount`);
+  return response.data;
+};
+export const getTotalVetsDetail = async () => {
+  const response = await api.get(`/api/v1/Account/Veterinaries`);
   return response.data;
 };
 
@@ -172,3 +192,53 @@ export const updateStatusAccount = async (data) => {
   const response = await api.put(`/api/v1/auths/accounts/status`, data);
   return response.data;
 };
+
+export const createStaffAccount = async (data) => {
+  const response = await api.post(`/api/v1/Account/CreateStaffAccount`, data);
+  return response.data;
+};
+
+export const createVetAccount = async (data) => {
+  const response = await api.post(`/api/v1/Account/CreateVetAccount`, data);
+  return response.data;
+};
+
+export const getAllVetAccount = async (data) => {
+  const response = await api.get(`/api/v1/Account/Veterinaries`, data);
+  return response.data;
+};
+
+export const updatetPersonalInformation = async (data) => {
+  const response = await api.patch(`/api/v1/Account/UpdateAccount`, data);
+  return response.data;
+};
+
+// export const uploadProfileImage = async (accountId, data) => {
+//   console.log("accountId:", accountId);
+//   console.log("data:", data);
+//   const response = await api.patch(`/api/v1/Account/UploadProfileImage/${accountId}`,data,
+//     {
+//       headers: {
+//         "Content-Type": "multipart/form-data",
+//       },
+//     }
+//   );
+//   return response.data;
+// };
+
+export const uploadProfileImage = async (data) => {
+  // console.log("accountId:", accountId); // Check the value here
+  console.log("data:", data); // Check the value here
+  const response = await api.patch(`/api/v1/Account/UploadProfileImage`, data, {
+      headers: {
+          "Content-Type": "multipart/form-data",
+      },
+  });
+  return response.data;
+};
+
+export const resetPassword = async (data) => {
+  const response = await api.patch(`/api/v1/Account/ResetPassword`, data);
+  return response.data;
+};
+

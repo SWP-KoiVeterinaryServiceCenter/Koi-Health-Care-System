@@ -1,0 +1,43 @@
+.rbc-toolbar .rbc-toolbar-label {
+    color: black
+}
+
+.rbc-header span {
+    color: black;
+}
+
+.rbc-button-link {
+    color: black;
+}
+
+.rbc-agenda-time-cell span {
+    color: black;
+}
+
+.rbc-agenda-event-cell {
+    color: black;
+}
+
+.rbc-agenda-date-cell {
+    color: black;
+}
+
+.rbc-time-slot span {
+    color: black;
+}
+
+.rbc-header {
+    color: black;
+}
+
+.rbc-event {
+    background-color: #55efc4;
+}
+
+.rbc-event-content {
+    color: black;
+}
+
+.rbc-event-label {
+    color: black;
+}

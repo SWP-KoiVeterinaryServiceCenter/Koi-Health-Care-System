@@ -25,7 +25,24 @@ import {
   banUser,
   unbanUser,
   changeRoleUser,
-  getTotalUsers
+  getTotalUsers,
+  createStaffAccount,
+  createVetAccount,
+  getTotalVets,
+  getTotalStaffs,
+
+  changePasswordForForgotPassword,
+
+  // getTotalVetsDetail,
+
+
+  getAllVetAccount,
+
+  getTotalVetsDetail,
+
+  updatetPersonalInformation,
+  uploadProfileImage,
+  resetPassword,
 } from "../../api/user";
 
 export const updateStaffPasswordThunk = createAsyncThunk(
@@ -51,7 +68,6 @@ export const getAllAccountsThunk = createAsyncThunk(
     }
   }
 );
-
 
 // TODO: API getAllVerifyUsers Thunk
 export const getAllVerifyUsersThunk = createAsyncThunk(
@@ -82,6 +98,39 @@ export const getTotalUsersThunk = createAsyncThunk(
   async (thunkAPI) => {
     try {
       const response = await getTotalUsers();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+export const getTotalStaffsThunk = createAsyncThunk(
+  "users/getTotalStaffs",
+  async (thunkAPI) => {
+    try {
+      const response = await getTotalStaffs();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+export const getTotalVetsThunk = createAsyncThunk(
+  "users/getTotalVets",
+  async (thunkAPI) => {
+    try {
+      const response = await getTotalVets();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+export const getTotalVetsDetailThunk = createAsyncThunk(
+  "users/getTotalVetsDetail",
+  async (thunkAPI) => {
+    try {
+      const response = await getTotalVetsDetail();
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error?.response?.data);
@@ -152,9 +201,9 @@ export const approveUserThunk = createAsyncThunk(
 //unban user from account
 export const unbanUserThunk = createAsyncThunk(
   "users/unbanUser",
-  async (userId, thunkAPI) => {
+  async (accountId, thunkAPI) => {
     try {
-      const response = await unbanUser(userId);
+      const response = await unbanUser(accountId);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error?.response?.data);
@@ -177,9 +226,9 @@ export const denyUserThunk = createAsyncThunk(
 //ban user from account
 export const banUserThunk = createAsyncThunk(
   "users/banUser",
-  async (userId, thunkAPI) => {
+  async (accountId, thunkAPI) => {
     try {
-      const response = await banUser(userId);
+      const response = await banUser(accountId);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error?.response?.data);
@@ -233,17 +282,42 @@ export const newPasswordThunk = createAsyncThunk(
   }
 );
 
+// export const checkEmailThunk = createAsyncThunk(
+//   "users/checkEmail",
+//   async (data, thunkAPI) => {
+//     try {
+//       const response = await checkEmail(data);
+//       return response;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error?.response?.data);
+//     }
+//   }
+// );
 export const checkEmailThunk = createAsyncThunk(
   "users/checkEmail",
-  async (data, thunkAPI) => {
+  async (email, thunkAPI) => {
     try {
-      const response = await checkEmail(data);
-      return response;
+      const response = await checkEmail(email);
+      return response; // Assuming true means the email exists
     } catch (error) {
-      return thunkAPI.rejectWithValue(error?.response?.data);
+      return thunkAPI.rejectWithValue(error?.response?.data || "Something went wrong");
     }
   }
 );
+export const changePasswordForForgotPasswordThunk = createAsyncThunk(
+  "users/changePasswordForForgotPassword",
+  async ({ code, password, confirmPassword }, thunkAPI) => {
+      try {
+          const response = await changePasswordForForgotPassword({ code, password, confirmPassword });
+          return response; 
+      } catch (error) {
+          return thunkAPI.rejectWithValue(error?.response?.data || "Something went wrong");
+      }
+  }
+);
+
+
+
 
 export const verifyForgotThunk = createAsyncThunk(
   "users/verifyForgot",
@@ -294,6 +368,17 @@ export const loginGGThunk = createAsyncThunk(
 );
 
 //API login
+// export const loginThunk = createAsyncThunk(
+//   "users/login",
+//   async (data, thunkAPI) => {
+//     try {
+//       const response = await login(data);
+//       return response;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error?.response?.data);
+//     }
+//   }
+// );
 export const loginThunk = createAsyncThunk(
   "users/login",
   async (data, thunkAPI) => {
@@ -301,10 +386,20 @@ export const loginThunk = createAsyncThunk(
       const response = await login(data);
       return response;
     } catch (error) {
+      // Log lỗi chi tiết từ BE và cả đối tượng error
+      console.error("Error from BE (data):", error?.response?.data);
+      console.error("Error from BE (full error object):", error);
+
+      // Kiểm tra xem error.response có tồn tại hay không
+      if (!error?.response) {
+        console.error("No response from server:", error);
+      }
+
       return thunkAPI.rejectWithValue(error?.response?.data);
     }
   }
 );
+
 
 //API CurrentLoginUserInfo
 export const getUserDataThunk = createAsyncThunk(
@@ -343,16 +438,93 @@ export const getUserDetailThunk = createAsyncThunk(
 //   }
 // );
 export const signupThunk = createAsyncThunk(
-  'user/signup',
+  "user/signup",
   async (userData, { rejectWithValue }) => {
-    console.log('Dispatching signup with data:', userData);
+    console.log("Dispatching signup with data:", userData);
     try {
       const result = await signup(userData);
-      console.log('User registered successfully:', result);
+      console.log("User registered successfully:", result);
       return result;
     } catch (error) {
-      console.error('Error in signup thunk:', error.response ? error.response.data : error.message);
-      return rejectWithValue(error.response ? error.response.data : error.message);
+      console.error(
+        "Error in signup thunk:",
+        error.response ? error.response.data : error.message
+      );
+      return rejectWithValue(
+        error.response ? error.response.data : error.message
+      );
+    }
+  }
+);
+
+export const createStaffAccountThunk = createAsyncThunk(
+  "user/createStaffAccount",
+  async (data, thunkAPI) => {
+    try {
+      const response = await createStaffAccount(data);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const createVetAccountThunk = createAsyncThunk(
+  "user/createVetAccount",
+  async (data, thunkAPI) => {
+    try {
+      const response = await createVetAccount(data);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const getAllVetAccountThunk = createAsyncThunk(
+  "user/getAllVetAccount",
+  async (data, thunkAPI) => {
+    try {
+      const response = await getAllVetAccount(data);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const updatePersonalInformationThunk = createAsyncThunk(
+  "user/updatePersonalInformation",
+  async (data, thunkApi) => {
+    try {
+      const response = await updatetPersonalInformation(data);
+      return response;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+export const uploadProfileImageThunk = createAsyncThunk(
+  "user/uploadProfileImage",
+  async ( data, thunkApi) => {
+    try {
+      const response = await uploadProfileImage(data);
+      return response;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+export const resetPasswordThunk = createAsyncThunk(
+  "user/resetPassword",
+  async ( data, thunkApi) => {
+    try {
+      const response = await resetPassword(data);
+      return response;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error?.response?.data);
     }
   }
 );
