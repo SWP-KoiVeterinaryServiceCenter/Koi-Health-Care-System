@@ -248,7 +248,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 size="small"
                 component="a"
                 onClick={() => {
-                  navigate("/booking");
+                  navigate("/login");
                 }}
                 target="_blank"
               >

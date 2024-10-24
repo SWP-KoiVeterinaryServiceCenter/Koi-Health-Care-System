@@ -1,0 +1,77 @@
+.travelExpenseList-status-not-ban {
+    background-color: rgba(0, 167, 111, 0.16);
+    color: #007867;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-align: center;
+    width: 60px;
+  }
+  
+  .travelExpenseList-status-ban {
+    background-color: rgba(255, 86, 48, 0.16);
+    color: #b71d18;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-align: center;
+    width: 60px;
+  }
+  
+  .travelExpenseList-button_css_createAmin {
+    .travelExpenseList-button-row {
+      display: flex;
+      gap: 20px;
+    }
+  
+    .travelExpenseList-custom-button-icon-create-staff {
+      display: flex;
+      border: 3px #fff solid;
+      width: fit-content;
+      cursor: pointer;
+    }
+  
+    .travelExpenseList-custom-icon-create-staff {
+      background-color: #fff;
+      padding: 13px 10px 5px 10px;
+    }
+  
+    .travelExpenseList-custom-cube-create-staff {
+      transition: all 0.4s;
+      transform-style: preserve-3d;
+      width: 200px;
+      height: 20px;
+    }
+  
+    .travelExpenseList-custom-button-icon-create-staff:hover {
+      border-color: #00504b;
+    }
+  
+    .travelExpenseList-custom-button-icon-create-staff:hover .travelExpenseList-custom-cube-create-staff {
+      transform: rotateX(90deg);
+    }
+  
+    .travelExpenseList-custom-side-create-staff {
+      position: absolute;
+      height: 50px;
+      width: 200px;
+      display: flex;
+      font-size: 0.8em;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: bold;
+    }
+  
+    .travelExpenseList-custom-top-create-staff {
+      background: #580ae0;
+      color: #fff;
+      transform: rotateX(-90deg) translate3d(0, 13.5px, 2em);
+    }
+  
+    .travelExpenseList-custom-front-create-staff {
+      background: #00504b;
+      color: #fff;
+      transform: translate3d(0, 0, 1em);
+    }
+  }
+  
