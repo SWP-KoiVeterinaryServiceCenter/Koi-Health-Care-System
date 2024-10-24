@@ -20,7 +20,6 @@ import {
   ERRORTEXT,
   SUCCESSTEXT,
 } from "../../../../components/text/notiText/notiText";
-import { BackButton } from "../../../../components/modal/backModal/backModal";
 import LoadingModal from "../../../../components/modal/loadingModal/loadingModal";
 import Footer from "../../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 
@@ -39,7 +38,9 @@ export default function UpdateWorkingSchedule() {
   const dispatch = useDispatch();
   const location = useLocation();
 
+  console.log("Location state:", location.state);
   const allWorkingSchedule = location.state?.allWorkingSchedule;
+  console.log(allWorkingSchedule, allWorkingSchedule);
 
   const wrkScheduleById = useSelector(allWorkingScheduleByIdSelector);
   const [showLoadingModal, setShowLoadingModal] = useState(false);
@@ -214,7 +215,7 @@ export default function UpdateWorkingSchedule() {
                 </FormControl>
                 {formik.touched.veterinarianId &&
                   formik.errors.veterinarianId && (
-                    <div className="koi__update__validation__error">
+                    <div className="update__working__schedule__validation__error">
                       {formik.errors.veterinarianId}
                     </div>
                   )}
@@ -249,7 +250,7 @@ export default function UpdateWorkingSchedule() {
                   }}
                 />
                 {formik.touched.startTime && formik.errors.startTime && (
-                  <div className="koi__update__validation__error">
+                  <div className="update__working__schedule__validation__error">
                     {formik.errors.startTime}
                   </div>
                 )}
@@ -286,7 +287,7 @@ export default function UpdateWorkingSchedule() {
                   }}
                 />
                 {formik.touched.workingDay && formik.errors.workingDay && (
-                  <div className="koi__update__validation__error">
+                  <div className="update__working__schedule__validation__error">
                     {formik.errors.workingDay}
                   </div>
                 )}
@@ -321,14 +322,13 @@ export default function UpdateWorkingSchedule() {
                   }}
                 />
                 {formik.touched.endTime && formik.errors.endTime && (
-                  <div className="koi__update__validation__error">
+                  <div className="update__working__schedule__validation__error">
                     {formik.errors.endTime}
                   </div>
                 )}
               </div>
               {!showLoadingModal ? (
                 <div className="wrk-schedule-button-container">
-                  <BackButton style={{ fontSize: "14px" }} />
                   <Button className="btn" variant="contained" type="submit">
                     Update
                   </Button>

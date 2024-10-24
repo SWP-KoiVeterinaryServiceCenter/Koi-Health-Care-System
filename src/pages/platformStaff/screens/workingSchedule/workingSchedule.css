@@ -31,7 +31,7 @@
 }
 
 .rbc-event {
-    background-color: #55efc4;
+    background: linear-gradient(135deg, #55efc4, #81ecec);
 }
 
 .rbc-event-content {

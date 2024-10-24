@@ -19,7 +19,7 @@ export const updateWorkingSchedule = async (id , data ) => {
 
 
 export const deleteWorkingSchedule = async (id) => {
-  const response = await api.delete(`/api/v1/WorkingSchedule/Delete/${id}`);
+  const response = await api.delete(`/api/v1/AccountSchedule/DeleteAccountSchedule/${id}`);
   return response.data;
 };
 
