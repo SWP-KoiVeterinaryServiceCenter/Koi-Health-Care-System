@@ -41,3 +41,7 @@
 .rbc-event-label {
     color: black;
 }
+
+.rbc-calendar{
+    height: 560px !important;
+}

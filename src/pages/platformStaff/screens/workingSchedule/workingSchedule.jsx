@@ -153,7 +153,7 @@ const WorkingSchedule = (props) => {
         style={{
           justifyContent: "center",
           display: "flex",
-          margin: "20px",
+          margin: "50px 20px 20px 20px",
           padding: 20,
           borderRadius: 40,
           background: "white",

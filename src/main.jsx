@@ -33,7 +33,7 @@ import ListServiceCenter from "./pages/admin/screens/listServiceCenter/listServi
 import ServiceCenter from "./pages/admin/screens/listServiceCenter/serviceCenter/serviceCenter";
 import AppointmentManagement from "./pages/admin/screens/appointmentManagement/appointmentManagement";
 import CreateTravelExpense from "./pages/admin/screens/createTravelExpense/createTravelExpense";
-import TravelExpenseList from "./pages/admin/screens/travelExpenseList/travelExpenseList"
+import TravelExpenseList from "./pages/admin/screens/travelExpenseList/travelExpenseList";
 
 //Manager
 import CreateShopManager from "./pages/manager/screens/shop/createShop/createShop";
@@ -51,8 +51,6 @@ import AdjustMoney from "./pages/platformStaff/screens/policy/postPrice/postPric
 //VET
 import VetHome from "./pages/vet/vetHome/vetHome";
 import AppointmentByCurrentVet from "./pages/vet/screens/appointmentByCurrentVet/appointmentByCurrentVet";
-
-
 
 //Staff
 import StaffHome from "./pages/platformStaff/screens/home/staffHome";
@@ -99,17 +97,14 @@ import GuestContact from "./pages/guest/guestContact/guestContact";
 import GuestDoctorNews from "./pages/guest/guestDoctorNews/guestDoctorNews";
 import Profile from "./pages/customer/screens/profile/profile";
 
-
 // import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
 import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
 import VetWorkingSchedule from "./pages/vet/screens/vetWorkingSchedule/vetWorkingSchedule";
 // import CreateWorkingSchedule from "./pages/admin/screens/createWorkingSchedule/createWorkingSchedule";
 
-
 // import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
 // import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
 // import CreateWorkingSchedule from "./pages/admin/screens/createWorkingSchedule/createWorkingSchedule";
-
 
 const router = createBrowserRouter([
   //Guest
@@ -167,8 +162,8 @@ const router = createBrowserRouter([
     element: <Signup />,
   },
   {
-      path: "/verifyAccount",
-      element: <VerifyAccount />,
+    path: "/verifyAccount",
+    element: <VerifyAccount />,
   },
   {
     path: "/error404",
@@ -515,75 +510,78 @@ const router = createBrowserRouter([
       // {
       //   path: "uploadPersonalImage",
       //   element: <UploadPersonalImage direction="customer"/>,
-      // },    
+      // },
       {
         path: "profile",
-        element: <Profile direction="customer"/>,
+        element: <Profile direction="customer" />,
       },
     ],
   },
-    //VET
-    {
-      path: "/vet",
-      element: <VetHome />,
-      errorElement: <Error404 />,
-      children: [
-        {
-          path: "",
-          element: <HomePage />,
-        },
-        // {
-        //   path: "service",
-        //   element: <ServiceHome direction="customer" />,
-        //   children: [
-        //     {
-        //       path: "",
-        //       element: <ServiceKoifish direction="customer" />,
-        //     },
-        //     {
-        //       path: "createKoiFishAppointment",
-        //       element: <CreateKoiFishAppointment />,
-        //     },
-        //   ],
-        // },
-       
-        {
-          path: "personalInformation",
-          element: <PersonalInformation direction="vet" />,
-        },
-     
-        {
-          path: "contactUs",
-          element: <ContactUs />,
-        },
-        {
-          path: "doctors",
-          element: <DoctorOnNewsPage direction="vet" />,
-        },
-       
-        {
-          path: "appointmentList",
-          element: <AppointmentList direction="vet" />,
-        },
-        {
-          path: "updatePersonalInformation",
-          element: <UpdatePersonalInformation direction="vet" />,
-        },
-        {
-          path: "appointmentByCurrentVet",
-          element: <AppointmentByCurrentVet direction="vet" />,
-        },
-        {
-          path: "vetWorkingSchedule",
-          element: <VetWorkingSchedule direction="vet" />,
-        },
-        
-        // {
-        //   path: "uploadPersonalImage",
-        //   element: <UploadPersonalImage direction="customer"/>,
-        // },
-      ],
-    },
+  //VET
+  {
+    path: "/vet",
+    element: <VetHome />,
+    errorElement: <Error404 />,
+    children: [
+      {
+        path: "",
+        element: <HomePage />,
+      },
+      // {
+      //   path: "service",
+      //   element: <ServiceHome direction="customer" />,
+      //   children: [
+      //     {
+      //       path: "",
+      //       element: <ServiceKoifish direction="customer" />,
+      //     },
+      //     {
+      //       path: "createKoiFishAppointment",
+      //       element: <CreateKoiFishAppointment />,
+      //     },
+      //   ],
+      // },
+
+      {
+        path: "personalInformation",
+        element: <PersonalInformation direction="vet" />,
+      },
+
+      {
+        path: "contactUs",
+        element: <ContactUs />,
+      },
+      {
+        path: "doctors",
+        element: <DoctorOnNewsPage direction="vet" />,
+      },
+
+      {
+        path: "appointmentList",
+        element: <AppointmentList direction="vet" />,
+      },
+      {
+        path: "updatePersonalInformation",
+        element: <UpdatePersonalInformation direction="vet" />,
+      },
+      {
+        path: "appointmentByCurrentVet",
+        element: <AppointmentByCurrentVet direction="vet" />,
+      },
+      {
+        path: "vetWorkingSchedule",
+        element: <VetWorkingSchedule direction="vet" />,
+      },
+      {
+        path: "profile",
+        element: <Profile direction="vet" />,
+      },
+      // {
+      //   path: "uploadPersonalImage",
+      //   element: <UploadPersonalImage direction="customer"/>,
+      // },
+    ],
+  },
 
   //Manager
   {
@@ -627,7 +625,6 @@ const router = createBrowserRouter([
         path: "changePassword",
         element: <ChangePassword />,
       },
-      
     ],
   },
 ]);
