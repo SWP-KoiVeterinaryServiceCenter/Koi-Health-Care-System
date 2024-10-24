@@ -40,26 +40,30 @@ export default function StaffHome() {
 
     return (
         <div style={{ display: "flex" }}>
-            <ColorModeContext.Provider value={colorMode}>
-                {!check && (
-                    <ThemeProvider theme={theme}>
-                        <CssBaseline />
-                        <Sidebar
-                            isCollapsed={isCollapsed}
-                            setIsCollapsed={setIsCollapsed}
-                        />
-                        <div
-                            className="component"
-                            style={{
-                                width: isCollapsed === true ? "100%" : "82.3%",
-                            }}
-                        >
-                            <Topbar />
-                            <Outlet />
-                        </div>
-                    </ThemeProvider>
-                )}
-            </ColorModeContext.Provider>
-        </div>
+      
+        <ColorModeContext.Provider value={colorMode}>
+          {!check && (
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              
+              <Sidebar
+                isCollapsed={isCollapsed}
+                setIsCollapsed={setIsCollapsed}
+              />
+              <div
+                style={{
+                  width: isCollapsed === true ? "94.75%" : "82.3%",               
+                  backgroundColor: "#739BBF",
+                }}
+              >
+                {/* <Topbar /> */}
+                <Outlet />
+            
+              </div>
+          
+            </ThemeProvider>
+          )}
+        </ColorModeContext.Provider>
+      </div>
     );
 }

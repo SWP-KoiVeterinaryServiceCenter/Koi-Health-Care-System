@@ -188,51 +188,51 @@ const AppointmentManagement = (props) => {
       flex: 1,
       renderCell: ({ row: { koiName } }) => <div>{koiName}</div>,
     },
-    // {
-    //   field: "vetName",
-    //   headerName: "Vet Name",
-    //   flex: 1,
-    //   renderCell: ({ row: { vetName } }) => <div>{vetName}</div>,
-    // },
+    {
+      field: "vetName",
+      headerName: "Vet Name",
+      flex: 1,
+      renderCell: ({ row: { vetName } }) => <div>{vetName}</div>,
+    },
     {
       field: "description",
       headerName: "Description",
       flex: 1,
       renderCell: ({ row: { description } }) => <div>{description}</div>,
     },
-    {
-      field: "actions",
-      headerName: "Actions",
-      headerAlign: "center",
-      flex: 1,
-      renderCell: ({ row }) => {
-        // Check if the status is one of Finished, Missed, Pending, Cancelled
-        const showActions = !["Finished", "Missed", "Pending", "Cancelled"].includes(row.status);
+    // {
+    //   field: "actions",
+    //   headerName: "Actions",
+    //   headerAlign: "center",
+    //   flex: 1,
+    //   renderCell: ({ row }) => {
+    //     // Check if the status is one of Finished, Missed, Pending, Cancelled
+    //     const showActions = !["Finished", "Missed", "Pending", "Cancelled"].includes(row.status);
   
-        return (
-          <Box width="100%" display="flex" justifyContent="center" gap="8px">
-            {showActions && (
-              <>
-                <Button
-                  variant="contained"
-                  sx={{ backgroundColor: "green", color: "white" }}
-                  onClick={() => handleConfirm(row)} // Confirm action
-                >
-                  Confirm
-                </Button>
-                <Button
-                  variant="contained"
-                  sx={{ backgroundColor: "red", color: "white" }}
-                  onClick={() => handleMiss(row)} // Miss action
-                >
-                  Missed
-                </Button>
-              </>
-            )}
-          </Box>
-        );
-      },
-    },
+    //     return (
+    //       <Box width="100%" display="flex" justifyContent="center" gap="8px">
+    //         {showActions && (
+    //           <>
+    //             <Button
+    //               variant="contained"
+    //               sx={{ backgroundColor: "green", color: "white" }}
+    //               onClick={() => handleConfirm(row)} // Confirm action
+    //             >
+    //               Confirm
+    //             </Button>
+    //             <Button
+    //               variant="contained"
+    //               sx={{ backgroundColor: "red", color: "white" }}
+    //               onClick={() => handleMiss(row)} // Miss action
+    //             >
+    //               Missed
+    //             </Button>
+    //           </>
+    //         )}
+    //       </Box>
+    //     );
+    //   },
+    // },
   ];
 
   const rows =

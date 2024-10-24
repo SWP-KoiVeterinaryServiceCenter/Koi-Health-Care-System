@@ -32,6 +32,8 @@ import CreateServiceCenter from "./pages/admin/screens/createServiceCenter/creat
 import ListServiceCenter from "./pages/admin/screens/listServiceCenter/listServiceCenter";
 import ServiceCenter from "./pages/admin/screens/listServiceCenter/serviceCenter/serviceCenter";
 import AppointmentManagement from "./pages/admin/screens/appointmentManagement/appointmentManagement";
+import CreateTravelExpense from "./pages/admin/screens/createTravelExpense/createTravelExpense";
+import TravelExpenseList from "./pages/admin/screens/travelExpenseList/travelExpenseList"
 
 //Manager
 import CreateShopManager from "./pages/manager/screens/shop/createShop/createShop";
@@ -223,6 +225,14 @@ const router = createBrowserRouter([
         element: <CreateTank />,
       },
       {
+        path: "createTravelExpense",
+        element: <CreateTravelExpense />,
+      },
+      {
+        path: "travelExpenseList",
+        element: <TravelExpenseList direction="admin" />,
+      },
+      {
         path: "createServiceType",
         element: <CreateServiceType />,
       },
@@ -389,6 +399,46 @@ const router = createBrowserRouter([
       {
         path: "updateWorkingSchedule",
         element: <UpdateWorkingSchedule direction="staff" />,
+      },
+      {
+        path: "tankList",
+        element: <TankList direction="staff" />,
+      },
+      {
+        path: "serviceType",
+        element: <ServiceTypeList direction="staff" />,
+      },
+      {
+        path: "createTank",
+        element: <CreateTank />,
+      },
+      {
+        path: "createTravelExpense",
+        element: <CreateTravelExpense />,
+      },
+      {
+        path: "travelExpenseList",
+        element: <TravelExpenseList direction="staff" />,
+      },
+      {
+        path: "createServiceType",
+        element: <CreateServiceType />,
+      },
+      {
+        path: "createServiceCenter",
+        element: <CreateServiceCenter />,
+      },
+      {
+        path: "listServiceCenter",
+        element: <ListServiceCenter direction="staff" />,
+      },
+      {
+        path: "serviceCenter",
+        element: <ServiceCenter direction="staff" />,
+      },
+      {
+        path: "appointmentManagement",
+        element: <AppointmentManagement direction="staff" />,
       },
     ],
   },
