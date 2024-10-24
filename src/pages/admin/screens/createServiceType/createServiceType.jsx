@@ -1,12 +1,13 @@
 import * as React from "react";
-import { TextField, Box, Button, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { TextField, Box, Button, Typography, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
 import Swal from "sweetalert2";
 import { useFormik } from "formik";
 import { createServicesTypeThunk } from "../../../../store/apiThunk/serviceKoiThunk";
-// import Header from "../../../components/header/Header";
+import { getAllTravelExpenseThunk } from "../../../../store/apiThunk/travelExpense";
+import { getAllTravelExpenseSelector } from "../../../../store/sellectors";
 import { BackButton } from "../../../../components/modal/backModal/backModal";
 import LoadingModal from "../../../../components/modal/loadingModal/loadingModal";
 import {
@@ -14,44 +15,41 @@ import {
   ERRORTEXT,
   SUCCESSTEXT,
 } from "../../../../components/text/notiText/notiText";
-// import "./createStaffAccount.css"
+
 export default function CreateServiceType() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
+  const travels = useSelector(getAllTravelExpenseSelector);
+  
+  useEffect(() => {
+    dispatch(getAllTravelExpenseThunk());
+  }, [dispatch]);
 
-  const Header = ({
-    title,
-    subtitle,
-    titleColor = "gray",
-    subtitleColor = "gray",
-  }) => {
-    return (
-      <Box mb={2} textAlign="center">
-        {" "}
-        {/* Thêm textAlign="center" */}
-        <Typography
-          style={{
-            fontFamily: "Source Sans Pro, sans-serif",
-            fontSize: "32px",
-            color: titleColor,
-            fontWeight: "700",
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-            padding: "4px",
-            borderRadius: "4px",
-          }}
-        >
-          {title}
-        </Typography>
-        <Typography variant="subtitle1" style={{ color: subtitleColor }}>
-          {subtitle}
-        </Typography>
-      </Box>
-    );
-  };
+  const Header = ({ title, subtitle, titleColor = "gray", subtitleColor = "gray" }) => (
+    <Box mb={2} textAlign="center">
+      <Typography
+        style={{
+          fontFamily: "Source Sans Pro, sans-serif",
+          fontSize: "32px",
+          color: titleColor,
+          fontWeight: "700",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+          padding: "4px",
+          borderRadius: "4px",
+        }}
+      >
+        {title}
+      </Typography>
+      <Typography variant="subtitle1" style={{ color: subtitleColor }}>
+        {subtitle}
+      </Typography>
+    </Box>
+  );
 
   const formik = useFormik({
     initialValues: {
+      travelExpenseId: "",
       typeName: "",
     },
     onSubmit: async (values) => {
@@ -102,14 +100,13 @@ export default function CreateServiceType() {
           id="typeName"
           label={
             <span>
-              Servie Type Name<span style={{ color: "red" }}>*</span>
+              Service Type Name<span style={{ color: "red" }}>*</span>
             </span>
           }
           variant="outlined"
           value={formik.values.typeName}
           onChange={formik.handleChange}
           fullWidth
-          //   autoComplete="typeName"
           margin="dense"
           color="secondary"
           InputLabelProps={{ style: { color: "black" } }}
@@ -121,6 +118,28 @@ export default function CreateServiceType() {
             },
           }}
         />
+
+        {/* travelExpenseId as Select */}
+        <FormControl fullWidth margin="dense" color="secondary">
+          <InputLabel id="travelExpenseId-label" style={{ color: "black" }}>
+            Select Base Rate
+          </InputLabel>
+          <Select
+            id="travelExpenseId"
+            labelId="travelExpenseId-label"
+            value={formik.values.travelExpenseId}
+            onChange={formik.handleChange}
+            name="travelExpenseId"
+            variant="outlined"
+            style={{ backgroundColor: "#f5f5f5", color: "black" }}
+          >
+            {travels?.map((travel) => (
+              <MenuItem key={travel.id} value={travel.id}>
+                Base Rate: {travel.baseRate}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
         {!showLoadingModal ? (
           <Box
