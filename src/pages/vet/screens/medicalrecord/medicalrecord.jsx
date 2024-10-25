@@ -29,7 +29,7 @@ import {
   CustomNoRowsOverlay,
   GridLoadingOverlay,
 } from "../../../../components/styledTable/styledTable";
-import "./appointmentByCurrentVet.css";
+import "./medicalrecord.css";
 import Footer from "../../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 import AddIcon from "@mui/icons-material/Add";
 import IconButton from "@mui/material/IconButton";
@@ -38,7 +38,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import bgImage from "../../../../assets/koibg_account.jpg";
 
-const AppointmentByCurrentVet = (props) => {
+const MedicalRecordList = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const accounts = useSelector(appointmentByCurrentVetSelector);
@@ -117,6 +117,14 @@ const AppointmentByCurrentVet = (props) => {
         console.error("Miss Error:", error);
       });
   };
+  const handlePrescription = (rowId) => {
+    // Navigate to /vet/createMedicalRecord with the row id
+    navigate(`/vet/createMedicalRecord`, {
+      state: { id: rowId },
+    });
+  };
+  
+  
 
   const columns = [
     {
@@ -212,7 +220,7 @@ const AppointmentByCurrentVet = (props) => {
       flex: 1,
       renderCell: ({ row }) => {
         // Check if the status is one of Finished, Missed, Pending, Cancelled
-        const showActions = !["Finished", "Missed", "Pending", "Cancelled"].includes(row.status);
+        const showActions = !["Confirmed", "Missed", "Pending", "Cancelled"].includes(row.status);
   
         return (
           <Box width="100%" display="flex" justifyContent="center" gap="8px">
@@ -221,17 +229,11 @@ const AppointmentByCurrentVet = (props) => {
                 <Button
                   variant="contained"
                   sx={{ backgroundColor: "green", color: "white" }}
-                  onClick={() => handleConfirm(row)} // Confirm action
+                  onClick={() => handlePrescription(row.id)} // Navigate to createMedicalRecord
                 >
-                  Confirm
+                  Prescription
                 </Button>
-                <Button
-                  variant="contained"
-                  sx={{ backgroundColor: "red", color: "white" }}
-                  onClick={() => handleMiss(row)} // Miss action
-                >
-                  Missed
-                </Button>
+           
               </>
             )}
           </Box>
@@ -333,11 +335,11 @@ const AppointmentByCurrentVet = (props) => {
                   fontFamily: "Helvetica",
                 })}
               >
-                APPOINTMENT
+                MEDICAL RECORD
               </Typography>
 
               <Typography variant="body1" color="black" textAlign="center" px={{ xs: 6, lg: 12 }} mt={1}>
-                Appointments management system, which allows admin to manage their appointments.
+              A place to help doctors prescribe medicine and monitor the condition of fish for customers
               </Typography>
             </Grid>
           </Container>
@@ -459,4 +461,4 @@ const AppointmentByCurrentVet = (props) => {
   );
 };
 
-export default AppointmentByCurrentVet;
+export default MedicalRecordList;

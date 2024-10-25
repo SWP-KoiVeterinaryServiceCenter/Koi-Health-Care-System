@@ -51,6 +51,8 @@ import AdjustMoney from "./pages/platformStaff/screens/policy/postPrice/postPric
 //VET
 import VetHome from "./pages/vet/vetHome/vetHome";
 import AppointmentByCurrentVet from "./pages/vet/screens/appointmentByCurrentVet/appointmentByCurrentVet";
+import MedicalRecordList from "./pages/vet/screens/medicalrecord/medicalrecord";
+import CreateMedicalRecord from "./pages/vet/screens/createMedicaRecord/createMedicaRecord";
 
 
 
@@ -571,6 +573,14 @@ const router = createBrowserRouter([
         {
           path: "appointmentByCurrentVet",
           element: <AppointmentByCurrentVet direction="vet" />,
+        },
+        {
+          path: "medicalrecordList",
+          element: <MedicalRecordList direction="vet" />,
+        },
+        {
+          path: "createMedicalRecord",
+          element: <CreateMedicalRecord  />,
         },
         // {
         //   path: "uploadPersonalImage",

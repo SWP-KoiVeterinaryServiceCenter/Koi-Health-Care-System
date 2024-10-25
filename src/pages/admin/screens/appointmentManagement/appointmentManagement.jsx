@@ -183,6 +183,12 @@ const AppointmentManagement = (props) => {
       renderCell: ({ row: { serviceName } }) => <div>{serviceName}</div>,
     },
     {
+      field: "customerName",
+      headerName: "Cusromer Name",
+      flex: 1,
+      renderCell: ({ row: { customerName } }) => <div>{customerName}</div>,
+    },
+    {
       field: "koiName",
       headerName: "KOI Name",
       flex: 1,
@@ -199,6 +205,12 @@ const AppointmentManagement = (props) => {
       headerName: "Description",
       flex: 1,
       renderCell: ({ row: { description } }) => <div>{description}</div>,
+    },
+    {
+      field: "appointmentDate",
+      headerName: "AppointmentDate",
+      flex: 1,
+      renderCell: ({ row: { appointmentDate,appointmentTime } }) => <div>{appointmentDate} at {appointmentTime}</div>,
     },
     // {
     //   field: "actions",
