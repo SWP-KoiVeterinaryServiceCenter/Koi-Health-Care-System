@@ -100,6 +100,7 @@ import Profile from "./pages/customer/screens/profile/profile";
 // import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
 import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
 import VetWorkingSchedule from "./pages/vet/screens/vetWorkingSchedule/vetWorkingSchedule";
+import VetDetailSchedule from "./pages/vet/screens/vetDetailSchedule/vetDetailSchedule";
 // import CreateWorkingSchedule from "./pages/admin/screens/createWorkingSchedule/createWorkingSchedule";
 
 // import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
@@ -576,6 +577,11 @@ const router = createBrowserRouter([
         path: "profile",
         element: <Profile direction="vet" />,
       },
+      {
+        path: "vetDetailSchedule",
+        element: <VetDetailSchedule direction="vet"/>,
+      },
+      
       // {
       //   path: "uploadPersonalImage",
       //   element: <UploadPersonalImage direction="customer"/>,
