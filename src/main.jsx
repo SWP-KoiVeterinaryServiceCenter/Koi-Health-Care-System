@@ -51,6 +51,8 @@ import AdjustMoney from "./pages/platformStaff/screens/policy/postPrice/postPric
 //VET
 import VetHome from "./pages/vet/vetHome/vetHome";
 import AppointmentByCurrentVet from "./pages/vet/screens/appointmentByCurrentVet/appointmentByCurrentVet";
+import MedicalRecordList from "./pages/vet/screens/medicalrecord/medicalrecord";
+import CreateMedicalRecord from "./pages/vet/screens/createMedicaRecord/createMedicaRecord";
 
 //Staff
 import StaffHome from "./pages/platformStaff/screens/home/staffHome";
@@ -582,6 +584,73 @@ const router = createBrowserRouter([
       // },
     ],
   },
+
+    //VET
+    {
+      path: "/vet",
+      element: <VetHome />,
+      errorElement: <Error404 />,
+      children: [
+        {
+          path: "",
+          element: <HomePage />,
+        },
+        // {
+        //   path: "service",
+        //   element: <ServiceHome direction="customer" />,
+        //   children: [
+        //     {
+        //       path: "",
+        //       element: <ServiceKoifish direction="customer" />,
+        //     },
+        //     {
+        //       path: "createKoiFishAppointment",
+        //       element: <CreateKoiFishAppointment />,
+        //     },
+        //   ],
+        // },
+       
+        {
+          path: "personalInformation",
+          element: <PersonalInformation direction="vet" />,
+        },
+     
+        {
+          path: "contactUs",
+          element: <ContactUs />,
+        },
+        {
+          path: "doctors",
+          element: <DoctorOnNewsPage direction="vet" />,
+        },
+       
+        {
+          path: "appointmentList",
+          element: <AppointmentList direction="vet" />,
+        },
+        {
+          path: "updatePersonalInformation",
+          element: <UpdatePersonalInformation direction="vet" />,
+        },
+        {
+          path: "appointmentByCurrentVet",
+          element: <AppointmentByCurrentVet direction="vet" />,
+        },
+        {
+          path: "medicalrecordList",
+          element: <MedicalRecordList direction="vet" />,
+        },
+        {
+          path: "createMedicalRecord",
+          element: <CreateMedicalRecord  />,
+        },
+        // {
+        //   path: "uploadPersonalImage",
+        //   element: <UploadPersonalImage direction="customer"/>,
+        // },
+      ],
+    },
+
 
   //Manager
   {

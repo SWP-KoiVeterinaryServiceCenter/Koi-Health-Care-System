@@ -27,6 +27,7 @@ import { Button } from "antd";
 import IconButton from "@mui/material/IconButton";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
+import VaccinesIcon from '@mui/icons-material/Vaccines';
 
 import { Link, useNavigate } from "react-router-dom";
 import { colors } from "@mui/material";
@@ -216,6 +217,30 @@ function AppAppBar({ mode, toggleColorMode }) {
                     APPOINTMENTS
                   </Typography>
                 </MenuItem>
+                <MenuItem
+                  onClick={() => scrollToSection("testimonials")}
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
+                  <VaccinesIcon
+                    sx={{ color: "black", fontSize: "19px" }}
+                  />
+                  <Typography
+                    // variant="body2"
+                    // color="text.primary"
+                    color="black"
+                    fontSize="16px"
+                    onClick={() => {
+
+                      navigate("medicalrecordList");
+
+                   
+
+                    }}
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                  >
+                    MEDICAL RECORD
+                  </Typography>
+                </MenuItem>
 
                 <MenuItem
                   onClick={() => scrollToSection("highlights")}
@@ -226,7 +251,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     color="black"
                     fontSize="16px"
                     onClick={() => {
-                      navigate("vetWorkingSchedule");
+                     navigate("vetWorkingSchedule");
                       window.scrollTo(0, 0);
                     }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
@@ -235,24 +260,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   </Typography>
                 </MenuItem>
 
-                <MenuItem
-                  onClick={() => scrollToSection("pricing")}
-                  sx={{ display: "flex", alignItems: "center" }}
-                >
-                  <PermContactCalendarOutlinedIcon
-                    sx={{ color: "black", fontSize: "19px" }}
-                  />
-                  <Typography
-                    onClick={() => {
-                      navigate("contactUs");
-                    }}
-                    color="black"
-                    fontSize="16px"
-                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
-                  >
-                    CONTACT
-                  </Typography>
-                </MenuItem>
+              
 
                 {/* <MenuItem
                   onClick={() => scrollToSection("faq")}
