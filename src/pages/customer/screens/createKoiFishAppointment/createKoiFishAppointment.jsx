@@ -129,8 +129,8 @@ const CreateKoiFishAppointment = () => {
       appointmentDate: Yup.date()
         .required("Date cannot be empty")
         .min(
-          new Date(new Date().setDate(new Date().getDate() + 2)),
-          "Must be at least 2 days from today"
+          new Date(new Date().setDate(new Date().getDate() + 1)),
+          "Must be at least 1 days from today"
         )
         .nullable(),
     }),
@@ -315,7 +315,7 @@ const CreateKoiFishAppointment = () => {
                 id="appointmentDate"
                 label={
                   <span>
-                    Appointment Date <span style={{ color: "red" }}>*</span>
+                    Anticipate Date <span style={{ color: "red" }}>*</span>
                   </span>
                 }
                 slotProps={{
@@ -354,7 +354,7 @@ const CreateKoiFishAppointment = () => {
                 id="appointmentTime"
                 label={
                   <span>
-                    Appointment Time <span style={{ color: "red" }}>*</span>
+                    Anticipate Time <span style={{ color: "red" }}>*</span>
                   </span>
                 }
                 variant="outlined"
