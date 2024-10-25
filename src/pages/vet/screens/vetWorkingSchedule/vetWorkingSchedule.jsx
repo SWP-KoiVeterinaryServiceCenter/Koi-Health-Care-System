@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo } from "react";
 import "./vetWorkingSchedule.css";
-import Footer from "../../../authorize/landingPage/LandingPageDetail/Footer/Footer";
-import { Box, Divider } from "@mui/material";
+import { Divider } from "@mui/material";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
 import { Tooltip } from "antd";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Swal from "sweetalert2";
+
+import { useNavigate } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -20,17 +20,17 @@ import {
 } from "../../../../store/apiThunk/userThunk";
 
 import { getVetWorkingScheduleByIdSelector } from "../../../../store/sellectors";
-import {
-  getVetWorkingScheduleByIdThunk,
-  deleteWorkingScheduleThunk,
-} from "../../../../store/apiThunk/workingSchedule";
+import { getVetWorkingScheduleByIdThunk } from "../../../../store/apiThunk/workingSchedule";
 
 const localizer = momentLocalizer(moment);
 
-export default function VetWorkingSchedule() {
+export default function VetWorkingSchedule(props) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [events, setEvents] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const direction = props.direction;
+
   const allWorkingSchedule = useSelector(getVetWorkingScheduleByIdSelector);
   const vetDetail = useSelector(vetDetailSelector);
   const userDetail = useSelector(userDataSelector);
@@ -78,7 +78,12 @@ export default function VetWorkingSchedule() {
     }));
   };
 
-  const handleEventClick = (event) => {};
+  const handleEventClick = (event) => {
+    console.log(event.id);  
+    navigate(`/${direction}/vetDetailSchedule`, {
+      state: { veterinarianId: event.id },
+    });
+  };
 
   const renderEvent = (event) => {
     const eventId = event.event.id;
@@ -109,7 +114,7 @@ export default function VetWorkingSchedule() {
           justifyContent: "center",
           display: "flex",
           margin: "90px 100px",
-          padding:"10px 20px 10px 20px",
+          padding: "10px 20px 10px 20px",
           borderRadius: 40,
           background: "white",
           boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
@@ -127,6 +132,7 @@ export default function VetWorkingSchedule() {
           components={{
             event: renderEvent,
           }}
+          onSelectEvent={handleEventClick}
         />
       </div>
       <Divider />
