@@ -130,7 +130,7 @@ export default function Profile(props) {
             <label htmlFor="formFile" className="image-label">
               <img
                 src={imagePreview}
-                alt="Koi"
+                alt="Personal Img"
                 className="image-preview-img"
                 style={{ cursor: "pointer" }}
               />

@@ -31,7 +31,7 @@
 }
 
 .rbc-event {
-    background-color: #55efc4;
+    background: linear-gradient(135deg, #55efc4, #81ecec);
 }
 
 .rbc-event-content {
@@ -40,4 +40,8 @@
 
 .rbc-event-label {
     color: black;
+}
+
+.rbc-calendar{
+    height: 560px !important;
 }

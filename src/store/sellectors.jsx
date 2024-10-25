@@ -29,6 +29,11 @@ export const  vetDetailSelector =(state) => state.vetDetail.entities;
 
 export const allWorkingScheduleSelector =(state) =>state.allWorkingSchedule.entities;
 
+export const allWorkingScheduleByIdSelector =(state) =>state.allWorkingScheduleById.entities;
+
+
+export const getVetWorkingScheduleByIdSelector =(state) =>state.getVetWorkingScheduleById.entities;
+
 export const petDetailSelector = (state) => state.petDetail.entities;
 export const petsFromShopSelector = (state) => state.petsFromShop.entities;
 export const petsFromAreaSelector = (state) => state.petsFromArea.entities;

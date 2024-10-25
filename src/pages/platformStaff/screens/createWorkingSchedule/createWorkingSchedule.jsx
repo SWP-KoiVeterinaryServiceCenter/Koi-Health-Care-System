@@ -64,19 +64,53 @@ export default function CreateWorkingSchedule() {
     );
   };
 
+  // const TIME_FORMAT = "HH:mm"; // 24-hour format
+  // const startTimeLimit = "08:00"; // 8 AM
+  // const endTimeLimit = "17:00"; // 5 PM
+
   const formik = useFormik({
     initialValues: {
       veterinarianId: "",
       workingDay: "",
-      age: "",
       startTime: "",
       endTime: "",
     },
     validationSchema: Yup.object({
       veterinarianId: Yup.string().required("Vet Name cannot be empty"),
-      workingDay: Yup.number().required("Date cannot be empty"),
-      startTime: Yup.string().required("Start time cannot be empty"),
-      endTime: Yup.string().required("End Time cannot be empty"),
+
+      workingDay: Yup.date()
+        .required("Date cannot be empty")
+        .min(
+          new Date(new Date().setDate(new Date().getDate() + 1)),
+          "Date must be at least one day from today"
+        ),
+
+      startTime: Yup.string()
+        .required("Start time cannot be empty")
+        .matches(
+          /^(0[8-9]:[0-5][0-9]|1[0-6]:[0-5][0-9]|17:00)$/, // Allow 08:00 to 17:00 (including 09:00)
+          "Start time must be between 08:00 and 17:00"
+        ),
+
+      endTime: Yup.string()
+        .required("End time cannot be empty")
+        .matches(
+          /^(0[8-9]:[0-5][0-9]|1[0-6]:[0-5][0-9]|17:00)$/, // Allow 08:00 to 17:00 (including 09:00)
+          "End time must be between 08:00 and 17:00"
+        )
+        .test(
+          "is-greater",
+          "End time must be after start time",
+          function (value) {
+            const { startTime } = this.parent;
+            if (!value || !startTime) return true; // If either is missing, skip validation
+            const start = startTime.split(":").map(Number);
+            const end = value.split(":").map(Number);
+            return (
+              end[0] > start[0] || (end[0] === start[0] && end[1] > start[1])
+            );
+          }
+        ),
     }),
 
     onSubmit: async (values) => {
@@ -84,7 +118,7 @@ export default function CreateWorkingSchedule() {
       dispatch(
         createWorkingScheduleThunk({
           veterinarianId: values.veterinarianId,
-          workingDay: values.workingDay.toString(), 
+          workingDay: values.workingDay,
           startTime: values.startTime,
           endTime: values.endTime,
         })
@@ -107,11 +141,11 @@ export default function CreateWorkingSchedule() {
           });
         })
         .catch((error) => {
-          console.error("Error response:", error);
+          // console.error("Error response:", error);
           setShowLoadingModal(false);
           Swal.fire({
             title: ERRORTEXT,
-            text: error.message,
+            // text: error.message,
             icon: "error",
             showConfirmButton: false,
             background: "white",
@@ -129,7 +163,7 @@ export default function CreateWorkingSchedule() {
 
   return (
     <>
-      <div className="working-schedule">
+      <div className="create-working-schedule">
         <Header
           title="Create Working Schedule  "
           subtitle="Provide Working Schedule"
@@ -169,7 +203,7 @@ export default function CreateWorkingSchedule() {
               </FormControl>
               {formik.touched.veterinarianId &&
                 formik.errors.veterinarianId && (
-                  <div className="login__validation__error">
+                  <div className="create__working__schedule__validation__error">
                     {formik.errors.veterinarianId}
                   </div>
                 )}
@@ -188,8 +222,9 @@ export default function CreateWorkingSchedule() {
                 onChange={formik.handleChange}
                 fullWidth
                 margin="dense"
+                type="time"
                 color="secondary"
-                InputLabelProps={{ style: { color: "black" } }}
+                InputLabelProps={{ style: { color: "black" }, shrink: true }}
                 InputProps={{
                   style: {
                     backgroundColor: "#f5f5f5",
@@ -199,7 +234,7 @@ export default function CreateWorkingSchedule() {
                 }}
               />
               {formik.touched.startTime && formik.errors.startTime && (
-                <div className="working__schedule__validation__error">
+                <div className="create__working__schedule__validation__error">
                   {formik.errors.startTime}
                 </div>
               )}
@@ -227,7 +262,7 @@ export default function CreateWorkingSchedule() {
                 fullWidth
                 autoComplete="workingDay"
                 margin="dense"
-                type="number"
+                type="date"
                 color="secondary"
                 InputLabelProps={{ style: { color: "black" }, shrink: true }}
                 InputProps={{
@@ -239,7 +274,7 @@ export default function CreateWorkingSchedule() {
                 }}
               />
               {formik.touched.workingDay && formik.errors.workingDay && (
-                <div className="login__validation__error">
+                <div className="create__working__schedule__validation__error">
                   {formik.errors.workingDay}
                 </div>
               )}
@@ -258,8 +293,9 @@ export default function CreateWorkingSchedule() {
                 onChange={formik.handleChange}
                 fullWidth
                 margin="dense"
+                type="time"
                 color="secondary"
-                InputLabelProps={{ style: { color: "black" } }}
+                InputLabelProps={{ style: { color: "black" }, shrink: true }}
                 InputProps={{
                   style: {
                     backgroundColor: "#f5f5f5",
@@ -269,7 +305,7 @@ export default function CreateWorkingSchedule() {
                 }}
               />
               {formik.touched.endTime && formik.errors.endTime && (
-                <div className="working__schedule__validation__error">
+                <div className="create__working__schedule__validation__error">
                   {formik.errors.endTime}
                 </div>
               )}

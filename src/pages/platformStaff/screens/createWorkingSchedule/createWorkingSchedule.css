@@ -1,4 +1,4 @@
-.working-schedule {
+.create-working-schedule {
     background-color: #fff;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -9,15 +9,15 @@
     border: 2px solid black;
   }
   
-  .working-schedule h1,
-  .working-schedule h2 {
+  .create-working-schedule h1,
+  .create-working-schedule h2 {
     text-align: center;
     font-family: "Bebas Neue", cursive;
     color: #344055;
     margin-bottom: 20px;
   }
   
-  .working__schedule__validation__error {   
+  .create__working__schedule__validation__error {   
     color: red;
     font-size: 14px;
     margin-top: 5px;
@@ -25,7 +25,7 @@
   }
   
   /* Form buttons (Back and Submit) */
-  .working-schedule .btn {
+  .create-working-schedule .btn {
     background-color: #70d8bd;
     color: white;
     padding: 10px 20px;
@@ -33,11 +33,11 @@
     transition: background-color 0.3s ease;
   }
   
-  .working-schedule .btn:hover {
+  .create-working-schedule .btn:hover {
     background-color: #5bb49d;
   }
   
-  .working-schedule .back-btn {
+  .create-working-schedule .back-btn {
     background-color: #ddd;
     color: #333;
     padding: 10px 20px;
@@ -45,11 +45,11 @@
     font-family: "Bebas Neue", cursive;
   }
   
-  .working-schedule .back-btn:hover {
+  .create-working-schedule .back-btn:hover {
     background-color: #ccc;
   }
   
-  .working-schedule .LoadingModal {
+  .create-working-schedule .LoadingModal {
     display: flex;
     justify-content: center;
     align-items: center;
