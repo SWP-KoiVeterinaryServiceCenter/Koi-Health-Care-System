@@ -16,11 +16,12 @@ import Lottie from "lottie-react";
 
 import "./ServiceInformation.css";
 
-const ServiceInformation = () => {
+const ServiceInformation = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentAppointments = useSelector(currentappointmentSelector);
   const currentAccounts = useSelector(userDataSelector);
+  const direction = props.direction;
 
   const [activeMenuCardId, setActiveMenuCardId] = useState(null);
   const [loading, setLoading] = useState(true); // Loading state for page loading
@@ -109,6 +110,10 @@ const ServiceInformation = () => {
         setActionLoading(false); // End loading if there's an error
       });
   };
+
+  // const handleFeedback = (appointmentId) => {
+  //   navigate(`/feedback?appointmentId=${appointmentId}`);
+  // };
 
   return (
     <div className="checkout-container">
@@ -209,8 +214,8 @@ const ServiceInformation = () => {
                       )}
                     </div>
                   </div> */}
-                  
-                  <div className="checkout-card checkout-footer">
+
+                  {/* <div className="checkout-card checkout-footer">
                     <div
                       className={`footer-details ${appointment.status.toUpperCase()}`}
                     >
@@ -234,15 +239,56 @@ const ServiceInformation = () => {
                         </button>
                       )}
                     </div>
-                  </div>
+                  </div> */}
 
+                  <div className="checkout-card checkout-footer">
+                    <div
+                      className={`footer-details ${appointment.status.toUpperCase()}`}
+                    >
+                      <label className="checkout-price">
+                        {appointment.price} vnđ
+                      </label>
+
+                      {/* Check for FINISHED status and render Feedback button */}
+                      {appointment.status.toUpperCase() === "FINISHED" ? (
+                        <button
+                          className="feedback-button-1"
+                          onClick={() => {
+                            console.log(appointment.id);
+                            navigate(`/${direction}/feedback`, {
+                              state: { appointment: appointment.id },
+                            });
+                            window.scrollTo(0, 0);
+                          }}
+                        >
+                          Feedback
+                        </button>
+                      ) : !["CANCELLED", "MISSED", "CONFIRMED"].includes(
+                          appointment.status.toUpperCase()
+                        ) ? (
+                        <button
+                          className="checkout-button"
+                          onClick={() =>
+                            handleCheckout(appointment.id, appointment.price)
+                          }
+                        >
+                          Check Out
+                        </button>
+                      ) : null}
+                    </div>
+                  </div>
                 </div>
 
                 {activeMenuCardId === appointment.id && (
                   <div className="menu-overlay" ref={menuRef}>
                     <div className="menu-buttons">
                       {/* Conditionally render Reject button */}
-                      {!(["CONFIRMED", "MISSED", "CANCELLED", "FINISHED"].includes(appointment.status.toUpperCase())) && (
+                      {![
+                        "CONFIRMED",
+                        "MISSED",
+                        "CANCELLED",
+                        "FINISHED",
+                      ].includes(appointment.status.toUpperCase()) && (
                         <button
                           className="cancel-button"
                           onClick={() =>
@@ -254,9 +300,7 @@ const ServiceInformation = () => {
                       )}
                       <button
                         className="delete-button"
-                        onClick={() =>
-                          handleDeleteAppointment(appointment.id)
-                        }
+                        onClick={() => handleDeleteAppointment(appointment.id)}
                       >
                         Delete
                       </button>
