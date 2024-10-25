@@ -91,6 +91,7 @@ import CreateKoiFishAppointment from "./pages/customer/screens/createKoiFishAppo
 import UpdateKoiFishInformation from "./pages/customer/screens/updateKoiFishInformation/UpdateKoiFishInformation";
 import AppointmentList from "./pages/customer/screens/appointmentList/AppointmentList";
 import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
+import Feedback from "./pages/customer/screens/feedback/feedback";
 // import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
 
 //Guest
@@ -518,6 +519,10 @@ const router = createBrowserRouter([
         path: "profile",
         element: <Profile direction="customer" />,
       },
+      {
+        path: "feedback",
+        element: <Feedback direction="customer" />,
+      },
     ],
   },
   //VET
@@ -581,9 +586,9 @@ const router = createBrowserRouter([
       },
       {
         path: "vetDetailSchedule",
-        element: <VetDetailSchedule direction="vet"/>,
+        element: <VetDetailSchedule direction="vet" />,
       },
-      
+
       // {
       //   path: "uploadPersonalImage",
       //   element: <UploadPersonalImage direction="customer"/>,
@@ -591,72 +596,71 @@ const router = createBrowserRouter([
     ],
   },
 
-    //VET
-    {
-      path: "/vet",
-      element: <VetHome />,
-      errorElement: <Error404 />,
-      children: [
-        {
-          path: "",
-          element: <HomePage />,
-        },
-        // {
-        //   path: "service",
-        //   element: <ServiceHome direction="customer" />,
-        //   children: [
-        //     {
-        //       path: "",
-        //       element: <ServiceKoifish direction="customer" />,
-        //     },
-        //     {
-        //       path: "createKoiFishAppointment",
-        //       element: <CreateKoiFishAppointment />,
-        //     },
-        //   ],
-        // },
-       
-        {
-          path: "personalInformation",
-          element: <PersonalInformation direction="vet" />,
-        },
-     
-        {
-          path: "contactUs",
-          element: <ContactUs />,
-        },
-        {
-          path: "doctors",
-          element: <DoctorOnNewsPage direction="vet" />,
-        },
-       
-        {
-          path: "appointmentList",
-          element: <AppointmentList direction="vet" />,
-        },
-        {
-          path: "updatePersonalInformation",
-          element: <UpdatePersonalInformation direction="vet" />,
-        },
-        {
-          path: "appointmentByCurrentVet",
-          element: <AppointmentByCurrentVet direction="vet" />,
-        },
-        {
-          path: "medicalrecordList",
-          element: <MedicalRecordList direction="vet" />,
-        },
-        {
-          path: "createMedicalRecord",
-          element: <CreateMedicalRecord  />,
-        },
-        // {
-        //   path: "uploadPersonalImage",
-        //   element: <UploadPersonalImage direction="customer"/>,
-        // },
-      ],
-    },
+  //VET
+  {
+    path: "/vet",
+    element: <VetHome />,
+    errorElement: <Error404 />,
+    children: [
+      {
+        path: "",
+        element: <HomePage />,
+      },
+      // {
+      //   path: "service",
+      //   element: <ServiceHome direction="customer" />,
+      //   children: [
+      //     {
+      //       path: "",
+      //       element: <ServiceKoifish direction="customer" />,
+      //     },
+      //     {
+      //       path: "createKoiFishAppointment",
+      //       element: <CreateKoiFishAppointment />,
+      //     },
+      //   ],
+      // },
 
+      {
+        path: "personalInformation",
+        element: <PersonalInformation direction="vet" />,
+      },
+
+      {
+        path: "contactUs",
+        element: <ContactUs />,
+      },
+      {
+        path: "doctors",
+        element: <DoctorOnNewsPage direction="vet" />,
+      },
+
+      {
+        path: "appointmentList",
+        element: <AppointmentList direction="vet" />,
+      },
+      {
+        path: "updatePersonalInformation",
+        element: <UpdatePersonalInformation direction="vet" />,
+      },
+      {
+        path: "appointmentByCurrentVet",
+        element: <AppointmentByCurrentVet direction="vet" />,
+      },
+      {
+        path: "medicalrecordList",
+        element: <MedicalRecordList direction="vet" />,
+      },
+      {
+        path: "createMedicalRecord",
+        element: <CreateMedicalRecord />,
+      },
+      // {
+      //   path: "uploadPersonalImage",
+      //   element: <UploadPersonalImage direction="customer"/>,
+      // },
+    ],
+  },
 
   //Manager
   {

@@ -208,7 +208,7 @@ const AppointmentManagement = (props) => {
     },
     {
       field: "appointmentDate",
-      headerName: "AppointmentDate",
+      headerName: "Request Date",
       flex: 1,
       renderCell: ({ row: { appointmentDate,appointmentTime } }) => <div>{appointmentDate} at {appointmentTime}</div>,
     },
