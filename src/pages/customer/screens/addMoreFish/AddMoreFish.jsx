@@ -25,6 +25,8 @@ import { useNavigate } from "react-router-dom";
 import LoadingModal from "../../../../components/modal/loadingModal/loadingModal";
 import Swal from "sweetalert2";
 import NoBackground from "../../../../assets/uploadImg.png";
+import koi_upload_img from "../../../../assets/koi-upload-img.png";
+
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 
 const AddMoreFish = () => {
@@ -151,7 +153,7 @@ const AddMoreFish = () => {
       <div className="add_more_fish">
         <Header
           title="Add More Fish "
-          subtitle="Provide Koi Fish Information"
+          // subtitle="Provide Koi Fish Information"
         />
         <form
           onSubmit={formik.handleSubmit}
@@ -173,7 +175,7 @@ const AddMoreFish = () => {
                 <img
                   src={
                     formik.values?.koiImage === ""
-                      ? NoBackground
+                      ? koi_upload_img 
                       : formik.values?.koiImage
                   }
                   alt="Koi Image"

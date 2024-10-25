@@ -277,7 +277,7 @@ export default function PersonalInformation(props) {
                     <CreateOutlinedIcon
                       alt="Edit"
                       className="edit_icon"
-                      sx={{ color: green[500], fontSize: 40 }}
+                      sx={{ color: green[500], fontSize: 30 }}
                       onClick={() =>
                         navigate(`/${direction}/updateKoiFishInformation`, {
                           state: { koiId: koi.id },
@@ -288,7 +288,7 @@ export default function PersonalInformation(props) {
                       alt="Delete"
                       onClick={() => handleDeleteKoi(koi.id)}
                       className="delete_icon"
-                      sx={{ color: red[500], fontSize: 40 }}
+                      sx={{ color: red[500], fontSize: 30 }}
                     />
                   </div>
                 </div>

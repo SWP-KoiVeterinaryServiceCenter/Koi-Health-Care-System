@@ -26,7 +26,9 @@ import NewspaperOutlinedIcon from "@mui/icons-material/NewspaperOutlined";
 import { Button } from "antd";
 import IconButton from "@mui/material/IconButton";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import RateReviewIcon from '@mui/icons-material/RateReview';
 import LogoutIcon from "@mui/icons-material/Logout";
+import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
 
 import { Link, useNavigate } from "react-router-dom";
 import { colors } from "@mui/material";
@@ -231,6 +233,23 @@ function AppAppBar({ mode, toggleColorMode }) {
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
                     APPOINTMENT
+                  </Typography>
+                </MenuItem>
+
+                <MenuItem
+                  onClick={() => scrollToSection("highlights")}
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
+                  <RateReviewOutlinedIcon sx={{ color: "black", fontSize: "19px" }} />
+                  <Typography
+                    color="black"
+                    fontSize="16px"
+                    onClick={() => {
+                      navigate("allFeedback");
+                    }}
+                    sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
+                  >
+                    FEEDBACK
                   </Typography>
                 </MenuItem>
 
