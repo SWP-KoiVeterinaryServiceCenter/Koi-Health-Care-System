@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Button, TextField, Grid, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -88,7 +88,8 @@ export default function Signup() {
       tankId: "",
       duration: "",
       serviceImage: "",
-      serviceLocation: "",
+      serviceLocationType: "",
+      customLocation: "",
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Required"),
@@ -98,10 +99,14 @@ export default function Signup() {
       tankId: Yup.string().required("Required"),
       duration: Yup.number().required("Required"),
       serviceImage: Yup.mixed().required("Required"),
-      serviceLocation: Yup.string().required("Required"),
+      serviceLocationType: Yup.string().required("Required"),
+      customLocation: Yup.string().when("serviceLocationType", {
+        is: "Choose Location",
+        then: Yup.string().required("Custom location is required"),
+      }),
     }),
     onSubmit: async (values) => {
-      const newFormData = new FormData();  // Tạo FormData mới trong onSubmit
+      const newFormData = new FormData();
       newFormData.append("name", values.name);
       newFormData.append("description", values.description);
       newFormData.append("price", values.price);
@@ -109,14 +114,17 @@ export default function Signup() {
       newFormData.append("tankId", values.tankId);
       newFormData.append("duration", values.duration);
       newFormData.append("serviceImage", serviceImage);
-      newFormData.append("serviceLocation", values.serviceLocation);
+      newFormData.append("serviceLocation", 
+        values.serviceLocationType === "Choose Location" 
+          ? values.customLocation 
+          : values.serviceLocationType
+      );
 
       setShowLoadingModal(true);
       dispatch(createServiceCenterThunk(newFormData))
         .unwrap()
         .then((res) => {
           setShowLoadingModal(false);
-          // Hiển thị modal thông báo thành công bằng SweetAlert2
           Swal.fire({
             title: "Thành Công!",
             text: "Dịch vụ đã được tạo thành công.",
@@ -124,7 +132,7 @@ export default function Signup() {
             confirmButtonText: "OK",
             background: "white",
             confirmButtonColor: "#3085d6",
-          }).then(() => navigate(""));  // Điều hướng về trang khác sau khi đóng modal
+          }).then(() => navigate(""));
         })
         .catch((error) => {
           setShowLoadingModal(false);
@@ -232,7 +240,6 @@ export default function Signup() {
                     <div className="login__validation__error">{formik.errors.price}</div>
                   )}
 
-                  {/* Select Tank */}
                   <FormControl fullWidth margin="dense">
                     <InputLabel id="tankId-label">Choose Aquarium</InputLabel>
                     <Select
@@ -254,7 +261,6 @@ export default function Signup() {
                     <div className="login__validation__error">{formik.errors.tankId}</div>
                   )}
 
-                  {/* Select Service Type */}
                   <FormControl fullWidth margin="dense">
                     <InputLabel id="typeId-label">Select Service Type</InputLabel>
                     <Select
@@ -287,18 +293,43 @@ export default function Signup() {
                     margin="dense"
                     color="secondary"
                   />
-               <TextField
-                    id="serviceLocation"
-                    label="Location"
-                    variant="outlined"
-                    value={formik.values.serviceLocation}
-                    onChange={formik.handleChange}
-                    fullWidth
-                    margin="dense"
-                    color="secondary"
-                  />
-                  {formik.touched.serviceLocation && formik.errors.serviceLocation && (
-                    <div className="login__validation__error">{formik.errors.serviceLocation}</div>
+                  {formik.touched.duration && formik.errors.duration && (
+                    <div className="login__validation__error">{formik.errors.duration}</div>
+                  )}
+
+                  <FormControl fullWidth margin="dense">
+                    <InputLabel id="serviceLocationType-label">Location</InputLabel>
+                    <Select
+                      labelId="serviceLocationType-label"
+                      id="serviceLocationType"
+                      name="serviceLocationType"
+                      value={formik.values.serviceLocationType}
+                      onChange={formik.handleChange}
+                      label="Location"
+                    >
+                      <MenuItem value="Online">Online</MenuItem>
+                      <MenuItem value="Center">Center</MenuItem>
+                      <MenuItem value="Choose Location">Choose Location</MenuItem>
+                    </Select>
+                  </FormControl>
+                  {formik.touched.serviceLocationType && formik.errors.serviceLocationType && (
+                    <div className="login__validation__error">{formik.errors.serviceLocationType}</div>
+                  )}
+
+                  {formik.values.serviceLocationType === "Choose Location" && (
+                    <TextField
+                      id="customLocation"
+                      label="Custom Location"
+                      variant="outlined"
+                      value={formik.values.customLocation}
+                      onChange={formik.handleChange}
+                      fullWidth
+                      margin="dense"
+                      color="secondary"
+                    />
+                  )}
+                  {formik.touched.customLocation && formik.errors.customLocation && (
+                    <div className="login__validation__error">{formik.errors.customLocation}</div>
                   )}
 
                   {!showLoadingModal ? (
@@ -312,8 +343,6 @@ export default function Signup() {
               </div>
             </Grid>
             <Grid item xs={2}></Grid>
-       
-            
           </Grid>
         </div>
       </ThemeProvider>
