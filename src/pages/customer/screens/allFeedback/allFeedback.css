@@ -1,0 +1,85 @@
+.appointment-allfeedback{
+    background-color: #fff;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px 40px;
+    max-width: 1100px;
+    margin: 100px auto;
+    border: 2px solid black;
+}
+
+.appointment-allfeedback-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* One column for Service Name */
+    grid-gap: 0px;
+    /* Space between rows */
+}
+
+.allfeedback-names-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Two columns for Vet Name and Koi Name */
+    grid-gap: 15px;
+    /* Space between the two fields */
+}
+
+.MuiTextField-root {
+    margin-bottom: 0;
+    /* Remove bottom margin for fields within grid */
+}
+
+
+.appointment-allfeedback h1,
+.appointment-allfeedback h2 {
+    text-align: center;
+    font-family: "Bebas Neue", cursive;
+    color: #344055;
+    margin-bottom: 20px;
+}
+
+.MuiTextField-root {
+    margin-bottom: 15px;
+    /* Space between each TextField */
+}
+
+.MuiButton-root {
+    display: block;
+    margin: 0 auto;
+    /* Center the submit button */
+}
+
+.MuiTypography-h6 {
+    margin-top: 20px;
+    /* Space above the rating section */
+    margin-bottom: 10px;
+    /* Space below the rating section */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .appointment-feedback {
+        padding: 15px;
+        /* Less padding on smaller screens */
+    }
+
+    .MuiTextField-root {
+        margin-bottom: 10px;
+        /* Adjust space for mobile */
+    }
+}
+
+.feedback-button{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.allfeedback-card{
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px 40px;
+    max-width: 1100px;
+    margin: 40px auto;
+    border: 0.5px solid black;
+}
