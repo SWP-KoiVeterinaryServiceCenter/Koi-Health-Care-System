@@ -187,7 +187,7 @@
 }
 /* CSS cho các trạng thái khác nhau của .footer-details */
 .checkout-footer .footer-details.CONFIRMED {
-  background-color: #56BD00;
+  background-color: #00A465;
 }
 
 .checkout-footer .footer-details.MISSED {
@@ -200,7 +200,7 @@
 }
 
 .checkout-footer .footer-details.FINISHED {
-  background-color: #A908B5;
+  background-color: #AEA2C5;
 }
 
 /* Các phần còn lại của CSS vẫn giữ nguyên */
@@ -221,11 +221,11 @@
   align-items: center;
   width: 150px;
   height: 36px;
-  background: #f3d2c9;
+  background: #2ecc71;
   box-shadow: 0px 0.5px 0.5px #e5c7c5, 0px 1px 0.5px rgba(239, 239, 239, 0.5);
   border-radius: 7px;
   border: 1px solid #ecc2c0;
-  color: #000000;
+  color: #FFF;
   font-size: 13px;
   font-weight: 600;
   transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
@@ -322,10 +322,10 @@
   align-items: center;
   width: 150px;
   height: 36px;
-  background: #2ecc71;
+  background: #e5c7c5;
   border-radius: 7px;
-  border: 1px solid #2ecc71;
-  color: #ffffff;
+  border: 1px solid #e5c7c5;
+  color: #040404;
   font-size: 13px;
   font-weight: 600;
   transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);

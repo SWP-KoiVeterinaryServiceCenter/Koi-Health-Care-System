@@ -232,11 +232,11 @@ function AppAppBar({ mode, toggleColorMode }) {
                     }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
                   >
-                    APPOINTMENT
+                    PRESCRIPTION
                   </Typography>
                 </MenuItem>
 
-                <MenuItem
+                {/* <MenuItem
                   onClick={() => scrollToSection("highlights")}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
@@ -251,7 +251,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   >
                     FEEDBACK
                   </Typography>
-                </MenuItem>
+                </MenuItem> */}
 
                 <MenuItem
                   onClick={() => scrollToSection("pricing")}

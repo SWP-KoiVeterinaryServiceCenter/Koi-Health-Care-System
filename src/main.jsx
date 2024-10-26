@@ -92,6 +92,7 @@ import UpdateKoiFishInformation from "./pages/customer/screens/updateKoiFishInfo
 import AppointmentList from "./pages/customer/screens/appointmentList/AppointmentList";
 import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
 import Feedback from "./pages/customer/screens/feedback/feedback";
+import PrescriptionList from "./pages/customer/screens/prescriptionList/prescriptionList";
 // import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/uploadPersonalImage";
 
 //Guest
@@ -527,6 +528,10 @@ const router = createBrowserRouter([
       {
         path: "allFeedback",
         element: <AllFeedback direction="customer" />,
+      },
+      {
+        path: "prescriptionList",
+        element: <PrescriptionList direction="customer" />,
       },
     ],
   },

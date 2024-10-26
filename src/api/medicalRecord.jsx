@@ -1,10 +1,9 @@
 import api from "./api";
 
-// export const getAllTanks = async () => {
-//     const response = await api.get(`/api/v1/Tank/GetAllTank`);
-//     return response.data;
-//   };
-
+export const getAllmedicalRecords = async (appointmentId) => {
+  const response = await api.get(`/api/v1/MedicalRecord/MedicalRecords/${appointmentId}`);
+  return response.data;
+};
 export const createmedicalRecords = async (appointmentId, data) => {
   const response = await api.post(
     `/api/v1/MedicalRecord/CreateMedicalRecord/${appointmentId}`,
