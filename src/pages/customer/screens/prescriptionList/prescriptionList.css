@@ -1,0 +1,160 @@
+.menuCards1 *,
+.menuCards1 *::before,
+.menuCards1 *::after {
+  box-sizing: border-box;
+}
+
+.menuCards1 {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: monospace;
+  font-size: 15px;
+  background: #eee;
+}
+
+.menuCards1 .menuCards1_cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menuCards1 .menuCards1_cardsItem {
+  display: flex;
+  padding: 1rem;
+}
+
+.menuCards1 .menuCards1_cardImage {
+  height: calc(13 * 1.2rem);
+  padding: 1.2rem 1.2rem 0;
+  position: relative;
+}
+
+.menuCards1 .menuCards1_cardImage:before,
+.menuCards1 .menuCards1_cardImage:after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  left: 60%;
+  top: 0;
+  height: 45px;
+  background: #e6e6e6b8;
+  transform: rotate(45deg);
+}
+
+.menuCards1 .menuCards1_cardImage:after {
+  transform: rotate(-45deg);
+  top: auto;
+  bottom: -22px;
+  left: 40%;
+}
+
+.menuCards1 .menuCards1_cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menuCards1 .menuCards1_cardsItem {
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.25));
+}
+
+.menuCards1 .menuCards1_card {
+  background-color: white;
+  border-radius: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-left: 30px;
+  background: repeating-linear-gradient(#0000 0 calc(1.2rem - 1px), #66afe1 0 1.2rem) right bottom / 100% 100%, linear-gradient(red 0 0) 30px 0 / 2px 100% #fff;
+  background-repeat: no-repeat;
+  line-height: 1.2rem;
+  -webkit-mask: radial-gradient(circle 0.8rem at 2px 50%, #0000 98%, #000) 0 0 / 100% 2.4rem;
+}
+
+.menuCards1 .menuCards1_cardContent {
+  padding: 1.2rem;
+}
+
+.menuCards1 h2.menuCards1_cardTitle,
+.menuCards1 p {
+  margin: 1.2rem 0;
+}
+
+.menuCards1 h2.menuCards1_cardTitle {
+  font-size: 1.3em;
+}
+
+.menuCards1 .menuCards1_cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  @media (max-width: 1200px) {
+    .menuCards1 .menuCards1_cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .menuCards1 .menuCards1_cards {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .menuCards1 .menuCards1_cardsItem {
+    display: flex;
+    padding: 0; /* Removed padding here as we're using gap in the grid */
+  }
+
+
+  .prescriptionList {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .prescriptionList__header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 40px 20px;
+    background-color: #f8f8f8;
+  }
+  
+  .prescriptionList__title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #333;
+    font-family: 'Times New Roman', serif;
+  }
+  
+  .prescriptionList__subtitle {
+    font-size: 1rem;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-family: Arial, sans-serif;
+  }
+  
+  .menuCards1 {
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .prescriptionList__title {
+      font-size: 2rem;
+    }
+  
+    .prescriptionList__subtitle {
+      font-size: 0.9rem;
+    }
+  }
+
+  

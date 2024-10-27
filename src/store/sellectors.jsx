@@ -4,6 +4,7 @@ export const staffsSelector = (state) => state.staffs.entities;
 
 export const allAccountsSelector = (state) => state.allAccounts.entities; //allAccountUsers
 export const allTanksSelector = (state) => state.allTanks.entities; //allAccountUsers
+export const medicalRecordsSelector = (state) => state.medicalRecords.entities; //allAccountUsers
 export const getAllTravelExpenseSelector = (state) => state.getAllTravelExpense.entities; //allAccountUsers
 export const currentappointmentSelector = (state) => state.currentappointment.entities; //allAccountUsers
 export const allappointmentSelector = (state) => state.allappointment.entities; //allAccountUsers
