@@ -418,7 +418,6 @@ const ServiceInformation = React.memo(({ direction }) => {
                 )}
               </div>
             ))
-            currentAppointments.map(renderAppointmentCard)
           ) : (
             <p>No appointments found.</p>
           )}
