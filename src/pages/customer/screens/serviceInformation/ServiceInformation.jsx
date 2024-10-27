@@ -249,7 +249,6 @@ const ServiceInformation = (props) => {
                         {appointment.price} vnđ
                       </label>
 
-                      {/* Check for FINISHED status and render Feedback button */}
                       {appointment.status.toUpperCase() === "FINISHED" ? (
                         <button
                           className="feedback-button-1"
