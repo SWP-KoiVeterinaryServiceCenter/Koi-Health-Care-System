@@ -36,6 +36,9 @@ export const allWorkingScheduleByIdSelector =(state) =>state.allWorkingScheduleB
 export const getVetWorkingScheduleByIdSelector =(state) =>state.getVetWorkingScheduleById.entities;
 
 export const getAllFeedbackByCurrentUserIdSelector =(state) =>state.allFeedbackByCurrentUserId.entities;
+export const getAllFeedbackSelector =(state) =>state.allFeedback.entities;
+export const getFeedbackByIdSelector =(state) =>state.getFeedbackById.entities;
+
 
 export const petDetailSelector = (state) => state.petDetail.entities;
 export const petsFromShopSelector = (state) => state.petsFromShop.entities;

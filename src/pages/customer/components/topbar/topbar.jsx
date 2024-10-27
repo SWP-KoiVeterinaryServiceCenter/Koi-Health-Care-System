@@ -236,7 +236,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   </Typography>
                 </MenuItem>
 
-                {/* <MenuItem
+                <MenuItem
                   onClick={() => scrollToSection("highlights")}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
@@ -251,7 +251,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   >
                     FEEDBACK
                   </Typography>
-                </MenuItem> */}
+                </MenuItem>
 
                 <MenuItem
                   onClick={() => scrollToSection("pricing")}

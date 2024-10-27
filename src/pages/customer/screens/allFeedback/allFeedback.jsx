@@ -2,13 +2,17 @@ import React, { useEffect } from "react";
 import "./allFeedback.css";
 import { TextField, Box, Typography, Divider, Rating } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
+import { useNavigate } from "react-router-dom";
 import {
   currentappointmentSelector,
   getAllFeedbackByCurrentUserIdSelector,
 } from "../../../../store/sellectors";
 import { getAllFeedbackByCurrentUserIdThunk } from "../../../../store/apiThunk/feedbackThunk";
 
-export default function AllFeedback() {
+export default function AllFeedback(props) {
+  const navigate = useNavigate();
+  const direction = props.direction; 
   const dispatch = useDispatch();
   const currentAppointments = useSelector(currentappointmentSelector);
   const currentFeedback = useSelector(getAllFeedbackByCurrentUserIdSelector);
@@ -62,6 +66,26 @@ export default function AllFeedback() {
             return (
               <div className="allfeedback-card" key={feedback.id}>
                 <div className="feedback-allfeedback-details">
+                  {/* <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <div style={{ flex: 1 }} />{" "}
+                    <CreateOutlinedIcon
+                      alt="Edit"
+                      className="delete_icon"
+                      style={{ color: "black", fontSize: "30px" }}
+                      onClick={() =>{
+                        console.log("feedback:", feedback.id  );                        
+                        navigate(`/${direction}/updateFeedback`, {
+                          state: { feedbackId: feedback.id },
+                      })
+                      }}
+                    />
+                  </div> */}
                   <div className="allfeedback-names-row">
                     <TextField
                       label="Service Name"
