@@ -126,6 +126,8 @@ import { allWorkingScheduleByIdSlice } from "./features/schedule.slice/getAllWor
 import { getVetWorkingScheduleByIdSlice } from "./features/schedule.slice/getVetWorkingScheduleById.slice";
 
 import { getAllFeedbackByCurrentUserIdSlice } from "./features/feedback.slice/getAllFeedbackByCurrentUserId.slice";
+import { getAllFeedbackSlice } from "./features/feedback.slice/getAllFeedback.slice";
+import { getFeedbackByIdSlice } from "./features/feedback.slice/getFeedbackById.slice";
 
 export const store = configureStore({
   reducer: {
@@ -160,6 +162,8 @@ export const store = configureStore({
     getVetWorkingScheduleById :getVetWorkingScheduleByIdSlice.reducer,
 
     allFeedbackByCurrentUserId : getAllFeedbackByCurrentUserIdSlice.reducer,
+    allFeedback: getAllFeedbackSlice.reducer,
+    getFeedbackById: getFeedbackByIdSlice.reducer,
 
     petDetail: petDetailSlice.reducer,
     petsFromShop: petsFromShopSlice.reducer,
