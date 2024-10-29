@@ -18,12 +18,15 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { tokens } from "../../../../theme";
-import { appointmentByCurrentVetSelector,allappointmentSelector } from "../../../../store/sellectors";
+import {
+  appointmentByCurrentVetSelector,
+  allappointmentSelector,
+} from "../../../../store/sellectors";
 import {
   getAppointmentByCurrentVetThunk,
   confirmAppointmentsThunk,
   missAppointmentsThunk,
-  getAllUserAppointmentsThunk
+  getAllUserAppointmentsThunk,
 } from "../../../../store/apiThunk/appointment";
 import {
   StyledBox,
@@ -91,7 +94,11 @@ const AppointmentManagement = (props) => {
         if (response.error) {
           Swal.fire("Error", response.error.message, "error");
         } else {
-          Swal.fire("Success", "Appointment confirmed successfully!", "success").then(() => {
+          Swal.fire(
+            "Success",
+            "Appointment confirmed successfully!",
+            "success"
+          ).then(() => {
             dispatch(getAllUserAppointmentsThunk()); // Reload data after success
           });
         }
@@ -109,9 +116,11 @@ const AppointmentManagement = (props) => {
         if (response.error) {
           Swal.fire("Error", response.error.message, "error");
         } else {
-          Swal.fire("Success", "Appointment marked as missed!", "success").then(() => {
-            dispatch(getAllUserAppointmentsThunk()); // Reload data after success
-          });
+          Swal.fire("Success", "Appointment marked as missed!", "success").then(
+            () => {
+              dispatch(getAllUserAppointmentsThunk()); // Reload data after success
+            }
+          );
         }
       })
       .catch((error) => {
@@ -125,7 +134,12 @@ const AppointmentManagement = (props) => {
       headerName: "STT",
       headerAlign: "center",
       renderCell: ({ row: { order } }) => (
-        <Box display="flex" justifyContent="center" alignItems="center" width="100%">
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          width="100%"
+        >
           {order}
         </Box>
       ),
@@ -136,7 +150,7 @@ const AppointmentManagement = (props) => {
       flex: 1,
       renderCell: ({ row: { status } }) => {
         let style = {}; // Define default style object
-        
+
         // Check the status and apply appropriate colors
         switch (status) {
           case "Cancelled":
@@ -157,7 +171,7 @@ const AppointmentManagement = (props) => {
           default:
             style = { color: "black", backgroundColor: "white" };
         }
-  
+
         return (
           <Box
             display="flex"
@@ -210,7 +224,11 @@ const AppointmentManagement = (props) => {
       field: "appointmentDate",
       headerName: "Request Date",
       flex: 1,
-      renderCell: ({ row: { appointmentDate,appointmentTime } }) => <div>{appointmentDate} at {appointmentTime}</div>,
+      renderCell: ({ row: { appointmentDate, appointmentTime } }) => (
+        <div>
+          {appointmentDate} at {appointmentTime}
+        </div>
+      ),
     },
     // {
     //   field: "actions",
@@ -220,7 +238,7 @@ const AppointmentManagement = (props) => {
     //   renderCell: ({ row }) => {
     //     // Check if the status is one of Finished, Missed, Pending, Cancelled
     //     const showActions = !["Finished", "Missed", "Pending", "Cancelled"].includes(row.status);
-  
+
     //     return (
     //       <Box width="100%" display="flex" justifyContent="center" gap="8px">
     //         {showActions && (
@@ -267,8 +285,18 @@ const AppointmentManagement = (props) => {
     pageNumber * pageSize + pageSize
   );
 
+  const handleViewFeedback = () => {
+    navigate("/staff/allUserFeedback"); // Navigate to the desired route
+  };
+
   const CustomFooter = () => (
-    <Box display="flex" justifyContent="space-between" alignItems="center" p={1} sx={{ color: "black", borderRadius: 1, gap: 1 }}>
+    <Box
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      p={1}
+      sx={{ color: "black", borderRadius: 1, gap: 1 }}
+    >
       <Box display="flex" alignItems="center" gap={1}>
         <Button
           onClick={() => handlePageChange(pageNumber - 1)}
@@ -277,7 +305,9 @@ const AppointmentManagement = (props) => {
         >
           Previous
         </Button>
-        <Box p={1} sx={{ color: "black" }}>{pageNumber + 1}</Box>
+        <Box p={1} sx={{ color: "black" }}>
+          {pageNumber + 1}
+        </Box>
         <Button
           onClick={() => handlePageChange(pageNumber + 1)}
           disabled={(pageNumber + 1) * pageSize >= filteredRows.length}
@@ -287,7 +317,9 @@ const AppointmentManagement = (props) => {
         </Button>
       </Box>
       <FormControl variant="outlined" sx={{ minWidth: 100, maxWidth: 120 }}>
-        <InputLabel id="page-size-select-label" style={{ color: "black" }}>Rows per page</InputLabel>
+        <InputLabel id="page-size-select-label" style={{ color: "black" }}>
+          Rows per page
+        </InputLabel>
         <Select
           labelId="page-size-select-label"
           id="page-size-select"
@@ -295,10 +327,18 @@ const AppointmentManagement = (props) => {
           onChange={handlePageSizeChange}
           label="Rows per page"
           sx={{
-            "& .MuiOutlinedInput-input": { padding: "8px 14px", fontSize: "0.875rem", color: "black" },
+            "& .MuiOutlinedInput-input": {
+              padding: "8px 14px",
+              fontSize: "0.875rem",
+              color: "black",
+            },
             "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
-            "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
-            "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
+            "&:hover .MuiOutlinedInput-notchedOutline": {
+              borderColor: "black",
+            },
+            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+              borderColor: "black",
+            },
           }}
         >
           <MenuItem value={5}>5</MenuItem>
@@ -324,7 +364,14 @@ const AppointmentManagement = (props) => {
           }}
         >
           <Container>
-            <Grid container item xs={12} lg={7} justifyContent="center" mx="auto">
+            <Grid
+              container
+              item
+              xs={12}
+              lg={7}
+              justifyContent="center"
+              mx="auto"
+            >
               <Typography
                 variant="h1"
                 color="#F7FBFC"
@@ -343,8 +390,15 @@ const AppointmentManagement = (props) => {
                 APPOINTMENT
               </Typography>
 
-              <Typography variant="body1" color="black" textAlign="center" px={{ xs: 6, lg: 12 }} mt={1}>
-                Appointments management system, which allows admin to manage their appointments.
+              <Typography
+                variant="body1"
+                color="black"
+                textAlign="center"
+                px={{ xs: 6, lg: 12 }}
+                mt={1}
+              >
+                Appointments management system, which allows admin to manage
+                their appointments.
               </Typography>
             </Grid>
           </Container>
@@ -361,7 +415,12 @@ const AppointmentManagement = (props) => {
           }}
         >
           <Box m="20px" className="Box-Template-Modal">
-            <Box display="flex" alignItems="center" justifyContent="space-between">
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              width="100%" // Ensure the Box takes full width
+            >
               <Box display="flex" alignItems="center">
                 <TextField
                   label="Search"
@@ -378,16 +437,40 @@ const AppointmentManagement = (props) => {
                     mb: 2,
                     width: "200px",
                     "& .MuiInputBase-input": { color: "black" },
-                    "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "black",
+                    },
                     "& .MuiInputLabel-root": { color: "black" },
                   }}
                 />
-                <Button variant="contained" onClick={handleSearch} sx={{ mb: 2, ml: 1, height: "50px", backgroundColor: "#7CB9E8" }}>
+                <Button
+                  variant="contained"
+                  onClick={handleSearch}
+                  sx={{
+                    mb: 2,
+                    ml: 1,
+                    height: "50px",
+                    backgroundColor: "#7CB9E8",
+                  }}
+                >
                   Search
                 </Button>
               </Box>
-            </Box>
-
+              <Box flexGrow={1} />{" "}
+              <Button
+                variant="contained"
+                onClick={handleViewFeedback}
+                sx={{
+                  mb: 2,
+                  ml: 1,
+                  height: "50px",
+                  backgroundColor: "#2ecc71",
+                }}
+              >
+                View Feedback
+              </Button>
+            </Box>    
+            
             <Box sx={StyledBox} height="100%">
               <DataGrid
                 disableRowSelectionOnClick
@@ -411,8 +494,19 @@ const AppointmentManagement = (props) => {
           <Box pt={18} pb={6}>
             <Container>
               <Grid container spacing={3}>
-                <Grid item xs={12} lg={5} ml="auto" sx={{ textAlign: { xs: "center", lg: "left" } }}>
-                  <Typography variant="h4" fontWeight="bold" mb={0.5} color="black">
+                <Grid
+                  item
+                  xs={12}
+                  lg={5}
+                  ml="auto"
+                  sx={{ textAlign: { xs: "center", lg: "left" } }}
+                >
+                  <Typography
+                    variant="h4"
+                    fontWeight="bold"
+                    mb={0.5}
+                    color="black"
+                  >
                     Thank you for your support!
                   </Typography>
                   <Typography variant="body1" color="black">
@@ -458,7 +552,12 @@ const AppointmentManagement = (props) => {
             </Container>
           </Box>
         </Card>
-        <Box pt={6} px={1} mt={6} sx={{ color: "black", background: "#ebe2e1" }}>
+        <Box
+          pt={6}
+          px={1}
+          mt={6}
+          sx={{ color: "black", background: "#ebe2e1" }}
+        >
           <Footer />
         </Box>
       </>

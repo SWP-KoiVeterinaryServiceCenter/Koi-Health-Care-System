@@ -539,10 +539,10 @@ const router = createBrowserRouter([
         path: "prescriptionList",
         element: <PrescriptionList direction="customer" />,
       },
-      {
-        path: "updateFeedback",
-        element: <UpdateFeedback direction="customer" />,
-      },
+      // {
+      //   path: "updateFeedback",
+      //   element: <UpdateFeedback direction="customer" />,
+      // },
     ],
   },
   //VET

@@ -242,13 +242,13 @@ const Sidebar = (props) => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                  <Item
+                  {/* <Item
                     title="Users Feedback "
                     to="allUserFeedback"
                     icon={<RateReviewOutlinedIcon/>}
                     selected={selected}
                     setSelected={setSelected}
-                  />
+                  /> */}
 
                   <List>
                     <ListItemButton onClick={handleClickWorkingSchedule}>
