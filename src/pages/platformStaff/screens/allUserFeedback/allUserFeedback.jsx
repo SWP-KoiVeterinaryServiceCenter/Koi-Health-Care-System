@@ -14,7 +14,10 @@ import {
   allappointmentSelector,
   getAllFeedbackSelector,
 } from "../../../../store/sellectors";
-import { getAllFeedbackThunk, deleteFeedbackThunk } from "../../../../store/apiThunk/feedbackThunk"; 
+import {
+  getAllFeedbackThunk,
+  deleteFeedbackThunk,
+} from "../../../../store/apiThunk/feedbackThunk";
 
 export default function AllUserFeedback() {
   const dispatch = useDispatch();
@@ -56,46 +59,46 @@ export default function AllUserFeedback() {
     </Box>
   );
 
-  const handleDeleteFeedback = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#28a745",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(deleteFeedbackThunk(id))
-          .unwrap()
-          .then(() => {
-            Swal.fire({
-              title: SUCCESSTEXT,
-              text: DELETEFEEDBACKSUCCESS,
-              icon: "success",
-              showCancelButton: false,
-              showConfirmButton: false,
-              background: "white",
-              timer: 1500,
-              timerProgressBar: true,
-              scrollbarPadding: false,
-            }).then(() => {
-              window.location.reload();
-            });
-          })
-          .catch((error) => {
-            Swal.fire({
-              title: ERRORTEXT,
-              text: error.message,
-              icon: "error",
-              showConfirmButton: true,
-              background: "white",
-            });
-          });
-      }
-    });
-  };
+  // const handleDeleteFeedback = (id) => {
+  //   Swal.fire({
+  //     title: "Are you sure?",
+  //     text: "You won't be able to revert this!",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#28a745",
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "Yes, delete it!",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       dispatch(deleteFeedbackThunk(id))
+  //         .unwrap()
+  //         .then(() => {
+  //           Swal.fire({
+  //             title: SUCCESSTEXT,
+  //             text: DELETEFEEDBACKSUCCESS,
+  //             icon: "success",
+  //             showCancelButton: false,
+  //             showConfirmButton: false,
+  //             background: "white",
+  //             timer: 1500,
+  //             timerProgressBar: true,
+  //             scrollbarPadding: false,
+  //           }).then(() => {
+  //             window.location.reload();
+  //           });
+  //         })
+  //         .catch((error) => {
+  //           Swal.fire({
+  //             title: ERRORTEXT,
+  //             text: error.message,
+  //             icon: "error",
+  //             showConfirmButton: true,
+  //             background: "white",
+  //           });
+  //         });
+  //     }
+  //   });
+  // };
 
   return (
     <>
@@ -103,11 +106,28 @@ export default function AllUserFeedback() {
         <Header title="All User Feedback" subtitle="" />
         {currentFeedback && currentFeedback.length > 0 ? (
           currentFeedback.map((feedback) => {
-            const appointmentDetails = getAppointmentDetails(feedback.appointmentId);
-
+            const appointmentDetails = getAppointmentDetails(
+              feedback.appointmentId
+            );
+            // console.log("Appointment ID:", feedback.appointmentId);
             return (
               <div className="alluserfeedback-card" key={feedback.id}>
                 <div className="feedback-alluserfeedback-details">
+                  <div className="alluserfeedback-names-row">
+                    <TextField
+                      sx={{
+                        "& .MuiInputBase-input": {
+                          color: "black",
+                        },
+                      }}
+                      label="Service Name"
+                      variant="outlined"
+                      fullWidth
+                      margin="normal"
+                      value={appointmentDetails.customerName || ""}
+                      InputProps={{ readOnly: true }}
+                    />
+                  </div>
                   <div className="alluserfeedback-names-row">
                     <TextField
                       sx={{
@@ -169,7 +189,7 @@ export default function AllUserFeedback() {
                       InputProps={{ readOnly: true }}
                     />
                   </div>
-                  <Typography variant="h6" gutterBottom>
+                  <Typography variant="h6" gutterBottom style={{color:'black'}}>
                     Rating
                   </Typography>
                   <Rating
@@ -198,7 +218,10 @@ export default function AllUserFeedback() {
             );
           })
         ) : (
-          <Typography variant="h6" style={{ textAlign: "center", color: "gray" }}>
+          <Typography
+            variant="h6"
+            style={{ textAlign: "center", color: "gray" }}
+          >
             No feedback available.
           </Typography>
         )}
