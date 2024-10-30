@@ -199,6 +199,7 @@ export default function AllUserFeedback() {
                     margin="normal"
                     value={feedback.ratingPoint}
                     InputProps={{ readOnly: true }}
+                    readOnly
                   />
                   <TextField
                     sx={{
