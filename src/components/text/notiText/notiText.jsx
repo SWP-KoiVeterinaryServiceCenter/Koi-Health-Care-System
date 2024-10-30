@@ -57,6 +57,7 @@ const UPDATEPERSONALIMAGESUCCESS =  "Personal Image Has Been Updated Successfull
 
 const UPDATESCHEDULEIMAGESUCCESS =  "Schedule Has Been Updated Successfully!!";
 const DELETEFEEDBACKSUCCESS =  "Feedback Has Been Deleted Successfully!!";
+const UPDATEFEEDBACKSUCCESS =  "Feedback Has Been Update Successfully!!";
 
 
 export {
@@ -115,4 +116,6 @@ export {
     UPDATEPERSONALIMAGESUCCESS,
     UPDATESCHEDULEIMAGESUCCESS,
     DELETEFEEDBACKSUCCESS,
+    UPDATEFEEDBACKSUCCESS,
+    
 };

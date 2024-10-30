@@ -4,7 +4,8 @@ import {
   createFeedback,
   getAllFeedback,
   deleteFeedback,
-  getFeedbackById
+  getFeedbackById,
+  updateFeedback
 } from "../../api/feedback";
 
 export const getAllFeedbackByCurrentUserIdThunk = createAsyncThunk(
@@ -46,29 +47,29 @@ export const getAllFeedbackThunk = createAsyncThunk(
 );
 
 
-export const deleteFeedbackThunk = createAsyncThunk(
-  "feedback/deleteFeedback",
-  async (id ,thunkAPI) => {
-    try {
-      const response = await deleteFeedback(id);
-      return response;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error?.response?.data);
-    }
-  }
-);
+// export const deleteFeedbackThunk = createAsyncThunk(
+//   "feedback/deleteFeedback",
+//   async (id ,thunkAPI) => {
+//     try {
+//       const response = await deleteFeedback(id);
+//       return response;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error?.response?.data);
+//     }
+//   }
+// );
 
-export const updateFeedbackThunk = createAsyncThunk(
-  "feedback/updateFeedback",
-  async ({id ,data},thunkAPI) => {
-    try {
-      const response = await deleteFeedback(id, data);
-      return response;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error?.response?.data);
-    }
-  }
-);
+// export const updateFeedbackThunk = createAsyncThunk(
+//   "feedback/updateFeedback",
+//   async ({id ,data},thunkAPI) => {
+//     try {
+//       const response = await updateFeedback(id, data);
+//       return response;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error?.response?.data);
+//     }
+//   }
+// );
 
 export const getFeedbackByIdThunk = createAsyncThunk(
   "feedback/getFeedbackById",
