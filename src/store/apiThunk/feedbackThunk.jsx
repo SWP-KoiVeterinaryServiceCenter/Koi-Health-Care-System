@@ -3,9 +3,9 @@ import {
   getAllFeedbackByCurrentUserId,
   createFeedback,
   getAllFeedback,
-  deleteFeedback,
+  // deleteFeedback,
   getFeedbackById,
-  updateFeedback
+  // updateFeedback
 } from "../../api/feedback";
 
 export const getAllFeedbackByCurrentUserIdThunk = createAsyncThunk(
