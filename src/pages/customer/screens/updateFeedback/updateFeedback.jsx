@@ -23,7 +23,7 @@ import LoadingModal from "../../../../components/modal/loadingModal/loadingModal
 
 import {
   getFeedbackByIdThunk,
-  updateFeedbackThunk,
+  // updateFeedbackThunk,
 } from "../../../../store/apiThunk/feedbackThunk";
 
 import {
