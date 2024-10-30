@@ -1,28 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../../../authorize/landingPage/LandingPageDetail/Footer/Footer";
 import "./allUserFeedback.css";
-import { TextField, Box, Typography, Rating } from "@mui/material";
+import { TextField, Box, Typography, Rating, Pagination } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import Swal from "sweetalert2";
-import {
-  DELETEFEEDBACKSUCCESS,
-  ERRORTEXT,
-  SUCCESSTEXT,
-} from "../../../../components/text/notiText/notiText";
 import {
   allappointmentSelector,
   getAllFeedbackSelector,
 } from "../../../../store/sellectors";
-import {
-  getAllFeedbackThunk,
-  deleteFeedbackThunk,
-} from "../../../../store/apiThunk/feedbackThunk";
+import { getAllFeedbackThunk } from "../../../../store/apiThunk/feedbackThunk";
 
 export default function AllUserFeedback() {
   const dispatch = useDispatch();
   const allAppointments = useSelector(allappointmentSelector);
   const currentFeedback = useSelector(getAllFeedbackSelector);
+
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 3;
 
   useEffect(() => {
     dispatch(getAllFeedbackThunk());
@@ -34,6 +27,17 @@ export default function AllUserFeedback() {
       {}
     );
   };
+
+  const totalPages = Math.ceil(currentFeedback.length / itemsPerPage);
+  
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
+
+  const displayedFeedback = currentFeedback.slice(
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage
+  );
 
   const Header = ({ title, subtitle }) => (
     <Box>
@@ -59,57 +63,15 @@ export default function AllUserFeedback() {
     </Box>
   );
 
-  // const handleDeleteFeedback = (id) => {
-  //   Swal.fire({
-  //     title: "Are you sure?",
-  //     text: "You won't be able to revert this!",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#28a745",
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Yes, delete it!",
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       dispatch(deleteFeedbackThunk(id))
-  //         .unwrap()
-  //         .then(() => {
-  //           Swal.fire({
-  //             title: SUCCESSTEXT,
-  //             text: DELETEFEEDBACKSUCCESS,
-  //             icon: "success",
-  //             showCancelButton: false,
-  //             showConfirmButton: false,
-  //             background: "white",
-  //             timer: 1500,
-  //             timerProgressBar: true,
-  //             scrollbarPadding: false,
-  //           }).then(() => {
-  //             window.location.reload();
-  //           });
-  //         })
-  //         .catch((error) => {
-  //           Swal.fire({
-  //             title: ERRORTEXT,
-  //             text: error.message,
-  //             icon: "error",
-  //             showConfirmButton: true,
-  //             background: "white",
-  //           });
-  //         });
-  //     }
-  //   });
-  // };
-
   return (
     <>
       <div className="appointment-alluserfeedback">
         <Header title="All User Feedback" subtitle="" />
-        {currentFeedback && currentFeedback.length > 0 ? (
-          currentFeedback.map((feedback) => {
+        {displayedFeedback && displayedFeedback.length > 0 ? (
+          displayedFeedback.map((feedback) => {
             const appointmentDetails = getAppointmentDetails(
               feedback.appointmentId
             );
-            // console.log("Appointment ID:", feedback.appointmentId);
             return (
               <div className="alluserfeedback-card" key={feedback.id}>
                 <div className="feedback-alluserfeedback-details">
@@ -189,7 +151,7 @@ export default function AllUserFeedback() {
                       InputProps={{ readOnly: true }}
                     />
                   </div>
-                  <Typography variant="h6" gutterBottom style={{color:'black'}}>
+                  <Typography variant="h6" gutterBottom style={{ color: 'black' }}>
                     Rating
                   </Typography>
                   <Rating
@@ -199,6 +161,7 @@ export default function AllUserFeedback() {
                     margin="normal"
                     value={feedback.ratingPoint}
                     InputProps={{ readOnly: true }}
+                    readOnly
                   />
                   <TextField
                     sx={{
@@ -225,6 +188,29 @@ export default function AllUserFeedback() {
             No feedback available.
           </Typography>
         )}
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={handlePageChange}
+          color="primary"
+          showFirstButton
+          showLastButton
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '20px',
+            '& .MuiPaginationItem-root': {
+              color: 'black', // Change text color of pagination items
+            },
+            '& .Mui-selected': {
+              backgroundColor: '#1976d2 !important', // Background color for the selected page
+              color: 'white !important', // Text color for the selected page
+            },
+            '& .MuiPaginationItem-previousNext': {
+              color: 'black', // Color for previous and next buttons
+            },
+          }}
+        />
       </div>
       <Box pt={6} px={1} mt={6} sx={{ color: "black", background: "#ebe2e1" }}>
         <Footer />

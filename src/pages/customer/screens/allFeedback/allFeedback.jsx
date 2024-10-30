@@ -137,6 +137,7 @@ export default function AllFeedback(props) {
                     margin="normal"
                     value={feedback.ratingPoint}
                     InputProps={{ readOnly: true }}
+                    readOnly
                   />
                   <TextField
                     label="Rating Content"
