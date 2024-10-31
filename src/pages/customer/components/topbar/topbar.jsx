@@ -196,7 +196,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     >
                       Veterinarians
                     </MenuItem>
-                    <MenuItem
+                    {/* <MenuItem
                       onClick={() => {
                         window.scrollTo(0, 0);
                         navigate("doctors");
@@ -204,7 +204,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     >
                       News
                     </MenuItem>
-                    <MenuItem onClick={() => navigate("/fact")}>Facts</MenuItem>
+                    <MenuItem onClick={() => navigate("/fact")}>Facts</MenuItem> */}
                   </Menu>
                 </>
 

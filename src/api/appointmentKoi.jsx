@@ -47,3 +47,17 @@ export const missAppointments= async (id ) => {
   const response = await api.put(`/api/v1/Appointment/MissAppointment/${id}`); //ban the user in account
   return response.data;
 };
+
+
+export const getTotalConfirmAppointments = async () => {
+  const response = await api.get(`/api/v1/Appointment/TotalConfirmedAppointment`); //La get API All users
+  return response.data;
+};
+export const getTotalAppointment = async () => {
+  const response = await api.get(`/api/v1/Appointment/TotalAppointment`); //La get API All users
+  return response.data;
+};
+export const getTotalPendingAppointments = async () => {
+  const response = await api.get(`/api/v1/Appointment/TotalPendingAppointment`); //La get API All users
+  return response.data;
+};

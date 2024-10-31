@@ -190,10 +190,10 @@ function AppAppBar({ mode, toggleColorMode }) {
                     <MenuItem onClick={() => navigate("doctors")}>
                       Veterinarians
                     </MenuItem>
-                    <MenuItem onClick={() => navigate("doctors")}>
+                    {/* <MenuItem onClick={() => navigate("doctors")}>
                       News
                     </MenuItem>
-                    <MenuItem onClick={() => navigate("/fact")}>Facts</MenuItem>
+                    <MenuItem onClick={() => navigate("/fact")}>Facts</MenuItem> */}
                   </Menu>
                 </>
 

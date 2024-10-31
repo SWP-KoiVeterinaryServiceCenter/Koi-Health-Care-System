@@ -129,7 +129,7 @@ const Sidebar = (props) => {
               <img src={logo} style={logoStyle} alt="logo of sitemark" />
             </Typography>
             <Box>
-              {/* <Typography
+              <Typography
                 variant="h6"
                 color={colors.grey[300]}
                 sx={{ m: "15px 0 5px 20px" }}
@@ -142,7 +142,7 @@ const Sidebar = (props) => {
                 icon={<BarChartIcon />}
                 selected={selected}
                 setSelected={setSelected}
-              /> */}
+              />
               <Divider />
               <Typography
                 variant="h6"

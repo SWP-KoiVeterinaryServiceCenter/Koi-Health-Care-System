@@ -18,7 +18,14 @@ import { totalUsersSlice } from "./features/user.slice/totalUsers.slice";
 
 import { totalStaffsSlice } from "./features/user.slice/totalStaffs.slice";
 import { totalVetsSlice } from "./features/user.slice/totalVets.slice";
+
+import { totalConfirmAppointmentsSlice } from "./features/appointment.slice/totalConfirmAppointments";
+import { totalAppointmentsSlice } from "./features/appointment.slice/totalAppointment";
+import { totalPendingAppointmentsSlice } from "./features/appointment.slice/pendingAppointments";
+
+
 import { totalVetsDetailSlice } from "./features/user.slice/totalVetsDetail.slice";
+
 
 import { allVerifyUsersSlice } from "./features/user.slice/allVerifyUsers.slice"; //allVerifyUsers
 
@@ -143,6 +150,10 @@ export const store = configureStore({
     appointmentByCurrentVet: appointmentByCurrentVetSlice.reducer,
     allServicesType: allServicesTypeSlice.reducer,
     payment: paymentSlice .reducer,
+    totalConfirmAppointments: totalConfirmAppointmentsSlice.reducer,
+    totalAppointments: totalAppointmentsSlice.reducer,
+    totalPendingAppointments: totalPendingAppointmentsSlice.reducer,
+
     totalUsers: totalUsersSlice.reducer,
     totalStaffs: totalStaffsSlice.reducer,
     totalVets: totalVetsSlice.reducer,

@@ -9,7 +9,10 @@ import {
   getAllUserAppointments,
   confirmAppointments,
   missAppointments,
-  getAppointmentByCurrentVet
+  getAppointmentByCurrentVet,
+  getTotalConfirmAppointments,
+  getTotalAppointment,
+  getTotalPendingAppointments
 } from "../../api/appointmentKoi";
 
 export const createAppointmentByAccountIdThunk = createAsyncThunk(
@@ -121,6 +124,42 @@ export const cancelCurrentUserAppointmentsThunk = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await cancelCurrentUserAppointments(data);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+export const getTotalConfirmAppointmentsThunk = createAsyncThunk(
+  "appointments/getTotalConfirmAppointments",
+  async (thunkAPI) => {
+    try {
+      const response = await getTotalConfirmAppointments();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+export const getTotalAppointmentThunk = createAsyncThunk(
+  "appointments/getTotalAppointment",
+  async (thunkAPI) => {
+    try {
+      const response = await getTotalAppointment();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+export const getTotalPendingAppointmentsThunk = createAsyncThunk(
+  "appointments/getTotalPendingAppointments",
+  async (thunkAPI) => {
+    try {
+      const response = await getTotalPendingAppointments();
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error?.response?.data);

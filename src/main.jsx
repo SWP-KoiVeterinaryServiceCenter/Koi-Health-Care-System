@@ -198,8 +198,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <AccountTable direction="admin" />,
+        element: <AdminDashboard />,
       },
+      // {
+      //   path: "",
+      //   element: <AccountTable direction="admin" />,
+      // },
+
       {
         path: "dashboardDetail",
         element: <AdminDashboardDetail />,

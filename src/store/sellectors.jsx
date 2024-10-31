@@ -10,7 +10,16 @@ export const currentappointmentSelector = (state) => state.currentappointment.en
 export const allappointmentSelector = (state) => state.allappointment.entities; //allAccountUsers
 export const appointmentByCurrentVetSelector = (state) => state.appointmentByCurrentVet.entities; //allAccountUsers
 export const allServicesTypeSelector = (state) => state.allServicesType.entities; //allAccountUsers
+
+
+
+
+
+export const totalPendingAppointmentsSelector = (state) => state.totalPendingAppointments.entities; //allAccountUsers
+export const totalAppointmentsSelector = (state) => state.totalAppointments.entities; //allAccountUsers
+export const totalConfirmAppointmentsSelector = (state) => state.totalConfirmAppointments.entities; //allAccountUsers
 export const totalUserssSelector = (state) => state.totalUsers.entities; //allAccountUsers
+
 export const totalStaffssSelector = (state) => state.totalStaffs.entities; //allAccountUsers
 export const totalVetssSelector = (state) => state.totalVets.entities; //allAccountUsers
 export const totalVetsDetailsSelector = (state) => state.totalVetsDetail.entities; //allAccountUsers
