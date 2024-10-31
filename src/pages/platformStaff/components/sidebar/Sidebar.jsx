@@ -35,9 +35,9 @@ import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import LocalPoliceIcon from "@mui/icons-material/LocalPolice";
 import logo from "../../../../assets/koi_loho.png";
 import backgroundGif from "../../../../assets/gif/koi_logo_sidebar.gif";
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import AddIcon from '@mui/icons-material/Add';
-
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import AddIcon from "@mui/icons-material/Add";
+import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
 
 const logoStyle = {
   width: "140px",
@@ -97,6 +97,10 @@ const Sidebar = (props) => {
   };
 
   const handleClickWorkingSchedule = () => {
+    setOpenWrk(!openWrk);
+  };
+
+  const handleClickUsersFeedback = () => {
     setOpenWrk(!openWrk);
   };
 
@@ -216,33 +220,37 @@ const Sidebar = (props) => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-              
-                      <Item
+
+                  <Item
                     title="Service Center List"
                     to="listServiceCenter"
                     icon={<SubscriptionsIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
-                           <Item
+                  <Item
                     title="Appointment "
                     to="appointmentManagement"
                     icon={<SubscriptionsIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
-                           <Item
+                  <Item
                     title="TravelExpense "
                     to="travelExpenseList"
                     icon={<SubscriptionsIcon />}
                     selected={selected}
                     setSelected={setSelected}
-                  />  
+                  />
+                  {/* <Item
+                    title="Users Feedback "
+                    to="allUserFeedback"
+                    icon={<RateReviewOutlinedIcon/>}
+                    selected={selected}
+                    setSelected={setSelected}
+                  /> */}
 
-                
-
-
-                   <List>
+                  <List>
                     <ListItemButton onClick={handleClickWorkingSchedule}>
                       {!isCollapsed && (
                         <CalendarMonthIcon
@@ -295,7 +303,7 @@ const Sidebar = (props) => {
                       <Item
                         title="Create Working Schedule"
                         to="createWorkingSchedule"
-                        icon={<AddIcon/>}
+                        icon={<AddIcon />}
                         selected={selected}
                         setSelected={setSelected}
                       />
@@ -308,6 +316,7 @@ const Sidebar = (props) => {
                       /> */}
                     </Collapse>
                   </List>
+                 
                   {/* ///////////////////////////////////////////////////////////////////// */}
                 </Collapse>
               </List>

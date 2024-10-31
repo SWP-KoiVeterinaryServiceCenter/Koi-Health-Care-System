@@ -106,6 +106,8 @@ import UploadPersonalImage from "./pages/customer/screens/uploadPersonalImage/up
 import VetWorkingSchedule from "./pages/vet/screens/vetWorkingSchedule/vetWorkingSchedule";
 import VetDetailSchedule from "./pages/vet/screens/vetDetailSchedule/vetDetailSchedule";
 import AllFeedback from "./pages/customer/screens/allFeedback/allFeedback";
+import AllUserFeedback from "./pages/platformStaff/screens/allUserFeedback/allUserFeedback";
+import UpdateFeedback from "./pages/customer/screens/updateFeedback/updateFeedback";
 // import CreateWorkingSchedule from "./pages/admin/screens/createWorkingSchedule/createWorkingSchedule";
 
 // import UpdatePersonalInformation from "./pages/customer/screens/updatePersonalInformation/updatePersonalInformation";
@@ -442,6 +444,10 @@ const router = createBrowserRouter([
         path: "appointmentManagement",
         element: <AppointmentManagement direction="staff" />,
       },
+      {
+        path: "allUserFeedback",
+        element: <AllUserFeedback direction="staff" />,
+      },
     ],
   },
   //Customer
@@ -533,6 +539,10 @@ const router = createBrowserRouter([
         path: "prescriptionList",
         element: <PrescriptionList direction="customer" />,
       },
+      // {
+      //   path: "updateFeedback",
+      //   element: <UpdateFeedback direction="customer" />,
+      // },
     ],
   },
   //VET

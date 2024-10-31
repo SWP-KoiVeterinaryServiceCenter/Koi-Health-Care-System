@@ -329,4 +329,15 @@
   font-size: 13px;
   font-weight: 600;
   transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.feedback-button-1:disabled {
+  background-color: #c0c0c0; /* Gray color for disabled state */
+  color: #6c757d; /* Darker gray text */
+  cursor: not-allowed; /* Change cursor style */
 }

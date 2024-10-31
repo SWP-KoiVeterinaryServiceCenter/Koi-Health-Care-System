@@ -26,9 +26,9 @@ import NewspaperOutlinedIcon from "@mui/icons-material/NewspaperOutlined";
 import { Button } from "antd";
 import IconButton from "@mui/material/IconButton";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import RateReviewIcon from '@mui/icons-material/RateReview';
+import RateReviewIcon from "@mui/icons-material/RateReview";
 import LogoutIcon from "@mui/icons-material/Logout";
-import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
+import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
 
 import { Link, useNavigate } from "react-router-dom";
 import { colors } from "@mui/material";
@@ -188,10 +188,20 @@ function AppAppBar({ mode, toggleColorMode }) {
                     open={openNews}
                     onClose={handleCloseNews}
                   >
-                    <MenuItem onClick={() => navigate("doctors")}>
+                    <MenuItem
+                      onClick={() => {
+                        window.scrollTo(0, 0);
+                        navigate("doctors");
+                      }}
+                    >
                       Veterinarians
                     </MenuItem>
-                    <MenuItem onClick={() => navigate("doctors")}>
+                    <MenuItem
+                      onClick={() => {
+                        window.scrollTo(0, 0);
+                        navigate("doctors");
+                      }}
+                    >
                       News
                     </MenuItem>
                     <MenuItem onClick={() => navigate("/fact")}>Facts</MenuItem>
@@ -211,6 +221,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     color="black"
                     fontSize="16px"
                     onClick={() => {
+                      window.scrollTo(0, 0);
                       navigate("service");
                     }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
@@ -228,6 +239,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     color="black"
                     fontSize="16px"
                     onClick={() => {
+                      window.scrollTo(0, 0);
                       navigate("appointmentList");
                     }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
@@ -240,11 +252,14 @@ function AppAppBar({ mode, toggleColorMode }) {
                   onClick={() => scrollToSection("highlights")}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <RateReviewOutlinedIcon sx={{ color: "black", fontSize: "19px" }} />
+                  <RateReviewOutlinedIcon
+                    sx={{ color: "black", fontSize: "19px" }}
+                  />
                   <Typography
                     color="black"
                     fontSize="16px"
                     onClick={() => {
+                      window.scrollTo(0, 0);
                       navigate("allFeedback");
                     }}
                     sx={{ ml: 0.1 }} // Thêm khoảng cách nhỏ giữa icon và chữ
@@ -262,6 +277,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   />
                   <Typography
                     onClick={() => {
+                      window.scrollTo(0, 0);
                       navigate("contactUs");
                     }}
                     color="black"
@@ -343,6 +359,15 @@ function AppAppBar({ mode, toggleColorMode }) {
                       }}
                     >
                       Service Information
+                    </MenuItem>
+
+                    <MenuItem
+                      onClick={() => {
+                        navigate("allFeedback");
+                        window.scrollTo(0, 0);
+                      }}
+                    >
+                      Feedback
                     </MenuItem>
 
                     <Divider />

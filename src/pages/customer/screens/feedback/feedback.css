@@ -12,8 +12,14 @@
     display: grid;
     grid-template-columns: 1fr;
     /* One column for Service Name */
-    grid-gap: 15px;
+    /* grid-gap: 15px; */
     /* Space between rows */
+}
+
+.appointment-details .service-name {
+    display: flex;
+    justify-content: flex-start;
+    width: 251px;
 }
 
 .names-row {
@@ -69,8 +75,30 @@
     }
 }
 
-.feedback-button{
+.feedback-button {
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
+}
+
+.feedback-text-field-container {
+    margin-bottom: 15px;
+    /* Adds some space below each text field */
+    position: relative;
+}
+
+
+.feedback__validation__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 0;
+    /* Keep it tight under the field */
+    position: absolute;
+    /* Ensure it's positioned correctly */
+    bottom: -20px;
+    /* Position it directly under the text field */
+    left: 0;
+    right: 0;
+    text-align: left;
 }

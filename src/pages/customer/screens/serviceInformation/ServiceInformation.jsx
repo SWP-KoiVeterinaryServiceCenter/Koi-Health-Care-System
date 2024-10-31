@@ -239,7 +239,185 @@ const ServiceInformation = React.memo(({ direction }) => {
       ) : (
         <div className="card-grid" style={{ marginTop: 100 }}>
           {currentAppointments && currentAppointments.length > 0 ? (
-            currentAppointments.map(renderAppointmentCard)
+            currentAppointments.map((appointment) => (
+              <div
+                key={appointment.id}
+                className={`checkout-card cart-card ${
+                  activeMenuCardId === appointment.id ? "blur" : ""
+                }`}
+              >
+                <div className="checkout-card-content">
+                  <div className="more-icon-container">
+                    <SettingsIcon
+                      onClick={() => handleSettingsClick(appointment.id)}
+                    />
+                  </div>
+
+                  <div className="header-container">
+                    <label className="checkout-title" style={{ marginTop: 20 }}>
+                      SERVICE INFORMATION
+                    </label>
+                    <span
+                      className="status-label"
+                      style={{
+                        color: getStatusColor(appointment.status),
+                        marginTop: 20,
+                      }}
+                    >
+                      {appointment.status.toUpperCase()}
+                    </span>
+                  </div>
+                  <hr className="custom-divider" />
+                  <div className="checkout-steps">
+                    <div className="checkout-step">
+                      <div>
+                        <span>SERVICE</span>
+                        <p>Service: {appointment.serviceName}</p>
+                        <p>Doctor: {appointment.vetName}</p>
+                      </div>
+                      <hr />
+                      <div>
+                        <span>KOI FISH</span>
+                        <p>{appointment.koiName}</p>
+                        <p>Description: {appointment.description}</p>
+                        <p>Location: {currentAccounts.location}</p>
+                      </div>
+                      <hr className="custom-divider" />
+                      <div className="checkout-payments">
+                        <span>PAYMENT</span>
+                        <div className="payment-details">
+                          <span>Service fee:</span>
+                          <span style={{ marginRight: 20 }}>
+                            {appointment.serviceFee}đ
+                          </span>
+                          <span>Travel fee:</span>
+                          <span style={{ marginRight: 20 }}>
+                            {appointment.travelFee}đ
+                          </span>
+                        </div>
+                        <hr className="custom-divider" />
+                        <div className="payment-details">
+                          <span>Total:</span>
+                          <span style={{ marginRight: 20 }}>
+                            {appointment.price}đ
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* <div className="checkout-card checkout-footer">
+                    <div className="footer-details">
+                      <label className="checkout-price">
+                        {appointment.price} vnđ
+                      </label>
+
+                    
+                      {!(["CANCELLED", "MISSED", "FINISHED", "CONFIRMED"].includes(appointment.status.toUpperCase())) && (
+                        <button
+                          className="checkout-button"
+                          onClick={() =>
+                            handleCheckout(appointment.id, appointment.price)
+                          }
+                        >
+                          Check Out
+                        </button>
+                      )}
+                    </div>
+                  </div> */}
+
+                  {/* <div className="checkout-card checkout-footer">
+                    <div
+                      className={`footer-details ${appointment.status.toUpperCase()}`}
+                    >
+                      <label className="checkout-price">
+                        {appointment.price} vnđ
+                      </label>
+
+                      {![
+                        "CANCELLED",
+                        "MISSED",
+                        "FINISHED",
+                        "CONFIRMED",
+                      ].includes(appointment.status.toUpperCase()) && (
+                        <button
+                          className="checkout-button"
+                          onClick={() =>
+                            handleCheckout(appointment.id, appointment.price)
+                          }
+                        >
+                          Check Out
+                        </button>
+                      )}
+                    </div>
+                  </div> */}
+
+                  <div className="checkout-card checkout-footer">
+                    <div
+                      className={`footer-details ${appointment.status.toUpperCase()}`}
+                    >
+                      <label className="checkout-price">
+                        {appointment.price} vnđ
+                      </label>
+
+                      {appointment.status.toUpperCase() === "FINISHED" ? (
+                        <button
+                          className="feedback-button-1"
+                          onClick={() => {
+                            console.log(appointment.id);
+                            navigate(`/${direction}/feedback`, {
+                              state: { appointment: appointment.id },
+                            });
+                            window.scrollTo(0, 0);
+                          }}
+                        >
+                          Feedback
+                        </button>
+                      ) : !["CANCELLED", "MISSED", "CONFIRMED"].includes(
+                          appointment.status.toUpperCase()
+                        ) ? (
+                        <button
+                          className="checkout-button"
+                          onClick={() =>
+                            handleCheckout(appointment.id, appointment.price)
+                          }
+                        >
+                          Check Out
+                        </button>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+
+                {activeMenuCardId === appointment.id && (
+                  <div className="menu-overlay" ref={menuRef}>
+                    <div className="menu-buttons">
+                      {/* Conditionally render Reject button */}
+                      {![
+                        "CONFIRMED",
+                        "MISSED",
+                        "CANCELLED",
+                        "FINISHED",
+                      ].includes(appointment.status.toUpperCase()) && (
+                        <button
+                          className="cancel-button"
+                          onClick={() =>
+                            handleCancelAppointment(appointment.id)
+                          }
+                        >
+                          Reject
+                        </button>
+                      )}
+                      <button
+                        className="delete-button"
+                        onClick={() => handleDeleteAppointment(appointment.id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))
           ) : (
             <p>No appointments found.</p>
           )}

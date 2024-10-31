@@ -153,7 +153,7 @@ export default function UpdateWorkingSchedule() {
             timerProgressBar: true,
             scrollbarPadding: false,
           }).then(() => {
-            navigate(-1);
+            navigate('/staff/workingSchedule');
           });
         })
         .catch((error) => {

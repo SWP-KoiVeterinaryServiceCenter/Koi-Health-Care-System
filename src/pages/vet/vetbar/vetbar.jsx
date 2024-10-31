@@ -326,9 +326,9 @@ function AppAppBar({ mode, toggleColorMode }) {
                     >
                       Schedule information
                     </MenuItem>
-                    <MenuItem onClick={() => navigate("")}>
+                    {/* <MenuItem onClick={() => navigate("")}>
                       Service information
-                    </MenuItem>
+                    </MenuItem> */}
 
                     <Divider />
                     <MenuItem>
