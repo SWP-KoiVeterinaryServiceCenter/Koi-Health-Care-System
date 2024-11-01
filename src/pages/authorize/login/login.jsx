@@ -440,7 +440,7 @@ export default function Login() {
                     </Link>
                   </p>
                 </form>
-                <div className="login__google">
+                {/* <div className="login__google">
                   <div className="login__flex">
                     <div className="login__divide"></div>
                     <span style={{ color: "#8b8b8b" }}>or sign in with</span>
@@ -457,7 +457,7 @@ export default function Login() {
                   ) : (
                     <LoadingModal />
                   )}
-                </div>
+                </div> */}
               </div>
             </Grid>
             <Grid item xs={2}></Grid>

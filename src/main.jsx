@@ -339,7 +339,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <ShopTableStaff />,
+        element: <AccountTable />,
       },
       {
         path: "account",
