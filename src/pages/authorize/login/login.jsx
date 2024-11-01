@@ -439,25 +439,7 @@ export default function Login() {
                       <span style={{ color: "#70d8bd" }}> Sign up now!</span>
                     </Link>
                   </p>
-                </form>
-                <div className="login__google">
-                  <div className="login__flex">
-                    <div className="login__divide"></div>
-                    <span style={{ color: "#8b8b8b" }}>or sign in with</span>
-                    <div className="login__divide"></div>
-                  </div>
-                  {!showLoadingGGModal ? (
-                    <div
-                      onClick={() => SignInUsingGoogle()}
-                      className="login__google__btn flex-center"
-                    >
-                      <img src={Google} className="login__google__img" />
-                      <span className="login__google__text">Google</span>
-                    </div>
-                  ) : (
-                    <LoadingModal />
-                  )}
-                </div>
+                </form>      
               </div>
             </Grid>
             <Grid item xs={2}></Grid>
