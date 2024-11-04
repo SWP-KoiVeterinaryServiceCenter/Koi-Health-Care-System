@@ -16,3 +16,8 @@ export const getTransationDetail = async (id) => {
     const response = await api.get(`/api/v1/transactions/${id}`);
     return response.data;
 };
+
+export const getAllTransaction = async () => {
+    const response = await api.get(`/api/v1/Transaction/Transactions`);
+    return response.data;
+  };

@@ -17,7 +17,7 @@ export const StyledSidebar = () => {
         "& .pro-inner-item": {
             padding: "5px 35px 5px 20px !important",
             transition: "background-color 0.3s, color 0.3s", // Thêm hiệu ứng chuyển tiếp
-            // color: "#000000 !important", // Đổi màu chữ thành màu đen
+            color: "#000000 !important", // Đổi màu chữ thành màu đen
         },
         "& .pro-inner-item:hover": {
             backgroundColor: "rgba(200, 200, 200, 0.5) !important", // Màu nền xám nhạt khi hover

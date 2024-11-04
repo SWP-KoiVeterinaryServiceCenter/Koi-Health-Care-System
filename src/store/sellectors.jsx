@@ -11,7 +11,7 @@ export const allappointmentSelector = (state) => state.allappointment.entities; 
 export const appointmentByCurrentVetSelector = (state) => state.appointmentByCurrentVet.entities; //allAccountUsers
 export const allServicesTypeSelector = (state) => state.allServicesType.entities; //allAccountUsers
 
-
+export const allTransactionSelector = (state) => state.alltransactions.entities; //allAccountUsers
 
 
 

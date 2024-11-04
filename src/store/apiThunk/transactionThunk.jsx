@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
     getTransationDetail,
     getTransationsFromShop,
+    getAllTransaction
 } from "../../api/transaction";
 
 export const getTransationDetailThunk = createAsyncThunk(
@@ -32,3 +33,14 @@ export const getTransationsFromShopThunk = createAsyncThunk(
         }
     }
 );
+export const getAllTransactionThunk = createAsyncThunk(
+    "appointments/getAllTransaction",
+    async (thunkAPI) => {
+      try {
+        const response = await getAllTransaction();
+        return response;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error?.response?.data);
+      }
+    }
+  );

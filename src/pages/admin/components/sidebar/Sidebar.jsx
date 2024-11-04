@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import { userDataSelector } from "../../../../store/sellectors";
 import Admin from "../../../../assets/admin.png";
 import { AccountCircleOutlined } from "@mui/icons-material";
+import WavesIcon from '@mui/icons-material/Waves';
+import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import RedeemIcon from "@mui/icons-material/Redeem";
 import ReportGmailerrorredIcon from "@mui/icons-material/ReportGmailerrorred";
@@ -35,8 +37,9 @@ import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import LocalPoliceIcon from "@mui/icons-material/LocalPolice";
 import logo from "../../../../assets/koi_loho.png";
 import backgroundGif from "../../../../assets/gif/koi_logo_sidebar.gif";
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import AddIcon from '@mui/icons-material/Add';
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import AddIcon from "@mui/icons-material/Add";
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 const logoStyle = {
   width: "140px",
   height: "auto",
@@ -131,7 +134,7 @@ const Sidebar = (props) => {
             <Box>
               <Typography
                 variant="h6"
-                color={colors.grey[300]}
+                color={colors.grey[100]}
                 sx={{ m: "15px 0 5px 20px" }}
               >
                 Statistics
@@ -146,7 +149,7 @@ const Sidebar = (props) => {
               <Divider />
               <Typography
                 variant="h6"
-                color={colors.grey[300]}
+                color={colors.grey[100]}
                 sx={{ m: "15px 0 5px 20px" }}
               >
                 Management
@@ -158,7 +161,7 @@ const Sidebar = (props) => {
                       style={{
                         marginLeft: "10px",
                         marginRight: "19px",
-                        color: "white",
+                        color: "#000000",
                       }}
                     />
                   )}
@@ -166,7 +169,7 @@ const Sidebar = (props) => {
                     <ListItemText
                       primary="System"
                       style={{
-                        color: "white",
+                        color: "#000000",
                       }}
                     />
                   )}
@@ -174,14 +177,14 @@ const Sidebar = (props) => {
                     <ExpandLess
                       style={{
                         marginLeft: "10px",
-                        color: "white",
+                        color: "#000000",
                       }}
                     />
                   ) : (
                     <ExpandMore
                       style={{
                         marginLeft: "10px",
-                        color: "white",
+                        color: "#000000",
                       }}
                     />
                   )}
@@ -200,80 +203,117 @@ const Sidebar = (props) => {
                     icon={<AccountCircleOutlined />}
                     selected={selected}
                     setSelected={setSelected}
+                    
                   />
-                  <Item
-                    title="Tank"
-                    to="tankList"
-                    icon={<AccountCircleOutlined />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  <Item
-                    title="Service Type"
-                    to="serviceType"
-                    icon={<AccountCircleOutlined />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-              
-                      <Item
-                    title="Service Center List"
-                    to="listServiceCenter"
-                    icon={<SubscriptionsIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                           <Item
-                    title="Appointment "
-                    to="appointmentManagement"
-                    icon={<SubscriptionsIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                           <Item
-                    title="TravelExpense "
-                    to="travelExpenseList"
-                    icon={<SubscriptionsIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />              
-                   {/* <List>
-                    <ListItemButton onClick={handleClickWorkingSchedule}>
+
+                  {/* ////////////////////////////////////////////////////////////////// */}
+                  <List>
+                    <ListItemButton onClick={handleClickTransaction}>
                       {!isCollapsed && (
-                        <CalendarMonthIcon
+                        < SubscriptionsIcon
                           style={{
                             marginLeft: "10px",
                             marginRight: "19px",
-                            color: "white",
+                            color: "black",
                           }}
                         />
                       )}
                       {!isCollapsed && (
                         <ListItemText
-                          primary="Working Schedule"
+                          primary="Service management"
                           style={{
-                            color: "white",
+                            color: "black",
                           }}
                         />
                       )}
-                      {openWrk ? (
+                      {openTran ? (
                         <ExpandLess
                           style={{
                             marginLeft: "10px",
-                            color: "white",
+                            color: "black",
                           }}
                         />
                       ) : (
                         <ExpandMore
                           style={{
                             marginLeft: "10px",
-                            color: "white",
+                            color: "black",
                           }}
                         />
                       )}
                     </ListItemButton>
                     <Collapse
-                      in={openWrk}
+                      in={openTran}
+                      timeout="auto"
+                      unmountOnExit
+                      style={{
+                        paddingLeft: !isCollapsed ? "20px" : 0,
+                      }}
+                    >
+                       <Item
+                        title="Appointment Center"
+                        to="listServiceCenter"
+                        icon={<SubscriptionsIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                      />
+                      <Item
+                        title="Tank"
+                        to="tankList"
+                        icon={<WavesIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                      />
+                      <Item
+                        title="Service Type"
+                        to="serviceType"
+                        icon={<HomeRepairServiceIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                      />
+
+                     
+                    </Collapse>
+                  </List>
+
+                  {/* ///////////////////////////////////////////////////////////////////// */}
+                  <List>
+                    <ListItemButton onClick={handleClickProductManagement}>
+                      {!isCollapsed && (
+                        <InventoryIcon
+                          style={{
+                            marginLeft: "10px",
+                            marginRight: "19px",
+                            color: "#000000",
+                          }}
+                        />
+                      )}
+                      {!isCollapsed && (
+                        <ListItemText
+                          primary="Tables Services"
+                          style={{
+                            color: "#000000",
+                          }}
+                        />
+                      )}
+                      {openCPM ? (
+                        <ExpandLess
+                          style={{
+                            marginLeft: "10px",
+                            color: "#000000",
+                          }}
+                        />
+                      ) : (
+                        <ExpandMore
+                          style={{
+                            marginLeft: "10px",
+                            color: "#000000",
+                          }}
+                        />
+                      )}
+                    </ListItemButton>
+                    <Collapse
+                      in={openCPM}
                       timeout="auto"
                       unmountOnExit
                       style={{
@@ -281,22 +321,30 @@ const Sidebar = (props) => {
                       }}
                     >
                       <Item
-                        title="Schedule"
-                        to="workingSchedule"
-                        icon={<EventRepeatIcon />}
+                        title="Appointment "
+                        to="appointmentManagement"
+                        icon={<ClassIcon />}
                         selected={selected}
                         setSelected={setSelected}
                       />
-                      <Item
-                        title="Create Working Schedule"
-                        to="createWorkingSchedule"
-                        icon={<AddIcon/>}
+                        <Item
+                        title="Transaction "
+                        to="transaction"
+                        icon={<ReceiptLongIcon />}
                         selected={selected}
                         setSelected={setSelected}
-                      />                
+                      />
                     </Collapse>
-                  </List> */}
-                  {/* ///////////////////////////////////////////////////////////////////// */}
+                  </List>
+                  {/* ////////////////////////////////////////////////////////////////// */}
+
+                  <Item
+                    title="TravelExpense "
+                    to="travelExpenseList"
+                    icon={<PaidIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
                 </Collapse>
               </List>
             </Box>

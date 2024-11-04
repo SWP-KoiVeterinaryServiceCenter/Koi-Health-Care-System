@@ -28,7 +28,7 @@ import { totalVetsDetailSlice } from "./features/user.slice/totalVetsDetail.slic
 
 
 import { allVerifyUsersSlice } from "./features/user.slice/allVerifyUsers.slice"; //allVerifyUsers
-
+import { alltransactionsSlice } from "./features/transaction.slice/alltransaction.slice";
 import { petDetailSlice } from "./features/pet.slice/petDetail.slice";
 import { petsFromShopSlice } from "./features/pet.slice/petsFromShop.slice";
 import { petsFromAreaSlice } from "./features/pet.slice/petsFromArea.slice";
@@ -141,6 +141,7 @@ export const store = configureStore({
     userDetail: userDetailSlice.reducer,
     userData: userDataSlice.reducer,
     staffs: staffsSlice.reducer,
+    alltransactions: alltransactionsSlice.reducer,
     allAccounts: allAccountsSlice.reducer,
     allTanks: allTanksSlice.reducer,
     medicalRecords: medicalRecordsSlice.reducer,
