@@ -5,8 +5,8 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { useFormik } from "formik";
+import * as Yup from 'yup';
 import { createTravelExpenseThunk } from "../../../../store/apiThunk/travelExpense";
-// import Header from "../../../components/header/Header";
 import { BackButton } from "../../../../components/modal/backModal/backModal";
 import LoadingModal from "../../../../components/modal/loadingModal/loadingModal";
 import {
@@ -14,7 +14,7 @@ import {
   ERRORTEXT,
   SUCCESSTEXT,
 } from "../../../../components/text/notiText/notiText";
-// import "./createStaffAccount.css"
+
 export default function CreateTravelExpense() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export default function CreateTravelExpense() {
 
   const Header = ({ title, subtitle, titleColor = "gray", subtitleColor = "gray" }) => {
     return (
-      <Box mb={2} textAlign="center"> {/* Thêm textAlign="center" */}
+      <Box mb={2} textAlign="center">
         <Typography
           style={{
             fontFamily: "Source Sans Pro, sans-serif",
@@ -43,13 +43,30 @@ export default function CreateTravelExpense() {
     );
   };
 
+  const validationSchema = Yup.object({
+    baseRate: Yup.number()
+      .integer("Must be an integer")
+      .min(0, "Must be a non-negative number")
+      .required("Base Rate is required"),
+    minimumTravelRate: Yup.number()
+      .integer("Must be an integer")
+      .min(0, "Must be a non-negative number")
+      .max(100000000, "Must be less than or equal to 100,000,000")
+      .required("Minimum Travel Rate is required"),
+    maximumTravelRate: Yup.number()
+      .integer("Must be an integer")
+      .min(0, "Must be a non-negative number")
+      .max(100000000, "Must be less than or equal to 100,000,000")
+      .required("Maximum Travel Rate is required"),
+  });
+
   const formik = useFormik({
     initialValues: {
       baseRate: "",
       minimumTravelRate: "",
       maximumTravelRate: "",
-   
     },
+    validationSchema: validationSchema,
     onSubmit: async (values) => {
       setShowLoadingModal(true);
       try {
@@ -92,9 +109,9 @@ export default function CreateTravelExpense() {
         subtitle="Create Travel Expense to easily manage information of KOI fish"
       />
       <form onSubmit={formik.handleSubmit}>
-        {/* baseRate */}
         <TextField
           id="baseRate"
+          name="baseRate"
           label={
             <span>
               Base Rate (đ)<span style={{ color: "red" }}>*</span>
@@ -103,8 +120,10 @@ export default function CreateTravelExpense() {
           variant="outlined"
           value={formik.values.baseRate}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.baseRate && Boolean(formik.errors.baseRate)}
+          helperText={formik.touched.baseRate && formik.errors.baseRate}
           fullWidth
-        //   autoComplete="baseRate"
           margin="dense"
           color="secondary"
           InputLabelProps={{ style: { color: "black" } }}
@@ -116,9 +135,9 @@ export default function CreateTravelExpense() {
             },
           }}
         />
-        {/* minimumTravelRate */}
         <TextField
           id="minimumTravelRate"
+          name="minimumTravelRate"
           label={
             <span>
               Minimum Travel Rate (đ) <span style={{ color: "red" }}>*</span>
@@ -127,8 +146,10 @@ export default function CreateTravelExpense() {
           variant="outlined"
           value={formik.values.minimumTravelRate}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.minimumTravelRate && Boolean(formik.errors.minimumTravelRate)}
+          helperText={formik.touched.minimumTravelRate && formik.errors.minimumTravelRate}
           fullWidth
-          autoComplete="minimumTravelRate"
           margin="dense"
           color="secondary"
           InputLabelProps={{ style: { color: "black" } }}
@@ -140,9 +161,9 @@ export default function CreateTravelExpense() {
             },
           }}
         />
-        {/* maximumTravelRate */}
         <TextField
           id="maximumTravelRate"
+          name="maximumTravelRate"
           label={
             <span>
               Maximum Travel Rate (đ) <span style={{ color: "red" }}>*</span>
@@ -151,8 +172,10 @@ export default function CreateTravelExpense() {
           variant="outlined"
           value={formik.values.maximumTravelRate}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.maximumTravelRate && Boolean(formik.errors.maximumTravelRate)}
+          helperText={formik.touched.maximumTravelRate && formik.errors.maximumTravelRate}
           fullWidth
-          autoComplete="maximumTravelRate"
           margin="dense"
           color="secondary"
           InputLabelProps={{ style: { color: "black" } }}
@@ -165,8 +188,7 @@ export default function CreateTravelExpense() {
           }}
         />
     
-    
-               {!showLoadingModal ? (
+        {!showLoadingModal ? (
           <Box
             display="flex"
             justifyContent="center"
@@ -188,7 +210,6 @@ export default function CreateTravelExpense() {
         ) : (
           <LoadingModal />
         )}
-
       </form>
     </div>
   );

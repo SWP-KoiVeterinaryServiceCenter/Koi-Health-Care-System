@@ -5,8 +5,8 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 import { createTanksThunk } from "../../../../store/apiThunk/tankKoiThunk";
-// import Header from "../../../components/header/Header";
 import { BackButton } from "../../../../components/modal/backModal/backModal";
 import LoadingModal from "../../../../components/modal/loadingModal/loadingModal";
 import {
@@ -14,7 +14,7 @@ import {
   ERRORTEXT,
   SUCCESSTEXT,
 } from "../../../../components/text/notiText/notiText";
-// import "./createStaffAccount.css"
+
 export default function CreateTank() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export default function CreateTank() {
 
   const Header = ({ title, subtitle, titleColor = "gray", subtitleColor = "gray" }) => {
     return (
-      <Box mb={2} textAlign="center"> {/* Thêm textAlign="center" */}
+      <Box mb={2} textAlign="center">
         <Typography
           style={{
             fontFamily: "Source Sans Pro, sans-serif",
@@ -43,13 +43,23 @@ export default function CreateTank() {
     );
   };
 
+  const validationSchema = Yup.object({
+    tankName: Yup.string().required("Tank Name is required"),
+    capacity: Yup.number()
+      .required("Capacity is required")
+      .integer("Capacity must be an integer")
+      .min(1, "Capacity must be at least 1")
+      .max(999, "Capacity must not exceed 999"),
+    status: Yup.string().required("Status is required"),
+  });
+
   const formik = useFormik({
     initialValues: {
       tankName: "",
       capacity: "",
       status: "",
-   
     },
+    validationSchema: validationSchema,
     onSubmit: async (values) => {
       setShowLoadingModal(true);
       try {
@@ -92,9 +102,9 @@ export default function CreateTank() {
         subtitle="Create Tank to easily manage information of KOI fish"
       />
       <form onSubmit={formik.handleSubmit}>
-        {/* tankName */}
         <TextField
           id="tankName"
+          name="tankName"
           label={
             <span>
               Tank Name<span style={{ color: "red" }}>*</span>
@@ -103,8 +113,8 @@ export default function CreateTank() {
           variant="outlined"
           value={formik.values.tankName}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           fullWidth
-        //   autoComplete="tankName"
           margin="dense"
           color="secondary"
           InputLabelProps={{ style: { color: "black" } }}
@@ -115,10 +125,12 @@ export default function CreateTank() {
               color: "black",
             },
           }}
+          error={formik.touched.tankName && Boolean(formik.errors.tankName)}
+          helperText={formik.touched.tankName && formik.errors.tankName}
         />
-        {/* capacity */}
         <TextField
           id="capacity"
+          name="capacity"
           label={
             <span>
               Capacity <span style={{ color: "red" }}>*</span>
@@ -127,8 +139,8 @@ export default function CreateTank() {
           variant="outlined"
           value={formik.values.capacity}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           fullWidth
-          autoComplete="capacity"
           margin="dense"
           color="secondary"
           InputLabelProps={{ style: { color: "black" } }}
@@ -139,10 +151,12 @@ export default function CreateTank() {
               color: "black",
             },
           }}
+          error={formik.touched.capacity && Boolean(formik.errors.capacity)}
+          helperText={formik.touched.capacity && formik.errors.capacity}
         />
-        {/* status */}
         <TextField
           id="status"
+          name="status"
           label={
             <span>
               Status <span style={{ color: "red" }}>*</span>
@@ -151,8 +165,8 @@ export default function CreateTank() {
           variant="outlined"
           value={formik.values.status}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           fullWidth
-          autoComplete="status"
           margin="dense"
           color="secondary"
           InputLabelProps={{ style: { color: "black" } }}
@@ -163,10 +177,11 @@ export default function CreateTank() {
               color: "black",
             },
           }}
+          error={formik.touched.status && Boolean(formik.errors.status)}
+          helperText={formik.touched.status && formik.errors.status}
         />
     
-    
-               {!showLoadingModal ? (
+        {!showLoadingModal ? (
           <Box
             display="flex"
             justifyContent="center"
@@ -188,7 +203,6 @@ export default function CreateTank() {
         ) : (
           <LoadingModal />
         )}
-
       </form>
     </div>
   );
