@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react";
 import "./sidebar.css";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
-import { Box, IconButton, Typography, useTheme, Divider } from "@mui/material";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import {
+  Box,
+  IconButton,
+  Typography,
+  useTheme,
+  Divider,
+  Button,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../../../theme";
@@ -10,8 +18,8 @@ import { useSelector } from "react-redux";
 import { userDataSelector } from "../../../../store/sellectors";
 import Admin from "../../../../assets/admin.png";
 import { AccountCircleOutlined } from "@mui/icons-material";
-import WavesIcon from '@mui/icons-material/Waves';
-import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
+import WavesIcon from "@mui/icons-material/Waves";
+import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import RedeemIcon from "@mui/icons-material/Redeem";
 import ReportGmailerrorredIcon from "@mui/icons-material/ReportGmailerrorred";
@@ -39,7 +47,7 @@ import logo from "../../../../assets/koi_loho.png";
 import backgroundGif from "../../../../assets/gif/koi_logo_sidebar.gif";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AddIcon from "@mui/icons-material/Add";
-import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 const logoStyle = {
   width: "140px",
   height: "auto",
@@ -54,6 +62,16 @@ const backgroundStyle = {
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const handleLogout = () => {
+    try {
+      localStorage.clear();
+      sessionStorage.clear();
+      navigate("/");
+    } catch (error) {
+      console.log({ error });
+    }
+  };
 
   return (
     <MenuItem
@@ -76,6 +94,7 @@ const Sidebar = (props) => {
   const colors = tokens(theme.palette.mode);
   let isCollapsed = props.isCollapsed;
   let setIsCollapsed = props.setIsCollapsed;
+  const navigate = useNavigate(); // Initialize navigate
   const [selected, setSelected] = useState();
   const [open, setOpen] = useState(true);
   const [openCPM, setOpenCPM] = useState(false);
@@ -99,6 +118,16 @@ const Sidebar = (props) => {
 
   const handleClickWorkingSchedule = () => {
     setOpenWrk(!openWrk);
+  };
+
+  const handleLogout = () => {
+    try {
+      localStorage.clear();
+      sessionStorage.clear();
+      navigate("/"); // Use navigate to redirect
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   const url = new URL(window.location.href);
@@ -203,14 +232,13 @@ const Sidebar = (props) => {
                     icon={<AccountCircleOutlined />}
                     selected={selected}
                     setSelected={setSelected}
-                    
                   />
 
                   {/* ////////////////////////////////////////////////////////////////// */}
                   <List>
                     <ListItemButton onClick={handleClickTransaction}>
                       {!isCollapsed && (
-                        < SubscriptionsIcon
+                        <SubscriptionsIcon
                           style={{
                             marginLeft: "10px",
                             marginRight: "19px",
@@ -250,7 +278,7 @@ const Sidebar = (props) => {
                         paddingLeft: !isCollapsed ? "20px" : 0,
                       }}
                     >
-                       <Item
+                      <Item
                         title="Appointment Center"
                         to="listServiceCenter"
                         icon={<SubscriptionsIcon />}
@@ -271,8 +299,6 @@ const Sidebar = (props) => {
                         selected={selected}
                         setSelected={setSelected}
                       />
-
-                     
                     </Collapse>
                   </List>
 
@@ -327,7 +353,7 @@ const Sidebar = (props) => {
                         selected={selected}
                         setSelected={setSelected}
                       />
-                        <Item
+                      <Item
                         title="Transaction "
                         to="transaction"
                         icon={<ReceiptLongIcon />}
@@ -349,6 +375,22 @@ const Sidebar = (props) => {
               </List>
             </Box>
           </Menu>
+          <Button
+            variant="outlined"
+            component="a"
+            onClick={handleLogout}
+            target="_blank"
+            sx={{
+              width: "96%",
+              marginLeft: 1,
+              backgroundColor: "white",
+              color: "#215D6E",
+              marginTop: "30px",
+              marginRight: 1,
+            }}
+          >
+            Logout
+          </Button>
         </ProSidebar>
       </Box>
     </div>

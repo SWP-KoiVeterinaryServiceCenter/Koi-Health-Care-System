@@ -148,76 +148,8 @@ const Transaction = (props) => {
         </Box>
       ),
     },
-    {
-      field: "status",
-      headerName: "Status",
-      flex: 1,
-      renderCell: ({ row: { status } }) => {
-        let style = {}; // Define default style object
+  
 
-        // Check the status and apply appropriate colors
-        switch (status) {
-          case "Cancelled":
-            style = { color: "#000080", backgroundColor: "#4F86F7" };
-            break;
-          case "Confirmed":
-            style = { color: "#00504B", backgroundColor: "#76BB68" };
-            break;
-          case "Missed":
-            style = { color: "#A30B2E", backgroundColor: "#E8917D" };
-            break;
-          case "Pending":
-            style = { color: "#C46210", backgroundColor: "#DAC98E" };
-            break;
-          case "Finished":
-            style = { color: "#41214F", backgroundColor: "#7D74A8" };
-            break;
-          default:
-            style = { color: "black", backgroundColor: "white" };
-        }
-
-        return (
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            width="100%"
-            p={1}
-            sx={{
-              borderRadius: 1,
-              ...style,
-            }}
-          >
-            {status}
-          </Box>
-        );
-      },
-    },
-    {
-      field: "serviceName",
-      headerName: "ServiceName",
-      flex: 1,
-      cellClassName: "name-column--cell",
-      renderCell: ({ row: { serviceName } }) => <div>{serviceName}</div>,
-    },
-    {
-      field: "customerName",
-      headerName: "Cusromer Name",
-      flex: 1,
-      renderCell: ({ row: { customerName } }) => <div>{customerName}</div>,
-    },
-    {
-      field: "koiName",
-      headerName: "KOI Name",
-      flex: 1,
-      renderCell: ({ row: { koiName } }) => <div>{koiName}</div>,
-    },
-    {
-      field: "vetName",
-      headerName: "Vet Name",
-      flex: 1,
-      renderCell: ({ row: { vetName } }) => <div>{vetName}</div>,
-    },
     {
       field: "description",
       headerName: "Description",
@@ -225,12 +157,32 @@ const Transaction = (props) => {
       renderCell: ({ row: { description } }) => <div>{description}</div>,
     },
     {
-      field: "appointmentDate",
-      headerName: "Request Date",
+      field: "amount",
+      headerName: "Amount",
       flex: 1,
-      renderCell: ({ row: { appointmentDate, appointmentTime } }) => (
+      renderCell: ({ row: { amount } }) => <div>{amount}  đ</div>,
+    },
+    {
+      field: "description",
+      headerName: "Description",
+      flex: 1,
+      renderCell: ({ row: { description } }) => <div>{description}</div>,
+      field: "creationDate",
+      headerName: "Creation Date",
+      flex: 1,
+      renderCell: ({ row: { creationDate } }) => (
         <div>
-          {appointmentDate} at {appointmentTime}
+          {creationDate} 
+        </div>
+      ),
+    },
+    {
+      field: "creationTime",
+      headerName: "Creation Time",
+      flex: 1,
+      renderCell: ({ row: { creationTime } }) => (
+        <div>
+          {creationTime} 
         </div>
       ),
     },
